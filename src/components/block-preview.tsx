@@ -11,6 +11,12 @@ interface BlockPreviewProps {
 }
 
 export function BlockPreview({ block, children }: BlockPreviewProps) {
+  // Diferentes layouts baseados na categoria do bloco
+  const isNavbar = block.category === 'navbar';
+  const previewClasses = isNavbar
+    ? "w-full min-h-[200px] bg-gray-50 dark:bg-gray-950"
+    : "w-full min-h-[400px] flex items-center justify-center bg-gray-50 dark:bg-gray-950";
+
   return (
     <Card className="overflow-hidden">
       <Tabs defaultValue="preview" className="w-full">
@@ -38,7 +44,7 @@ export function BlockPreview({ block, children }: BlockPreviewProps) {
         </div>
 
         <TabsContent value="preview" className="p-0 m-0">
-          <div className="w-full min-h-[400px] flex items-center justify-center bg-gray-50 dark:bg-gray-950">
+          <div className={previewClasses}>
             {children}
           </div>
         </TabsContent>
