@@ -683,11 +683,12 @@ export default function Footer1({
   {
     id: 'announcement-1',
     name: 'Announcement Bar',
-    description: 'Barra de anúncio fixa no topo com mensagem, link e botão de fechar. Inclui 3 variações de cores.',
+    description: 'Barra de anúncio fixa no topo com mensagem, link e botão de fechar usando shadcn/ui Button. Inclui 3 variações de cores.',
     category: 'announcement',
     tags: ['announcement', 'banner', 'notification', 'top-bar'],
     dependencies: [
-      { name: 'lucide-react', version: '^0.544.0' }
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'shadcn/ui', version: 'latest', component: 'button' }
     ],
     previewProps: {
       message: 'Novidade: Acabamos de lançar nossa nova versão 2.0',
@@ -702,6 +703,7 @@ export default function Footer1({
       { name: 'variant', type: "'default' | 'gradient' | 'dark'", default: 'default', description: 'Variação de cor da barra' }
     ],
     code: `import { X, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Announcement1Props {
   message?: string;
@@ -737,12 +739,14 @@ export default function Announcement1({
             </a>
           )}
         </p>
-        <button
-          className="absolute right-4 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity"
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 opacity-70 hover:opacity-100 hover:bg-transparent"
           aria-label="Fechar"
         >
           <X className="h-4 w-4" />
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { X, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Announcement1Props {
   message?: string;
@@ -34,12 +35,14 @@ export default function Announcement1({
             </a>
           )}
         </p>
-        <button
-          className="absolute right-4 top-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity"
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 opacity-70 hover:opacity-100 hover:bg-transparent"
           aria-label="Fechar"
         >
           <X className="h-4 w-4" />
-        </button>
+        </Button>
       </div>
     </div>
   );
