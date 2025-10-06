@@ -28,7 +28,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-6">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary">
               <Blocks className="h-6 w-6 text-primary-foreground" />
@@ -43,7 +43,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="border-b border-gray-200 dark:border-gray-800 bg-gradient-to-b from-gray-50 to-background dark:from-gray-900 dark:to-background">
-        <div className="container mx-auto px-4 py-16 md:py-24">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-16 md:py-24">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               Ready-to-use React components
@@ -57,10 +57,10 @@ export default function Home() {
 
       {/* Search & Filters */}
       <section className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4 py-8">
-          <div className="space-y-4">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-8">
+          <div className="space-y-6">
             {/* Search */}
-            <div className="relative max-w-xl mx-auto">
+            <div className="relative max-w-2xl mx-auto">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
               <Input
                 type="text"
@@ -72,7 +72,7 @@ export default function Home() {
             </div>
 
             {/* Category Filters */}
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-2 justify-center max-w-4xl mx-auto">
               <Badge
                 variant={selectedCategory === null ? 'default' : 'outline'}
                 className="cursor-pointer"
@@ -99,7 +99,7 @@ export default function Home() {
       </section>
 
       {/* Blocks Grid */}
-      <section className="container mx-auto px-4 py-12">
+      <section className="container mx-auto px-6 md:px-8 lg:px-12 py-12">
         {filteredBlocks.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-500 text-lg">
@@ -107,7 +107,7 @@ export default function Home() {
             </p>
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredBlocks.map((block) => (
               <BlockCard key={block.id} block={block} />
             ))}
@@ -117,7 +117,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-gray-200 dark:border-gray-800 mt-16">
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-8">
           <div className="text-center text-sm text-gray-500">
             <p>Built with Next.js, Tailwind CSS and shadcn/ui</p>
             <p className="mt-2">Copy, paste, customize - It's that simple.</p>
