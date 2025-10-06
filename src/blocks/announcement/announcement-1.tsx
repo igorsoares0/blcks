@@ -9,8 +9,8 @@ interface Announcement1Props {
 }
 
 export default function Announcement1({
-  message = 'Novidade: Acabamos de lançar nossa nova versão 2.0',
-  linkText = 'Saiba mais',
+  message = 'News: We just launched our new version 2.0',
+  linkText = 'Learn more',
   linkHref = '#',
   variant = 'default'
 }: Announcement1Props) {
@@ -39,7 +39,7 @@ export default function Announcement1({
           variant="ghost"
           size="icon"
           className="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 opacity-70 hover:opacity-100 hover:bg-transparent"
-          aria-label="Fechar"
+          aria-label="Close"
         >
           <X className="h-4 w-4" />
         </Button>

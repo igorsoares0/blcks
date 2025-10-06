@@ -22,29 +22,29 @@ interface Footer1Props {
 
 export default function Footer1({
   companyName = 'Blcks',
-  description = 'Componentes React prontos para copiar e colar. Copy, paste, customize.',
+  description = 'Ready-to-use React components to copy and paste. Copy, paste, customize.',
   sections = [
     {
-      title: 'Produto',
+      title: 'Product',
       links: [
         { label: 'Features', href: '#' },
-        { label: 'Preços', href: '#' },
-        { label: 'Documentação', href: '#' }
+        { label: 'Pricing', href: '#' },
+        { label: 'Documentation', href: '#' }
       ]
     },
     {
-      title: 'Empresa',
+      title: 'Company',
       links: [
-        { label: 'Sobre', href: '#' },
+        { label: 'About', href: '#' },
         { label: 'Blog', href: '#' },
-        { label: 'Carreiras', href: '#' }
+        { label: 'Careers', href: '#' }
       ]
     },
     {
-      title: 'Suporte',
+      title: 'Support',
       links: [
-        { label: 'Ajuda', href: '#' },
-        { label: 'Contato', href: '#' },
+        { label: 'Help', href: '#' },
+        { label: 'Contact', href: '#' },
         { label: 'Status', href: '#' }
       ]
     }
@@ -54,7 +54,7 @@ export default function Footer1({
     github: '#',
     linkedin: '#'
   },
-  copyright = '© 2024 Blcks. Todos os direitos reservados.'
+  copyright = '© 2024 Blcks. All rights reserved.'
 }: Footer1Props) {
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">

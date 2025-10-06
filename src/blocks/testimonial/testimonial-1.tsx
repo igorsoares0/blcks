@@ -16,15 +16,15 @@ interface Testimonial1Props {
 }
 
 export default function Testimonial1({
-  title = 'O que nossos clientes dizem',
-  description = 'Veja o feedback de quem já usa nosso produto',
+  title = 'What our customers say',
+  description = 'See feedback from those who already use our product',
   testimonials = [
     {
       name: 'Ana Silva',
       role: 'CEO',
       company: 'TechStart Inc',
       avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
-      content: 'Este produto revolucionou completamente a forma como nossa equipe trabalha. A produtividade aumentou em 40% e conseguimos reduzir drasticamente o tempo de desenvolvimento.',
+      content: 'This product completely revolutionized the way our team works. Productivity increased by 40% and we were able to drastically reduce development time.',
       rating: 5
     },
     {
@@ -32,7 +32,7 @@ export default function Testimonial1({
       role: 'Product Manager',
       company: 'Digital Solutions',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
-      content: 'Excelente ferramenta! A interface é intuitiva e os recursos atendem perfeitamente nossas necessidades. O suporte ao cliente também é excepcional.',
+      content: 'Excellent tool! The interface is intuitive and the features perfectly meet our needs. Customer support is also exceptional.',
       rating: 5
     },
     {
@@ -40,7 +40,7 @@ export default function Testimonial1({
       role: 'Lead Developer',
       company: 'CodeCraft',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
-      content: 'Como desenvolvedora, aprecio muito a qualidade do código e a documentação completa. Facilitou muito a integração com nossos sistemas existentes.',
+      content: 'As a developer, I really appreciate the code quality and complete documentation. It made integration with our existing systems much easier.',
       rating: 5
     },
     {
@@ -48,7 +48,7 @@ export default function Testimonial1({
       role: 'CTO',
       company: 'Innovation Labs',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
-      content: 'A melhor decisão que tomamos este ano. ROI positivo em menos de 2 meses. Recomendo fortemente para qualquer equipe que busca eficiência.',
+      content: 'The best decision we made this year. Positive ROI in less than 2 months. I strongly recommend it to any team looking for efficiency.',
       rating: 5
     },
     {
@@ -56,7 +56,7 @@ export default function Testimonial1({
       role: 'Design Lead',
       company: 'Creative Studio',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop',
-      content: 'Design impecável e funcionalidade top. Nossa equipe adotou rapidamente e agora não conseguimos trabalhar sem. Vale cada centavo investido.',
+      content: 'Impeccable design and top functionality. Our team adopted it quickly and now we can\'t work without it. Worth every penny invested.',
       rating: 5
     },
     {
@@ -64,7 +64,7 @@ export default function Testimonial1({
       role: 'Founder',
       company: 'StartupXYZ',
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop',
-      content: 'Perfeito para startups em crescimento. Escalável, confiável e com um custo-benefício imbatível. Já estamos usando há 6 meses e só temos elogios.',
+      content: 'Perfect for growing startups. Scalable, reliable and with unbeatable value for money. We\'ve been using it for 6 months and only have praise.',
       rating: 5
     }
   ]

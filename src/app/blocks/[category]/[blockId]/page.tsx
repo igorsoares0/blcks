@@ -30,7 +30,7 @@ interface PageProps {
   }>;
 }
 
-// Mapa de componentes para renderização
+// Component map for rendering
 const componentMap: Record<string, React.ComponentType<any>> = {
   'navbar-1': Navbar1,
   'hero-1': Hero1,
@@ -74,7 +74,7 @@ export default async function BlockPage({ params }: PageProps) {
             <Link href="/">
               <Button variant="ghost" size="sm">
                 <ArrowLeft className="h-4 w-4 mr-2" />
-                Voltar
+                Back
               </Button>
             </Link>
             <div className="flex items-center gap-2">
@@ -127,16 +127,16 @@ export default async function BlockPage({ params }: PageProps) {
                   <thead className="bg-gray-50 dark:bg-gray-900">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Nome
+                        Name
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Tipo
+                        Type
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Padrão
+                        Default
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Descrição
+                        Description
                       </th>
                     </tr>
                   </thead>
@@ -178,12 +178,12 @@ export default async function BlockPage({ params }: PageProps) {
       {/* Installation Instructions */}
       <section className="container mx-auto px-4 py-12 border-t border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">Como usar</h2>
+          <h2 className="text-2xl font-bold mb-6">How to use</h2>
           <div className="space-y-4 prose dark:prose-invert max-w-none">
             <div>
-              <h3 className="text-lg font-semibold mb-2">1. Instalar dependências</h3>
+              <h3 className="text-lg font-semibold mb-2">1. Install dependencies</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-3">
-                Primeiro, instale as dependências necessárias:
+                First, install the required dependencies:
               </p>
               <div className="space-y-2">
                 {block.dependencies.filter(dep => !dep.command).length > 0 && (
@@ -200,16 +200,16 @@ export default async function BlockPage({ params }: PageProps) {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-2">2. Copiar o código</h3>
+              <h3 className="text-lg font-semibold mb-2">2. Copy the code</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Copie o código do componente da aba "Code" acima e cole no seu projeto.
+                Copy the component code from the "Code" tab above and paste it into your project.
               </p>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-2">3. Customizar</h3>
+              <h3 className="text-lg font-semibold mb-2">3. Customize</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Ajuste as cores, espaçamentos e textos de acordo com seu design system.
+                Adjust colors, spacing and text according to your design system.
               </p>
             </div>
           </div>

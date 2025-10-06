@@ -23,24 +23,24 @@ const iconMap = {
 };
 
 export default function Services1({
-  title = 'Nossos Serviços',
-  description = 'Soluções completas para transformar seu negócio digital',
+  title = 'Our Services',
+  description = 'Complete solutions to transform your digital business',
   services = [
     {
       icon: 'Code',
-      title: 'Desenvolvimento Web',
-      description: 'Criamos aplicações web modernas, rápidas e escaláveis usando as melhores tecnologias do mercado.',
+      title: 'Web Development',
+      description: 'We create modern, fast and scalable web applications using the best technologies on the market.',
       features: [
         'React & Next.js',
         'TypeScript',
-        'API RESTful',
-        'Responsivo'
+        'RESTful API',
+        'Responsive'
       ]
     },
     {
       icon: 'Smartphone',
-      title: 'Desenvolvimento Mobile',
-      description: 'Aplicativos nativos e multiplataforma que proporcionam experiências incríveis em qualquer dispositivo.',
+      title: 'Mobile Development',
+      description: 'Native and cross-platform applications that provide incredible experiences on any device.',
       features: [
         'React Native',
         'iOS & Android',
@@ -51,7 +51,7 @@ export default function Services1({
     {
       icon: 'Cloud',
       title: 'Cloud & DevOps',
-      description: 'Infraestrutura escalável e automatizada para garantir performance e disponibilidade do seu produto.',
+      description: 'Scalable and automated infrastructure to ensure performance and availability of your product.',
       features: [
         'AWS / Google Cloud',
         'Docker & Kubernetes',
@@ -61,19 +61,19 @@ export default function Services1({
     },
     {
       icon: 'Shield',
-      title: 'Segurança',
-      description: 'Proteja seus dados e usuários com as melhores práticas de segurança e compliance.',
+      title: 'Security',
+      description: 'Protect your data and users with security and compliance best practices.',
       features: [
-        'Autenticação OAuth',
-        'Criptografia',
-        'LGPD Compliance',
+        'OAuth Authentication',
+        'Encryption',
+        'GDPR Compliance',
         'Penetration Testing'
       ]
     },
     {
       icon: 'Zap',
       title: 'Performance',
-      description: 'Otimizamos cada aspecto da sua aplicação para garantir velocidade e eficiência máximas.',
+      description: 'We optimize every aspect of your application to ensure maximum speed and efficiency.',
       features: [
         'Code Splitting',
         'Lazy Loading',
@@ -83,8 +83,8 @@ export default function Services1({
     },
     {
       icon: 'Users',
-      title: 'Consultoria',
-      description: 'Orientação estratégica e técnica para garantir o sucesso do seu projeto digital.',
+      title: 'Consulting',
+      description: 'Strategic and technical guidance to ensure the success of your digital project.',
       features: [
         'Tech Assessment',
         'Code Review',

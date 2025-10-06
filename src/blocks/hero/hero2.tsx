@@ -8,10 +8,10 @@ interface Hero2Props {
 }
 
 export default function Hero2({
-  title = 'Transforme suas ideias em realidade',
-  description = 'Plataforma completa para criar, lançar e escalar seus projetos digitais com velocidade e confiança.',
-  primaryCTA = 'Começar gratuitamente',
-  secondaryCTA = 'Agendar demo'
+  title = 'Transform your ideas into reality',
+  description = 'Complete platform to create, launch and scale your digital projects with speed and confidence.',
+  primaryCTA = 'Get Started Free',
+  secondaryCTA = 'Schedule Demo'
 }: Hero2Props) {
   return (
     <section className="relative w-full py-20 md:py-32 lg:py-40 overflow-hidden">
@@ -26,7 +26,7 @@ export default function Hero2({
         <div className="flex flex-col items-center text-center space-y-8">
           <div className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm text-white">
             <Sparkles className="mr-2 h-4 w-4" />
-            Novidade: Lançamos a versão 2.0
+            New: We launched version 2.0
           </div>
 
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-white max-w-4xl">

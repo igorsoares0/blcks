@@ -1,7 +1,7 @@
 export interface BlockDependency {
   name: string;
   version?: string;
-  command?: string; // comando shadcn/ui se aplicável
+  command?: string; // shadcn/ui command if applicable
 }
 
 export interface BlockMetadata {
@@ -21,18 +21,18 @@ export interface BlockMetadata {
   }[];
 }
 
-// Helper para gerar código do bloco a partir do arquivo
+// Helper to generate block code from file
 export const getBlockCode = (blockId: string): string => {
-  // Em produção, isso seria carregado dinamicamente ou do sistema de arquivos
-  // Por enquanto, retornamos o código inline no registry
+  // In production, this would be loaded dynamically or from the file system
+  // For now, we return the inline code in the registry
   return blocksRegistry.find(b => b.id === blockId)?.code || '';
 };
 
 export const blocksRegistry: BlockMetadata[] = [
   {
     id: 'navbar-1',
-    name: 'Navbar Responsiva',
-    description: 'Barra de navegação moderna com menu mobile, sticky header e backdrop blur. Totalmente responsiva.',
+    name: 'Responsive Navbar',
+    description: 'Modern navigation bar with mobile menu, sticky header and backdrop blur. Fully responsive.',
     category: 'navbar',
     tags: ['navbar', 'navigation', 'menu', 'header', 'mobile'],
     dependencies: [
@@ -43,19 +43,19 @@ export const blocksRegistry: BlockMetadata[] = [
     previewProps: {
       logo: 'Blcks',
       items: [
-        { label: 'Início', href: '#' },
-        { label: 'Blocos', href: '#blocos' },
-        { label: 'Documentação', href: '#docs' },
-        { label: 'Sobre', href: '#sobre' }
+        { label: 'Home', href: '#' },
+        { label: 'Blocks', href: '#blocos' },
+        { label: 'Documentation', href: '#docs' },
+        { label: 'About', href: '#sobre' }
       ],
-      ctaText: 'Começar',
+      ctaText: 'Get Started',
       ctaHref: '#'
     },
     props: [
-      { name: 'logo', type: 'string', default: 'Blcks', description: 'Texto/nome do logo' },
-      { name: 'items', type: 'NavItem[]', description: 'Array de items de navegação com label e href' },
-      { name: 'ctaText', type: 'string', default: 'Começar', description: 'Texto do botão CTA' },
-      { name: 'ctaHref', type: 'string', default: '#', description: 'Link do botão CTA' }
+      { name: 'logo', type: 'string', default: 'Blcks', description: 'Logo text/name' },
+      { name: 'items', type: 'NavItem[]', description: 'Array of navigation items with label and href' },
+      { name: 'ctaText', type: 'string', default: 'Get Started', description: 'CTA button text' },
+      { name: 'ctaHref', type: 'string', default: '#', description: 'CTA button link' }
     ],
     code: `import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -82,12 +82,12 @@ interface Navbar1Props {
 export default function Navbar1({
   logo = 'Blcks',
   items = [
-    { label: 'Início', href: '#' },
-    { label: 'Blocos', href: '#blocos' },
-    { label: 'Documentação', href: '#docs' },
-    { label: 'Sobre', href: '#sobre' }
+    { label: 'Home', href: '#' },
+    { label: 'Blocks', href: '#blocos' },
+    { label: 'Documentation', href: '#docs' },
+    { label: 'About', href: '#sobre' }
   ],
-  ctaText = 'Começar',
+  ctaText = 'Get Started',
   ctaHref = '#'
 }: Navbar1Props) {
   return (
@@ -158,8 +158,8 @@ export default function Navbar1({
   },
   {
     id: 'hero-1',
-    name: 'Hero com Imagem à Direita',
-    description: 'Seção hero moderna com texto à esquerda e imagem à direita. Totalmente responsivo e personalizável.',
+    name: 'Hero with Image on Right',
+    description: 'Modern hero section with text on the left and image on the right. Fully responsive and customizable.',
     category: 'hero',
     tags: ['hero', 'landing', 'cta', 'image'],
     dependencies: [
@@ -167,20 +167,20 @@ export default function Navbar1({
       { name: 'button', command: 'npx shadcn@latest add button' }
     ],
     previewProps: {
-      title: 'Construa seu próximo projeto com nossos blocos',
-      subtitle: 'Componentes React prontos para copiar e colar',
-      description: 'Uma coleção crescente de componentes bonitos e acessíveis. Copy, paste, customize. É simples assim.',
-      primaryCTA: 'Começar agora',
-      secondaryCTA: 'Ver exemplos',
+      title: 'Build your next project with our blocks',
+      subtitle: 'Ready-to-use React components to copy and paste',
+      description: 'A growing collection of beautiful and accessible components. Copy, paste, customize. It\'s that simple.',
+      primaryCTA: 'Get started now',
+      secondaryCTA: 'View examples',
       imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop'
     },
     props: [
-      { name: 'title', type: 'string', description: 'Título principal do hero' },
-      { name: 'subtitle', type: 'string', description: 'Subtítulo acima do título' },
-      { name: 'description', type: 'string', description: 'Descrição abaixo do título' },
-      { name: 'primaryCTA', type: 'string', description: 'Texto do botão primário' },
-      { name: 'secondaryCTA', type: 'string', description: 'Texto do botão secundário' },
-      { name: 'imageUrl', type: 'string', description: 'URL da imagem' }
+      { name: 'title', type: 'string', description: 'Hero main title' },
+      { name: 'subtitle', type: 'string', description: 'Subtitle above title' },
+      { name: 'description', type: 'string', description: 'Description below title' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary button text' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary button text' },
+      { name: 'imageUrl', type: 'string', description: 'Image URL' }
     ],
     code: `import { ArrowRight } from 'lucide-react';
 
@@ -194,11 +194,11 @@ interface Hero1Props {
 }
 
 export default function Hero1({
-  title = 'Construa seu próximo projeto com nossos blocos',
-  subtitle = 'Componentes React prontos para copiar e colar',
-  description = 'Uma coleção crescente de componentes bonitos e acessíveis. Copy, paste, customize. É simples assim.',
-  primaryCTA = 'Começar agora',
-  secondaryCTA = 'Ver exemplos',
+  title = 'Build your next project with our blocks',
+  subtitle = 'Ready-to-use React components to copy and paste',
+  description = 'A growing collection of beautiful and accessible components. Copy, paste, customize. It\'s that simple.',
+  primaryCTA = 'Get started now',
+  secondaryCTA = 'View examples',
   imageUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop'
 }: Hero1Props) {
   return (
@@ -240,24 +240,24 @@ export default function Hero1({
   },
   {
     id: 'hero-2',
-    name: 'Hero com Gradient Background',
-    description: 'Hero section com background gradient vibrante e efeitos visuais modernos.',
+    name: 'Hero with Gradient Background',
+    description: 'Hero section with vibrant gradient background and modern visual effects.',
     category: 'hero',
     tags: ['hero', 'landing', 'gradient', 'modern'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      title: 'Transforme suas ideias em realidade',
-      description: 'Plataforma completa para criar, lançar e escalar seus projetos digitais com velocidade e confiança.',
-      primaryCTA: 'Começar gratuitamente',
-      secondaryCTA: 'Agendar demo'
+      title: 'Transform your ideas into reality',
+      description: 'Complete platform to create, launch and scale your digital projects with speed and confidence.',
+      primaryCTA: 'Start for free',
+      secondaryCTA: 'Schedule demo'
     },
     props: [
-      { name: 'title', type: 'string', description: 'Título principal do hero' },
-      { name: 'description', type: 'string', description: 'Descrição do hero' },
-      { name: 'primaryCTA', type: 'string', description: 'Texto do botão primário' },
-      { name: 'secondaryCTA', type: 'string', description: 'Texto do botão secundário' }
+      { name: 'title', type: 'string', description: 'Hero main title' },
+      { name: 'description', type: 'string', description: 'Hero description' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary button text' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary button text' }
     ],
     code: `import { Sparkles } from 'lucide-react';
 
@@ -269,10 +269,10 @@ interface Hero2Props {
 }
 
 export default function Hero2({
-  title = 'Transforme suas ideias em realidade',
-  description = 'Plataforma completa para criar, lançar e escalar seus projetos digitais com velocidade e confiança.',
-  primaryCTA = 'Começar gratuitamente',
-  secondaryCTA = 'Agendar demo'
+  title = 'Transform your ideas into reality',
+  description = 'Complete platform to create, launch and scale your digital projects with speed and confidence.',
+  primaryCTA = 'Start for free',
+  secondaryCTA = 'Schedule demo'
 }: Hero2Props) {
   return (
     <section className="relative w-full py-20 md:py-32 lg:py-40 overflow-hidden">
@@ -287,7 +287,7 @@ export default function Hero2({
         <div className="flex flex-col items-center text-center space-y-8">
           <div className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 text-sm text-white">
             <Sparkles className="mr-2 h-4 w-4" />
-            Novidade: Lançamos a versão 2.0
+            New: We launched version 2.0
           </div>
 
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-white max-w-4xl">
@@ -314,53 +314,53 @@ export default function Hero2({
   },
   {
     id: 'features-1',
-    name: 'Features Grid com Ícones',
-    description: 'Grade de features com ícones, título e descrição. Layout responsivo 3 colunas.',
+    name: 'Features Grid with Icons',
+    description: 'Features grid with icons, title and description. Responsive 3-column layout.',
     category: 'features',
     tags: ['features', 'grid', 'icons', 'services'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      title: 'Tudo que você precisa',
-      description: 'Ferramentas poderosas para acelerar seu desenvolvimento',
+      title: 'Everything you need',
+      description: 'Powerful tools to accelerate your development',
       features: [
         {
           icon: 'Zap',
-          title: 'Extremamente rápido',
-          description: 'Otimizado para performance. Carregamento instantâneo e experiência fluida.'
+          title: 'Extremely fast',
+          description: 'Optimized for performance. Instant loading and smooth experience.'
         },
         {
           icon: 'Shield',
-          title: 'Seguro por padrão',
-          description: 'Proteção em todas as camadas. Seus dados sempre seguros e criptografados.'
+          title: 'Secure by default',
+          description: 'Protection at all layers. Your data always safe and encrypted.'
         },
         {
           icon: 'Code',
           title: 'Developer First',
-          description: 'APIs intuitivas e documentação completa. Comece a construir em minutos.'
+          description: 'Intuitive APIs and complete documentation. Start building in minutes.'
         },
         {
           icon: 'Layers',
-          title: 'Altamente escalável',
-          description: 'Cresce com seu negócio. De startup a enterprise, suportamos seu crescimento.'
+          title: 'Highly scalable',
+          description: 'Grows with your business. From startup to enterprise, we support your growth.'
         },
         {
           icon: 'Users',
-          title: 'Colaboração',
-          description: 'Trabalhe em equipe com facilidade. Ferramentas colaborativas integradas.'
+          title: 'Collaboration',
+          description: 'Work in teams with ease. Integrated collaborative tools.'
         },
         {
           icon: 'BarChart',
           title: 'Analytics',
-          description: 'Insights em tempo real. Tome decisões baseadas em dados concretos.'
+          description: 'Real-time insights. Make decisions based on concrete data.'
         }
       ]
     },
     props: [
-      { name: 'title', type: 'string', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição da seção' },
-      { name: 'features', type: 'array', description: 'Array de features com icon, title e description' }
+      { name: 'title', type: 'string', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
+      { name: 'features', type: 'array', description: 'Array of features with icon, title and description' }
     ],
     code: `import { Zap, Shield, Code, Layers, Users, BarChart, LucideIcon } from 'lucide-react';
 
@@ -386,23 +386,23 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export default function Features1({
-  title = 'Tudo que você precisa',
-  description = 'Ferramentas poderosas para acelerar seu desenvolvimento',
+  title = 'Everything you need',
+  description = 'Powerful tools to accelerate your development',
   features = [
     {
       icon: 'Zap',
-      title: 'Extremamente rápido',
-      description: 'Otimizado para performance. Carregamento instantâneo e experiência fluida.'
+      title: 'Extremely fast',
+      description: 'Optimized for performance. Instant loading and smooth experience.'
     },
     {
       icon: 'Shield',
-      title: 'Seguro por padrão',
-      description: 'Proteção em todas as camadas. Seus dados sempre seguros e criptografados.'
+      title: 'Secure by default',
+      description: 'Protection at all layers. Your data always safe and encrypted.'
     },
     {
       icon: 'Code',
       title: 'Developer First',
-      description: 'APIs intuitivas e documentação completa. Comece a construir em minutos.'
+      description: 'Intuitive APIs and complete documentation. Start building in minutes.'
     }
   ]
 }: Features1Props) {
@@ -439,24 +439,24 @@ export default function Features1({
   },
   {
     id: 'cta-1',
-    name: 'CTA Simples',
-    description: 'Call-to-action limpo e direto com título, descrição e botões de ação.',
+    name: 'Simple CTA',
+    description: 'Clean and direct call-to-action with title, description and action buttons.',
     category: 'cta',
     tags: ['cta', 'call-to-action', 'conversion'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      title: 'Pronto para começar?',
-      description: 'Junte-se a milhares de desenvolvedores que já estão construindo projetos incríveis.',
-      primaryCTA: 'Criar conta grátis',
-      secondaryCTA: 'Falar com vendas'
+      title: 'Ready to get started?',
+      description: 'Join thousands of developers who are already building amazing projects.',
+      primaryCTA: 'Create free account',
+      secondaryCTA: 'Talk to sales'
     },
     props: [
-      { name: 'title', type: 'string', description: 'Título do CTA' },
-      { name: 'description', type: 'string', description: 'Descrição do CTA' },
-      { name: 'primaryCTA', type: 'string', description: 'Texto do botão primário' },
-      { name: 'secondaryCTA', type: 'string', description: 'Texto do botão secundário' }
+      { name: 'title', type: 'string', description: 'CTA title' },
+      { name: 'description', type: 'string', description: 'CTA description' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary button text' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary button text' }
     ],
     code: `import { ArrowRight } from 'lucide-react';
 
@@ -468,10 +468,10 @@ interface CTA1Props {
 }
 
 export default function CTA1({
-  title = 'Pronto para começar?',
-  description = 'Junte-se a milhares de desenvolvedores que já estão construindo projetos incríveis.',
-  primaryCTA = 'Criar conta grátis',
-  secondaryCTA = 'Falar com vendas'
+  title = 'Ready to get started?',
+  description = 'Join thousands of developers who are already building amazing projects.',
+  primaryCTA = 'Create free account',
+  secondaryCTA = 'Talk to sales'
 }: CTA1Props) {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
@@ -503,8 +503,8 @@ export default function CTA1({
   },
   {
     id: 'footer-1',
-    name: 'Footer Completo',
-    description: 'Footer com informações da empresa, seções de links, ícones sociais e copyright. Layout responsivo.',
+    name: 'Complete Footer',
+    description: 'Footer with company information, link sections, social icons and copyright. Responsive layout.',
     category: 'footer',
     tags: ['footer', 'links', 'social', 'navigation', 'company'],
     dependencies: [],
@@ -513,26 +513,26 @@ export default function CTA1({
       description: 'Componentes React prontos para copiar e colar. Copy, paste, customize.',
       sections: [
         {
-          title: 'Produto',
+          title: 'Product',
           links: [
             { label: 'Features', href: '#' },
-            { label: 'Preços', href: '#' },
-            { label: 'Documentação', href: '#' }
+            { label: 'Pricing', href: '#' },
+            { label: 'Documentation', href: '#' }
           ]
         },
         {
-          title: 'Empresa',
+          title: 'Company',
           links: [
-            { label: 'Sobre', href: '#' },
+            { label: 'About', href: '#' },
             { label: 'Blog', href: '#' },
-            { label: 'Carreiras', href: '#' }
+            { label: 'Careers', href: '#' }
           ]
         },
         {
-          title: 'Suporte',
+          title: 'Support',
           links: [
-            { label: 'Ajuda', href: '#' },
-            { label: 'Contato', href: '#' },
+            { label: 'Help', href: '#' },
+            { label: 'Contact', href: '#' },
             { label: 'Status', href: '#' }
           ]
         }
@@ -542,14 +542,14 @@ export default function CTA1({
         github: '#',
         linkedin: '#'
       },
-      copyright: '© 2024 Blcks. Todos os direitos reservados.'
+      copyright: '© 2024 Blcks. All rights reserved.'
     },
     props: [
-      { name: 'companyName', type: 'string', default: 'Blcks', description: 'Nome da empresa' },
-      { name: 'description', type: 'string', description: 'Descrição da empresa' },
-      { name: 'sections', type: 'FooterSection[]', description: 'Array de seções de links com título e links' },
-      { name: 'socialLinks', type: 'object', description: 'Objeto com links das redes sociais (twitter, github, linkedin)' },
-      { name: 'copyright', type: 'string', description: 'Texto de copyright' }
+      { name: 'companyName', type: 'string', default: 'Blcks', description: 'Company name' },
+      { name: 'description', type: 'string', description: 'Company description' },
+      { name: 'sections', type: 'FooterSection[]', description: 'Array of link sections with title and links' },
+      { name: 'socialLinks', type: 'object', description: 'Object with social media links (twitter, github, linkedin)' },
+      { name: 'copyright', type: 'string', description: 'Copyright text' }
     ],
     code: `interface FooterLink {
   label: string;
@@ -578,26 +578,26 @@ export default function Footer1({
   description = 'Componentes React prontos para copiar e colar. Copy, paste, customize.',
   sections = [
     {
-      title: 'Produto',
+      title: 'Product',
       links: [
         { label: 'Features', href: '#' },
-        { label: 'Preços', href: '#' },
-        { label: 'Documentação', href: '#' }
+        { label: 'Pricing', href: '#' },
+        { label: 'Documentation', href: '#' }
       ]
     },
     {
-      title: 'Empresa',
+      title: 'Company',
       links: [
-        { label: 'Sobre', href: '#' },
+        { label: 'About', href: '#' },
         { label: 'Blog', href: '#' },
-        { label: 'Carreiras', href: '#' }
+        { label: 'Careers', href: '#' }
       ]
     },
     {
-      title: 'Suporte',
+      title: 'Support',
       links: [
-        { label: 'Ajuda', href: '#' },
-        { label: 'Contato', href: '#' },
+        { label: 'Help', href: '#' },
+        { label: 'Contact', href: '#' },
         { label: 'Status', href: '#' }
       ]
     }
@@ -607,7 +607,7 @@ export default function Footer1({
     github: '#',
     linkedin: '#'
   },
-  copyright = '© 2024 Blcks. Todos os direitos reservados.'
+  copyright = '© 2024 Blcks. All rights reserved.'
 }: Footer1Props) {
   return (
     <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
@@ -683,7 +683,7 @@ export default function Footer1({
   {
     id: 'announcement-1',
     name: 'Announcement Bar',
-    description: 'Barra de anúncio fixa no topo com mensagem, link e botão de fechar usando shadcn/ui Button. Inclui 3 variações de cores.',
+    description: 'Fixed announcement bar at the top with message, link and close button using shadcn/ui Button. Includes 3 color variations.',
     category: 'announcement',
     tags: ['announcement', 'banner', 'notification', 'top-bar'],
     dependencies: [
@@ -691,16 +691,16 @@ export default function Footer1({
       { name: 'shadcn/ui', version: 'latest', component: 'button' }
     ],
     previewProps: {
-      message: 'Novidade: Acabamos de lançar nossa nova versão 2.0',
-      linkText: 'Saiba mais',
+      message: 'New: We just launched our new version 2.0',
+      linkText: 'Learn more',
       linkHref: '#',
       variant: 'default'
     },
     props: [
-      { name: 'message', type: 'string', description: 'Mensagem do anúncio' },
-      { name: 'linkText', type: 'string', description: 'Texto do link' },
-      { name: 'linkHref', type: 'string', description: 'URL do link' },
-      { name: 'variant', type: "'default' | 'gradient' | 'dark'", default: 'default', description: 'Variação de cor da barra' }
+      { name: 'message', type: 'string', description: 'Announcement message' },
+      { name: 'linkText', type: 'string', description: 'Link text' },
+      { name: 'linkHref', type: 'string', description: 'Link URL' },
+      { name: 'variant', type: "'default' | 'gradient' | 'dark'", default: 'default', description: 'Bar color variation' }
     ],
     code: `import { X, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -713,8 +713,8 @@ interface Announcement1Props {
 }
 
 export default function Announcement1({
-  message = 'Novidade: Acabamos de lançar nossa nova versão 2.0',
-  linkText = 'Saiba mais',
+  message = 'New: We just launched our new version 2.0',
+  linkText = 'Learn more',
   linkHref = '#',
   variant = 'default'
 }: Announcement1Props) {
@@ -743,7 +743,7 @@ export default function Announcement1({
           variant="ghost"
           size="icon"
           className="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 opacity-70 hover:opacity-100 hover:bg-transparent"
-          aria-label="Fechar"
+          aria-label="Close"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -755,19 +755,19 @@ export default function Announcement1({
   {
     id: 'about-1',
     name: 'About Section',
-    description: 'Seção completa sobre a empresa com descrição, missão, estatísticas e equipe. Layout responsivo e moderno.',
+    description: 'Complete company section with description, mission, statistics and team. Responsive and modern layout.',
     category: 'about',
     tags: ['about', 'team', 'mission', 'company', 'stats'],
     dependencies: [],
     previewProps: {
-      title: 'Sobre nós',
-      description: 'Somos uma equipe apaixonada por criar experiências digitais incríveis. Nossa missão é ajudar empresas a transformar suas ideias em produtos que as pessoas amam.',
-      mission: 'Democratizar o acesso a componentes de alta qualidade para desenvolvedores em todo o mundo.',
+      title: 'About us',
+      description: 'We are a team passionate about creating amazing digital experiences. Our mission is to help companies transform their ideas into products that people love.',
+      mission: 'Democratize access to high-quality components for developers around the world.',
       stats: [
-        { value: '50+', label: 'Componentes' },
-        { value: '10k+', label: 'Desenvolvedores' },
+        { value: '50+', label: 'Components' },
+        { value: '10k+', label: 'Developers' },
         { value: '100%', label: 'Open Source' },
-        { value: '24/7', label: 'Suporte' }
+        { value: '24/7', label: 'Support' }
       ],
       team: [
         {
@@ -793,11 +793,11 @@ export default function Announcement1({
       ]
     },
     props: [
-      { name: 'title', type: 'string', default: 'Sobre nós', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição principal' },
-      { name: 'mission', type: 'string', description: 'Texto da missão da empresa' },
-      { name: 'stats', type: 'Array<{ value: string; label: string }>', description: 'Array de estatísticas' },
-      { name: 'team', type: 'TeamMember[]', description: 'Array de membros da equipe com name, role e imageUrl' }
+      { name: 'title', type: 'string', default: 'About us', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Main description' },
+      { name: 'mission', type: 'string', description: 'Company mission text' },
+      { name: 'stats', type: 'Array<{ value: string; label: string }>', description: 'Array of statistics' },
+      { name: 'team', type: 'TeamMember[]', description: 'Array of team members with name, role and imageUrl' }
     ],
     code: `interface TeamMember {
   name: string;
@@ -817,14 +817,14 @@ interface About1Props {
 }
 
 export default function About1({
-  title = 'Sobre nós',
-  description = 'Somos uma equipe apaixonada por criar experiências digitais incríveis. Nossa missão é ajudar empresas a transformar suas ideias em produtos que as pessoas amam.',
-  mission = 'Democratizar o acesso a componentes de alta qualidade para desenvolvedores em todo o mundo.',
+  title = 'About us',
+  description = 'We are a team passionate about creating amazing digital experiences. Our mission is to help companies transform their ideas into products that people love.',
+  mission = 'Democratize access to high-quality components for developers around the world.',
   stats = [
-    { value: '50+', label: 'Componentes' },
-    { value: '10k+', label: 'Desenvolvedores' },
+    { value: '50+', label: 'Components' },
+    { value: '10k+', label: 'Developers' },
     { value: '100%', label: 'Open Source' },
-    { value: '24/7', label: 'Suporte' }
+    { value: '24/7', label: 'Support' }
   ],
   team = [
     {
@@ -865,7 +865,7 @@ export default function About1({
         {/* Mission */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl font-bold mb-4">Nossa Missão</h3>
+            <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
             <p className="text-lg text-gray-700 dark:text-gray-300">
               {mission}
             </p>
@@ -888,7 +888,7 @@ export default function About1({
 
         {/* Team */}
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-12">Nossa Equipe</h3>
+          <h3 className="text-2xl font-bold text-center mb-12">Our Team</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
               <div key={index} className="text-center group">
@@ -915,7 +915,7 @@ export default function About1({
   {
     id: 'blog-1',
     name: 'Blog Grid',
-    description: 'Grade de posts de blog com imagem, categoria, título, excerpt, meta informações e autor. Layout responsivo com 3 colunas.',
+    description: 'Blog post grid with image, category, title, excerpt, meta information and author. Responsive 3-column layout.',
     category: 'blog',
     tags: ['blog', 'posts', 'articles', 'grid', 'content'],
     dependencies: [
@@ -923,11 +923,11 @@ export default function About1({
     ],
     previewProps: {
       title: 'Blog',
-      description: 'Artigos, tutoriais e novidades sobre desenvolvimento',
+      description: 'Articles, tutorials and news about development',
       posts: [
         {
-          title: 'Como criar componentes reutilizáveis com React',
-          excerpt: 'Aprenda as melhores práticas para criar componentes React que podem ser reutilizados em qualquer projeto.',
+          title: 'How to create reusable components with React',
+          excerpt: 'Learn best practices for creating React components that can be reused in any project.',
           author: 'Ana Silva',
           date: '15 Mar 2024',
           readTime: '5 min',
@@ -936,8 +936,8 @@ export default function About1({
           slug: '#'
         },
         {
-          title: 'Guia completo de TypeScript para iniciantes',
-          excerpt: 'Descubra como TypeScript pode melhorar a qualidade do seu código e aumentar sua produtividade.',
+          title: 'Complete TypeScript guide for beginners',
+          excerpt: 'Discover how TypeScript can improve your code quality and increase your productivity.',
           author: 'Carlos Santos',
           date: '12 Mar 2024',
           readTime: '8 min',
@@ -946,8 +946,8 @@ export default function About1({
           slug: '#'
         },
         {
-          title: 'Otimizando performance no Next.js 15',
-          excerpt: 'Técnicas avançadas para melhorar o desempenho das suas aplicações Next.js e proporcionar uma experiência incrível.',
+          title: 'Optimizing performance in Next.js 15',
+          excerpt: 'Advanced techniques to improve the performance of your Next.js applications and provide an amazing experience.',
           author: 'Marina Costa',
           date: '10 Mar 2024',
           readTime: '6 min',
@@ -958,9 +958,9 @@ export default function About1({
       ]
     },
     props: [
-      { name: 'title', type: 'string', default: 'Blog', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição da seção' },
-      { name: 'posts', type: 'BlogPost[]', description: 'Array de posts com title, excerpt, author, date, readTime, category, imageUrl e slug' }
+      { name: 'title', type: 'string', default: 'Blog', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
+      { name: 'posts', type: 'BlogPost[]', description: 'Array of posts with title, excerpt, author, date, readTime, category, imageUrl and slug' }
     ],
     code: `import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
@@ -983,11 +983,11 @@ interface Blog1Props {
 
 export default function Blog1({
   title = 'Blog',
-  description = 'Artigos, tutoriais e novidades sobre desenvolvimento',
+  description = 'Articles, tutorials and news about development',
   posts = [
     {
-      title: 'Como criar componentes reutilizáveis com React',
-      excerpt: 'Aprenda as melhores práticas para criar componentes React que podem ser reutilizados em qualquer projeto.',
+      title: 'How to create reusable components with React',
+      excerpt: 'Learn best practices for creating React components that can be reused in any project.',
       author: 'Ana Silva',
       date: '15 Mar 2024',
       readTime: '5 min',
@@ -996,8 +996,8 @@ export default function Blog1({
       slug: '#'
     },
     {
-      title: 'Guia completo de TypeScript para iniciantes',
-      excerpt: 'Descubra como TypeScript pode melhorar a qualidade do seu código e aumentar sua produtividade.',
+      title: 'Complete TypeScript guide for beginners',
+      excerpt: 'Discover how TypeScript can improve your code quality and increase your productivity.',
       author: 'Carlos Santos',
       date: '12 Mar 2024',
       readTime: '8 min',
@@ -1006,8 +1006,8 @@ export default function Blog1({
       slug: '#'
     },
     {
-      title: 'Otimizando performance no Next.js 15',
-      excerpt: 'Técnicas avançadas para melhorar o desempenho das suas aplicações Next.js e proporcionar uma experiência incrível.',
+      title: 'Optimizing performance in Next.js 15',
+      excerpt: 'Advanced techniques to improve the performance of your Next.js applications and provide an amazing experience.',
       author: 'Marina Costa',
       date: '10 Mar 2024',
       readTime: '6 min',
@@ -1099,67 +1099,67 @@ export default function Blog1({
   {
     id: 'pricing-1',
     name: 'Pricing Table',
-    description: 'Tabela de preços com 3 planos, features com check/x, destaque para plano popular. Layout responsivo em grade.',
+    description: 'Pricing table with 3 plans, features with check/x, highlight for popular plan. Responsive grid layout.',
     category: 'pricing',
     tags: ['pricing', 'plans', 'subscription', 'features', 'comparison'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      title: 'Preços simples e transparentes',
+      title: 'Simple and transparent pricing',
       description: 'Escolha o plano perfeito para suas necessidades',
       plans: [
         {
           name: 'Starter',
-          description: 'Perfeito para começar',
+          description: 'Perfect to get started',
           price: 'R$ 29',
-          period: '/mês',
-          cta: 'Começar agora',
+          period: '/month',
+          cta: 'Get started now',
           features: [
             { text: '10 projetos', included: true },
             { text: '5GB de armazenamento', included: true },
             { text: 'Suporte por email', included: true },
             { text: 'API access', included: false },
-            { text: 'Integrações avançadas', included: false },
-            { text: 'Suporte prioritário', included: false }
+            { text: 'Advanced integrations', included: false },
+            { text: 'Priority support', included: false }
           ]
         },
         {
           name: 'Professional',
           description: 'Para times em crescimento',
           price: 'R$ 99',
-          period: '/mês',
-          cta: 'Começar agora',
+          period: '/month',
+          cta: 'Get started now',
           popular: true,
           features: [
-            { text: 'Projetos ilimitados', included: true },
+            { text: 'Unlimited projects', included: true },
             { text: '50GB de armazenamento', included: true },
             { text: 'Suporte por email e chat', included: true },
             { text: 'API access', included: true },
-            { text: 'Integrações avançadas', included: true },
-            { text: 'Suporte prioritário', included: false }
+            { text: 'Advanced integrations', included: true },
+            { text: 'Priority support', included: false }
           ]
         },
         {
           name: 'Enterprise',
           description: 'Para grandes empresas',
           price: 'R$ 299',
-          period: '/mês',
-          cta: 'Falar com vendas',
+          period: '/month',
+          cta: 'Talk to sales',
           features: [
-            { text: 'Projetos ilimitados', included: true },
+            { text: 'Unlimited projects', included: true },
             { text: 'Armazenamento ilimitado', included: true },
             { text: 'Suporte 24/7', included: true },
             { text: 'API access', included: true },
-            { text: 'Integrações avançadas', included: true },
-            { text: 'Suporte prioritário', included: true }
+            { text: 'Advanced integrations', included: true },
+            { text: 'Priority support', included: true }
           ]
         }
       ]
     },
     props: [
-      { name: 'title', type: 'string', default: 'Preços simples e transparentes', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição da seção' },
+      { name: 'title', type: 'string', default: 'Simple and transparent pricing', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
       { name: 'plans', type: 'PricingPlan[]', description: 'Array de planos com name, description, price, period, cta, features e popular (opcional)' }
     ],
     code: `import { Check, X } from 'lucide-react';
@@ -1186,53 +1186,53 @@ interface Pricing1Props {
 }
 
 export default function Pricing1({
-  title = 'Preços simples e transparentes',
+  title = 'Simple and transparent pricing',
   description = 'Escolha o plano perfeito para suas necessidades',
   plans = [
     {
       name: 'Starter',
-      description: 'Perfeito para começar',
+      description: 'Perfect to get started',
       price: 'R$ 29',
-      period: '/mês',
-      cta: 'Começar agora',
+      period: '/month',
+      cta: 'Get started now',
       features: [
         { text: '10 projetos', included: true },
         { text: '5GB de armazenamento', included: true },
         { text: 'Suporte por email', included: true },
         { text: 'API access', included: false },
-        { text: 'Integrações avançadas', included: false },
-        { text: 'Suporte prioritário', included: false }
+        { text: 'Advanced integrations', included: false },
+        { text: 'Priority support', included: false }
       ]
     },
     {
       name: 'Professional',
       description: 'Para times em crescimento',
       price: 'R$ 99',
-      period: '/mês',
-      cta: 'Começar agora',
+      period: '/month',
+      cta: 'Get started now',
       popular: true,
       features: [
-        { text: 'Projetos ilimitados', included: true },
+        { text: 'Unlimited projects', included: true },
         { text: '50GB de armazenamento', included: true },
         { text: 'Suporte por email e chat', included: true },
         { text: 'API access', included: true },
-        { text: 'Integrações avançadas', included: true },
-        { text: 'Suporte prioritário', included: false }
+        { text: 'Advanced integrations', included: true },
+        { text: 'Priority support', included: false }
       ]
     },
     {
       name: 'Enterprise',
       description: 'Para grandes empresas',
       price: 'R$ 299',
-      period: '/mês',
-      cta: 'Falar com vendas',
+      period: '/month',
+      cta: 'Talk to sales',
       features: [
-        { text: 'Projetos ilimitados', included: true },
+        { text: 'Unlimited projects', included: true },
         { text: 'Armazenamento ilimitado', included: true },
         { text: 'Suporte 24/7', included: true },
         { text: 'API access', included: true },
-        { text: 'Integrações avançadas', included: true },
-        { text: 'Suporte prioritário', included: true }
+        { text: 'Advanced integrations', included: true },
+        { text: 'Priority support', included: true }
       ]
     }
   ]
@@ -1323,20 +1323,20 @@ export default function Pricing1({
   {
     id: 'services-1',
     name: 'Services Grid',
-    description: 'Grade de serviços com ícones, título, descrição e lista de features. Layout responsivo com 3 colunas e hover effects.',
+    description: 'Services grid with icons, title, description and feature list. Responsive 3-column layout with hover effects.',
     category: 'services',
     tags: ['services', 'features', 'grid', 'icons', 'business'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      title: 'Nossos Serviços',
-      description: 'Soluções completas para transformar seu negócio digital',
+      title: 'Our Services',
+      description: 'Complete solutions to transform your digital business',
       services: [
         {
           icon: 'Code',
-          title: 'Desenvolvimento Web',
-          description: 'Criamos aplicações web modernas, rápidas e escaláveis usando as melhores tecnologias do mercado.',
+          title: 'Web Development',
+          description: 'We create modern, fast and scalable web applications using the best market technologies.',
           features: [
             'React & Next.js',
             'TypeScript',
@@ -1346,8 +1346,8 @@ export default function Pricing1({
         },
         {
           icon: 'Smartphone',
-          title: 'Desenvolvimento Mobile',
-          description: 'Aplicativos nativos e multiplataforma que proporcionam experiências incríveis em qualquer dispositivo.',
+          title: 'Mobile Development',
+          description: 'Native and cross-platform applications that provide amazing experiences on any device.',
           features: [
             'React Native',
             'iOS & Android',
@@ -1358,7 +1358,7 @@ export default function Pricing1({
         {
           icon: 'Cloud',
           title: 'Cloud & DevOps',
-          description: 'Infraestrutura escalável e automatizada para garantir performance e disponibilidade do seu produto.',
+          description: 'Scalable and automated infrastructure to ensure performance and availability of your product.',
           features: [
             'AWS / Google Cloud',
             'Docker & Kubernetes',
@@ -1369,9 +1369,9 @@ export default function Pricing1({
       ]
     },
     props: [
-      { name: 'title', type: 'string', default: 'Nossos Serviços', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição da seção' },
-      { name: 'services', type: 'Service[]', description: 'Array de serviços com icon, title, description e features' }
+      { name: 'title', type: 'string', default: 'Our Services', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
+      { name: 'services', type: 'Service[]', description: 'Array of services with icon, title, description and features' }
     ],
     code: `import { Code, Smartphone, Cloud, Shield, Zap, Users } from 'lucide-react';
 
@@ -1398,13 +1398,13 @@ const iconMap = {
 };
 
 export default function Services1({
-  title = 'Nossos Serviços',
-  description = 'Soluções completas para transformar seu negócio digital',
+  title = 'Our Services',
+  description = 'Complete solutions to transform your digital business',
   services = [
     {
       icon: 'Code',
-      title: 'Desenvolvimento Web',
-      description: 'Criamos aplicações web modernas, rápidas e escaláveis usando as melhores tecnologias do mercado.',
+      title: 'Web Development',
+      description: 'We create modern, fast and scalable web applications using the best market technologies.',
       features: [
         'React & Next.js',
         'TypeScript',
@@ -1414,8 +1414,8 @@ export default function Services1({
     },
     {
       icon: 'Smartphone',
-      title: 'Desenvolvimento Mobile',
-      description: 'Aplicativos nativos e multiplataforma que proporcionam experiências incríveis em qualquer dispositivo.',
+      title: 'Mobile Development',
+      description: 'Native and cross-platform applications that provide amazing experiences on any device.',
       features: [
         'React Native',
         'iOS & Android',
@@ -1426,7 +1426,7 @@ export default function Services1({
     {
       icon: 'Cloud',
       title: 'Cloud & DevOps',
-      description: 'Infraestrutura escalável e automatizada para garantir performance e disponibilidade do seu produto.',
+      description: 'Scalable and automated infrastructure to ensure performance and availability of your product.',
       features: [
         'AWS / Google Cloud',
         'Docker & Kubernetes',
@@ -1500,34 +1500,34 @@ export default function Services1({
   {
     id: 'blog-post-1',
     name: 'Blog Post Article',
-    description: 'Layout completo de artigo de blog com imagem de capa, meta informações, autor, conteúdo formatado e tags. Tipografia otimizada para leitura.',
+    description: 'Complete blog article layout with cover image, meta information, author, formatted content and tags. Typography optimized for reading.',
     category: 'blog',
     tags: ['blog', 'article', 'post', 'content', 'reading'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      title: 'Como criar componentes reutilizáveis com React',
+      title: 'How to create reusable components with React',
       author: {
         name: 'Ana Silva',
         avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
-        bio: 'Senior Frontend Developer com 8+ anos de experiência em React e TypeScript'
+        bio: 'Senior Frontend Developer with 8+ years experience in React and TypeScript'
       },
-      date: '15 de Março, 2024',
+      date: 'March 15, 2024',
       readTime: '8 min de leitura',
       category: 'React',
       coverImage: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop',
-      content: '<p class="lead">Criar componentes reutilizáveis é uma das habilidades mais importantes para qualquer desenvolvedor React.</p><h2>Por que componentes reutilizáveis?</h2><p>Componentes reutilizáveis economizam tempo e garantem consistência.</p>',
+      content: '<p class="lead">Creating reusable components is one of the most important skills for any React developer.</p><h2>Why reusable components?</h2><p>Reusable components save time and ensure consistency.</p>',
       tags: ['React', 'Components', 'Best Practices', 'TypeScript']
     },
     props: [
-      { name: 'title', type: 'string', description: 'Título do artigo' },
-      { name: 'author', type: '{ name: string; avatar: string; bio?: string }', description: 'Informações do autor' },
-      { name: 'date', type: 'string', description: 'Data de publicação' },
+      { name: 'title', type: 'string', description: 'Article title' },
+      { name: 'author', type: '{ name: string; avatar: string; bio?: string }', description: 'Author information' },
+      { name: 'date', type: 'string', description: 'Publication date' },
       { name: 'readTime', type: 'string', description: 'Tempo estimado de leitura' },
       { name: 'category', type: 'string', description: 'Categoria do artigo' },
       { name: 'coverImage', type: 'string', description: 'URL da imagem de capa' },
-      { name: 'content', type: 'string', description: 'Conteúdo HTML do artigo' },
+      { name: 'content', type: 'string', description: 'Article HTML content' },
       { name: 'tags', type: 'string[]', description: 'Tags do artigo' }
     ],
     code: `import { Calendar, Clock, User, ArrowLeft, Share2 } from 'lucide-react';
@@ -1548,20 +1548,20 @@ interface BlogPost1Props {
 }
 
 export default function BlogPost1({
-  title = 'Como criar componentes reutilizáveis com React',
+  title = 'How to create reusable components with React',
   author = {
     name: 'Ana Silva',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
-    bio: 'Senior Frontend Developer com 8+ anos de experiência em React e TypeScript'
+    bio: 'Senior Frontend Developer with 8+ years experience in React and TypeScript'
   },
-  date = '15 de Março, 2024',
+  date = 'March 15, 2024',
   readTime = '8 min de leitura',
   category = 'React',
   coverImage = 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop',
   content = \`
-    <p class="lead">Criar componentes reutilizáveis é uma das habilidades mais importantes para qualquer desenvolvedor React.</p>
-    <h2>Por que componentes reutilizáveis são importantes?</h2>
-    <p>Componentes reutilizáveis não apenas economizam tempo de desenvolvimento, mas também garantem consistência em toda a sua aplicação.</p>
+    <p class="lead">Creating reusable components is one of the most important skills for any React developer.</p>
+    <h2>Why are reusable components important?</h2>
+    <p>Reusable components not only save development time, but also ensure consistency throughout your application.</p>
   \`,
   tags = ['React', 'Components', 'Best Practices', 'TypeScript']
 }: BlogPost1Props) {
@@ -1674,7 +1674,7 @@ export default function BlogPost1({
   {
     id: 'changelog-1',
     name: 'Changelog Timeline',
-    description: 'Timeline de changelog com versões, datas e categorização de mudanças (adicionado, corrigido, melhorado, alterado, removido). Visual moderno com ícones e cores.',
+    description: 'Changelog timeline with versions, dates and change categorization (added, fixed, improved, changed, removed). Modern visual with icons and colors.',
     category: 'changelog',
     tags: ['changelog', 'updates', 'releases', 'versions', 'timeline'],
     dependencies: [
@@ -1682,32 +1682,32 @@ export default function BlogPost1({
     ],
     previewProps: {
       title: 'Changelog',
-      description: 'Acompanhe todas as atualizações, melhorias e correções do produto',
+      description: 'Follow all product updates, improvements and fixes',
       entries: [
         {
           version: '2.1.0',
-          date: '15 de Março, 2024',
+          date: 'March 15, 2024',
           changes: [
-            { type: 'added', text: 'Novo sistema de notificações em tempo real' },
-            { type: 'added', text: 'Suporte para autenticação via Google e GitHub' },
+            { type: 'added', text: 'New real-time notification system' },
+            { type: 'added', text: 'Support for authentication via Google and GitHub' },
             { type: 'improved', text: 'Performance do dashboard aumentada em 40%' },
-            { type: 'fixed', text: 'Correção de bug no upload de arquivos grandes' }
+            { type: 'fixed', text: 'Fixed bug in large file upload' }
           ]
         },
         {
           version: '2.0.0',
-          date: '1 de Março, 2024',
+          date: 'March 1, 2024',
           changes: [
-            { type: 'added', text: 'Interface completamente redesenhada' },
-            { type: 'improved', text: 'API REST v2 com melhor documentação' },
-            { type: 'changed', text: 'Migração para Next.js 15' }
+            { type: 'added', text: 'Completely redesigned interface' },
+            { type: 'improved', text: 'REST API v2 with better documentation' },
+            { type: 'changed', text: 'Migration to Next.js 15' }
           ]
         }
       ]
     },
     props: [
-      { name: 'title', type: 'string', default: 'Changelog', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição da seção' },
+      { name: 'title', type: 'string', default: 'Changelog', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
       { name: 'entries', type: 'ChangelogEntry[]', description: 'Array de entradas com version, date e changes' }
     ],
     code: `import { Calendar, Plus, Wrench, Bug, Zap, AlertCircle } from 'lucide-react';
@@ -1764,15 +1764,15 @@ const typeConfig = {
 
 export default function Changelog1({
   title = 'Changelog',
-  description = 'Acompanhe todas as atualizações, melhorias e correções do produto',
+  description = 'Follow all product updates, improvements and fixes',
   entries = [
     {
       version: '2.1.0',
-      date: '15 de Março, 2024',
+      date: 'March 15, 2024',
       changes: [
-        { type: 'added', text: 'Novo sistema de notificações em tempo real' },
+        { type: 'added', text: 'New real-time notification system' },
         { type: 'improved', text: 'Performance do dashboard aumentada em 40%' },
-        { type: 'fixed', text: 'Correção de bug no upload de arquivos grandes' }
+        { type: 'fixed', text: 'Fixed bug in large file upload' }
       ]
     }
   ]
@@ -1808,7 +1808,7 @@ export default function Changelog1({
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">
-                        Versão {entry.version}
+                        Version {entry.version}
                       </h3>
                       <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                         <Calendar className="h-4 w-4" />
@@ -1876,7 +1876,7 @@ export default function Changelog1({
   {
     id: 'login-1',
     name: 'Login Form',
-    description: 'Formulário de login completo usando shadcn/ui components (Input, Button, Checkbox), com email/senha, login social (Google, GitHub), lembrar-me e recuperação de senha. Design moderno e responsivo.',
+    description: 'Complete login form using shadcn/ui components (Input, Button, Checkbox), with email/password, social login (Google, GitHub), remember me and password recovery. Modern and responsive design.',
     category: 'auth',
     tags: ['login', 'authentication', 'form', 'social-login', 'auth'],
     dependencies: [
@@ -1886,17 +1886,17 @@ export default function Changelog1({
       { name: 'shadcn/ui', version: 'latest', component: 'checkbox' }
     ],
     previewProps: {
-      title: 'Bem-vindo de volta',
+      title: 'Welcome back',
       subtitle: 'Entre com sua conta para continuar',
       brandName: 'Blcks',
       showSocialLogin: true
     },
     props: [
-      { name: 'title', type: 'string', default: 'Bem-vindo de volta', description: 'Título do formulário' },
-      { name: 'subtitle', type: 'string', description: 'Subtítulo do formulário' },
+      { name: 'title', type: 'string', default: 'Welcome back', description: 'Form title' },
+      { name: 'subtitle', type: 'string', description: 'Form subtitle' },
       { name: 'brandName', type: 'string', default: 'Blcks', description: 'Nome da marca' },
       { name: 'brandLogo', type: 'string', description: 'URL do logo (opcional)' },
-      { name: 'showSocialLogin', type: 'boolean', default: 'true', description: 'Mostrar opções de login social' }
+      { name: 'showSocialLogin', type: 'boolean', default: 'true', description: 'Show social login options' }
     ],
     code: `import { Mail, Lock } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -1912,7 +1912,7 @@ interface Login1Props {
 }
 
 export default function Login1({
-  title = 'Bem-vindo de volta',
+  title = 'Welcome back',
   subtitle = 'Entre com sua conta para continuar',
   brandName = 'Blcks',
   brandLogo,
@@ -1996,7 +1996,7 @@ export default function Login1({
             {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Senha
+                Password
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -2016,11 +2016,11 @@ export default function Login1({
               <div className="flex items-center space-x-2">
                 <Checkbox id="remember" />
                 <label htmlFor="remember" className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
-                  Lembrar de mim
+                  Remember me
                 </label>
               </div>
               <a href="#" className="text-sm text-primary hover:underline">
-                Esqueceu a senha?
+                Forgot password?
               </a>
             </div>
 
@@ -2032,7 +2032,7 @@ export default function Login1({
 
           {/* Sign Up Link */}
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-            Não tem uma conta?{' '}
+            Don't have an account?{' '}
             <a href="#" className="text-primary font-medium hover:underline">
               Criar conta
             </a>
@@ -2046,7 +2046,7 @@ export default function Login1({
   {
     id: 'signup-1',
     name: 'Signup Form',
-    description: 'Formulário de cadastro completo usando shadcn/ui components (Input, Button, Checkbox), com nome, email, senha, aceite de termos e signup social (Google, GitHub). Design moderno e responsivo.',
+    description: 'Complete signup form using shadcn/ui components (Input, Button, Checkbox), with name, email, password, terms acceptance and social signup (Google, GitHub). Modern and responsive design.',
     category: 'auth',
     tags: ['signup', 'register', 'authentication', 'form', 'social-signup'],
     dependencies: [
@@ -2057,16 +2057,16 @@ export default function Login1({
     ],
     previewProps: {
       title: 'Criar sua conta',
-      subtitle: 'Comece gratuitamente, não precisa cartão de crédito',
+      subtitle: 'Start for free, no credit card required',
       brandName: 'Blcks',
       showSocialSignup: true
     },
     props: [
-      { name: 'title', type: 'string', default: 'Criar sua conta', description: 'Título do formulário' },
-      { name: 'subtitle', type: 'string', description: 'Subtítulo do formulário' },
+      { name: 'title', type: 'string', default: 'Criar sua conta', description: 'Form title' },
+      { name: 'subtitle', type: 'string', description: 'Form subtitle' },
       { name: 'brandName', type: 'string', default: 'Blcks', description: 'Nome da marca' },
       { name: 'brandLogo', type: 'string', description: 'URL do logo (opcional)' },
-      { name: 'showSocialSignup', type: 'boolean', default: 'true', description: 'Mostrar opções de cadastro social' }
+      { name: 'showSocialSignup', type: 'boolean', default: 'true', description: 'Show social signup options' }
     ],
     code: `import { Mail, Lock, User } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -2083,7 +2083,7 @@ interface Signup1Props {
 
 export default function Signup1({
   title = 'Criar sua conta',
-  subtitle = 'Comece gratuitamente, não precisa cartão de crédito',
+  subtitle = 'Start for free, no credit card required',
   brandName = 'Blcks',
   brandLogo,
   showSocialSignup = true
@@ -2148,7 +2148,7 @@ export default function Signup1({
             {/* Name Field */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Nome completo
+                Name completo
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -2158,7 +2158,7 @@ export default function Signup1({
                   id="name"
                   type="text"
                   className="pl-10"
-                  placeholder="João Silva"
+                  placeholder="John Silva"
                 />
               </div>
             </div>
@@ -2184,7 +2184,7 @@ export default function Signup1({
             {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Senha
+                Password
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -2194,11 +2194,11 @@ export default function Signup1({
                   id="password"
                   type="password"
                   className="pl-10"
-                  placeholder="Mínimo 8 caracteres"
+                  placeholder="Minimum 8 characters"
                 />
               </div>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                A senha deve ter no mínimo 8 caracteres
+                Password must have at least 8 characters
               </p>
             </div>
 
@@ -2206,13 +2206,13 @@ export default function Signup1({
             <div className="flex items-start space-x-2">
               <Checkbox id="terms" className="mt-1" />
               <label htmlFor="terms" className="text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
-                Eu aceito os{' '}
+                I agree to the{' '}
                 <a href="#" className="text-primary hover:underline">
                   Termos de Uso
                 </a>{' '}
                 e a{' '}
                 <a href="#" className="text-primary hover:underline">
-                  Política de Privacidade
+                  Privacy Policy
                 </a>
               </label>
             </div>
@@ -2225,7 +2225,7 @@ export default function Signup1({
 
           {/* Login Link */}
           <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
-            Já tem uma conta?{' '}
+            Already have an account?{' '}
             <a href="#" className="text-primary font-medium hover:underline">
               Fazer login
             </a>
@@ -2239,15 +2239,15 @@ export default function Signup1({
   {
     id: 'testimonial-1',
     name: 'Testimonials Grid',
-    description: 'Grade de depoimentos com avatar, nome, cargo/empresa, rating com estrelas e citação. Layout responsivo com 3 colunas e ícone de quote.',
+    description: 'Testimonials grid with avatar, name, role/company, star rating and quote. Responsive 3-column layout with quote icon.',
     category: 'testimonial',
     tags: ['testimonial', 'reviews', 'social-proof', 'ratings', 'feedback'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      title: 'O que nossos clientes dizem',
-      description: 'Veja o feedback de quem já usa nosso produto',
+      title: 'What our customers say',
+      description: 'See feedback from people who already use our product',
       testimonials: [
         {
           name: 'Ana Silva',
@@ -2262,7 +2262,7 @@ export default function Signup1({
           role: 'Product Manager',
           company: 'Digital Solutions',
           avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop',
-          content: 'Excelente ferramenta! A interface é intuitiva e os recursos atendem perfeitamente nossas necessidades. O suporte ao cliente também é excepcional.',
+          content: 'Excellent tool! The interface is intuitive and the features perfectly meet our needs. Customer support is also exceptional.',
           rating: 5
         },
         {
@@ -2270,14 +2270,14 @@ export default function Signup1({
           role: 'Lead Developer',
           company: 'CodeCraft',
           avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
-          content: 'Como desenvolvedora, aprecio muito a qualidade do código e a documentação completa. Facilitou muito a integração com nossos sistemas existentes.',
+          content: 'As a developer, I really appreciate the code quality and complete documentation. It made integration with our existing systems much easier.',
           rating: 5
         }
       ]
     },
     props: [
-      { name: 'title', type: 'string', default: 'O que nossos clientes dizem', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição da seção' },
+      { name: 'title', type: 'string', default: 'What our customers say', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
       { name: 'testimonials', type: 'Testimonial[]', description: 'Array de depoimentos com name, role, company, avatar, content e rating' }
     ],
     code: `import { Quote, Star } from 'lucide-react';
@@ -2298,8 +2298,8 @@ interface Testimonial1Props {
 }
 
 export default function Testimonial1({
-  title = 'O que nossos clientes dizem',
-  description = 'Veja o feedback de quem já usa nosso produto',
+  title = 'What our customers say',
+  description = 'See feedback from people who already use our product',
   testimonials = [
     {
       name: 'Ana Silva',
@@ -2382,33 +2382,33 @@ export default function Testimonial1({
   {
     id: 'faq-1',
     name: 'FAQ Accordion',
-    description: 'FAQ com accordion interativo usando shadcn/ui Accordion, animações suaves de abertura/fechamento e CTA de contato. Primeiro item aberto por padrão.',
+    description: 'FAQ with interactive accordion using shadcn/ui Accordion, smooth open/close animations and contact CTA. First item open by default.',
     category: 'faq',
     tags: ['faq', 'accordion', 'questions', 'help', 'support'],
     dependencies: [
       { name: 'shadcn/ui', version: 'latest', component: 'accordion' }
     ],
     previewProps: {
-      title: 'Perguntas Frequentes',
-      description: 'Encontre respostas para as dúvidas mais comuns',
+      title: 'Frequently Asked Questions',
+      description: 'Find answers to the most common questions',
       faqs: [
         {
-          question: 'Como funciona o período de teste gratuito?',
-          answer: 'Oferecemos 14 dias de teste gratuito sem necessidade de cartão de crédito. Você terá acesso completo a todos os recursos premium durante este período.'
+          question: 'How does the free trial period work?',
+          answer: 'We offer a 14-day free trial with no credit card required. You will have full access to all premium features during this period.'
         },
         {
           question: 'Posso cancelar minha assinatura a qualquer momento?',
-          answer: 'Sim! Você pode cancelar sua assinatura a qualquer momento através das configurações da sua conta. Não há taxas de cancelamento.'
+          answer: 'Yes! You can cancel your subscription at any time through your account settings. There are no cancellation fees.'
         },
         {
-          question: 'Quais formas de pagamento são aceitas?',
-          answer: 'Aceitamos todos os principais cartões de crédito (Visa, Mastercard, American Express), PayPal e transferência bancária para planos anuais.'
+          question: 'What payment methods are accepted?',
+          answer: 'We accept all major credit cards (Visa, Mastercard, American Express), PayPal and bank transfer for annual plans.'
         }
       ]
     },
     props: [
-      { name: 'title', type: 'string', default: 'Perguntas Frequentes', description: 'Título da seção' },
-      { name: 'description', type: 'string', description: 'Descrição da seção' },
+      { name: 'title', type: 'string', default: 'Frequently Asked Questions', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
       { name: 'faqs', type: 'FAQItem[]', description: 'Array de perguntas e respostas com question e answer' }
     ],
     code: `import {
@@ -2430,20 +2430,20 @@ interface FAQ1Props {
 }
 
 export default function FAQ1({
-  title = 'Perguntas Frequentes',
-  description = 'Encontre respostas para as dúvidas mais comuns',
+  title = 'Frequently Asked Questions',
+  description = 'Find answers to the most common questions',
   faqs = [
     {
-      question: 'Como funciona o período de teste gratuito?',
-      answer: 'Oferecemos 14 dias de teste gratuito sem necessidade de cartão de crédito. Você terá acesso completo a todos os recursos premium durante este período. Após o término, você pode escolher um dos nossos planos ou continuar usando a versão gratuita com recursos limitados.'
+      question: 'How does the free trial period work?',
+      answer: 'We offer a 14-day free trial with no credit card required. You will have full access to all premium features during this period. After it ends, you can choose one of our plans or continue using the free version with limited features.'
     },
     {
       question: 'Posso cancelar minha assinatura a qualquer momento?',
-      answer: 'Sim! Você pode cancelar sua assinatura a qualquer momento através das configurações da sua conta. Não há taxas de cancelamento e você continuará tendo acesso aos recursos pagos até o final do período que já foi pago.'
+      answer: 'Yes! You can cancel your subscription at any time through your account settings. There are no cancellation fees and you will continue to have access to paid features until the end of the period that has already been paid.'
     },
     {
-      question: 'Quais formas de pagamento são aceitas?',
-      answer: 'Aceitamos todos os principais cartões de crédito (Visa, Mastercard, American Express), PayPal e transferência bancária para planos anuais. Todas as transações são processadas de forma segura através de plataformas certificadas.'
+      question: 'What payment methods are accepted?',
+      answer: 'We accept all major credit cards (Visa, Mastercard, American Express), PayPal and bank transfer for annual plans. All transactions are processed securely through certified platforms.'
     }
   ]
 }: FAQ1Props) {
@@ -2487,7 +2487,7 @@ export default function FAQ1({
         {/* Contact CTA */}
         <div className="max-w-4xl mx-auto mt-12 text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            Ainda tem dúvidas?{' '}
+            Still have questions?{' '}
             <a href="#" className="text-primary font-medium hover:underline">
               Entre em contato conosco
             </a>
@@ -2500,7 +2500,7 @@ export default function FAQ1({
   }
 ];
 
-// Funções auxiliares
+// Helper functions
 export const getBlockById = (id: string): BlockMetadata | undefined => {
   return blocksRegistry.find(block => block.id === id);
 };

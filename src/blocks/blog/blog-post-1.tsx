@@ -16,33 +16,33 @@ interface BlogPost1Props {
 }
 
 export default function BlogPost1({
-  title = 'Como criar componentes reutilizáveis com React',
+  title = 'How to create reusable components with React',
   author = {
     name: 'Ana Silva',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
-    bio: 'Senior Frontend Developer com 8+ anos de experiência em React e TypeScript'
+    bio: 'Senior Frontend Developer with 8+ years of experience in React and TypeScript'
   },
-  date = '15 de Março, 2024',
-  readTime = '8 min de leitura',
+  date = 'March 15, 2024',
+  readTime = '8 min read',
   category = 'React',
   coverImage = 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=600&fit=crop',
   content = `
-    <p class="lead">Criar componentes reutilizáveis é uma das habilidades mais importantes para qualquer desenvolvedor React. Neste guia completo, vamos explorar as melhores práticas e padrões.</p>
+    <p class="lead">Creating reusable components is one of the most important skills for any React developer. In this complete guide, we will explore the best practices and patterns.</p>
 
-    <h2>Por que componentes reutilizáveis são importantes?</h2>
-    <p>Componentes reutilizáveis não apenas economizam tempo de desenvolvimento, mas também garantem consistência em toda a sua aplicação. Quando bem projetados, eles se tornam os blocos de construção fundamentais do seu sistema de design.</p>
+    <h2>Why are reusable components important?</h2>
+    <p>Reusable components not only save development time, but also ensure consistency throughout your application. When well designed, they become the fundamental building blocks of your design system.</p>
 
-    <h2>Princípios fundamentais</h2>
-    <p>Ao criar componentes reutilizáveis, você deve sempre considerar:</p>
+    <h2>Fundamental principles</h2>
+    <p>When creating reusable components, you should always consider:</p>
     <ul>
-      <li><strong>Composição sobre herança:</strong> Use composição para criar componentes complexos a partir de componentes simples</li>
-      <li><strong>Props bem definidas:</strong> Tenha uma interface clara e intuitiva</li>
-      <li><strong>Responsabilidade única:</strong> Cada componente deve fazer uma coisa e fazê-la bem</li>
-      <li><strong>Flexibilidade:</strong> Permita customização através de props, sem comprometer a simplicidade</li>
+      <li><strong>Composition over inheritance:</strong> Use composition to create complex components from simple components</li>
+      <li><strong>Well-defined props:</strong> Have a clear and intuitive interface</li>
+      <li><strong>Single responsibility:</strong> Each component should do one thing and do it well</li>
+      <li><strong>Flexibility:</strong> Allow customization through props, without compromising simplicity</li>
     </ul>
 
-    <h2>Exemplo prático</h2>
-    <p>Vamos criar um botão reutilizável que pode ser usado em diferentes contextos:</p>
+    <h2>Practical example</h2>
+    <p>Let's create a reusable button that can be used in different contexts:</p>
     <pre><code>interface ButtonProps {
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
@@ -66,8 +66,8 @@ export function Button({
   );
 }</code></pre>
 
-    <h2>Conclusão</h2>
-    <p>Criar componentes reutilizáveis é uma arte que melhora com a prática. Comece com componentes simples, itere baseado no feedback, e sempre pense em como seu componente será usado por outros desenvolvedores.</p>
+    <h2>Conclusion</h2>
+    <p>Creating reusable components is an art that improves with practice. Start with simple components, iterate based on feedback, and always think about how your component will be used by other developers.</p>
   `,
   tags = ['React', 'Components', 'Best Practices', 'TypeScript']
 }: BlogPost1Props) {
@@ -81,7 +81,7 @@ export function Button({
             className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-primary transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Voltar para o blog
+            Back to blog
           </a>
         </div>
       </div>
@@ -121,7 +121,7 @@ export function Button({
           </div>
           <button className="flex items-center gap-2 hover:text-primary transition-colors">
             <Share2 className="h-4 w-4" />
-            <span>Compartilhar</span>
+            <span>Share</span>
           </button>
         </div>
 

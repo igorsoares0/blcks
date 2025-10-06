@@ -11,7 +11,7 @@ interface BlockPreviewProps {
 }
 
 export function BlockPreview({ block, children }: BlockPreviewProps) {
-  // Diferentes layouts baseados na categoria do bloco
+  // Different layouts based on block category
   const isNavbar = block.category === 'navbar';
   const previewClasses = isNavbar
     ? "w-full min-h-[200px] bg-gray-50 dark:bg-gray-950"
@@ -56,7 +56,7 @@ export function BlockPreview({ block, children }: BlockPreviewProps) {
         <TabsContent value="dependencies" className="p-6 m-0">
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-3">Dependências NPM</h3>
+              <h3 className="text-lg font-semibold mb-3">NPM Dependencies</h3>
               <div className="space-y-2">
                 {block.dependencies
                   .filter(dep => !dep.command)
@@ -85,7 +85,7 @@ export function BlockPreview({ block, children }: BlockPreviewProps) {
 
             {block.dependencies.some(dep => dep.command) && (
               <div>
-                <h3 className="text-lg font-semibold mb-3">Componentes shadcn/ui</h3>
+                <h3 className="text-lg font-semibold mb-3">shadcn/ui Components</h3>
                 <div className="space-y-2">
                   {block.dependencies
                     .filter(dep => dep.command)

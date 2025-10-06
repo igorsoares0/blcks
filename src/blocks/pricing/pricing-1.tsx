@@ -22,53 +22,53 @@ interface Pricing1Props {
 }
 
 export default function Pricing1({
-  title = 'Preços simples e transparentes',
-  description = 'Escolha o plano perfeito para suas necessidades',
+  title = 'Simple and transparent pricing',
+  description = 'Choose the perfect plan for your needs',
   plans = [
     {
       name: 'Starter',
-      description: 'Perfeito para começar',
-      price: 'R$ 29',
-      period: '/mês',
-      cta: 'Começar agora',
+      description: 'Perfect to get started',
+      price: '$29',
+      period: '/month',
+      cta: 'Get started',
       features: [
-        { text: '10 projetos', included: true },
-        { text: '5GB de armazenamento', included: true },
-        { text: 'Suporte por email', included: true },
+        { text: '10 projects', included: true },
+        { text: '5GB storage', included: true },
+        { text: 'Email support', included: true },
         { text: 'API access', included: false },
-        { text: 'Integrações avançadas', included: false },
-        { text: 'Suporte prioritário', included: false }
+        { text: 'Advanced integrations', included: false },
+        { text: 'Priority support', included: false }
       ]
     },
     {
       name: 'Professional',
-      description: 'Para times em crescimento',
-      price: 'R$ 99',
-      period: '/mês',
-      cta: 'Começar agora',
+      description: 'For growing teams',
+      price: '$99',
+      period: '/month',
+      cta: 'Get started',
       popular: true,
       features: [
-        { text: 'Projetos ilimitados', included: true },
-        { text: '50GB de armazenamento', included: true },
-        { text: 'Suporte por email e chat', included: true },
+        { text: 'Unlimited projects', included: true },
+        { text: '50GB storage', included: true },
+        { text: 'Email and chat support', included: true },
         { text: 'API access', included: true },
-        { text: 'Integrações avançadas', included: true },
-        { text: 'Suporte prioritário', included: false }
+        { text: 'Advanced integrations', included: true },
+        { text: 'Priority support', included: false }
       ]
     },
     {
       name: 'Enterprise',
-      description: 'Para grandes empresas',
-      price: 'R$ 299',
-      period: '/mês',
-      cta: 'Falar com vendas',
+      description: 'For large companies',
+      price: '$299',
+      period: '/month',
+      cta: 'Talk to sales',
       features: [
-        { text: 'Projetos ilimitados', included: true },
-        { text: 'Armazenamento ilimitado', included: true },
-        { text: 'Suporte 24/7', included: true },
+        { text: 'Unlimited projects', included: true },
+        { text: 'Unlimited storage', included: true },
+        { text: '24/7 support', included: true },
         { text: 'API access', included: true },
-        { text: 'Integrações avançadas', included: true },
-        { text: 'Suporte prioritário', included: true }
+        { text: 'Advanced integrations', included: true },
+        { text: 'Priority support', included: true }
       ]
     }
   ]
@@ -100,7 +100,7 @@ export default function Pricing1({
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                   <span className="inline-block px-4 py-1 text-sm font-semibold bg-primary text-primary-foreground rounded-full">
-                    Mais Popular
+                    Most Popular
                   </span>
                 </div>
               )}

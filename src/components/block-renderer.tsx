@@ -43,7 +43,7 @@ export default function BlockRenderer({ block }: { block: BlockMetadata }) {
   const Component = componentMap[block.id];
 
   if (!Component) {
-    return <div>Componente não encontrado</div>;
+    return <div>Component not found</div>;
   }
 
   return <Component {...block.previewProps} />;

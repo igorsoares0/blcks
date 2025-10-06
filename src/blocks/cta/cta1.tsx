@@ -8,10 +8,10 @@ interface CTA1Props {
 }
 
 export default function CTA1({
-  title = 'Pronto para começar?',
-  description = 'Junte-se a milhares de desenvolvedores que já estão construindo projetos incríveis.',
-  primaryCTA = 'Criar conta grátis',
-  secondaryCTA = 'Falar com vendas'
+  title = 'Ready to get started?',
+  description = 'Join thousands of developers who are already building incredible projects.',
+  primaryCTA = 'Create free account',
+  secondaryCTA = 'Talk to sales'
 }: CTA1Props) {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">

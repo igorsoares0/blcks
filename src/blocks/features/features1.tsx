@@ -22,38 +22,38 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export default function Features1({
-  title = 'Tudo que você precisa',
-  description = 'Ferramentas poderosas para acelerar seu desenvolvimento',
+  title = 'Everything you need',
+  description = 'Powerful tools to accelerate your development',
   features = [
     {
       icon: 'Zap',
-      title: 'Extremamente rápido',
-      description: 'Otimizado para performance. Carregamento instantâneo e experiência fluida.'
+      title: 'Lightning Fast',
+      description: 'Optimized for performance. Instant loading and smooth experience.'
     },
     {
       icon: 'Shield',
-      title: 'Seguro por padrão',
-      description: 'Proteção em todas as camadas. Seus dados sempre seguros e criptografados.'
+      title: 'Secure by Default',
+      description: 'Protection at all layers. Your data always safe and encrypted.'
     },
     {
       icon: 'Code',
       title: 'Developer First',
-      description: 'APIs intuitivas e documentação completa. Comece a construir em minutos.'
+      description: 'Intuitive APIs and complete documentation. Start building in minutes.'
     },
     {
       icon: 'Layers',
-      title: 'Altamente escalável',
-      description: 'Cresce com seu negócio. De startup a enterprise, suportamos seu crescimento.'
+      title: 'Highly Scalable',
+      description: 'Grows with your business. From startup to enterprise, we support your growth.'
     },
     {
       icon: 'Users',
-      title: 'Colaboração',
-      description: 'Trabalhe em equipe com facilidade. Ferramentas colaborativas integradas.'
+      title: 'Collaboration',
+      description: 'Work as a team with ease. Integrated collaborative tools.'
     },
     {
       icon: 'BarChart',
       title: 'Analytics',
-      description: 'Insights em tempo real. Tome decisões baseadas em dados concretos.'
+      description: 'Real-time insights. Make data-driven decisions.'
     }
   ]
 }: Features1Props) {

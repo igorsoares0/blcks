@@ -35,7 +35,7 @@ export default function Home() {
             </div>
             <div>
               <h1 className="text-2xl font-bold">Blcks</h1>
-              <p className="text-sm text-gray-500">Biblioteca de Blocos React</p>
+              <p className="text-sm text-gray-500">React Blocks Library</p>
             </div>
           </div>
         </div>
@@ -46,10 +46,10 @@ export default function Home() {
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              Componentes React prontos para usar
+              Ready-to-use React components
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              Copy, paste, customize. Uma coleção crescente de componentes bonitos e acessíveis construídos com Tailwind CSS e shadcn/ui.
+              Copy, paste, customize. A growing collection of beautiful and accessible components built with Tailwind CSS and shadcn/ui.
             </p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export default function Home() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
               <Input
                 type="text"
-                placeholder="Buscar blocos por nome, descrição ou tags..."
+                placeholder="Search blocks by name, description or tags..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -78,7 +78,7 @@ export default function Home() {
                 className="cursor-pointer"
                 onClick={() => setSelectedCategory(null)}
               >
-                Todos ({blocksRegistry.length})
+                All ({blocksRegistry.length})
               </Badge>
               {categories.map((category) => {
                 const count = blocksRegistry.filter(b => b.category === category).length;
@@ -103,7 +103,7 @@ export default function Home() {
         {filteredBlocks.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-500 text-lg">
-              Nenhum bloco encontrado. Tente outro termo de busca.
+              No blocks found. Try another search term.
             </p>
           </div>
         ) : (
@@ -119,8 +119,8 @@ export default function Home() {
       <footer className="border-t border-gray-200 dark:border-gray-800 mt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center text-sm text-gray-500">
-            <p>Construído com Next.js, Tailwind CSS e shadcn/ui</p>
-            <p className="mt-2">Copy, paste, customize - É simples assim.</p>
+            <p>Built with Next.js, Tailwind CSS and shadcn/ui</p>
+            <p className="mt-2">Copy, paste, customize - It's that simple.</p>
           </div>
         </div>
       </footer>

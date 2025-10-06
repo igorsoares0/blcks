@@ -17,32 +17,32 @@ interface FAQ1Props {
 }
 
 export default function FAQ1({
-  title = 'Perguntas Frequentes',
-  description = 'Encontre respostas para as dúvidas mais comuns',
+  title = 'Frequently Asked Questions',
+  description = 'Find answers to the most common questions',
   faqs = [
     {
-      question: 'Como funciona o período de teste gratuito?',
-      answer: 'Oferecemos 14 dias de teste gratuito sem necessidade de cartão de crédito. Você terá acesso completo a todos os recursos premium durante este período. Após o término, você pode escolher um dos nossos planos ou continuar usando a versão gratuita com recursos limitados.'
+      question: 'How does the free trial period work?',
+      answer: 'We offer 14 days of free trial with no credit card required. You will have full access to all premium features during this period. After it ends, you can choose one of our plans or continue using the free version with limited features.'
     },
     {
-      question: 'Posso cancelar minha assinatura a qualquer momento?',
-      answer: 'Sim! Você pode cancelar sua assinatura a qualquer momento através das configurações da sua conta. Não há taxas de cancelamento e você continuará tendo acesso aos recursos pagos até o final do período que já foi pago.'
+      question: 'Can I cancel my subscription at any time?',
+      answer: 'Yes! You can cancel your subscription at any time through your account settings. There are no cancellation fees and you will continue to have access to paid features until the end of the period that has already been paid for.'
     },
     {
-      question: 'Quais formas de pagamento são aceitas?',
-      answer: 'Aceitamos todos os principais cartões de crédito (Visa, Mastercard, American Express), PayPal e transferência bancária para planos anuais. Todas as transações são processadas de forma segura através de plataformas certificadas.'
+      question: 'What payment methods are accepted?',
+      answer: 'We accept all major credit cards (Visa, Mastercard, American Express), PayPal and bank transfer for annual plans. All transactions are securely processed through certified platforms.'
     },
     {
-      question: 'Vocês oferecem desconto para organizações sem fins lucrativos?',
-      answer: 'Sim! Oferecemos descontos especiais de até 50% para organizações sem fins lucrativos e educacionais. Entre em contato com nossa equipe de vendas com a documentação da sua organização para obter mais informações.'
+      question: 'Do you offer discounts for non-profit organizations?',
+      answer: 'Yes! We offer special discounts of up to 50% for non-profit and educational organizations. Contact our sales team with your organization\'s documentation for more information.'
     },
     {
-      question: 'Como funciona o suporte técnico?',
-      answer: 'Oferecemos suporte por email para todos os planos, com tempo de resposta de até 24 horas. Planos Professional e Enterprise incluem suporte prioritário com tempo de resposta de 4 horas e acesso a chat ao vivo. Também temos uma base de conhecimento completa disponível 24/7.'
+      question: 'How does technical support work?',
+      answer: 'We offer email support for all plans, with a response time of up to 24 hours. Professional and Enterprise plans include priority support with a 4-hour response time and access to live chat. We also have a complete knowledge base available 24/7.'
     },
     {
-      question: 'É possível fazer upgrade ou downgrade do plano?',
-      answer: 'Sim, você pode alterar seu plano a qualquer momento. No caso de upgrade, você será cobrado proporcionalmente pela diferença. Para downgrade, o ajuste será aplicado na próxima renovação. Todas as alterações podem ser feitas facilmente através do painel de controle.'
+      question: 'Is it possible to upgrade or downgrade the plan?',
+      answer: 'Yes, you can change your plan at any time. In case of upgrade, you will be charged proportionally for the difference. For downgrade, the adjustment will be applied at the next renewal. All changes can be easily made through the control panel.'
     }
   ]
 }: FAQ1Props) {
@@ -86,9 +86,9 @@ export default function FAQ1({
         {/* Contact CTA */}
         <div className="max-w-4xl mx-auto mt-12 text-center">
           <p className="text-gray-600 dark:text-gray-400">
-            Ainda tem dúvidas?{' '}
+            Still have questions?{' '}
             <a href="#" className="text-primary font-medium hover:underline">
-              Entre em contato conosco
+              Contact us
             </a>
           </p>
         </div>

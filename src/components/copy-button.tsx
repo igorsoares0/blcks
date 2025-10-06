@@ -28,12 +28,12 @@ export function CopyButton({ text, className }: CopyButtonProps) {
       {copied ? (
         <>
           <Check className="h-4 w-4 mr-2" />
-          Copiado!
+          Copied!
         </>
       ) : (
         <>
           <Copy className="h-4 w-4 mr-2" />
-          Copiar
+          Copy
         </>
       )}
     </Button>

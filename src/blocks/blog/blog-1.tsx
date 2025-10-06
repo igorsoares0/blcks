@@ -19,11 +19,11 @@ interface Blog1Props {
 
 export default function Blog1({
   title = 'Blog',
-  description = 'Artigos, tutoriais e novidades sobre desenvolvimento',
+  description = 'Articles, tutorials and news about development',
   posts = [
     {
-      title: 'Como criar componentes reutilizáveis com React',
-      excerpt: 'Aprenda as melhores práticas para criar componentes React que podem ser reutilizados em qualquer projeto.',
+      title: 'How to create reusable components with React',
+      excerpt: 'Learn best practices for creating React components that can be reused in any project.',
       author: 'Ana Silva',
       date: '15 Mar 2024',
       readTime: '5 min',
@@ -32,8 +32,8 @@ export default function Blog1({
       slug: '#'
     },
     {
-      title: 'Guia completo de TypeScript para iniciantes',
-      excerpt: 'Descubra como TypeScript pode melhorar a qualidade do seu código e aumentar sua produtividade.',
+      title: 'Complete TypeScript guide for beginners',
+      excerpt: 'Discover how TypeScript can improve your code quality and increase your productivity.',
       author: 'Carlos Santos',
       date: '12 Mar 2024',
       readTime: '8 min',
@@ -42,8 +42,8 @@ export default function Blog1({
       slug: '#'
     },
     {
-      title: 'Otimizando performance no Next.js 15',
-      excerpt: 'Técnicas avançadas para melhorar o desempenho das suas aplicações Next.js e proporcionar uma experiência incrível.',
+      title: 'Optimizing performance in Next.js 15',
+      excerpt: 'Advanced techniques to improve the performance of your Next.js applications and provide an amazing experience.',
       author: 'Marina Costa',
       date: '10 Mar 2024',
       readTime: '6 min',
@@ -52,8 +52,8 @@ export default function Blog1({
       slug: '#'
     },
     {
-      title: 'Design Systems: Do zero à implementação',
-      excerpt: 'Aprenda a criar e manter um design system escalável que cresce junto com seu produto.',
+      title: 'Design Systems: From zero to implementation',
+      excerpt: 'Learn how to create and maintain a scalable design system that grows with your product.',
       author: 'Pedro Oliveira',
       date: '08 Mar 2024',
       readTime: '10 min',
@@ -62,8 +62,8 @@ export default function Blog1({
       slug: '#'
     },
     {
-      title: 'Tailwind CSS: Além do básico',
-      excerpt: 'Explore recursos avançados do Tailwind CSS para criar interfaces únicas e performáticas.',
+      title: 'Tailwind CSS: Beyond the basics',
+      excerpt: 'Explore advanced Tailwind CSS features to create unique and performant interfaces.',
       author: 'Ana Silva',
       date: '05 Mar 2024',
       readTime: '7 min',
@@ -72,8 +72,8 @@ export default function Blog1({
       slug: '#'
     },
     {
-      title: 'State Management em React: Qual escolher?',
-      excerpt: 'Compare as principais soluções de gerenciamento de estado e escolha a melhor para seu projeto.',
+      title: 'State Management in React: Which one to choose?',
+      excerpt: 'Compare the main state management solutions and choose the best one for your project.',
       author: 'Carlos Santos',
       date: '01 Mar 2024',
       readTime: '12 min',
@@ -142,7 +142,7 @@ export default function Blog1({
                     href={post.slug}
                     className="text-primary hover:underline inline-flex items-center text-sm font-medium"
                   >
-                    Ler mais
+                    Read more
                     <ArrowRight className="ml-1 h-3 w-3" />
                   </a>
                 </div>
@@ -150,7 +150,7 @@ export default function Blog1({
                 {/* Author */}
                 <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Por <span className="font-medium text-gray-900 dark:text-white">{post.author}</span>
+                    By <span className="font-medium text-gray-900 dark:text-white">{post.author}</span>
                   </p>
                 </div>
               </div>

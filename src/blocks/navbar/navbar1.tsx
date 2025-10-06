@@ -23,12 +23,12 @@ interface Navbar1Props {
 export default function Navbar1({
   logo = 'Blcks',
   items = [
-    { label: 'Início', href: '#' },
-    { label: 'Blocos', href: '#blocos' },
-    { label: 'Documentação', href: '#docs' },
-    { label: 'Sobre', href: '#sobre' }
+    { label: 'Home', href: '#' },
+    { label: 'Blocks', href: '#blocks' },
+    { label: 'Documentation', href: '#docs' },
+    { label: 'About', href: '#about' }
   ],
-  ctaText = 'Começar',
+  ctaText = 'Get Started',
   ctaHref = '#'
 }: Navbar1Props) {
   return (

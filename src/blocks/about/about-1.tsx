@@ -16,14 +16,14 @@ interface About1Props {
 }
 
 export default function About1({
-  title = 'Sobre nós',
-  description = 'Somos uma equipe apaixonada por criar experiências digitais incríveis. Nossa missão é ajudar empresas a transformar suas ideias em produtos que as pessoas amam.',
-  mission = 'Democratizar o acesso a componentes de alta qualidade para desenvolvedores em todo o mundo.',
+  title = 'About us',
+  description = 'We are a team passionate about creating incredible digital experiences. Our mission is to help companies transform their ideas into products that people love.',
+  mission = 'Democratize access to high-quality components for developers worldwide.',
   stats = [
-    { value: '50+', label: 'Componentes' },
-    { value: '10k+', label: 'Desenvolvedores' },
+    { value: '50+', label: 'Components' },
+    { value: '10k+', label: 'Developers' },
     { value: '100%', label: 'Open Source' },
-    { value: '24/7', label: 'Suporte' }
+    { value: '24/7', label: 'Support' }
   ],
   team = [
     {
@@ -64,7 +64,7 @@ export default function About1({
         {/* Mission */}
         <div className="max-w-4xl mx-auto mb-16">
           <div className="bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl font-bold mb-4">Nossa Missão</h3>
+            <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
             <p className="text-lg text-gray-700 dark:text-gray-300">
               {mission}
             </p>
@@ -87,7 +87,7 @@ export default function About1({
 
         {/* Team */}
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-2xl font-bold text-center mb-12">Nossa Equipe</h3>
+          <h3 className="text-2xl font-bold text-center mb-12">Our Team</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
               <div key={index} className="text-center group">

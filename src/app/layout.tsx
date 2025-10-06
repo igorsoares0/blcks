@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blcks - Biblioteca de Blocos React",
-  description: "Uma coleção crescente de componentes React bonitos e acessíveis. Copy, paste, customize.",
+  title: "Blcks - React Blocks Library",
+  description: "A growing collection of beautiful and accessible React components. Copy, paste, customize.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning

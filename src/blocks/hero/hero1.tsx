@@ -10,11 +10,11 @@ interface Hero1Props {
 }
 
 export default function Hero1({
-  title = 'Construa seu próximo projeto com nossos blocos',
-  subtitle = 'Componentes React prontos para copiar e colar',
-  description = 'Uma coleção crescente de componentes bonitos e acessíveis. Copy, paste, customize. É simples assim.',
-  primaryCTA = 'Começar agora',
-  secondaryCTA = 'Ver exemplos',
+  title = 'Build your next project with our blocks',
+  subtitle = 'Ready-to-use React components to copy and paste',
+  description = 'A growing collection of beautiful and accessible components. Copy, paste, customize. It\'s that simple.',
+  primaryCTA = 'Get Started',
+  secondaryCTA = 'View Examples',
   imageUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=600&fit=crop'
 }: Hero1Props) {
   return (

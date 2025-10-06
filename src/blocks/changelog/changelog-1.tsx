@@ -20,31 +20,31 @@ interface Changelog1Props {
 const typeConfig = {
   added: {
     icon: Plus,
-    label: 'Adicionado',
+    label: 'Added',
     color: 'text-green-600 dark:text-green-400',
     bg: 'bg-green-50 dark:bg-green-950'
   },
   fixed: {
     icon: Bug,
-    label: 'Corrigido',
+    label: 'Fixed',
     color: 'text-red-600 dark:text-red-400',
     bg: 'bg-red-50 dark:bg-red-950'
   },
   improved: {
     icon: Zap,
-    label: 'Melhorado',
+    label: 'Improved',
     color: 'text-blue-600 dark:text-blue-400',
     bg: 'bg-blue-50 dark:bg-blue-950'
   },
   changed: {
     icon: Wrench,
-    label: 'Alterado',
+    label: 'Changed',
     color: 'text-orange-600 dark:text-orange-400',
     bg: 'bg-orange-50 dark:bg-orange-950'
   },
   removed: {
     icon: AlertCircle,
-    label: 'Removido',
+    label: 'Removed',
     color: 'text-gray-600 dark:text-gray-400',
     bg: 'bg-gray-50 dark:bg-gray-950'
   }
@@ -52,46 +52,46 @@ const typeConfig = {
 
 export default function Changelog1({
   title = 'Changelog',
-  description = 'Acompanhe todas as atualizações, melhorias e correções do produto',
+  description = 'Track all product updates, improvements and fixes',
   entries = [
     {
       version: '2.1.0',
-      date: '15 de Março, 2024',
+      date: 'March 15, 2024',
       changes: [
-        { type: 'added', text: 'Novo sistema de notificações em tempo real' },
-        { type: 'added', text: 'Suporte para autenticação via Google e GitHub' },
-        { type: 'improved', text: 'Performance do dashboard aumentada em 40%' },
-        { type: 'fixed', text: 'Correção de bug no upload de arquivos grandes' }
+        { type: 'added', text: 'New real-time notification system' },
+        { type: 'added', text: 'Support for Google and GitHub authentication' },
+        { type: 'improved', text: 'Dashboard performance increased by 40%' },
+        { type: 'fixed', text: 'Fixed bug in large file upload' }
       ]
     },
     {
       version: '2.0.0',
-      date: '1 de Março, 2024',
+      date: 'March 1, 2024',
       changes: [
-        { type: 'added', text: 'Interface completamente redesenhada' },
-        { type: 'added', text: 'Modo escuro nativo' },
-        { type: 'improved', text: 'API REST v2 com melhor documentação' },
-        { type: 'changed', text: 'Migração para Next.js 15' },
-        { type: 'removed', text: 'Descontinuado suporte para versões antigas do Node.js' }
+        { type: 'added', text: 'Completely redesigned interface' },
+        { type: 'added', text: 'Native dark mode' },
+        { type: 'improved', text: 'REST API v2 with better documentation' },
+        { type: 'changed', text: 'Migration to Next.js 15' },
+        { type: 'removed', text: 'Deprecated support for older Node.js versions' }
       ]
     },
     {
       version: '1.5.2',
-      date: '20 de Fevereiro, 2024',
+      date: 'February 20, 2024',
       changes: [
-        { type: 'fixed', text: 'Corrigido problema de sincronização de dados' },
-        { type: 'fixed', text: 'Resolvido erro de memória em dispositivos móveis' },
-        { type: 'improved', text: 'Melhorias na acessibilidade do formulário de cadastro' }
+        { type: 'fixed', text: 'Fixed data synchronization issue' },
+        { type: 'fixed', text: 'Resolved memory error on mobile devices' },
+        { type: 'improved', text: 'Improvements in registration form accessibility' }
       ]
     },
     {
       version: '1.5.0',
-      date: '10 de Fevereiro, 2024',
+      date: 'February 10, 2024',
       changes: [
-        { type: 'added', text: 'Exportação de relatórios em PDF e Excel' },
-        { type: 'added', text: 'Filtros avançados na listagem de usuários' },
-        { type: 'improved', text: 'Velocidade de carregamento otimizada em 60%' },
-        { type: 'changed', text: 'Atualização do design dos botões e inputs' }
+        { type: 'added', text: 'Export reports in PDF and Excel' },
+        { type: 'added', text: 'Advanced filters in user listing' },
+        { type: 'improved', text: 'Loading speed optimized by 60%' },
+        { type: 'changed', text: 'Updated button and input design' }
       ]
     }
   ]
@@ -127,7 +127,7 @@ export default function Changelog1({
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold">
-                        Versão {entry.version}
+                        Version {entry.version}
                       </h3>
                       <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                         <Calendar className="h-4 w-4" />
@@ -171,7 +171,7 @@ export default function Changelog1({
         {/* Legend */}
         <div className="max-w-4xl mx-auto mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
-            Legenda
+            Legend
           </h4>
           <div className="flex flex-wrap gap-4">
             {Object.entries(typeConfig).map(([type, config]) => {
