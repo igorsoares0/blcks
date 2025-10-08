@@ -69,7 +69,7 @@ export default async function BlockPage({ params }: PageProps) {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800 sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-4">
           <div className="flex items-center justify-between">
             <Link href="/">
               <Button variant="ghost" size="sm">
@@ -88,8 +88,8 @@ export default async function BlockPage({ params }: PageProps) {
 
       {/* Block Info */}
       <section className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
-        <div className="container mx-auto px-4 py-12">
-          <div className="max-w-4xl">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-12">
+          <div className="max-w-7xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
               {block.name}
             </h1>
@@ -108,7 +108,7 @@ export default async function BlockPage({ params }: PageProps) {
       </section>
 
       {/* Block Preview */}
-      <section className="container mx-auto px-4 py-12">
+      <section className="container mx-auto px-6 md:px-8 lg:px-12 py-12">
         <div className="max-w-7xl mx-auto">
           <BlockPreview block={block}>
             <BlockComponent {...block.previewProps} />
@@ -118,7 +118,7 @@ export default async function BlockPage({ params }: PageProps) {
 
       {/* Props Documentation */}
       {block.props && block.props.length > 0 && (
-        <section className="container mx-auto px-4 py-12">
+        <section className="container mx-auto px-6 md:px-8 lg:px-12 py-12">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-2xl font-bold mb-6">Props</h2>
             <div className="border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden">
@@ -176,7 +176,7 @@ export default async function BlockPage({ params }: PageProps) {
       )}
 
       {/* Installation Instructions */}
-      <section className="container mx-auto px-4 py-12 border-t border-gray-200 dark:border-gray-800">
+      <section className="container mx-auto px-6 md:px-8 lg:px-12 py-12 border-t border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold mb-6">How to use</h2>
           <div className="space-y-4 prose dark:prose-invert max-w-none">
