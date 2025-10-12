@@ -7,6 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import Hero1 from '@/blocks/hero/hero1';
 import Hero2 from '@/blocks/hero/hero2';
+import Hero3 from '@/blocks/hero/hero3';
+import Hero4 from '@/blocks/hero/hero4';
+import Hero5 from '@/blocks/hero/hero5';
+import Hero6 from '@/blocks/hero/hero6';
+import Hero7 from '@/blocks/hero/hero7';
 import Features1 from '@/blocks/features/features1';
 import CTA1 from '@/blocks/cta/cta1';
 import Navbar1 from '@/blocks/navbar/navbar1';
@@ -35,6 +40,11 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'navbar-1': Navbar1,
   'hero-1': Hero1,
   'hero-2': Hero2,
+  'hero-3': Hero3,
+  'hero-4': Hero4,
+  'hero-5': Hero5,
+  'hero-6': Hero6,
+  'hero-7': Hero7,
   'features-1': Features1,
   'cta-1': CTA1,
   'footer-1': Footer1,
