@@ -2099,6 +2099,766 @@ export default function Footer1({
 }`
   },
   {
+    id: 'footer-2',
+    name: 'Footer with Newsletter',
+    description: 'Comprehensive footer with company info, newsletter signup, multiple link sections, social media icons and bottom bar. Modern design.',
+    category: 'footer',
+    tags: ['footer', 'newsletter', 'subscribe', 'links', 'social', 'navigation'],
+    dependencies: [],
+    previewProps: {
+      companyName: 'Blcks',
+      tagline: 'Beautiful UI components for your next project',
+      sections: [
+        {
+          title: 'Product',
+          links: [
+            { label: 'Features', href: '#' },
+            { label: 'Pricing', href: '#' },
+            { label: 'Changelog', href: '#' },
+            { label: 'Documentation', href: '#' }
+          ]
+        },
+        {
+          title: 'Company',
+          links: [
+            { label: 'About', href: '#' },
+            { label: 'Blog', href: '#' },
+            { label: 'Careers', href: '#' },
+            { label: 'Contact', href: '#' }
+          ]
+        },
+        {
+          title: 'Resources',
+          links: [
+            { label: 'Community', href: '#' },
+            { label: 'Support', href: '#' },
+            { label: 'Templates', href: '#' },
+            { label: 'Guides', href: '#' }
+          ]
+        },
+        {
+          title: 'Legal',
+          links: [
+            { label: 'Privacy', href: '#' },
+            { label: 'Terms', href: '#' },
+            { label: 'Cookie Policy', href: '#' },
+            { label: 'Licenses', href: '#' }
+          ]
+        }
+      ],
+      socialLinks: [
+        { name: 'Twitter', href: '#', icon: '𝕏' },
+        { name: 'GitHub', href: '#', icon: '⚙' },
+        { name: 'LinkedIn', href: '#', icon: '💼' },
+        { name: 'Discord', href: '#', icon: '💬' }
+      ],
+      copyright: '© 2024 Blcks. All rights reserved.',
+      showNewsletter: true,
+      newsletterTitle: 'Subscribe to our newsletter',
+      newsletterDescription: 'Get the latest updates and news delivered to your inbox.'
+    },
+    props: [
+      { name: 'companyName', type: 'string', default: 'Blcks', description: 'Company name' },
+      { name: 'tagline', type: 'string', description: 'Company tagline/description' },
+      { name: 'sections', type: 'FooterSection[]', description: 'Array of link sections with title and links' },
+      { name: 'socialLinks', type: 'SocialLink[]', description: 'Array of social links with name, href and icon' },
+      { name: 'copyright', type: 'string', description: 'Copyright text' },
+      { name: 'showNewsletter', type: 'boolean', default: 'true', description: 'Show newsletter signup section' },
+      { name: 'newsletterTitle', type: 'string', description: 'Newsletter section title' },
+      { name: 'newsletterDescription', type: 'string', description: 'Newsletter section description' }
+    ],
+    code: `interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
+interface SocialLink {
+  name: string;
+  href: string;
+  icon: string;
+}
+
+interface Footer2Props {
+  companyName?: string;
+  tagline?: string;
+  sections?: FooterSection[];
+  socialLinks?: SocialLink[];
+  copyright?: string;
+  showNewsletter?: boolean;
+  newsletterTitle?: string;
+  newsletterDescription?: string;
+}
+
+export default function Footer2({
+  companyName = 'Blcks',
+  tagline = 'Beautiful UI components for your next project',
+  sections = [
+    {
+      title: 'Product',
+      links: [
+        { label: 'Features', href: '#' },
+        { label: 'Pricing', href: '#' },
+        { label: 'Changelog', href: '#' },
+        { label: 'Documentation', href: '#' }
+      ]
+    },
+    {
+      title: 'Company',
+      links: [
+        { label: 'About', href: '#' },
+        { label: 'Blog', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Contact', href: '#' }
+      ]
+    },
+    {
+      title: 'Resources',
+      links: [
+        { label: 'Community', href: '#' },
+        { label: 'Support', href: '#' },
+        { label: 'Templates', href: '#' },
+        { label: 'Guides', href: '#' }
+      ]
+    },
+    {
+      title: 'Legal',
+      links: [
+        { label: 'Privacy', href: '#' },
+        { label: 'Terms', href: '#' },
+        { label: 'Cookie Policy', href: '#' },
+        { label: 'Licenses', href: '#' }
+      ]
+    }
+  ],
+  socialLinks = [
+    { name: 'Twitter', href: '#', icon: '𝕏' },
+    { name: 'GitHub', href: '#', icon: '⚙' },
+    { name: 'LinkedIn', href: '#', icon: '💼' },
+    { name: 'Discord', href: '#', icon: '💬' }
+  ],
+  copyright = '© 2024 Blcks. All rights reserved.',
+  showNewsletter = true,
+  newsletterTitle = 'Subscribe to our newsletter',
+  newsletterDescription = 'Get the latest updates and news delivered to your inbox.'
+}: Footer2Props) {
+  return (
+    <footer className="w-full border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20">
+        {/* Main Footer Content */}
+        <div className="grid gap-8 lg:grid-cols-5">
+          {/* Company Info & Newsletter */}
+          <div className="lg:col-span-2">
+            {/* Logo & Tagline */}
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                {companyName}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm">
+                {tagline}
+              </p>
+            </div>
+
+            {/* Newsletter */}
+            {showNewsletter && (
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
+                  {newsletterTitle}
+                </h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  {newsletterDescription}
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="flex-1 h-10 px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
+                  />
+                  <button className="inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 h-10 px-4">
+                    Subscribe
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Social Links */}
+            <div>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                Follow us
+              </h4>
+              <div className="flex gap-3">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    aria-label={social.name}
+                    className="w-10 h-10 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 transition-colors"
+                  >
+                    <span className="text-lg">{social.icon}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Links Sections */}
+          {sections.map((section, index) => (
+            <div key={index}>
+              <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
+                {section.title}
+              </h4>
+              <ul className="space-y-3">
+                {section.links.map((link, linkIndex) => (
+                  <li key={linkIndex}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {copyright}
+            </p>
+            <div className="flex gap-6">
+              <a
+                href="#"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="#"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+              >
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}`
+  },
+  {
+    id: 'footer-3',
+    name: 'Footer with Contact Info',
+    description: 'Professional footer with company description, contact details (email, phone, address), multiple link columns and legal links. Clean layout.',
+    category: 'footer',
+    tags: ['footer', 'contact', 'links', 'address', 'business', 'professional'],
+    dependencies: [],
+    previewProps: {
+      logo: 'Blcks',
+      description: 'Building the future of web development with beautiful, reusable components.',
+      columns: [
+        {
+          title: 'Platform',
+          links: [
+            { label: 'Overview', href: '#' },
+            { label: 'Features', href: '#' },
+            { label: 'Integrations', href: '#' },
+            { label: 'Pricing', href: '#' },
+            { label: 'Changelog', href: '#' }
+          ]
+        },
+        {
+          title: 'Company',
+          links: [
+            { label: 'About Us', href: '#' },
+            { label: 'Careers', href: '#' },
+            { label: 'Press', href: '#' },
+            { label: 'Partners', href: '#' },
+            { label: 'Contact', href: '#' }
+          ]
+        },
+        {
+          title: 'Resources',
+          links: [
+            { label: 'Blog', href: '#' },
+            { label: 'Documentation', href: '#' },
+            { label: 'Help Center', href: '#' },
+            { label: 'Tutorials', href: '#' },
+            { label: 'API Reference', href: '#' }
+          ]
+        }
+      ],
+      email: 'hello@blcks.com',
+      phone: '+1 (555) 123-4567',
+      address: '123 Main Street, San Francisco, CA 94102',
+      copyright: '© 2024 Blcks, Inc. All rights reserved.',
+      legalLinks: [
+        { label: 'Privacy Policy', href: '#' },
+        { label: 'Terms of Service', href: '#' },
+        { label: 'Cookie Policy', href: '#' }
+      ]
+    },
+    props: [
+      { name: 'logo', type: 'string', default: 'Blcks', description: 'Company logo/name' },
+      { name: 'description', type: 'string', description: 'Company description text' },
+      { name: 'columns', type: 'FooterColumn[]', description: 'Array of link columns with title and links' },
+      { name: 'email', type: 'string', description: 'Contact email address' },
+      { name: 'phone', type: 'string', description: 'Contact phone number' },
+      { name: 'address', type: 'string', description: 'Physical address' },
+      { name: 'copyright', type: 'string', description: 'Copyright text' },
+      { name: 'legalLinks', type: 'FooterLink[]', description: 'Array of legal/policy links' }
+    ],
+    code: `interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterColumn {
+  title: string;
+  links: FooterLink[];
+}
+
+interface Footer3Props {
+  logo?: string;
+  description?: string;
+  columns?: FooterColumn[];
+  email?: string;
+  phone?: string;
+  address?: string;
+  copyright?: string;
+  legalLinks?: FooterLink[];
+}
+
+export default function Footer3({
+  logo = 'Blcks',
+  description = 'Building the future of web development with beautiful, reusable components.',
+  columns = [
+    {
+      title: 'Platform',
+      links: [
+        { label: 'Overview', href: '#' },
+        { label: 'Features', href: '#' },
+        { label: 'Integrations', href: '#' },
+        { label: 'Pricing', href: '#' },
+        { label: 'Changelog', href: '#' }
+      ]
+    },
+    {
+      title: 'Company',
+      links: [
+        { label: 'About Us', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Press', href: '#' },
+        { label: 'Partners', href: '#' },
+        { label: 'Contact', href: '#' }
+      ]
+    },
+    {
+      title: 'Resources',
+      links: [
+        { label: 'Blog', href: '#' },
+        { label: 'Documentation', href: '#' },
+        { label: 'Help Center', href: '#' },
+        { label: 'Tutorials', href: '#' },
+        { label: 'API Reference', href: '#' }
+      ]
+    }
+  ],
+  email = 'hello@blcks.com',
+  phone = '+1 (555) 123-4567',
+  address = '123 Main Street, San Francisco, CA 94102',
+  copyright = '© 2024 Blcks, Inc. All rights reserved.',
+  legalLinks = [
+    { label: 'Privacy Policy', href: '#' },
+    { label: 'Terms of Service', href: '#' },
+    { label: 'Cookie Policy', href: '#' }
+  ]
+}: Footer3Props) {
+  return (
+    <footer className="w-full bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20">
+        {/* Main Footer Grid */}
+        <div className="grid gap-8 lg:grid-cols-12">
+          {/* Company Info - Takes 4 columns */}
+          <div className="lg:col-span-4">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              {logo}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 max-w-sm">
+              {description}
+            </p>
+
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 dark:text-gray-400 text-sm">📧</span>
+                <a
+                  href={\`mailto:\${email}\`}
+                  className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  {email}
+                </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 dark:text-gray-400 text-sm">📞</span>
+                <a
+                  href={\`tel:\${phone.replace(/\\s/g, '')}\`}
+                  className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  {phone}
+                </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-gray-500 dark:text-gray-400 text-sm">📍</span>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
+                  {address}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Link Columns - Takes 8 columns, distributed evenly */}
+          <div className="lg:col-span-8">
+            <div className="grid gap-8 sm:grid-cols-3">
+              {columns.map((column, index) => (
+                <div key={index}>
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 uppercase tracking-wider">
+                    {column.title}
+                  </h4>
+                  <ul className="space-y-3">
+                    {column.links.map((link, linkIndex) => (
+                      <li key={linkIndex}>
+                        <a
+                          href={link.href}
+                          className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Copyright */}
+            <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-left">
+              {copyright}
+            </p>
+
+            {/* Legal Links */}
+            <div className="flex flex-wrap justify-center gap-6">
+              {legalLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}`
+  },
+  {
+    id: 'footer-4',
+    name: 'Footer with Language Selector',
+    description: 'Modern footer with brand section, 4 link columns, social media icons, language selector and bottom bar with badge. Clean and international.',
+    category: 'footer',
+    tags: ['footer', 'international', 'language', 'social', 'links', 'i18n'],
+    dependencies: [],
+    previewProps: {
+      logo: 'Blcks',
+      tagline: 'Build faster with beautiful components',
+      sections: [
+        {
+          title: 'Product',
+          links: [
+            { label: 'Features', href: '#' },
+            { label: 'Pricing', href: '#' },
+            { label: 'Security', href: '#' },
+            { label: 'Roadmap', href: '#' }
+          ]
+        },
+        {
+          title: 'Developers',
+          links: [
+            { label: 'Documentation', href: '#' },
+            { label: 'API Reference', href: '#' },
+            { label: 'Changelog', href: '#' },
+            { label: 'GitHub', href: '#' }
+          ]
+        },
+        {
+          title: 'Company',
+          links: [
+            { label: 'About', href: '#' },
+            { label: 'Blog', href: '#' },
+            { label: 'Careers', href: '#' },
+            { label: 'Press Kit', href: '#' }
+          ]
+        },
+        {
+          title: 'Support',
+          links: [
+            { label: 'Help Center', href: '#' },
+            { label: 'Community', href: '#' },
+            { label: 'Contact Us', href: '#' },
+            { label: 'Status', href: '#' }
+          ]
+        }
+      ],
+      socialLinks: [
+        { name: 'Twitter', href: '#', icon: '𝕏' },
+        { name: 'GitHub', href: '#', icon: '⚙' },
+        { name: 'Discord', href: '#', icon: '💬' },
+        { name: 'YouTube', href: '#', icon: '▶' }
+      ],
+      showLanguageSelector: true,
+      languages: [
+        { code: 'en', label: 'English' },
+        { code: 'es', label: 'Español' },
+        { code: 'pt', label: 'Português' },
+        { code: 'fr', label: 'Français' }
+      ],
+      copyright: '© 2024 Blcks. All rights reserved.',
+      badge: 'Made with ❤️ in San Francisco'
+    },
+    props: [
+      { name: 'logo', type: 'string', default: 'Blcks', description: 'Company logo/name' },
+      { name: 'tagline', type: 'string', description: 'Company tagline' },
+      { name: 'sections', type: 'FooterSection[]', description: 'Array of link sections' },
+      { name: 'socialLinks', type: 'SocialLink[]', description: 'Array of social media links with icons' },
+      { name: 'showLanguageSelector', type: 'boolean', default: 'true', description: 'Show language selector dropdown' },
+      { name: 'languages', type: 'array', description: 'Array of available languages with code and label' },
+      { name: 'copyright', type: 'string', description: 'Copyright text' },
+      { name: 'badge', type: 'string', description: 'Optional badge text (e.g., Made with love)' }
+    ],
+    code: `interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
+interface SocialLink {
+  name: string;
+  href: string;
+  icon: string;
+}
+
+interface Footer4Props {
+  logo?: string;
+  tagline?: string;
+  sections?: FooterSection[];
+  socialLinks?: SocialLink[];
+  showLanguageSelector?: boolean;
+  languages?: { code: string; label: string }[];
+  copyright?: string;
+  badge?: string;
+}
+
+export default function Footer4({
+  logo = 'Blcks',
+  tagline = 'Build faster with beautiful components',
+  sections = [
+    {
+      title: 'Product',
+      links: [
+        { label: 'Features', href: '#' },
+        { label: 'Pricing', href: '#' },
+        { label: 'Security', href: '#' },
+        { label: 'Roadmap', href: '#' }
+      ]
+    },
+    {
+      title: 'Developers',
+      links: [
+        { label: 'Documentation', href: '#' },
+        { label: 'API Reference', href: '#' },
+        { label: 'Changelog', href: '#' },
+        { label: 'GitHub', href: '#' }
+      ]
+    },
+    {
+      title: 'Company',
+      links: [
+        { label: 'About', href: '#' },
+        { label: 'Blog', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Press Kit', href: '#' }
+      ]
+    },
+    {
+      title: 'Support',
+      links: [
+        { label: 'Help Center', href: '#' },
+        { label: 'Community', href: '#' },
+        { label: 'Contact Us', href: '#' },
+        { label: 'Status', href: '#' }
+      ]
+    }
+  ],
+  socialLinks = [
+    { name: 'Twitter', href: '#', icon: '𝕏' },
+    { name: 'GitHub', href: '#', icon: '⚙' },
+    { name: 'Discord', href: '#', icon: '💬' },
+    { name: 'YouTube', href: '#', icon: '▶' }
+  ],
+  showLanguageSelector = true,
+  languages = [
+    { code: 'en', label: 'English' },
+    { code: 'es', label: 'Español' },
+    { code: 'pt', label: 'Português' },
+    { code: 'fr', label: 'Français' }
+  ],
+  copyright = '© 2024 Blcks. All rights reserved.',
+  badge = 'Made with ❤️ in San Francisco'
+}: Footer4Props) {
+  return (
+    <footer className="w-full bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Main Footer Content */}
+        <div className="py-12 md:py-16 lg:py-20">
+          <div className="grid gap-8 lg:grid-cols-6">
+            {/* Brand Column - Takes 2 columns */}
+            <div className="lg:col-span-2">
+              <div className="mb-4">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {logo}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  {tagline}
+                </p>
+              </div>
+
+              {/* Social Links */}
+              <div className="flex gap-2 mb-6">
+                {socialLinks.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    aria-label={social.name}
+                    className="w-9 h-9 rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 transition-colors text-sm"
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+
+              {/* Language Selector */}
+              {showLanguageSelector && (
+                <div>
+                  <label className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2 block">
+                    Language
+                  </label>
+                  <select className="w-full max-w-[200px] h-9 px-3 text-sm rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100">
+                    {languages.map((lang) => (
+                      <option key={lang.code} value={lang.code}>
+                        {lang.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+
+            {/* Link Sections - Takes 4 columns */}
+            <div className="lg:col-span-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {sections.map((section, index) => (
+                  <div key={index}>
+                    <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
+                      {section.title}
+                    </h4>
+                    <ul className="space-y-3">
+                      {section.links.map((link, linkIndex) => (
+                        <li key={linkIndex}>
+                          <a
+                            href={link.href}
+                            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                          >
+                            {link.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="py-6 border-t border-gray-200 dark:border-gray-800">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {copyright}
+              </p>
+              {badge && (
+                <span className="text-xs text-gray-500 dark:text-gray-500">
+                  {badge}
+                </span>
+              )}
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-6">
+              <a
+                href="#"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                Privacy
+              </a>
+              <a
+                href="#"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                Terms
+              </a>
+              <a
+                href="#"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                Cookies
+              </a>
+              <a
+                href="#"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                Sitemap
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}`
+  },
+  {
     id: 'announcement-1',
     name: 'Announcement Bar',
     description: 'Fixed announcement bar at the top with message, link and close button using shadcn/ui Button. Includes 3 color variations.',
