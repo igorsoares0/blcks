@@ -4001,6 +4001,181 @@ export default function Announcement1({
 }`
   },
   {
+    id: 'announcement-2',
+    name: 'Announcement Badge Banner',
+    description: 'Clean announcement banner with badge, message and link. Subtle design with hover effects and emoji support.',
+    category: 'announcement',
+    tags: ['announcement', 'banner', 'badge', 'notification', 'news'],
+    dependencies: [],
+    previewProps: {
+      badge: '🎉 New',
+      message: 'Announcing our next round of funding and our new AI features',
+      linkText: 'Read more',
+      linkHref: '#',
+      icon: '→',
+      showIcon: true
+    },
+    props: [
+      { name: 'badge', type: 'string', default: '🎉 New', description: 'Badge text with optional emoji' },
+      { name: 'message', type: 'string', default: 'Announcing our next round of funding and our new AI features', description: 'Main announcement message' },
+      { name: 'linkText', type: 'string', default: 'Read more', description: 'Link text' },
+      { name: 'linkHref', type: 'string', default: '#', description: 'Link URL' },
+      { name: 'icon', type: 'string', default: '→', description: 'Icon or emoji for link' },
+      { name: 'showIcon', type: 'boolean', default: 'true', description: 'Show or hide icon next to link' }
+    ],
+    code: `interface Announcement2Props {
+  badge?: string;
+  message?: string;
+  linkText?: string;
+  linkHref?: string;
+  icon?: string;
+  showIcon?: boolean;
+}
+
+export default function Announcement2({
+  badge = '🎉 New',
+  message = 'Announcing our next round of funding and our new AI features',
+  linkText = 'Read more',
+  linkHref = '#',
+  icon = '→',
+  showIcon = true
+}: Announcement2Props) {
+  return (
+    <div className="w-full bg-white dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-center justify-center gap-3 flex-wrap">
+          {/* Badge */}
+          <span className="inline-flex items-center rounded-full bg-primary/10 dark:bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">
+            {badge}
+          </span>
+
+          {/* Message */}
+          <p className="text-sm text-gray-700 dark:text-gray-300 text-center">
+            {message}
+          </p>
+
+          {/* Link */}
+          {linkText && (
+            <a
+              href={linkHref}
+              className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors group"
+            >
+              {linkText}
+              {showIcon && (
+                <span className="transition-transform group-hover:translate-x-0.5">
+                  {icon}
+                </span>
+              )}
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}`
+  },
+  {
+    id: 'announcement-3',
+    name: 'Announcement Card Banner',
+    description: 'Colored announcement banner with icon, title, message and link. Includes 4 color variants (blue, green, purple, orange).',
+    category: 'announcement',
+    tags: ['announcement', 'banner', 'notification', 'alert', 'colored'],
+    dependencies: [],
+    previewProps: {
+      title: 'Product Update',
+      message: 'Check out the new features we just released',
+      linkText: 'View details',
+      linkHref: '#',
+      icon: '🔔',
+      variant: 'blue'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Product Update', description: 'Title of the announcement' },
+      { name: 'message', type: 'string', default: 'Check out the new features we just released', description: 'Main announcement message' },
+      { name: 'linkText', type: 'string', default: 'View details', description: 'Link text' },
+      { name: 'linkHref', type: 'string', default: '#', description: 'Link URL' },
+      { name: 'icon', type: 'string', default: '🔔', description: 'Icon or emoji for announcement' },
+      { name: 'variant', type: "'blue' | 'green' | 'purple' | 'orange'", default: 'blue', description: 'Color variant of the banner' }
+    ],
+    code: `interface Announcement3Props {
+  title?: string;
+  message?: string;
+  linkText?: string;
+  linkHref?: string;
+  icon?: string;
+  variant?: 'blue' | 'green' | 'purple' | 'orange';
+}
+
+export default function Announcement3({
+  title = 'Product Update',
+  message = 'Check out the new features we just released',
+  linkText = 'View details',
+  linkHref = '#',
+  icon = '🔔',
+  variant = 'blue'
+}: Announcement3Props) {
+  const variantClasses = {
+    blue: 'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-900',
+    green: 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-900',
+    purple: 'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-900',
+    orange: 'bg-orange-50 dark:bg-orange-950/30 border-orange-200 dark:border-orange-900'
+  };
+
+  const textVariantClasses = {
+    blue: 'text-blue-900 dark:text-blue-100',
+    green: 'text-green-900 dark:text-green-100',
+    purple: 'text-purple-900 dark:text-purple-100',
+    orange: 'text-orange-900 dark:text-orange-100'
+  };
+
+  const linkVariantClasses = {
+    blue: 'text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300',
+    green: 'text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300',
+    purple: 'text-purple-700 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300',
+    orange: 'text-orange-700 dark:text-orange-400 hover:text-orange-800 dark:hover:text-orange-300'
+  };
+
+  return (
+    <div className={\`w-full border \${variantClasses[variant]}\`}>
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex items-start md:items-center gap-4 flex-col md:flex-row">
+          {/* Icon */}
+          <div className="flex-shrink-0">
+            <span className="text-2xl">{icon}</span>
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              <h3 className={\`text-sm font-semibold \${textVariantClasses[variant]}\`}>
+                {title}
+              </h3>
+              <span className="hidden sm:inline text-gray-400 dark:text-gray-600">•</span>
+              <p className={\`text-sm \${textVariantClasses[variant]} opacity-90\`}>
+                {message}
+              </p>
+            </div>
+          </div>
+
+          {/* Link */}
+          {linkText && (
+            <div className="flex-shrink-0">
+              <a
+                href={linkHref}
+                className={\`inline-flex items-center text-sm font-medium \${linkVariantClasses[variant]} underline underline-offset-4 hover:no-underline transition-all\`}
+              >
+                {linkText}
+                <span className="ml-1">→</span>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}`
+  },
+  {
     id: 'about-1',
     name: 'About Section',
     description: 'Complete company section with description, mission, statistics and team. Responsive and modern layout.',
