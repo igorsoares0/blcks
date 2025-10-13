@@ -21,6 +21,8 @@ import Navbar1 from '@/blocks/navbar/navbar1';
 import Footer1 from '@/blocks/footer/footer-1';
 import Announcement1 from '@/blocks/announcement/announcement-1';
 import About1 from '@/blocks/about/about-1';
+import About2 from '@/blocks/about/about-2';
+import About3 from '@/blocks/about/about-3';
 import Blog1 from '@/blocks/blog/blog-1';
 import BlogPost1 from '@/blocks/blog/blog-post-1';
 import Pricing1 from '@/blocks/pricing/pricing-1';
@@ -56,6 +58,8 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'footer-1': Footer1,
   'announcement-1': Announcement1,
   'about-1': About1,
+  'about-2': About2,
+  'about-3': About3,
   'blog-1': Blog1,
   'blog-post-1': BlogPost1,
   'pricing-1': Pricing1,
