@@ -1,18 +1,18 @@
+import { Sparkles, ArrowRight } from 'lucide-react';
+
 interface Announcement2Props {
   badge?: string;
   message?: string;
   linkText?: string;
   linkHref?: string;
-  icon?: string;
   showIcon?: boolean;
 }
 
 export default function Announcement2({
-  badge = '🎉 New',
+  badge = 'New',
   message = 'Announcing our next round of funding and our new AI features',
   linkText = 'Read more',
   linkHref = '#',
-  icon = '→',
   showIcon = true
 }: Announcement2Props) {
   return (
@@ -20,7 +20,8 @@ export default function Announcement2({
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-center gap-3 flex-wrap">
           {/* Badge */}
-          <span className="inline-flex items-center rounded-full bg-primary/10 dark:bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 dark:bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">
+            <Sparkles className="h-3 w-3" />
             {badge}
           </span>
 
@@ -37,9 +38,7 @@ export default function Announcement2({
             >
               {linkText}
               {showIcon && (
-                <span className="transition-transform group-hover:translate-x-0.5">
-                  {icon}
-                </span>
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               )}
             </a>
           )}

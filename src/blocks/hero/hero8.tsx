@@ -1,5 +1,7 @@
+import { Rocket, Zap, Lock, BarChart3, Target } from 'lucide-react';
+
 interface Benefit {
-  icon: string;
+  icon: 'zap' | 'lock' | 'barchart' | 'target';
   title: string;
   description: string;
 }
@@ -16,7 +18,7 @@ interface Hero8Props {
 }
 
 export default function Hero8({
-  badge = '🚀 New Launch',
+  badge = 'New Launch',
   title = 'Transform your workflow with',
   highlight = 'intelligent automation',
   description = 'Streamline your processes, boost productivity, and achieve more with our powerful platform designed for modern teams.',
@@ -24,34 +26,49 @@ export default function Hero8({
   secondaryCTA = 'View Demo',
   benefits = [
     {
-      icon: '⚡',
+      icon: 'zap',
       title: 'Lightning Fast',
       description: 'Deploy in seconds, not hours'
     },
     {
-      icon: '🔒',
+      icon: 'lock',
       title: 'Secure by Default',
       description: 'Enterprise-grade security built-in'
     },
     {
-      icon: '📊',
+      icon: 'barchart',
       title: 'Real-time Analytics',
       description: 'Track performance as it happens'
     },
     {
-      icon: '🎯',
+      icon: 'target',
       title: 'Easy Integration',
       description: 'Connect with your favorite tools'
     }
   ],
   trustIndicator = 'Trusted by 50,000+ teams worldwide'
 }: Hero8Props) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'zap':
+        return <Zap className="h-8 w-8" />;
+      case 'lock':
+        return <Lock className="h-8 w-8" />;
+      case 'barchart':
+        return <BarChart3 className="h-8 w-8" />;
+      case 'target':
+        return <Target className="h-8 w-8" />;
+      default:
+        return <Zap className="h-8 w-8" />;
+    }
+  };
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
       <div className="container mx-auto px-4 md:px-6">
         {/* Badge */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+            <Rocket className="h-4 w-4" />
             {badge}
           </div>
         </div>
@@ -93,7 +110,9 @@ export default function Hero8({
               key={index}
               className="flex flex-col p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow"
             >
-              <div className="text-4xl mb-4">{benefit.icon}</div>
+              <div className="text-blue-600 dark:text-blue-400 mb-4">
+                {getIcon(benefit.icon)}
+              </div>
               <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
                 {benefit.title}
               </h3>

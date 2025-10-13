@@ -1081,7 +1081,7 @@ export default function Hero3({
       { name: 'lucide-react', version: '^0.544.0' }
     ],
     previewProps: {
-      badge: '✨ Introducing v2.0',
+      badge: 'Introducing v2.0',
       title: 'Build amazing products',
       highlight: 'faster than ever',
       description: 'The complete platform for modern teams. Ship products your customers love with powerful features and beautiful design.',
@@ -1132,7 +1132,7 @@ interface Hero4Props {
 }
 
 export default function Hero4({
-  badge = '✨ Introducing v2.0',
+  badge = 'Introducing v2.0',
   title = 'Build amazing products',
   highlight = 'faster than ever',
   description = 'The complete platform for modern teams. Ship products your customers love with powerful features and beautiful design.',
@@ -1181,7 +1181,8 @@ export default function Hero4({
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-1.5 text-sm font-medium text-white shadow-lg">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-1.5 text-sm font-medium text-white shadow-lg">
+              <Sparkles className="h-4 w-4" />
               {badge}
             </div>
 
@@ -1826,7 +1827,7 @@ export default function Hero7({
     tags: ['hero', 'landing', 'benefits', 'features', 'cta', 'grid'],
     dependencies: [],
     previewProps: {
-      badge: '🚀 New Launch',
+      badge: 'New Launch',
       title: 'Transform your workflow with',
       highlight: 'intelligent automation',
       description: 'Streamline your processes, boost productivity, and achieve more with our powerful platform designed for modern teams.',
@@ -1884,7 +1885,7 @@ interface Hero8Props {
 }
 
 export default function Hero8({
-  badge = '🚀 New Launch',
+  badge = 'New Launch',
   title = 'Transform your workflow with',
   highlight = 'intelligent automation',
   description = 'Streamline your processes, boost productivity, and achieve more with our powerful platform designed for modern teams.',
@@ -2168,7 +2169,7 @@ export default function Hero9({
     tags: ['hero', 'landing', 'code', 'developer', 'terminal', 'cli', 'stats'],
     dependencies: [],
     previewProps: {
-      badge: '✨ New in v2.0',
+      badge: 'New in v2.0',
       title: 'Build and deploy faster than ever',
       description: 'A powerful development platform that helps you ship products faster. Write code, deploy instantly, and scale effortlessly.',
       primaryCTA: 'Start Building',
@@ -2221,7 +2222,7 @@ interface Hero10Props {
 }
 
 export default function Hero10({
-  badge = '✨ New in v2.0',
+  badge = 'New in v2.0',
   title = 'Build and deploy faster than ever',
   description = 'A powerful development platform that helps you ship products faster. Write code, deploy instantly, and scale effortlessly.',
   primaryCTA = 'Start Building',
@@ -4003,41 +4004,41 @@ export default function Announcement1({
   {
     id: 'announcement-2',
     name: 'Announcement Badge Banner',
-    description: 'Clean announcement banner with badge, message and link. Subtle design with hover effects and emoji support.',
+    description: 'Clean announcement banner with badge, message and link. Subtle design with hover effects using lucide-react icons.',
     category: 'announcement',
     tags: ['announcement', 'banner', 'badge', 'notification', 'news'],
-    dependencies: [],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
     previewProps: {
-      badge: '🎉 New',
+      badge: 'New',
       message: 'Announcing our next round of funding and our new AI features',
       linkText: 'Read more',
       linkHref: '#',
-      icon: '→',
       showIcon: true
     },
     props: [
-      { name: 'badge', type: 'string', default: '🎉 New', description: 'Badge text with optional emoji' },
+      { name: 'badge', type: 'string', default: 'New', description: 'Badge text' },
       { name: 'message', type: 'string', default: 'Announcing our next round of funding and our new AI features', description: 'Main announcement message' },
       { name: 'linkText', type: 'string', default: 'Read more', description: 'Link text' },
       { name: 'linkHref', type: 'string', default: '#', description: 'Link URL' },
-      { name: 'icon', type: 'string', default: '→', description: 'Icon or emoji for link' },
-      { name: 'showIcon', type: 'boolean', default: 'true', description: 'Show or hide icon next to link' }
+      { name: 'showIcon', type: 'boolean', default: 'true', description: 'Show or hide arrow icon next to link' }
     ],
-    code: `interface Announcement2Props {
+    code: `import { Sparkles, ArrowRight } from 'lucide-react';
+
+interface Announcement2Props {
   badge?: string;
   message?: string;
   linkText?: string;
   linkHref?: string;
-  icon?: string;
   showIcon?: boolean;
 }
 
 export default function Announcement2({
-  badge = '🎉 New',
+  badge = 'New',
   message = 'Announcing our next round of funding and our new AI features',
   linkText = 'Read more',
   linkHref = '#',
-  icon = '→',
   showIcon = true
 }: Announcement2Props) {
   return (
@@ -4045,7 +4046,8 @@ export default function Announcement2({
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-center gap-3 flex-wrap">
           {/* Badge */}
-          <span className="inline-flex items-center rounded-full bg-primary/10 dark:bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">
+          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 dark:bg-primary/20 px-3 py-1 text-xs font-semibold text-primary">
+            <Sparkles className="h-3 w-3" />
             {badge}
           </span>
 
@@ -4062,9 +4064,7 @@ export default function Announcement2({
             >
               {linkText}
               {showIcon && (
-                <span className="transition-transform group-hover:translate-x-0.5">
-                  {icon}
-                </span>
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               )}
             </a>
           )}
@@ -4077,16 +4077,17 @@ export default function Announcement2({
   {
     id: 'announcement-3',
     name: 'Announcement Card Banner',
-    description: 'Colored announcement banner with icon, title, message and link. Includes 4 color variants (blue, green, purple, orange).',
+    description: 'Colored announcement banner with Bell icon, title, message and link. Includes 4 color variants (blue, green, purple, orange).',
     category: 'announcement',
     tags: ['announcement', 'banner', 'notification', 'alert', 'colored'],
-    dependencies: [],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
     previewProps: {
       title: 'Product Update',
       message: 'Check out the new features we just released',
       linkText: 'View details',
       linkHref: '#',
-      icon: '🔔',
       variant: 'blue'
     },
     props: [
@@ -4094,15 +4095,15 @@ export default function Announcement2({
       { name: 'message', type: 'string', default: 'Check out the new features we just released', description: 'Main announcement message' },
       { name: 'linkText', type: 'string', default: 'View details', description: 'Link text' },
       { name: 'linkHref', type: 'string', default: '#', description: 'Link URL' },
-      { name: 'icon', type: 'string', default: '🔔', description: 'Icon or emoji for announcement' },
       { name: 'variant', type: "'blue' | 'green' | 'purple' | 'orange'", default: 'blue', description: 'Color variant of the banner' }
     ],
-    code: `interface Announcement3Props {
+    code: `import { Bell, ArrowRight } from 'lucide-react';
+
+interface Announcement3Props {
   title?: string;
   message?: string;
   linkText?: string;
   linkHref?: string;
-  icon?: string;
   variant?: 'blue' | 'green' | 'purple' | 'orange';
 }
 
@@ -4111,7 +4112,6 @@ export default function Announcement3({
   message = 'Check out the new features we just released',
   linkText = 'View details',
   linkHref = '#',
-  icon = '🔔',
   variant = 'blue'
 }: Announcement3Props) {
   const variantClasses = {
@@ -4128,6 +4128,13 @@ export default function Announcement3({
     orange: 'text-orange-900 dark:text-orange-100'
   };
 
+  const iconVariantClasses = {
+    blue: 'text-blue-600 dark:text-blue-400',
+    green: 'text-green-600 dark:text-green-400',
+    purple: 'text-purple-600 dark:text-purple-400',
+    orange: 'text-orange-600 dark:text-orange-400'
+  };
+
   const linkVariantClasses = {
     blue: 'text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300',
     green: 'text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300',
@@ -4141,7 +4148,7 @@ export default function Announcement3({
         <div className="flex items-start md:items-center gap-4 flex-col md:flex-row">
           {/* Icon */}
           <div className="flex-shrink-0">
-            <span className="text-2xl">{icon}</span>
+            <Bell className={\`h-5 w-5 \${iconVariantClasses[variant]}\`} />
           </div>
 
           {/* Content */}
@@ -4162,10 +4169,10 @@ export default function Announcement3({
             <div className="flex-shrink-0">
               <a
                 href={linkHref}
-                className={\`inline-flex items-center text-sm font-medium \${linkVariantClasses[variant]} underline underline-offset-4 hover:no-underline transition-all\`}
+                className={\`inline-flex items-center gap-1 text-sm font-medium \${linkVariantClasses[variant]} underline underline-offset-4 hover:no-underline transition-all\`}
               >
                 {linkText}
-                <span className="ml-1">→</span>
+                <ArrowRight className="h-3 w-3" />
               </a>
             </div>
           )}

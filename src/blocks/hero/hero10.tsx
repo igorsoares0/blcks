@@ -1,5 +1,7 @@
+import { Sparkles, Zap, Lock, Globe, BarChart3 } from 'lucide-react';
+
 interface Feature {
-  icon: string;
+  icon: 'zap' | 'lock' | 'globe' | 'barchart';
   text: string;
 }
 
@@ -18,16 +20,16 @@ interface Hero10Props {
 }
 
 export default function Hero10({
-  badge = '✨ New in v2.0',
+  badge = 'New in v2.0',
   title = 'Build and deploy faster than ever',
   description = 'A powerful development platform that helps you ship products faster. Write code, deploy instantly, and scale effortlessly.',
   primaryCTA = 'Start Building',
   secondaryCTA = 'View Documentation',
   features = [
-    { icon: '⚡', text: 'Deploy in seconds' },
-    { icon: '🔒', text: 'Secure by default' },
-    { icon: '🌍', text: 'Global CDN' },
-    { icon: '📊', text: 'Real-time analytics' }
+    { icon: 'zap', text: 'Deploy in seconds' },
+    { icon: 'lock', text: 'Secure by default' },
+    { icon: 'globe', text: 'Global CDN' },
+    { icon: 'barchart', text: 'Real-time analytics' }
   ],
   codeSnippet = `npm install @blcks/cli
 npx blcks deploy
@@ -41,12 +43,28 @@ npx blcks deploy
     { value: '<100ms', label: 'Response time' }
   ]
 }: Hero10Props) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'zap':
+        return <Zap className="h-4 w-4" />;
+      case 'lock':
+        return <Lock className="h-4 w-4" />;
+      case 'globe':
+        return <Globe className="h-4 w-4" />;
+      case 'barchart':
+        return <BarChart3 className="h-4 w-4" />;
+      default:
+        return <Zap className="h-4 w-4" />;
+    }
+  };
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
       <div className="container mx-auto px-4 md:px-6">
         {/* Badge */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-950 border border-blue-100 dark:border-blue-900 px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-300">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 dark:bg-blue-950 border border-blue-100 dark:border-blue-900 px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-300">
+            <Sparkles className="h-4 w-4" />
             {badge}
           </div>
         </div>
@@ -78,7 +96,9 @@ npx blcks deploy
               key={index}
               className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
             >
-              <span className="text-xl">{feature.icon}</span>
+              <span className="text-blue-600 dark:text-blue-400">
+                {getIcon(feature.icon)}
+              </span>
               <span>{feature.text}</span>
             </div>
           ))}

@@ -1,9 +1,10 @@
+import { Bell, ArrowRight } from 'lucide-react';
+
 interface Announcement3Props {
   title?: string;
   message?: string;
   linkText?: string;
   linkHref?: string;
-  icon?: string;
   variant?: 'blue' | 'green' | 'purple' | 'orange';
 }
 
@@ -12,7 +13,6 @@ export default function Announcement3({
   message = 'Check out the new features we just released',
   linkText = 'View details',
   linkHref = '#',
-  icon = '🔔',
   variant = 'blue'
 }: Announcement3Props) {
   const variantClasses = {
@@ -29,6 +29,13 @@ export default function Announcement3({
     orange: 'text-orange-900 dark:text-orange-100'
   };
 
+  const iconVariantClasses = {
+    blue: 'text-blue-600 dark:text-blue-400',
+    green: 'text-green-600 dark:text-green-400',
+    purple: 'text-purple-600 dark:text-purple-400',
+    orange: 'text-orange-600 dark:text-orange-400'
+  };
+
   const linkVariantClasses = {
     blue: 'text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300',
     green: 'text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300',
@@ -42,7 +49,7 @@ export default function Announcement3({
         <div className="flex items-start md:items-center gap-4 flex-col md:flex-row">
           {/* Icon */}
           <div className="flex-shrink-0">
-            <span className="text-2xl">{icon}</span>
+            <Bell className={`h-5 w-5 ${iconVariantClasses[variant]}`} />
           </div>
 
           {/* Content */}
@@ -63,10 +70,10 @@ export default function Announcement3({
             <div className="flex-shrink-0">
               <a
                 href={linkHref}
-                className={`inline-flex items-center text-sm font-medium ${linkVariantClasses[variant]} underline underline-offset-4 hover:no-underline transition-all`}
+                className={`inline-flex items-center gap-1 text-sm font-medium ${linkVariantClasses[variant]} underline underline-offset-4 hover:no-underline transition-all`}
               >
                 {linkText}
-                <span className="ml-1">→</span>
+                <ArrowRight className="h-3 w-3" />
               </a>
             </div>
           )}

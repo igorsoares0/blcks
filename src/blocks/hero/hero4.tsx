@@ -18,7 +18,7 @@ interface Hero4Props {
 }
 
 export default function Hero4({
-  badge = '✨ Introducing v2.0',
+  badge = 'Introducing v2.0',
   title = 'Build amazing products',
   highlight = 'faster than ever',
   description = 'The complete platform for modern teams. Ship products your customers love with powerful features and beautiful design.',
@@ -67,7 +67,8 @@ export default function Hero4({
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col items-center text-center space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-1.5 text-sm font-medium text-white shadow-lg">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-4 py-1.5 text-sm font-medium text-white shadow-lg">
+              <Sparkles className="h-4 w-4" />
               {badge}
             </div>
 
