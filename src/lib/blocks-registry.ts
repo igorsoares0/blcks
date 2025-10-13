@@ -1219,6 +1219,518 @@ export default function Hero7({
 }`
   },
   {
+    id: 'hero-8',
+    name: 'Hero with Benefits Grid',
+    description: 'Centered hero section with prominent CTA, trust indicators, and a 4-column benefits grid. Clean design with subtle gradient background.',
+    category: 'hero',
+    tags: ['hero', 'landing', 'benefits', 'features', 'cta', 'grid'],
+    dependencies: [],
+    previewProps: {
+      badge: '🚀 New Launch',
+      title: 'Transform your workflow with',
+      highlight: 'intelligent automation',
+      description: 'Streamline your processes, boost productivity, and achieve more with our powerful platform designed for modern teams.',
+      primaryCTA: 'Get Started Free',
+      secondaryCTA: 'View Demo',
+      benefits: [
+        {
+          icon: '⚡',
+          title: 'Lightning Fast',
+          description: 'Deploy in seconds, not hours'
+        },
+        {
+          icon: '🔒',
+          title: 'Secure by Default',
+          description: 'Enterprise-grade security built-in'
+        },
+        {
+          icon: '📊',
+          title: 'Real-time Analytics',
+          description: 'Track performance as it happens'
+        },
+        {
+          icon: '🎯',
+          title: 'Easy Integration',
+          description: 'Connect with your favorite tools'
+        }
+      ],
+      trustIndicator: 'Trusted by 50,000+ teams worldwide'
+    },
+    props: [
+      { name: 'badge', type: 'string', description: 'Badge text shown at the top' },
+      { name: 'title', type: 'string', description: 'Main hero title' },
+      { name: 'highlight', type: 'string', description: 'Highlighted text in title (colored)' },
+      { name: 'description', type: 'string', description: 'Hero description text' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary CTA button text' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary CTA button text' },
+      { name: 'benefits', type: 'array', description: 'Array of benefits with icon, title, and description' },
+      { name: 'trustIndicator', type: 'string', description: 'Trust indicator text' }
+    ],
+    code: `interface Benefit {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Hero8Props {
+  badge?: string;
+  title?: string;
+  highlight?: string;
+  description?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  benefits?: Benefit[];
+  trustIndicator?: string;
+}
+
+export default function Hero8({
+  badge = '🚀 New Launch',
+  title = 'Transform your workflow with',
+  highlight = 'intelligent automation',
+  description = 'Streamline your processes, boost productivity, and achieve more with our powerful platform designed for modern teams.',
+  primaryCTA = 'Get Started Free',
+  secondaryCTA = 'View Demo',
+  benefits = [
+    {
+      icon: '⚡',
+      title: 'Lightning Fast',
+      description: 'Deploy in seconds, not hours'
+    },
+    {
+      icon: '🔒',
+      title: 'Secure by Default',
+      description: 'Enterprise-grade security built-in'
+    },
+    {
+      icon: '📊',
+      title: 'Real-time Analytics',
+      description: 'Track performance as it happens'
+    },
+    {
+      icon: '🎯',
+      title: 'Easy Integration',
+      description: 'Connect with your favorite tools'
+    }
+  ],
+  trustIndicator = 'Trusted by 50,000+ teams worldwide'
+}: Hero8Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Badge */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex items-center rounded-full bg-gray-100 dark:bg-gray-800 px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+            {badge}
+          </div>
+        </div>
+
+        {/* Title and Description */}
+        <div className="flex flex-col items-center text-center space-y-6 mb-12">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl max-w-4xl">
+            {title}{' '}
+            <span className="text-blue-600 dark:text-blue-400">
+              {highlight}
+            </span>
+          </h1>
+          <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400 md:text-xl">
+            {description}
+          </p>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+          <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-colors bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 h-12 px-8 shadow-lg">
+            {primaryCTA}
+          </button>
+          <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-colors border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 h-12 px-8">
+            {secondaryCTA}
+          </button>
+        </div>
+
+        {/* Trust Indicator */}
+        <div className="flex justify-center mb-12">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {trustIndicator}
+          </p>
+        </div>
+
+        {/* Benefits Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {benefits.map((benefit, index) => (
+            <div
+              key={index}
+              className="flex flex-col p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="text-4xl mb-4">{benefit.icon}</div>
+              <h3 className="text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100">
+                {benefit.title}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {benefit.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'hero-9',
+    name: 'Hero with Social Proof',
+    description: 'Two-column hero with image, floating testimonial cards, and metrics. Perfect for showcasing customer satisfaction and trust.',
+    category: 'hero',
+    tags: ['hero', 'landing', 'testimonials', 'social-proof', 'metrics', 'image'],
+    dependencies: [],
+    previewProps: {
+      badge: 'Trusted by thousands',
+      title: 'The platform teams love to use',
+      description: 'Join thousands of teams who have transformed their workflow. Our intuitive platform helps you ship faster and collaborate better.',
+      primaryCTA: 'Start Free Trial',
+      secondaryCTA: 'Book a Demo',
+      testimonials: [
+        {
+          quote: 'This platform has completely transformed how our team works together.',
+          author: 'Sarah Johnson',
+          role: 'Product Manager at TechCo',
+          avatar: 'SJ'
+        },
+        {
+          quote: 'The best tool we\'ve used for project management. Highly recommended!',
+          author: 'Michael Chen',
+          role: 'CTO at StartupXYZ',
+          avatar: 'MC'
+        }
+      ],
+      metrics: [
+        { value: '50K+', label: 'Active users' },
+        { value: '99.9%', label: 'Uptime SLA' },
+        { value: '4.9/5', label: 'User rating' }
+      ],
+      imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop'
+    },
+    props: [
+      { name: 'badge', type: 'string', description: 'Badge text shown at the top' },
+      { name: 'title', type: 'string', description: 'Main hero title' },
+      { name: 'description', type: 'string', description: 'Hero description text' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary CTA button text' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary CTA button text' },
+      { name: 'testimonials', type: 'array', description: 'Array of testimonials with quote, author, role, and avatar' },
+      { name: 'metrics', type: 'array', description: 'Array of metrics with value and label' },
+      { name: 'imageUrl', type: 'string', description: 'URL of the main image' }
+    ],
+    code: `interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  avatar: string;
+}
+
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface Hero9Props {
+  badge?: string;
+  title?: string;
+  description?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  testimonials?: Testimonial[];
+  metrics?: Metric[];
+  imageUrl?: string;
+}
+
+export default function Hero9({
+  badge = 'Trusted by thousands',
+  title = 'The platform teams love to use',
+  description = 'Join thousands of teams who have transformed their workflow. Our intuitive platform helps you ship faster and collaborate better.',
+  primaryCTA = 'Start Free Trial',
+  secondaryCTA = 'Book a Demo',
+  testimonials = [
+    {
+      quote: 'This platform has completely transformed how our team works together.',
+      author: 'Sarah Johnson',
+      role: 'Product Manager at TechCo',
+      avatar: 'SJ'
+    },
+    {
+      quote: 'The best tool we\\'ve used for project management. Highly recommended!',
+      author: 'Michael Chen',
+      role: 'CTO at StartupXYZ',
+      avatar: 'MC'
+    }
+  ],
+  metrics = [
+    { value: '50K+', label: 'Active users' },
+    { value: '99.9%', label: 'Uptime SLA' },
+    { value: '4.9/5', label: 'User rating' }
+  ],
+  imageUrl = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop'
+}: Hero9Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+          {/* Left Column - Content */}
+          <div className="flex flex-col space-y-8">
+            {/* Badge */}
+            <div className="inline-flex w-fit items-center rounded-full border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 px-3 py-1 text-sm text-gray-600 dark:text-gray-400">
+              {badge}
+            </div>
+
+            {/* Title and Description */}
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-gray-900 dark:text-white">
+                {title}
+              </h1>
+              <p className="text-lg text-gray-600 dark:text-gray-400 md:text-xl max-w-xl">
+                {description}
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 h-12 px-8">
+                {primaryCTA}
+              </button>
+              <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-colors border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 h-12 px-8">
+                {secondaryCTA}
+              </button>
+            </div>
+
+            {/* Metrics */}
+            <div className="flex flex-wrap gap-8 pt-4">
+              {metrics.map((metric, index) => (
+                <div key={index} className="flex flex-col">
+                  <span className="text-3xl font-bold text-gray-900 dark:text-white">
+                    {metric.value}
+                  </span>
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    {metric.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column - Image and Testimonials */}
+          <div className="relative">
+            {/* Main Image */}
+            <div className="rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-xl">
+              <img
+                src={imageUrl}
+                alt="Team collaboration"
+                className="w-full h-auto object-cover aspect-[4/3]"
+              />
+            </div>
+
+            {/* Floating Testimonial Cards */}
+            <div className="absolute -bottom-8 -left-4 right-4 md:-left-12 md:right-12 space-y-4">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 p-4 shadow-lg"
+                >
+                  <p className="text-sm text-gray-700 dark:text-gray-300 mb-3 line-clamp-2">
+                    "{testimonial.quote}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-semibold">
+                      {testimonial.avatar}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                        {testimonial.author}
+                      </span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">
+                        {testimonial.role}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'hero-10',
+    name: 'Hero with Code Preview',
+    description: 'Centered hero with terminal/code preview window, feature badges, and stats. Perfect for developer tools and technical products.',
+    category: 'hero',
+    tags: ['hero', 'landing', 'code', 'developer', 'terminal', 'cli', 'stats'],
+    dependencies: [],
+    previewProps: {
+      badge: '✨ New in v2.0',
+      title: 'Build and deploy faster than ever',
+      description: 'A powerful development platform that helps you ship products faster. Write code, deploy instantly, and scale effortlessly.',
+      primaryCTA: 'Start Building',
+      secondaryCTA: 'View Documentation',
+      features: [
+        { icon: '⚡', text: 'Deploy in seconds' },
+        { icon: '🔒', text: 'Secure by default' },
+        { icon: '🌍', text: 'Global CDN' },
+        { icon: '📊', text: 'Real-time analytics' }
+      ],
+      codeSnippet: `npm install @blcks/cli
+npx blcks deploy
+
+✓ Building project...
+✓ Deploying to production...
+✓ Done! https://your-app.blcks.app`,
+      stats: [
+        { value: '100K+', label: 'Deployments' },
+        { value: '99.99%', label: 'Uptime' },
+        { value: '<100ms', label: 'Response time' }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', description: 'Badge text shown at the top' },
+      { name: 'title', type: 'string', description: 'Main hero title' },
+      { name: 'description', type: 'string', description: 'Hero description text' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary CTA button text' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary CTA button text' },
+      { name: 'features', type: 'array', description: 'Array of features with icon and text' },
+      { name: 'codeSnippet', type: 'string', description: 'Code snippet to display in terminal window' },
+      { name: 'stats', type: 'array', description: 'Array of stats with value and label' }
+    ],
+    code: `interface Feature {
+  icon: string;
+  text: string;
+}
+
+interface Hero10Props {
+  badge?: string;
+  title?: string;
+  description?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  features?: Feature[];
+  codeSnippet?: string;
+  stats?: {
+    value: string;
+    label: string;
+  }[];
+}
+
+export default function Hero10({
+  badge = '✨ New in v2.0',
+  title = 'Build and deploy faster than ever',
+  description = 'A powerful development platform that helps you ship products faster. Write code, deploy instantly, and scale effortlessly.',
+  primaryCTA = 'Start Building',
+  secondaryCTA = 'View Documentation',
+  features = [
+    { icon: '⚡', text: 'Deploy in seconds' },
+    { icon: '🔒', text: 'Secure by default' },
+    { icon: '🌍', text: 'Global CDN' },
+    { icon: '📊', text: 'Real-time analytics' }
+  ],
+  codeSnippet = \`npm install @blcks/cli
+npx blcks deploy
+
+✓ Building project...
+✓ Deploying to production...
+✓ Done! https://your-app.blcks.app\`,
+  stats = [
+    { value: '100K+', label: 'Deployments' },
+    { value: '99.99%', label: 'Uptime' },
+    { value: '<100ms', label: 'Response time' }
+  ]
+}: Hero10Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Badge */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex items-center rounded-full bg-blue-50 dark:bg-blue-950 border border-blue-100 dark:border-blue-900 px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-300">
+            {badge}
+          </div>
+        </div>
+
+        {/* Title and Description */}
+        <div className="flex flex-col items-center text-center space-y-6 mb-12 max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-gray-900 dark:text-white">
+            {title}
+          </h1>
+          <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400 md:text-xl">
+            {description}
+          </p>
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-colors bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 h-12 px-8 shadow-lg">
+            {primaryCTA}
+          </button>
+          <button className="inline-flex items-center justify-center rounded-lg text-base font-medium transition-colors border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-50 dark:hover:bg-gray-800 h-12 px-8">
+            {secondaryCTA}
+          </button>
+        </div>
+
+        {/* Features */}
+        <div className="flex flex-wrap justify-center gap-6 mb-16">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
+            >
+              <span className="text-xl">{feature.icon}</span>
+              <span>{feature.text}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Code Preview Window */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden shadow-2xl bg-white dark:bg-gray-950">
+            {/* Window Header */}
+            <div className="bg-gray-100 dark:bg-gray-900 px-4 py-3 flex items-center gap-2 border-b border-gray-200 dark:border-gray-800">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div className="flex-1 text-center">
+                <span className="text-xs text-gray-600 dark:text-gray-400 font-mono">
+                  terminal
+                </span>
+              </div>
+            </div>
+            {/* Code Content */}
+            <div className="bg-gray-950 dark:bg-black p-6">
+              <pre className="text-sm font-mono text-gray-100 whitespace-pre-wrap">
+                {codeSnippet}
+              </pre>
+            </div>
+          </div>
+        </div>
+
+        {/* Stats */}
+        <div className="flex flex-wrap justify-center gap-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+          {stats.map((stat, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <span className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-1">
+                {stat.value}
+              </span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
     id: 'features-1',
     name: 'Features Grid with Icons',
     description: 'Features grid with icons, title and description. Responsive 3-column layout.',

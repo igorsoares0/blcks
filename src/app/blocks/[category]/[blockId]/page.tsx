@@ -12,6 +12,9 @@ import Hero4 from '@/blocks/hero/hero4';
 import Hero5 from '@/blocks/hero/hero5';
 import Hero6 from '@/blocks/hero/hero6';
 import Hero7 from '@/blocks/hero/hero7';
+import Hero8 from '@/blocks/hero/hero8';
+import Hero9 from '@/blocks/hero/hero9';
+import Hero10 from '@/blocks/hero/hero10';
 import Features1 from '@/blocks/features/features1';
 import CTA1 from '@/blocks/cta/cta1';
 import Navbar1 from '@/blocks/navbar/navbar1';
@@ -45,6 +48,9 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'hero-5': Hero5,
   'hero-6': Hero6,
   'hero-7': Hero7,
+  'hero-8': Hero8,
+  'hero-9': Hero9,
+  'hero-10': Hero10,
   'features-1': Features1,
   'cta-1': CTA1,
   'footer-1': Footer1,
