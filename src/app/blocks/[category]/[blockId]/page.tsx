@@ -18,6 +18,9 @@ import Hero10 from '@/blocks/hero/hero10';
 import Features1 from '@/blocks/features/features1';
 import CTA1 from '@/blocks/cta/cta1';
 import Navbar1 from '@/blocks/navbar/navbar1';
+import Navbar2 from '@/blocks/navbar/navbar-2';
+import Navbar3 from '@/blocks/navbar/navbar-3';
+import Navbar4 from '@/blocks/navbar/navbar-4';
 import Footer1 from '@/blocks/footer/footer-1';
 import Footer2 from '@/blocks/footer/footer-2';
 import Footer3 from '@/blocks/footer/footer-3';
@@ -46,6 +49,9 @@ interface PageProps {
 // Component map for rendering
 const componentMap: Record<string, React.ComponentType<any>> = {
   'navbar-1': Navbar1,
+  'navbar-2': Navbar2,
+  'navbar-3': Navbar3,
+  'navbar-4': Navbar4,
   'hero-1': Hero1,
   'hero-2': Hero2,
   'hero-3': Hero3,

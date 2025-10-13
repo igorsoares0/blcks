@@ -157,6 +157,606 @@ export default function Navbar1({
 }`
   },
   {
+    id: 'navbar-2',
+    name: 'Simple Clean Navbar',
+    description: 'Clean and minimal navbar with hamburger menu for mobile. Zero external dependencies except Sheet for mobile menu.',
+    category: 'navbar',
+    tags: ['navbar', 'navigation', 'menu', 'header', 'mobile', 'simple', 'clean'],
+    dependencies: [
+      { name: 'sheet', command: 'npx shadcn@latest add sheet' }
+    ],
+    previewProps: {
+      logo: 'Blcks',
+      navLinks: [
+        { label: 'Features', href: '#features' },
+        { label: 'Pricing', href: '#pricing' },
+        { label: 'About', href: '#about' },
+        { label: 'Blog', href: '#blog' },
+        { label: 'Contact', href: '#contact' }
+      ],
+      ctaText: 'Get Started',
+      ctaHref: '#signup',
+      showCTA: true
+    },
+    props: [
+      { name: 'logo', type: 'string', default: 'Blcks', description: 'Logo text displayed in navbar' },
+      { name: 'navLinks', type: 'NavLink[]', description: 'Array of navigation links with label and href' },
+      { name: 'ctaText', type: 'string', default: 'Get Started', description: 'Call-to-action button text' },
+      { name: 'ctaHref', type: 'string', default: '#signup', description: 'Call-to-action button link' },
+      { name: 'showCTA', type: 'boolean', default: 'true', description: 'Show or hide the CTA button' }
+    ],
+    code: `import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+interface Navbar2Props {
+  logo?: string;
+  navLinks?: NavLink[];
+  ctaText?: string;
+  ctaHref?: string;
+  showCTA?: boolean;
+}
+
+export default function Navbar2({
+  logo = 'Blcks',
+  navLinks = [
+    { label: 'Features', href: '#features' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'About', href: '#about' },
+    { label: 'Blog', href: '#blog' },
+    { label: 'Contact', href: '#contact' }
+  ],
+  ctaText = 'Get Started',
+  ctaHref = '#signup',
+  showCTA = true
+}: Navbar2Props) {
+  return (
+    <nav className="w-full border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <a
+            href="/"
+            className="text-xl font-bold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
+          >
+            {logo}
+          </a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop CTA */}
+          {showCTA && (
+            <div className="hidden md:block">
+              <a
+                href={ctaHref}
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 h-10 px-6"
+              >
+                {ctaText}
+              </a>
+            </div>
+          )}
+
+          {/* Mobile Menu */}
+          <Sheet>
+            <SheetTrigger className="md:hidden inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:bg-gray-100 dark:hover:bg-gray-800 h-10 w-10">
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <div className="flex flex-col gap-6 mt-6">
+                <a
+                  href="/"
+                  className="text-xl font-bold text-gray-900 dark:text-white"
+                >
+                  {logo}
+                </a>
+                <div className="flex flex-col gap-4">
+                  {navLinks.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.href}
+                      className="text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+                {showCTA && (
+                  <a
+                    href={ctaHref}
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 h-10 px-6"
+                  >
+                    {ctaText}
+                  </a>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </nav>
+  );
+}`
+  },
+  {
+    id: 'navbar-3',
+    name: 'Navbar with Dropdown and Search',
+    description: 'Advanced navbar with dropdown menu, search bar, and mobile-responsive design. Perfect for content-heavy sites.',
+    category: 'navbar',
+    tags: ['navbar', 'navigation', 'menu', 'header', 'mobile', 'dropdown', 'search', 'advanced'],
+    dependencies: [
+      { name: 'sheet', command: 'npx shadcn@latest add sheet' }
+    ],
+    previewProps: {
+      logo: 'Blcks',
+      navLinks: [
+        { label: 'Home', href: '#' },
+        { label: 'About', href: '#about' },
+        { label: 'Contact', href: '#contact' }
+      ],
+      dropdown: {
+        label: 'Products',
+        items: [
+          { label: 'Web Apps', href: '#web' },
+          { label: 'Mobile Apps', href: '#mobile' },
+          { label: 'Desktop Apps', href: '#desktop' },
+          { label: 'API Services', href: '#api' }
+        ]
+      },
+      showSearch: true,
+      searchPlaceholder: 'Search...',
+      ctaText: 'Sign In',
+      ctaHref: '#signin'
+    },
+    props: [
+      { name: 'logo', type: 'string', default: 'Blcks', description: 'Logo text displayed in navbar' },
+      { name: 'navLinks', type: 'NavLink[]', description: 'Array of navigation links with label and href' },
+      { name: 'dropdown', type: 'DropdownCategory', description: 'Dropdown menu with label and items array' },
+      { name: 'showSearch', type: 'boolean', default: 'true', description: 'Show or hide search bar' },
+      { name: 'searchPlaceholder', type: 'string', default: 'Search...', description: 'Placeholder text for search input' },
+      { name: 'ctaText', type: 'string', default: 'Sign In', description: 'Call-to-action button text' },
+      { name: 'ctaHref', type: 'string', default: '#signin', description: 'Call-to-action button link' }
+    ],
+    code: `import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+interface DropdownCategory {
+  label: string;
+  items: NavLink[];
+}
+
+interface Navbar3Props {
+  logo?: string;
+  navLinks?: NavLink[];
+  dropdown?: DropdownCategory;
+  showSearch?: boolean;
+  searchPlaceholder?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+export default function Navbar3({
+  logo = 'Blcks',
+  navLinks = [
+    { label: 'Home', href: '#' },
+    { label: 'About', href: '#about' },
+    { label: 'Contact', href: '#contact' }
+  ],
+  dropdown = {
+    label: 'Products',
+    items: [
+      { label: 'Web Apps', href: '#web' },
+      { label: 'Mobile Apps', href: '#mobile' },
+      { label: 'Desktop Apps', href: '#desktop' },
+      { label: 'API Services', href: '#api' }
+    ]
+  },
+  showSearch = true,
+  searchPlaceholder = 'Search...',
+  ctaText = 'Sign In',
+  ctaHref = '#signin'
+}: Navbar3Props) {
+  return (
+    <nav className="w-full border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 sticky top-0 z-50 backdrop-blur-sm bg-white/95 dark:bg-gray-950/95">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex h-16 items-center justify-between gap-4">
+          {/* Logo */}
+          <a
+            href="/"
+            className="text-xl font-bold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition-colors shrink-0"
+          >
+            {logo}
+          </a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center gap-6">
+            {navLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+
+            {/* Dropdown Menu */}
+            <div className="relative group">
+              <button className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors inline-flex items-center gap-1">
+                {dropdown.label}
+                <svg
+                  className="h-4 w-4 transition-transform group-hover:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Dropdown Content */}
+              <div className="absolute top-full left-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg shadow-lg overflow-hidden">
+                {dropdown.items.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.href}
+                    className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Search Bar - Desktop */}
+          {showSearch && (
+            <div className="hidden md:flex flex-1 max-w-md">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  placeholder={searchPlaceholder}
+                  className="w-full h-9 px-4 pl-10 text-sm bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-white transition-all"
+                />
+                <svg
+                  className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          )}
+
+          {/* Desktop CTA */}
+          <div className="hidden lg:block shrink-0">
+            <a
+              href={ctaHref}
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 h-9 px-5"
+            >
+              {ctaText}
+            </a>
+          </div>
+
+          {/* Mobile Menu */}
+          <Sheet>
+            <SheetTrigger className="lg:hidden inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:bg-gray-100 dark:hover:bg-gray-800 h-9 w-9 shrink-0">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetTitle className="text-xl font-bold text-gray-900 dark:text-white">
+                {logo}
+              </SheetTitle>
+              <div className="flex flex-col gap-6 mt-6">
+
+                {/* Search in mobile menu */}
+                {showSearch && (
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder={searchPlaceholder}
+                      className="w-full h-10 px-4 pl-10 text-sm bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-white"
+                    />
+                    <svg
+                      className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </div>
+                )}
+
+                {/* Nav Links */}
+                <div className="flex flex-col gap-4">
+                  {navLinks.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.href}
+                      className="text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+
+                  {/* Dropdown items in mobile */}
+                  <div className="border-t border-gray-200 dark:border-gray-800 pt-4">
+                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                      {dropdown.label}
+                    </div>
+                    {dropdown.items.map((item, index) => (
+                      <a
+                        key={index}
+                        href={item.href}
+                        className="block text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors mb-3"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA in mobile menu */}
+                <a
+                  href={ctaHref}
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 h-10 px-6"
+                >
+                  {ctaText}
+                </a>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </nav>
+  );
+}`
+  },
+  {
+    id: 'navbar-4',
+    name: 'Navbar with Centered Links',
+    description: 'Modern navbar with logo on left, centered navigation links, and dual action buttons (Sign In + Sign Up). Clean and balanced design.',
+    category: 'navbar',
+    tags: ['navbar', 'navigation', 'menu', 'header', 'mobile', 'centered', 'dual-cta', 'auth'],
+    dependencies: [
+      { name: 'sheet', command: 'npx shadcn@latest add sheet' }
+    ],
+    previewProps: {
+      logo: 'Blcks',
+      logoHref: '/',
+      navLinks: [
+        { label: 'Features', href: '#features' },
+        { label: 'Pricing', href: '#pricing' },
+        { label: 'Resources', href: '#resources' },
+        { label: 'Docs', href: '#docs' }
+      ],
+      primaryCTA: 'Sign Up',
+      primaryCTAHref: '#signup',
+      secondaryCTA: 'Sign In',
+      secondaryCTAHref: '#signin',
+      showCTAs: true
+    },
+    props: [
+      { name: 'logo', type: 'string', default: 'Blcks', description: 'Logo text displayed in navbar' },
+      { name: 'logoHref', type: 'string', default: '/', description: 'Logo link URL' },
+      { name: 'navLinks', type: 'NavLink[]', description: 'Array of navigation links with label and href' },
+      { name: 'primaryCTA', type: 'string', default: 'Sign Up', description: 'Primary CTA button text' },
+      { name: 'primaryCTAHref', type: 'string', default: '#signup', description: 'Primary CTA button link' },
+      { name: 'secondaryCTA', type: 'string', default: 'Sign In', description: 'Secondary CTA button text' },
+      { name: 'secondaryCTAHref', type: 'string', default: '#signin', description: 'Secondary CTA button link' },
+      { name: 'showCTAs', type: 'boolean', default: 'true', description: 'Show or hide CTA buttons' }
+    ],
+    code: `import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+interface Navbar4Props {
+  logo?: string;
+  logoHref?: string;
+  navLinks?: NavLink[];
+  primaryCTA?: string;
+  primaryCTAHref?: string;
+  secondaryCTA?: string;
+  secondaryCTAHref?: string;
+  showCTAs?: boolean;
+}
+
+export default function Navbar4({
+  logo = 'Blcks',
+  logoHref = '/',
+  navLinks = [
+    { label: 'Features', href: '#features' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'Resources', href: '#resources' },
+    { label: 'Docs', href: '#docs' }
+  ],
+  primaryCTA = 'Sign Up',
+  primaryCTAHref = '#signup',
+  secondaryCTA = 'Sign In',
+  secondaryCTAHref = '#signin',
+  showCTAs = true
+}: Navbar4Props) {
+  return (
+    <nav className="w-full border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <a
+            href={logoHref}
+            className="text-xl font-bold text-gray-900 dark:text-white hover:text-gray-700 dark:hover:text-gray-300 transition-colors shrink-0"
+          >
+            {logo}
+          </a>
+
+          {/* Desktop Navigation - Centered */}
+          <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+            {navLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Desktop CTAs */}
+          {showCTAs && (
+            <div className="hidden lg:flex items-center gap-3 shrink-0">
+              <a
+                href={secondaryCTAHref}
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white h-9 px-4"
+              >
+                {secondaryCTA}
+              </a>
+              <a
+                href={primaryCTAHref}
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 h-9 px-5"
+              >
+                {primaryCTA}
+              </a>
+            </div>
+          )}
+
+          {/* Mobile Menu */}
+          <Sheet>
+            <SheetTrigger className="lg:hidden inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:bg-gray-100 dark:hover:bg-gray-800 h-9 w-9 shrink-0">
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <SheetTitle className="text-xl font-bold text-gray-900 dark:text-white">
+                {logo}
+              </SheetTitle>
+              <div className="flex flex-col gap-6 mt-6">
+                {/* Nav Links */}
+                <div className="flex flex-col gap-4">
+                  {navLinks.map((link, index) => (
+                    <a
+                      key={index}
+                      href={link.href}
+                      className="text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+
+                {/* CTAs in mobile menu */}
+                {showCTAs && (
+                  <div className="flex flex-col gap-3 pt-4 border-t border-gray-200 dark:border-gray-800">
+                    <a
+                      href={secondaryCTAHref}
+                      className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 hover:bg-gray-100 dark:hover:bg-gray-800 h-10 px-6"
+                    >
+                      {secondaryCTA}
+                    </a>
+                    <a
+                      href={primaryCTAHref}
+                      className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:bg-gray-700 dark:hover:bg-gray-200 h-10 px-6"
+                    >
+                      {primaryCTA}
+                    </a>
+                  </div>
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </nav>
+  );
+}`
+  },
+  {
     id: 'hero-1',
     name: 'Hero with Image on Right',
     description: 'Modern hero section with text on the left and image on the right. Fully responsive and customizable.',
