@@ -1,3 +1,5 @@
+import { Twitter, Github, Linkedin, MessageSquare } from 'lucide-react';
+
 interface FooterLink {
   label: string;
   href: string;
@@ -11,7 +13,7 @@ interface FooterSection {
 interface SocialLink {
   name: string;
   href: string;
-  icon: string;
+  icon: 'twitter' | 'github' | 'linkedin' | 'discord';
 }
 
 interface Footer2Props {
@@ -67,16 +69,31 @@ export default function Footer2({
     }
   ],
   socialLinks = [
-    { name: 'Twitter', href: '#', icon: '𝕏' },
-    { name: 'GitHub', href: '#', icon: '⚙' },
-    { name: 'LinkedIn', href: '#', icon: '💼' },
-    { name: 'Discord', href: '#', icon: '💬' }
+    { name: 'Twitter', href: '#', icon: 'twitter' },
+    { name: 'GitHub', href: '#', icon: 'github' },
+    { name: 'LinkedIn', href: '#', icon: 'linkedin' },
+    { name: 'Discord', href: '#', icon: 'discord' }
   ],
   copyright = '© 2024 Blcks. All rights reserved.',
   showNewsletter = true,
   newsletterTitle = 'Subscribe to our newsletter',
   newsletterDescription = 'Get the latest updates and news delivered to your inbox.'
 }: Footer2Props) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'twitter':
+        return <Twitter className="h-4 w-4" />;
+      case 'github':
+        return <Github className="h-4 w-4" />;
+      case 'linkedin':
+        return <Linkedin className="h-4 w-4" />;
+      case 'discord':
+        return <MessageSquare className="h-4 w-4" />;
+      default:
+        return <Twitter className="h-4 w-4" />;
+    }
+  };
+
   return (
     <footer className="w-full border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20">
@@ -129,7 +146,7 @@ export default function Footer2({
                     aria-label={social.name}
                     className="w-10 h-10 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 flex items-center justify-center text-gray-700 dark:text-gray-300 transition-colors"
                   >
-                    <span className="text-lg">{social.icon}</span>
+                    {getIcon(social.icon)}
                   </a>
                 ))}
               </div>

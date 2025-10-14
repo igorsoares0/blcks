@@ -1,5 +1,7 @@
+import { Zap, Lock, Palette, Rocket, BarChart3, Plug } from 'lucide-react';
+
 interface Feature {
-  icon: string;
+  icon: 'zap' | 'lock' | 'palette' | 'rocket' | 'barchart' | 'plug';
   title: string;
   description: string;
 }
@@ -19,32 +21,32 @@ export default function Features2({
   subtitle = 'Powerful features designed to help you build better products faster',
   features = [
     {
-      icon: '⚡',
+      icon: 'zap',
       title: 'Lightning Fast',
       description: 'Built for speed with optimized performance and minimal load times'
     },
     {
-      icon: '🔒',
+      icon: 'lock',
       title: 'Secure by Default',
       description: 'Enterprise-grade security with end-to-end encryption and compliance'
     },
     {
-      icon: '🎨',
+      icon: 'palette',
       title: 'Beautiful Design',
       description: 'Pixel-perfect UI components with dark mode and responsive layouts'
     },
     {
-      icon: '🚀',
+      icon: 'rocket',
       title: 'Easy to Deploy',
       description: 'One-click deployment to any platform with automatic scaling'
     },
     {
-      icon: '📊',
+      icon: 'barchart',
       title: 'Analytics Built-in',
       description: 'Real-time insights and metrics to track your product growth'
     },
     {
-      icon: '🔌',
+      icon: 'plug',
       title: 'API First',
       description: 'RESTful API with comprehensive documentation and SDKs'
     }
@@ -52,6 +54,25 @@ export default function Features2({
   imageUrl = 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop',
   imagePosition = 'right'
 }: Features2Props) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'zap':
+        return <Zap className="h-7 w-7" />;
+      case 'lock':
+        return <Lock className="h-7 w-7" />;
+      case 'palette':
+        return <Palette className="h-7 w-7" />;
+      case 'rocket':
+        return <Rocket className="h-7 w-7" />;
+      case 'barchart':
+        return <BarChart3 className="h-7 w-7" />;
+      case 'plug':
+        return <Plug className="h-7 w-7" />;
+      default:
+        return <Zap className="h-7 w-7" />;
+    }
+  };
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4 md:px-6">
@@ -78,7 +99,9 @@ export default function Features2({
                 className="flex flex-col gap-2 p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">{feature.icon}</span>
+                  <div className="text-blue-600 dark:text-blue-400">
+                    {getIcon(feature.icon)}
+                  </div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                     {feature.title}
                   </h3>

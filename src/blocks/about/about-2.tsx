@@ -1,5 +1,7 @@
+import { Target, Rocket, Handshake, Lightbulb } from 'lucide-react';
+
 interface Value {
-  icon: string;
+  icon: 'target' | 'rocket' | 'handshake' | 'lightbulb';
   title: string;
   description: string;
 }
@@ -24,22 +26,22 @@ export default function About2({
   description = 'We are a team of passionate creators, designers, and developers dedicated to crafting exceptional digital experiences. Our mission is to help businesses thrive in the digital age through innovative solutions and cutting-edge technology.',
   values = [
     {
-      icon: '🎯',
+      icon: 'target',
       title: 'Mission Driven',
       description: 'Every decision we make is guided by our commitment to delivering value'
     },
     {
-      icon: '🚀',
+      icon: 'rocket',
       title: 'Innovation First',
       description: 'We push boundaries and embrace new technologies to stay ahead'
     },
     {
-      icon: '🤝',
+      icon: 'handshake',
       title: 'Customer Focused',
       description: 'Your success is our success. We put customers at the heart of everything'
     },
     {
-      icon: '💡',
+      icon: 'lightbulb',
       title: 'Creative Solutions',
       description: 'We think outside the box to solve complex problems elegantly'
     }
@@ -52,6 +54,21 @@ export default function About2({
   ],
   imageUrl = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop'
 }: About2Props) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'target':
+        return <Target className="h-8 w-8" />;
+      case 'rocket':
+        return <Rocket className="h-8 w-8" />;
+      case 'handshake':
+        return <Handshake className="h-8 w-8" />;
+      case 'lightbulb':
+        return <Lightbulb className="h-8 w-8" />;
+      default:
+        return <Target className="h-8 w-8" />;
+    }
+  };
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4 md:px-6">
@@ -107,8 +124,8 @@ export default function About2({
                   key={index}
                   className="flex gap-4 p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 hover:shadow-md transition-shadow"
                 >
-                  <div className="text-3xl flex-shrink-0">
-                    {value.icon}
+                  <div className="flex-shrink-0 text-blue-600 dark:text-blue-400">
+                    {getIcon(value.icon)}
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">

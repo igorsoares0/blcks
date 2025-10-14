@@ -1,3 +1,5 @@
+import { Mail, Phone, MapPin } from 'lucide-react';
+
 interface FooterLink {
   label: string;
   href: string;
@@ -81,7 +83,7 @@ export default function Footer3({
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <span className="text-gray-500 dark:text-gray-400 text-sm">📧</span>
+                <Mail className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5" />
                 <a
                   href={`mailto:${email}`}
                   className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -90,7 +92,7 @@ export default function Footer3({
                 </a>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-gray-500 dark:text-gray-400 text-sm">📞</span>
+                <Phone className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5" />
                 <a
                   href={`tel:${phone.replace(/\s/g, '')}`}
                   className="text-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
@@ -99,7 +101,7 @@ export default function Footer3({
                 </a>
               </div>
               <div className="flex items-start gap-3">
-                <span className="text-gray-500 dark:text-gray-400 text-sm">📍</span>
+                <MapPin className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5" />
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   {address}
                 </p>

@@ -1,3 +1,5 @@
+import { Twitter, Github, MessageSquare, Youtube, Heart } from 'lucide-react';
+
 interface FooterLink {
   label: string;
   href: string;
@@ -11,7 +13,7 @@ interface FooterSection {
 interface SocialLink {
   name: string;
   href: string;
-  icon: string;
+  icon: 'twitter' | 'github' | 'discord' | 'youtube';
 }
 
 interface Footer4Props {
@@ -67,10 +69,10 @@ export default function Footer4({
     }
   ],
   socialLinks = [
-    { name: 'Twitter', href: '#', icon: '𝕏' },
-    { name: 'GitHub', href: '#', icon: '⚙' },
-    { name: 'Discord', href: '#', icon: '💬' },
-    { name: 'YouTube', href: '#', icon: '▶' }
+    { name: 'Twitter', href: '#', icon: 'twitter' },
+    { name: 'GitHub', href: '#', icon: 'github' },
+    { name: 'Discord', href: '#', icon: 'discord' },
+    { name: 'YouTube', href: '#', icon: 'youtube' }
   ],
   showLanguageSelector = true,
   languages = [
@@ -80,8 +82,23 @@ export default function Footer4({
     { code: 'fr', label: 'Français' }
   ],
   copyright = '© 2024 Blcks. All rights reserved.',
-  badge = 'Made with ❤️ in San Francisco'
+  badge = 'Made with love in San Francisco'
 }: Footer4Props) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'twitter':
+        return <Twitter className="h-4 w-4" />;
+      case 'github':
+        return <Github className="h-4 w-4" />;
+      case 'discord':
+        return <MessageSquare className="h-4 w-4" />;
+      case 'youtube':
+        return <Youtube className="h-4 w-4" />;
+      default:
+        return <Twitter className="h-4 w-4" />;
+    }
+  };
+
   return (
     <footer className="w-full bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 md:px-6">
@@ -106,9 +123,9 @@ export default function Footer4({
                     key={index}
                     href={social.href}
                     aria-label={social.name}
-                    className="w-9 h-9 rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 transition-colors text-sm"
+                    className="w-9 h-9 rounded-md border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 transition-colors"
                   >
-                    {social.icon}
+                    {getIcon(social.icon)}
                   </a>
                 ))}
               </div>

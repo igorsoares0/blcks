@@ -1,5 +1,7 @@
+import { Rocket, Target, Wrench, Smartphone, Moon, Zap } from 'lucide-react';
+
 interface Feature {
-  icon: string;
+  icon: 'rocket' | 'target' | 'wrench' | 'smartphone' | 'moon' | 'zap';
   title: string;
   description: string;
   span?: 'single' | 'double'; // Define se o card ocupa 1 ou 2 colunas
@@ -18,43 +20,61 @@ export default function Features3({
   subtitle = 'Powerful tools and features to help you build amazing products',
   features = [
     {
-      icon: '🚀',
+      icon: 'rocket',
       title: 'Fast Performance',
       description: 'Optimized for speed with cutting-edge technology and best practices',
       span: 'double'
     },
     {
-      icon: '🎯',
+      icon: 'target',
       title: 'Precision',
       description: 'Pixel-perfect designs and accurate implementations',
       span: 'single'
     },
     {
-      icon: '🔧',
+      icon: 'wrench',
       title: 'Customizable',
       description: 'Fully customizable to match your brand',
       span: 'single'
     },
     {
-      icon: '📱',
+      icon: 'smartphone',
       title: 'Mobile Ready',
       description: 'Responsive design that works on all devices',
       span: 'single'
     },
     {
-      icon: '🌙',
+      icon: 'moon',
       title: 'Dark Mode',
       description: 'Beautiful dark mode support out of the box',
       span: 'single'
     },
     {
-      icon: '⚡',
+      icon: 'zap',
       title: 'Real-time Updates',
       description: 'Stay synchronized with instant updates and live data across all your devices',
       span: 'double'
     }
   ]
 }: Features3Props) {
+  const getIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'rocket':
+        return <Rocket className="h-8 w-8" />;
+      case 'target':
+        return <Target className="h-8 w-8" />;
+      case 'wrench':
+        return <Wrench className="h-8 w-8" />;
+      case 'smartphone':
+        return <Smartphone className="h-8 w-8" />;
+      case 'moon':
+        return <Moon className="h-8 w-8" />;
+      case 'zap':
+        return <Zap className="h-8 w-8" />;
+      default:
+        return <Rocket className="h-8 w-8" />;
+    }
+  };
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4 md:px-6">
@@ -81,8 +101,8 @@ export default function Features3({
               }`}
             >
               {/* Icon */}
-              <div className="mb-4">
-                <span className="text-4xl">{feature.icon}</span>
+              <div className="mb-4 text-blue-600 dark:text-blue-400">
+                {getIcon(feature.icon)}
               </div>
 
               {/* Content */}
