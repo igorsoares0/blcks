@@ -35,7 +35,10 @@ import About1 from '@/blocks/about/about-1';
 import About2 from '@/blocks/about/about-2';
 import About3 from '@/blocks/about/about-3';
 import Blog1 from '@/blocks/blog/blog-1';
+import Blog2 from '@/blocks/blog/blog-2';
+import Blog3 from '@/blocks/blog/blog-3';
 import BlogPost1 from '@/blocks/blog/blog-post-1';
+import BlogPost2 from '@/blocks/blog/blog-post-2';
 import Pricing1 from '@/blocks/pricing/pricing-1';
 import Services1 from '@/blocks/services/services-1';
 import Changelog1 from '@/blocks/changelog/changelog-1';
@@ -83,7 +86,10 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'about-2': About2,
   'about-3': About3,
   'blog-1': Blog1,
+  'blog-2': Blog2,
+  'blog-3': Blog3,
   'blog-post-1': BlogPost1,
+  'blog-post-2': BlogPost2,
   'pricing-1': Pricing1,
   'services-1': Services1,
   'changelog-1': Changelog1,
