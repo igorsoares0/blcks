@@ -8012,6 +8012,619 @@ export default function Pricing4({
     </section>
   );
 }`
+  },
+  {
+    id: 'services-2',
+    name: 'Services with Gradient Icons',
+    description: 'Services section with gradient icon backgrounds, hover effects, and individual CTAs. Clean card layout with bottom section CTA.',
+    category: 'services',
+    tags: ['services', 'features', 'cards', 'gradient', 'cta', 'grid'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'button', command: 'npx shadcn@latest add button' }
+    ],
+    previewProps: {
+      title: 'What We Do',
+      subtitle: 'Comprehensive services to help your business grow and succeed in the digital world',
+      ctaText: 'Learn More',
+      services: [
+        {
+          icon: 'Palette',
+          title: 'UI/UX Design',
+          description: 'Beautiful and intuitive interfaces that users love. We design experiences that convert visitors into customers.',
+          link: '#'
+        },
+        {
+          icon: 'TrendingUp',
+          title: 'Digital Marketing',
+          description: 'Strategic campaigns that drive results. SEO, SEM, social media, and content marketing to grow your brand.',
+          link: '#'
+        },
+        {
+          icon: 'Globe',
+          title: 'Web Solutions',
+          description: 'Custom websites and web applications built with modern technologies. Fast, secure, and scalable.',
+          link: '#'
+        },
+        {
+          icon: 'MessageSquare',
+          title: 'Content Strategy',
+          description: 'Engaging content that tells your story and connects with your audience across all channels.',
+          link: '#'
+        },
+        {
+          icon: 'Database',
+          title: 'Data Analytics',
+          description: 'Turn data into insights. We help you understand your metrics and make informed business decisions.',
+          link: '#'
+        },
+        {
+          icon: 'Lock',
+          title: 'Cybersecurity',
+          description: 'Protect your business with enterprise-grade security solutions and compliance management.',
+          link: '#'
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'What We Do', description: 'Section title' },
+      { name: 'subtitle', type: 'string', description: 'Section subtitle' },
+      { name: 'ctaText', type: 'string', default: 'Learn More', description: 'Text for service card CTAs' },
+      { name: 'services', type: 'Service[]', description: 'Array of services with icon, title, description, and optional link' }
+    ],
+    code: `import { Palette, TrendingUp, Globe, MessageSquare, Database, Lock } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+interface Service {
+  icon: string;
+  title: string;
+  description: string;
+  link?: string;
+}
+
+interface Services2Props {
+  title?: string;
+  subtitle?: string;
+  services?: Service[];
+  ctaText?: string;
+}
+
+const iconMap = {
+  Palette,
+  TrendingUp,
+  Globe,
+  MessageSquare,
+  Database,
+  Lock
+};
+
+export default function Services2({
+  title = 'What We Do',
+  subtitle = 'Comprehensive services to help your business grow and succeed in the digital world',
+  ctaText = 'Learn More',
+  services = [
+    {
+      icon: 'Palette',
+      title: 'UI/UX Design',
+      description: 'Beautiful and intuitive interfaces that users love. We design experiences that convert visitors into customers.',
+      link: '#'
+    },
+    {
+      icon: 'TrendingUp',
+      title: 'Digital Marketing',
+      description: 'Strategic campaigns that drive results. SEO, SEM, social media, and content marketing to grow your brand.',
+      link: '#'
+    },
+    {
+      icon: 'Globe',
+      title: 'Web Solutions',
+      description: 'Custom websites and web applications built with modern technologies. Fast, secure, and scalable.',
+      link: '#'
+    },
+    {
+      icon: 'MessageSquare',
+      title: 'Content Strategy',
+      description: 'Engaging content that tells your story and connects with your audience across all channels.',
+      link: '#'
+    },
+    {
+      icon: 'Database',
+      title: 'Data Analytics',
+      description: 'Turn data into insights. We help you understand your metrics and make informed business decisions.',
+      link: '#'
+    },
+    {
+      icon: 'Lock',
+      title: 'Cybersecurity',
+      description: 'Protect your business with enterprise-grade security solutions and compliance management.',
+      link: '#'
+    }
+  ]
+}: Services2Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[800px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+          {services.map((service, index) => {
+            const Icon = iconMap[service.icon as keyof typeof iconMap] || Palette;
+
+            return (
+              <div
+                key={index}
+                className="group relative flex flex-col p-6 bg-gray-50 dark:bg-gray-900 rounded-lg hover:bg-white dark:hover:bg-gray-800 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-all duration-300"
+              >
+                {/* Icon with gradient background */}
+                <div className="mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-primary/60 shadow-sm group-hover:shadow-md transition-shadow">
+                    <Icon className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                  {service.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex-1">
+                  {service.description}
+                </p>
+
+                {/* CTA Link */}
+                {service.link && (
+                  <a
+                    href={service.link}
+                    className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors group-hover:translate-x-1 transform duration-300"
+                  >
+                    {ctaText}
+                    <svg
+                      className="ml-1 h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <p className="text-gray-600 dark:text-gray-400 mb-4">
+            Need something else? We offer custom solutions tailored to your needs.
+          </p>
+          <Button size="lg" variant="outline">
+            Get in Touch
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'services-3',
+    name: 'Services with Stats',
+    description: 'Premium services section with animated badges, hover effects with glow, and bottom statistics. Features decorative elements and 2-border design.',
+    category: 'services',
+    tags: ['services', 'features', 'stats', 'badges', 'animated', 'premium'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'badge', command: 'npx shadcn@latest add badge' }
+    ],
+    previewProps: {
+      title: 'How We Help You Succeed',
+      subtitle: 'Our comprehensive approach ensures your business reaches its full potential',
+      services: [
+        {
+          icon: 'Target',
+          title: 'Strategic Planning',
+          description: 'We analyze your market, define clear objectives, and create actionable roadmaps to achieve your business goals with precision.',
+          badge: 'Core'
+        },
+        {
+          icon: 'Lightbulb',
+          title: 'Innovation & Design',
+          description: 'Transform ideas into reality with cutting-edge design thinking and innovative solutions that set you apart from competitors.',
+          badge: 'Popular'
+        },
+        {
+          icon: 'Rocket',
+          title: 'Growth Acceleration',
+          description: 'Scale your business rapidly with proven strategies, marketing automation, and performance optimization techniques.',
+          badge: 'Premium'
+        },
+        {
+          icon: 'Users',
+          title: 'Team Development',
+          description: 'Build high-performing teams through training, mentorship, and culture development programs tailored to your needs.',
+        },
+        {
+          icon: 'BarChart',
+          title: 'Analytics & Insights',
+          description: 'Make data-driven decisions with comprehensive analytics, reporting, and business intelligence solutions.',
+        },
+        {
+          icon: 'HeartHandshake',
+          title: 'Partnership Success',
+          description: 'Long-term support and strategic partnership to ensure sustained growth and continuous improvement.',
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'How We Help You Succeed', description: 'Section title' },
+      { name: 'subtitle', type: 'string', description: 'Section subtitle' },
+      { name: 'services', type: 'Service[]', description: 'Array of services with icon, title, description, and optional badge' }
+    ],
+    code: `import { Target, Lightbulb, Rocket, Users, BarChart, HeartHandshake } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+interface Service {
+  icon: string;
+  title: string;
+  description: string;
+  badge?: string;
+}
+
+interface Services3Props {
+  title?: string;
+  subtitle?: string;
+  services?: Service[];
+}
+
+const iconMap = {
+  Target,
+  Lightbulb,
+  Rocket,
+  Users,
+  BarChart,
+  HeartHandshake
+};
+
+export default function Services3({
+  title = 'How We Help You Succeed',
+  subtitle = 'Our comprehensive approach ensures your business reaches its full potential',
+  services = [
+    {
+      icon: 'Target',
+      title: 'Strategic Planning',
+      description: 'We analyze your market, define clear objectives, and create actionable roadmaps to achieve your business goals with precision.',
+      badge: 'Core'
+    },
+    {
+      icon: 'Lightbulb',
+      title: 'Innovation & Design',
+      description: 'Transform ideas into reality with cutting-edge design thinking and innovative solutions that set you apart from competitors.',
+      badge: 'Popular'
+    },
+    {
+      icon: 'Rocket',
+      title: 'Growth Acceleration',
+      description: 'Scale your business rapidly with proven strategies, marketing automation, and performance optimization techniques.',
+      badge: 'Premium'
+    },
+    {
+      icon: 'Users',
+      title: 'Team Development',
+      description: 'Build high-performing teams through training, mentorship, and culture development programs tailored to your needs.',
+    },
+    {
+      icon: 'BarChart',
+      title: 'Analytics & Insights',
+      description: 'Make data-driven decisions with comprehensive analytics, reporting, and business intelligence solutions.',
+    },
+    {
+      icon: 'HeartHandshake',
+      title: 'Partnership Success',
+      description: 'Long-term support and strategic partnership to ensure sustained growth and continuous improvement.',
+    }
+  ]
+}: Services3Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[900px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {services.map((service, index) => {
+            const Icon = iconMap[service.icon as keyof typeof iconMap] || Target;
+
+            return (
+              <div
+                key={index}
+                className="group relative bg-white dark:bg-gray-900 rounded-2xl p-8 border-2 border-gray-100 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Badge */}
+                {service.badge && (
+                  <div className="absolute top-6 right-6">
+                    <Badge
+                      variant="secondary"
+                      className="bg-primary/10 text-primary hover:bg-primary/20"
+                    >
+                      {service.badge}
+                    </Badge>
+                  </div>
+                )}
+
+                {/* Icon with animated background */}
+                <div className="mb-6 relative">
+                  <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20">
+                    <Icon className="h-8 w-8 text-primary" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {service.description}
+                </p>
+
+                {/* Decorative element */}
+                <div className="mt-6 h-1 w-12 bg-gradient-to-r from-primary to-primary/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Stats/Info */}
+        <div className="mt-16 pt-12 border-t border-gray-200 dark:border-gray-800">
+          <div className="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto text-center">
+            <div>
+              <div className="text-3xl font-bold text-primary mb-2">500+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Projects Completed</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-primary mb-2">98%</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Client Satisfaction</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-primary mb-2">10+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'services-4',
+    name: 'Services Grid with Numbers',
+    description: 'Modern services grid with numbered cards, large background numbers, and grid separator lines. Features header with CTA and bottom banner.',
+    category: 'services',
+    tags: ['services', 'features', 'grid', 'numbers', 'minimal', 'modern'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'button', command: 'npx shadcn@latest add button' }
+    ],
+    previewProps: {
+      title: 'Our Expertise',
+      subtitle: 'We combine creativity, technology, and strategy to deliver exceptional results',
+      ctaText: 'View All Services',
+      ctaLink: '#',
+      services: [
+        {
+          icon: 'Boxes',
+          number: '01',
+          title: 'Product Design',
+          description: 'From concept to completion, we create products that users love and businesses value.'
+        },
+        {
+          icon: 'Layers',
+          number: '02',
+          title: 'Brand Identity',
+          description: 'Crafting memorable brands that stand out and resonate with your target audience.'
+        },
+        {
+          icon: 'Compass',
+          number: '03',
+          title: 'Strategy & Planning',
+          description: 'Data-driven strategies that align with your goals and drive measurable growth.'
+        },
+        {
+          icon: 'PenTool',
+          number: '04',
+          title: 'Creative Direction',
+          description: 'Innovative creative solutions that capture attention and inspire action.'
+        },
+        {
+          icon: 'Settings',
+          number: '05',
+          title: 'Development',
+          description: 'Building robust, scalable solutions with cutting-edge technologies.'
+        },
+        {
+          icon: 'LineChart',
+          number: '06',
+          title: 'Growth Marketing',
+          description: 'Performance-focused campaigns that maximize ROI and accelerate growth.'
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Our Expertise', description: 'Section title' },
+      { name: 'subtitle', type: 'string', description: 'Section subtitle' },
+      { name: 'ctaText', type: 'string', default: 'View All Services', description: 'CTA button text' },
+      { name: 'ctaLink', type: 'string', default: '#', description: 'CTA button link' },
+      { name: 'services', type: 'Service[]', description: 'Array of services with icon, number, title, and description' }
+    ],
+    code: `import { Boxes, Layers, Compass, PenTool, Settings, LineChart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+interface Service {
+  icon: string;
+  title: string;
+  description: string;
+  number: string;
+}
+
+interface Services4Props {
+  title?: string;
+  subtitle?: string;
+  services?: Service[];
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const iconMap = {
+  Boxes,
+  Layers,
+  Compass,
+  PenTool,
+  Settings,
+  LineChart
+};
+
+export default function Services4({
+  title = 'Our Expertise',
+  subtitle = 'We combine creativity, technology, and strategy to deliver exceptional results',
+  ctaText = 'View All Services',
+  ctaLink = '#',
+  services = [
+    {
+      icon: 'Boxes',
+      number: '01',
+      title: 'Product Design',
+      description: 'From concept to completion, we create products that users love and businesses value.'
+    },
+    {
+      icon: 'Layers',
+      number: '02',
+      title: 'Brand Identity',
+      description: 'Crafting memorable brands that stand out and resonate with your target audience.'
+    },
+    {
+      icon: 'Compass',
+      number: '03',
+      title: 'Strategy & Planning',
+      description: 'Data-driven strategies that align with your goals and drive measurable growth.'
+    },
+    {
+      icon: 'PenTool',
+      number: '04',
+      title: 'Creative Direction',
+      description: 'Innovative creative solutions that capture attention and inspire action.'
+    },
+    {
+      icon: 'Settings',
+      number: '05',
+      title: 'Development',
+      description: 'Building robust, scalable solutions with cutting-edge technologies.'
+    },
+    {
+      icon: 'LineChart',
+      number: '06',
+      title: 'Growth Marketing',
+      description: 'Performance-focused campaigns that maximize ROI and accelerate growth.'
+    }
+  ]
+}: Services4Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8 mb-16">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white mb-4">
+              {title}
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              {subtitle}
+            </p>
+          </div>
+          <Button size="lg" className="shrink-0">
+            <a href={ctaLink}>{ctaText}</a>
+          </Button>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid gap-px bg-gray-200 dark:bg-gray-800 border border-gray-200 dark:border-gray-800 rounded-lg overflow-hidden md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => {
+            const Icon = iconMap[service.icon as keyof typeof iconMap] || Boxes;
+
+            return (
+              <div
+                key={index}
+                className="group relative bg-white dark:bg-gray-950 p-8 transition-all duration-300 hover:bg-gray-50 dark:hover:bg-gray-900"
+              >
+                {/* Number */}
+                <div className="absolute top-6 right-6 text-6xl font-bold text-gray-100 dark:text-gray-900 group-hover:text-gray-200 dark:group-hover:text-gray-800 transition-colors">
+                  {service.number}
+                </div>
+
+                {/* Icon */}
+                <div className="relative mb-6 inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                  <Icon className="h-7 w-7 text-primary group-hover:text-white transition-colors" />
+                </div>
+
+                {/* Content */}
+                <h3 className="relative text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                  {service.title}
+                </h3>
+                <p className="relative text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+
+                {/* Hover indicator */}
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary group-hover:w-full transition-all duration-300" />
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Feature */}
+        <div className="mt-16 p-8 rounded-2xl bg-gradient-to-r from-primary/5 to-primary/10 dark:from-primary/10 dark:to-primary/5 border border-primary/20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex-1">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                Ready to start your project?
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Let's discuss how we can help you achieve your goals with our expertise.
+              </p>
+            </div>
+            <Button size="lg" variant="default" className="shrink-0">
+              Get Started
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
   }
 ];
 
