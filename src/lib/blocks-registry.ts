@@ -7188,6 +7188,830 @@ export default function BlogPost2({
     </article>
   );
 }`
+  },
+  {
+    id: 'pricing-2',
+    name: 'Pricing with Popular Badge',
+    description: 'Advanced pricing table with 3 plans, popular badge, feature comparison with checkmarks and X marks, and highlighted recommended plan.',
+    category: 'pricing',
+    tags: ['pricing', 'plans', 'subscription', 'comparison', 'popular', 'features', 'payment'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'button', command: 'npx shadcn@latest add button' }
+    ],
+    previewProps: {
+      title: 'Simple, Transparent Pricing',
+      subtitle: 'Choose the perfect plan for your needs. Always know what you will pay.',
+      plans: [
+        {
+          name: 'Starter',
+          description: 'Perfect for individuals and small projects',
+          price: '$29',
+          period: 'per month',
+          cta: 'Get Started',
+          features: [
+            { name: 'Up to 10 projects', included: true },
+            { name: '5GB storage', included: true },
+            { name: 'Basic analytics', included: true },
+            { name: 'Email support', included: true },
+            { name: 'Custom domain', included: false },
+            { name: 'Priority support', included: false }
+          ]
+        },
+        {
+          name: 'Professional',
+          description: 'Best for growing teams and businesses',
+          price: '$99',
+          period: 'per month',
+          popular: true,
+          highlighted: true,
+          cta: 'Start Free Trial',
+          features: [
+            { name: 'Unlimited projects', included: true },
+            { name: '50GB storage', included: true },
+            { name: 'Basic analytics', included: true },
+            { name: 'Email support', included: true },
+            { name: 'Custom domain', included: true },
+            { name: 'Priority support', included: true }
+          ]
+        },
+        {
+          name: 'Enterprise',
+          description: 'For large organizations with advanced needs',
+          price: '$299',
+          period: 'per month',
+          cta: 'Contact Sales',
+          features: [
+            { name: 'Unlimited projects', included: true },
+            { name: '500GB storage', included: true },
+            { name: 'Basic analytics', included: true },
+            { name: 'Email support', included: true },
+            { name: 'Custom domain', included: true },
+            { name: 'Priority support', included: true }
+          ]
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Simple, Transparent Pricing', description: 'Section title' },
+      { name: 'subtitle', type: 'string', description: 'Section subtitle' },
+      { name: 'plans', type: 'PricingPlan[]', description: 'Array of plans with name, description, price, period, features (array with name and included boolean), popular flag, highlighted flag, and cta text' }
+    ],
+    code: `import { Check, X, Star, Zap } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+interface PricingFeature {
+  name: string;
+  included: boolean;
+}
+
+interface PricingPlan {
+  name: string;
+  description: string;
+  price: string;
+  period: string;
+  features: PricingFeature[];
+  popular?: boolean;
+  cta: string;
+  highlighted?: boolean;
+}
+
+interface Pricing2Props {
+  title?: string;
+  subtitle?: string;
+  plans?: PricingPlan[];
+}
+
+export default function Pricing2({
+  title = 'Simple, Transparent Pricing',
+  subtitle = 'Choose the perfect plan for your needs. Always know what you will pay.',
+  plans = [
+    {
+      name: 'Starter',
+      description: 'Perfect for individuals and small projects',
+      price: '$29',
+      period: 'per month',
+      cta: 'Get Started',
+      features: [
+        { name: 'Up to 10 projects', included: true },
+        { name: '5GB storage', included: true },
+        { name: 'Basic analytics', included: true },
+        { name: 'Email support', included: true },
+        { name: 'Custom domain', included: false },
+        { name: 'Priority support', included: false },
+        { name: 'Advanced analytics', included: false },
+        { name: 'API access', included: false }
+      ]
+    },
+    {
+      name: 'Professional',
+      description: 'Best for growing teams and businesses',
+      price: '$99',
+      period: 'per month',
+      popular: true,
+      highlighted: true,
+      cta: 'Start Free Trial',
+      features: [
+        { name: 'Unlimited projects', included: true },
+        { name: '50GB storage', included: true },
+        { name: 'Basic analytics', included: true },
+        { name: 'Email support', included: true },
+        { name: 'Custom domain', included: true },
+        { name: 'Priority support', included: true },
+        { name: 'Advanced analytics', included: true },
+        { name: 'API access', included: false }
+      ]
+    },
+    {
+      name: 'Enterprise',
+      description: 'For large organizations with advanced needs',
+      price: '$299',
+      period: 'per month',
+      cta: 'Contact Sales',
+      features: [
+        { name: 'Unlimited projects', included: true },
+        { name: '500GB storage', included: true },
+        { name: 'Basic analytics', included: true },
+        { name: 'Email support', included: true },
+        { name: 'Custom domain', included: true },
+        { name: 'Priority support', included: true },
+        { name: 'Advanced analytics', included: true },
+        { name: 'API access', included: true }
+      ]
+    }
+  ]
+}: Pricing2Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[700px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={\`relative flex flex-col p-8 bg-white dark:bg-gray-900 rounded-2xl border transition-all duration-300 \${
+                plan.highlighted
+                  ? 'border-primary shadow-2xl scale-105 md:scale-110'
+                  : 'border-gray-200 dark:border-gray-800 hover:shadow-lg'
+              }\`}
+            >
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <div className="inline-flex items-center gap-1 px-4 py-1.5 bg-primary text-primary-foreground text-sm font-semibold rounded-full shadow-lg">
+                    <Star className="h-3 w-3 fill-current" />
+                    Most Popular
+                  </div>
+                </div>
+              )}
+
+              {/* Plan Header */}
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                  {plan.name}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {plan.description}
+                </p>
+              </div>
+
+              {/* Price */}
+              <div className="mb-8">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-5xl font-bold text-gray-900 dark:text-white">
+                    {plan.price}
+                  </span>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    {plan.period}
+                  </span>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <Button
+                className={\`w-full mb-8 \${
+                  plan.highlighted
+                    ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+                    : ''
+                }\`}
+                variant={plan.highlighted ? 'default' : 'outline'}
+              >
+                {plan.highlighted && <Zap className="h-4 w-4 mr-2" />}
+                {plan.cta}
+              </Button>
+
+              {/* Features List */}
+              <div className="space-y-4 flex-1">
+                <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
+                  What's included:
+                </div>
+                <ul className="space-y-3">
+                  {plan.features.map((feature, featureIndex) => (
+                    <li
+                      key={featureIndex}
+                      className="flex items-start gap-3"
+                    >
+                      {feature.included ? (
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mt-0.5">
+                          <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
+                        </div>
+                      ) : (
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center mt-0.5">
+                          <X className="h-3 w-3 text-gray-400 dark:text-gray-600" />
+                        </div>
+                      )}
+                      <span
+                        className={\`text-sm \${
+                          feature.included
+                            ? 'text-gray-700 dark:text-gray-300'
+                            : 'text-gray-500 dark:text-gray-500'
+                        }\`}
+                      >
+                        {feature.name}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Note */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            All plans include 14-day free trial. No credit card required.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'pricing-3',
+    name: 'Pricing with Annual Toggle',
+    description: 'Interactive pricing table with monthly/annual billing toggle, automatic discount calculation, and 3 tiers. Includes highlighted recommended plan.',
+    category: 'pricing',
+    tags: ['pricing', 'plans', 'subscription', 'toggle', 'annual', 'monthly', 'discount', 'interactive'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'button', command: 'npx shadcn@latest add button' },
+      { name: 'tabs', command: 'npx shadcn@latest add tabs' }
+    ],
+    previewProps: {
+      title: 'Flexible Pricing Plans',
+      subtitle: 'Save up to 20% with annual billing',
+      annualDiscount: 20,
+      plans: [
+        {
+          name: 'Basic',
+          description: 'Essential features for getting started',
+          monthlyPrice: 19,
+          yearlyPrice: 182,
+          cta: 'Get Started',
+          features: [
+            'Up to 5 team members',
+            '10GB storage',
+            'Basic support',
+            'Standard features'
+          ]
+        },
+        {
+          name: 'Professional',
+          description: 'Advanced features for growing teams',
+          monthlyPrice: 49,
+          yearlyPrice: 470,
+          highlighted: true,
+          cta: 'Start Free Trial',
+          features: [
+            'Up to 20 team members',
+            '100GB storage',
+            'Priority support',
+            'All features',
+            'Weekly reports',
+            'Custom integrations'
+          ]
+        },
+        {
+          name: 'Enterprise',
+          description: 'Complete solution for large organizations',
+          monthlyPrice: 149,
+          yearlyPrice: 1430,
+          cta: 'Contact Sales',
+          features: [
+            'Unlimited team members',
+            'Unlimited storage',
+            '24/7 dedicated support',
+            'All features',
+            'Real-time reports'
+          ]
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Flexible Pricing Plans', description: 'Section title' },
+      { name: 'subtitle', type: 'string', description: 'Section subtitle' },
+      { name: 'annualDiscount', type: 'number', default: '20', description: 'Annual discount percentage' },
+      { name: 'plans', type: 'PricingPlan[]', description: 'Array of plans with name, description, monthlyPrice, yearlyPrice, features array, highlighted flag, and cta text' }
+    ],
+    code: `import { Check, DollarSign } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+interface PricingPlan {
+  name: string;
+  description: string;
+  monthlyPrice: number;
+  yearlyPrice: number;
+  features: string[];
+  highlighted?: boolean;
+  cta: string;
+}
+
+interface Pricing3Props {
+  title?: string;
+  subtitle?: string;
+  plans?: PricingPlan[];
+  annualDiscount?: number;
+}
+
+export default function Pricing3({
+  title = 'Flexible Pricing Plans',
+  subtitle = 'Save up to 20% with annual billing',
+  annualDiscount = 20,
+  plans = [
+    {
+      name: 'Basic',
+      description: 'Essential features for getting started',
+      monthlyPrice: 19,
+      yearlyPrice: 182,
+      cta: 'Get Started',
+      features: [
+        'Up to 5 team members',
+        '10GB storage',
+        'Basic support',
+        'Standard features',
+        'Monthly reports'
+      ]
+    },
+    {
+      name: 'Professional',
+      description: 'Advanced features for growing teams',
+      monthlyPrice: 49,
+      yearlyPrice: 470,
+      highlighted: true,
+      cta: 'Start Free Trial',
+      features: [
+        'Up to 20 team members',
+        '100GB storage',
+        'Priority support',
+        'All features',
+        'Weekly reports',
+        'Custom integrations',
+        'Advanced analytics'
+      ]
+    },
+    {
+      name: 'Enterprise',
+      description: 'Complete solution for large organizations',
+      monthlyPrice: 149,
+      yearlyPrice: 1430,
+      cta: 'Contact Sales',
+      features: [
+        'Unlimited team members',
+        'Unlimited storage',
+        '24/7 dedicated support',
+        'All features',
+        'Real-time reports',
+        'Custom integrations',
+        'Advanced analytics',
+        'SLA guarantee',
+        'Dedicated account manager'
+      ]
+    }
+  ]
+}: Pricing3Props) {
+  const renderPricingCards = (isAnnual: boolean) => (
+    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+      {plans.map((plan, index) => {
+        const price = isAnnual ? plan.yearlyPrice : plan.monthlyPrice;
+        const periodPrice = isAnnual ? price / 12 : price;
+
+        return (
+          <div
+            key={index}
+            className={\`relative flex flex-col p-8 bg-white dark:bg-gray-900 rounded-2xl border transition-all duration-300 \${
+              plan.highlighted
+                ? 'border-primary shadow-xl ring-2 ring-primary ring-opacity-50'
+                : 'border-gray-200 dark:border-gray-800 hover:shadow-lg'
+            }\`}
+          >
+            {/* Plan Header */}
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                {plan.name}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {plan.description}
+              </p>
+            </div>
+
+            {/* Price */}
+            <div className="mb-8">
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="text-5xl font-bold text-gray-900 dark:text-white">
+                  \${periodPrice.toFixed(0)}
+                </span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  /month
+                </span>
+              </div>
+              {isAnnual && (
+                <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
+                  <DollarSign className="h-3 w-3" />
+                  <span>\${price} billed annually</span>
+                </div>
+              )}
+            </div>
+
+            {/* CTA Button */}
+            <Button
+              className="w-full mb-8"
+              variant={plan.highlighted ? 'default' : 'outline'}
+            >
+              {plan.cta}
+            </Button>
+
+            {/* Features List */}
+            <div className="space-y-4 flex-1">
+              <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
+                Everything in {plan.name}:
+              </div>
+              <ul className="space-y-3">
+                {plan.features.map((feature, featureIndex) => (
+                  <li
+                    key={featureIndex}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                      <Check className="h-3 w-3 text-primary" />
+                    </div>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-12">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[700px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+
+          {/* Billing Toggle with Tabs */}
+          <Tabs defaultValue="monthly" className="mt-8 flex flex-col items-center">
+            <TabsList className="grid w-[400px] grid-cols-2">
+              <TabsTrigger value="monthly">Monthly</TabsTrigger>
+              <TabsTrigger value="annual" className="relative">
+                Annual
+                <span className="ml-2 inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full">
+                  Save {annualDiscount}%
+                </span>
+              </TabsTrigger>
+            </TabsList>
+
+            {/* Monthly Pricing */}
+            <TabsContent value="monthly" className="mt-12">
+              {renderPricingCards(false)}
+            </TabsContent>
+
+            {/* Annual Pricing */}
+            <TabsContent value="annual" className="mt-12">
+              {renderPricingCards(true)}
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        {/* Bottom Note */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            All plans include 30-day money-back guarantee. No questions asked.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'pricing-4',
+    name: 'Pricing with Icons',
+    description: 'Modern pricing table with icon badges, gradient background, and feature comparison. Shows free tier with paid upgrades.',
+    category: 'pricing',
+    tags: ['pricing', 'plans', 'subscription', 'icons', 'free-tier', 'features'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'button', command: 'npx shadcn@latest add button' },
+      { name: 'badge', command: 'npx shadcn@latest add badge' }
+    ],
+    previewProps: {
+      title: 'Choose Your Plan',
+      subtitle: 'Start free, upgrade when you need more power',
+      plans: [
+        {
+          name: 'Starter',
+          description: 'Perfect for trying out our service',
+          price: 'Free',
+          period: 'forever',
+          icon: 'sparkles',
+          cta: 'Get Started',
+          features: [
+            { name: 'Up to 3 projects', included: true },
+            { name: '1GB storage', included: true },
+            { name: 'Community support', included: true },
+            { name: 'Basic analytics', included: true },
+            { name: 'API access', included: false }
+          ]
+        },
+        {
+          name: 'Professional',
+          description: 'For professionals and small teams',
+          price: '$49',
+          period: 'per month',
+          icon: 'zap',
+          popular: true,
+          cta: 'Start Free Trial',
+          features: [
+            { name: 'Unlimited projects', included: true },
+            { name: '100GB storage', included: true },
+            { name: 'Priority support', included: true },
+            { name: 'Advanced analytics', included: true },
+            { name: 'API access', included: true },
+            { name: 'Custom domain', included: true }
+          ]
+        },
+        {
+          name: 'Enterprise',
+          description: 'For large organizations',
+          price: '$199',
+          period: 'per month',
+          icon: 'building',
+          cta: 'Contact Sales',
+          features: [
+            { name: 'Unlimited projects', included: true },
+            { name: '1TB storage', included: true },
+            { name: '24/7 dedicated support', included: true },
+            { name: 'Advanced analytics', included: true },
+            { name: 'API access', included: true },
+            { name: 'Custom domain', included: true },
+            { name: 'Dedicated account manager', included: true }
+          ]
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Choose Your Plan', description: 'Section title' },
+      { name: 'subtitle', type: 'string', description: 'Section subtitle' },
+      { name: 'plans', type: 'PricingPlan[]', description: 'Array of plans with name, description, price, period, icon, features array with included flag, popular flag, and cta text' }
+    ],
+    code: `import { Check, Sparkles, Building2, Zap } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+
+interface PricingFeature {
+  name: string;
+  included: boolean;
+}
+
+interface PricingPlan {
+  name: string;
+  description: string;
+  price: string;
+  period: string;
+  icon: 'sparkles' | 'zap' | 'building';
+  features: PricingFeature[];
+  popular?: boolean;
+  cta: string;
+}
+
+interface Pricing4Props {
+  title?: string;
+  subtitle?: string;
+  plans?: PricingPlan[];
+}
+
+const iconMap = {
+  sparkles: Sparkles,
+  zap: Zap,
+  building: Building2
+};
+
+export default function Pricing4({
+  title = 'Choose Your Plan',
+  subtitle = 'Start free, upgrade when you need more power',
+  plans = [
+    {
+      name: 'Starter',
+      description: 'Perfect for trying out our service',
+      price: 'Free',
+      period: 'forever',
+      icon: 'sparkles' as const,
+      cta: 'Get Started',
+      features: [
+        { name: 'Up to 3 projects', included: true },
+        { name: '1GB storage', included: true },
+        { name: 'Community support', included: true },
+        { name: 'Basic analytics', included: true },
+        { name: 'API access', included: false },
+        { name: 'Priority support', included: false },
+        { name: 'Custom domain', included: false }
+      ]
+    },
+    {
+      name: 'Professional',
+      description: 'For professionals and small teams',
+      price: '$49',
+      period: 'per month',
+      icon: 'zap' as const,
+      popular: true,
+      cta: 'Start Free Trial',
+      features: [
+        { name: 'Unlimited projects', included: true },
+        { name: '100GB storage', included: true },
+        { name: 'Priority support', included: true },
+        { name: 'Advanced analytics', included: true },
+        { name: 'API access', included: true },
+        { name: 'Custom domain', included: true },
+        { name: 'Dedicated account manager', included: false }
+      ]
+    },
+    {
+      name: 'Enterprise',
+      description: 'For large organizations',
+      price: '$199',
+      period: 'per month',
+      icon: 'building' as const,
+      cta: 'Contact Sales',
+      features: [
+        { name: 'Unlimited projects', included: true },
+        { name: '1TB storage', included: true },
+        { name: '24/7 dedicated support', included: true },
+        { name: 'Advanced analytics', included: true },
+        { name: 'API access', included: true },
+        { name: 'Custom domain', included: true },
+        { name: 'Dedicated account manager', included: true }
+      ]
+    }
+  ]
+}: Pricing4Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[700px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+          {plans.map((plan, index) => {
+            const IconComponent = iconMap[plan.icon];
+
+            return (
+              <div
+                key={index}
+                className={\`relative flex flex-col p-8 bg-white dark:bg-gray-900 rounded-2xl border transition-all duration-300 \${
+                  plan.popular
+                    ? 'border-primary shadow-2xl scale-105'
+                    : 'border-gray-200 dark:border-gray-800 hover:shadow-lg'
+                }\`}
+              >
+                {/* Popular Badge */}
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <Badge className="bg-primary text-primary-foreground px-4 py-1 text-sm font-semibold">
+                      Most Popular
+                    </Badge>
+                  </div>
+                )}
+
+                {/* Icon */}
+                <div className={\`inline-flex items-center justify-center w-12 h-12 rounded-xl mb-6 \${
+                  plan.popular
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white'
+                }\`}>
+                  <IconComponent className="h-6 w-6" />
+                </div>
+
+                {/* Plan Header */}
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                    {plan.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {plan.description}
+                  </p>
+                </div>
+
+                {/* Price */}
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-5xl font-bold text-gray-900 dark:text-white">
+                      {plan.price}
+                    </span>
+                  </div>
+                  <span className="text-gray-600 dark:text-gray-400">
+                    {plan.period}
+                  </span>
+                </div>
+
+                {/* CTA Button */}
+                <Button
+                  className="w-full mb-8"
+                  variant={plan.popular ? 'default' : 'outline'}
+                  size="lg"
+                >
+                  {plan.cta}
+                </Button>
+
+                {/* Features List */}
+                <div className="space-y-4 flex-1">
+                  <div className="text-sm font-semibold text-gray-900 dark:text-white mb-4">
+                    What's included:
+                  </div>
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li
+                        key={featureIndex}
+                        className="flex items-center gap-3"
+                      >
+                        <div className={\`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center \${
+                          feature.included
+                            ? 'bg-green-100 dark:bg-green-900/30'
+                            : 'bg-gray-100 dark:bg-gray-800'
+                        }\`}>
+                          <Check className={\`h-3 w-3 \${
+                            feature.included
+                              ? 'text-green-600 dark:text-green-400'
+                              : 'text-gray-400 dark:text-gray-600'
+                          }\`} />
+                        </div>
+                        <span className={\`text-sm \${
+                          feature.included
+                            ? 'text-gray-700 dark:text-gray-300'
+                            : 'text-gray-500 dark:text-gray-500 line-through'
+                        }\`}>
+                          {feature.name}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom Note */}
+        <div className="mt-16 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            All plans include a 14-day free trial. Cancel anytime, no questions asked.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}`
   }
 ];
 
