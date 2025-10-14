@@ -31,6 +31,7 @@ Criar um novo bloco envolve 3 etapas principais:
 - ✅ Usar `<a>` em vez de `<Link>` do Next.js
 - ✅ Usar `<img>` em vez de `<Image>` do Next.js
 - ✅ Usar componentes shadcn/ui para interatividade (Sheet, Dialog, Accordion, etc)
+- ✅ **SEMPRE usar ícones do lucide-react** (NUNCA emojis ou SVG inline)
 - ✅ TypeScript com tipos explícitos
 - ✅ Props com valores default
 - ✅ Mobile-first (responsivo)
@@ -43,6 +44,8 @@ Criar um novo bloco envolve 3 etapas principais:
 - ❌ Não usar `useState` manualmente - preferir componentes shadcn/ui
 - ❌ Não usar classes Tailwind personalizadas
 - ❌ Não criar componentes que dependem de contexto externo
+- ❌ **NUNCA usar emojis (🚀, ✓, 💡, etc) - sempre usar lucide-react**
+- ❌ **NUNCA usar SVG inline - sempre usar lucide-react (exceto logos de marcas como Google)**
 
 ### 🎯 Quando usar 'use client'
 
@@ -84,6 +87,7 @@ mkdir -p src/blocks/pricing
 
 ```tsx
 // NÃO adicionar 'use client' se for bloco estático!
+import { Check } from 'lucide-react'; // ✅ SEMPRE importar ícones do lucide-react
 
 interface Pricing1Props {
   title?: string;
@@ -136,8 +140,10 @@ export default function Pricing1({
               </div>
               <ul className="space-y-2 mb-6">
                 {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center">
-                    <span className="mr-2">✓</span>
+                  <li key={idx} className="flex items-center gap-2">
+                    {/* ✅ CORRETO: usar ícone lucide-react */}
+                    <Check className="h-4 w-4 text-green-500" />
+                    {/* ❌ ERRADO: <span className="mr-2">✓</span> */}
                     {feature}
                   </li>
                 ))}
@@ -160,6 +166,7 @@ export default function Pricing1({
 - ✅ Classes Tailwind responsivas (`md:`, `lg:`)
 - ✅ Dark mode (`dark:`)
 - ✅ Sem 'use client' (é estático)
+- ✅ **Ícones do lucide-react (NUNCA emojis)**
 
 ---
 
@@ -508,6 +515,7 @@ Antes de considerar o bloco completo, verifique:
 - [ ] Não usa `'use client'` (a menos que necessário)
 - [ ] Classes Tailwind responsivas (`md:`, `lg:`)
 - [ ] Suporte a dark mode (`dark:`)
+- [ ] **Ícones APENAS do lucide-react (ZERO emojis ou SVG inline)**
 - [ ] Código limpo e comentado
 
 ### ✅ Registry
@@ -624,27 +632,50 @@ export default function Pricing1({ plans }: Pricing1Props) {
 }
 ```
 
-### 3. Usar ícones do lucide-react
+### 3. 🎨 SEMPRE usar ícones do lucide-react (NUNCA emojis)
 
+**⚠️ REGRA OBRIGATÓRIA:** Todos os blocos devem usar ícones do lucide-react. Emojis e SVG inline são PROIBIDOS (exceto logos de marcas).
+
+**✅ CORRETO:**
 ```tsx
-import { Check, X, Star } from 'lucide-react';
+import { Check, X, Star, Rocket, Zap, Heart } from 'lucide-react';
 
 export default function MyBlock() {
   return (
     <div>
+      {/* ✅ Usar lucide icons */}
       <Check className="h-5 w-5 text-green-500" />
       <Star className="h-6 w-6 text-yellow-500" />
+      <Rocket className="h-8 w-8 text-blue-600 dark:text-blue-400" />
     </div>
   );
 }
 ```
 
-Adicione ao registry:
-```typescript
-dependencies: [
-  { name: 'lucide-react', version: '^0.544.0' }
-]
+**❌ ERRADO:**
+```tsx
+export default function MyBlock() {
+  return (
+    <div>
+      {/* ❌ NUNCA usar emojis */}
+      <span>✓</span>
+      <span>🚀</span>
+      <span>⭐</span>
+
+      {/* ❌ NUNCA usar SVG inline (exceto logos) */}
+      <svg>...</svg>
+    </div>
+  );
+}
 ```
+
+**Como escolher o ícone certo:**
+- Visite https://lucide.dev/ e busque o ícone
+- Importe apenas os ícones que você vai usar
+- Use tamanhos consistentes: `h-4 w-4`, `h-5 w-5`, `h-6 w-6`, `h-8 w-8`
+- Adicione cores com dark mode: `text-blue-600 dark:text-blue-400`
+
+**Lucide-react já está instalado**, não precisa adicionar ao dependencies do registry.
 
 ### 4. Props complexas (objetos, arrays)
 
