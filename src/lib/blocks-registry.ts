@@ -8625,6 +8625,815 @@ export default function Services4({
     </section>
   );
 }`
+  },
+  {
+    id: 'changelog-2',
+    name: 'Changelog 2',
+    description: 'Card-based changelog layout with color-coded change types and major release highlighting',
+    category: 'changelog',
+    tags: ['changelog', 'updates', 'releases', 'version history', 'cards', 'badges'],
+    dependencies: [
+      {
+        name: 'lucide-react',
+        version: '^0.263.1'
+      }
+    ],
+    previewProps: {},
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        default: 'Changelog',
+        description: 'Main heading for the changelog section'
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        default: 'All notable changes to this project will be documented here',
+        description: 'Subtitle text below the main heading'
+      },
+      {
+        name: 'entries',
+        type: 'ChangelogEntry[]',
+        default: '[Array of changelog entries]',
+        description: 'Array of changelog entries with version, date, and changes'
+      }
+    ],
+    code: `import { Calendar, Plus, Wrench, Bug, Zap, AlertCircle, ChevronRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+interface ChangelogItem {
+  type: 'added' | 'fixed' | 'improved' | 'changed' | 'removed';
+  text: string;
+}
+
+interface ChangelogEntry {
+  version: string;
+  date: string;
+  changes: ChangelogItem[];
+}
+
+interface Changelog2Props {
+  title?: string;
+  subtitle?: string;
+  entries?: ChangelogEntry[];
+}
+
+const changeTypeConfig = {
+  added: {
+    icon: Plus,
+    label: 'Added',
+    color: 'text-green-600 dark:text-green-400',
+    bgColor: 'bg-green-100 dark:bg-green-900/30',
+    borderColor: 'border-green-200 dark:border-green-800'
+  },
+  fixed: {
+    icon: Bug,
+    label: 'Fixed',
+    color: 'text-red-600 dark:text-red-400',
+    bgColor: 'bg-red-100 dark:bg-red-900/30',
+    borderColor: 'border-red-200 dark:border-red-800'
+  },
+  improved: {
+    icon: Zap,
+    label: 'Improved',
+    color: 'text-blue-600 dark:text-blue-400',
+    bgColor: 'bg-blue-100 dark:bg-blue-900/30',
+    borderColor: 'border-blue-200 dark:border-blue-800'
+  },
+  changed: {
+    icon: Wrench,
+    label: 'Changed',
+    color: 'text-yellow-600 dark:text-yellow-400',
+    bgColor: 'bg-yellow-100 dark:bg-yellow-900/30',
+    borderColor: 'border-yellow-200 dark:border-yellow-800'
+  },
+  removed: {
+    icon: AlertCircle,
+    label: 'Removed',
+    color: 'text-gray-600 dark:text-gray-400',
+    bgColor: 'bg-gray-100 dark:bg-gray-900/30',
+    borderColor: 'border-gray-200 dark:border-gray-800'
+  }
+};
+
+export default function Changelog2({
+  title = 'Changelog',
+  subtitle = 'All notable changes to this project will be documented here',
+  entries = [
+    {
+      version: '2.1.0',
+      date: 'March 15, 2024',
+      changes: [
+        { type: 'added', text: 'New dark mode toggle with smooth transitions' },
+        { type: 'added', text: 'Keyboard shortcuts for quick navigation' },
+        { type: 'improved', text: 'Performance optimization for large datasets' },
+        { type: 'fixed', text: 'Login form validation error messages' }
+      ]
+    },
+    {
+      version: '2.0.0',
+      date: 'March 1, 2024',
+      changes: [
+        { type: 'added', text: 'Complete UI redesign with modern interface' },
+        { type: 'added', text: 'Real-time collaboration features' },
+        { type: 'changed', text: 'Updated API endpoints structure' },
+        { type: 'removed', text: 'Deprecated legacy authentication system' },
+        { type: 'fixed', text: 'Memory leaks in data synchronization' }
+      ]
+    },
+    {
+      version: '1.5.2',
+      date: 'February 20, 2024',
+      changes: [
+        { type: 'fixed', text: 'Critical security vulnerability in file upload' },
+        { type: 'fixed', text: 'Date picker timezone issues' },
+        { type: 'improved', text: 'Error handling and user feedback' }
+      ]
+    },
+    {
+      version: '1.5.0',
+      date: 'February 10, 2024',
+      changes: [
+        { type: 'added', text: 'Export data to CSV and PDF formats' },
+        { type: 'added', text: 'Advanced filtering and search capabilities' },
+        { type: 'improved', text: 'Mobile responsive design' },
+        { type: 'changed', text: 'Updated dependencies to latest versions' }
+      ]
+    }
+  ]
+}: Changelog2Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[700px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Changelog Entries - Card Layout */}
+        <div className="max-w-4xl mx-auto space-y-6">
+          {entries.map((entry, entryIndex) => {
+            const isMajorVersion = entry.version.split('.')[1] === '0' && entry.version.split('.')[2] === '0';
+
+            return (
+              <div
+                key={entryIndex}
+                className={\`group relative bg-white dark:bg-gray-900 rounded-2xl border-2 transition-all duration-300 hover:shadow-lg \${
+                  isMajorVersion
+                    ? 'border-primary shadow-md'
+                    : 'border-gray-200 dark:border-gray-800 hover:border-primary/50'
+                }\`}
+              >
+                {/* Card Header */}
+                <div className="p-6 border-b border-gray-200 dark:border-gray-800">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <Badge
+                        variant={isMajorVersion ? 'default' : 'secondary'}
+                        className="text-lg font-bold px-4 py-1"
+                      >
+                        v{entry.version}
+                      </Badge>
+                      {isMajorVersion && (
+                        <Badge variant="outline" className="text-xs border-primary text-primary">
+                          Major Release
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                      <Calendar className="h-4 w-4" />
+                      <span>{entry.date}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card Body - Changes */}
+                <div className="p-6">
+                  <div className="space-y-3">
+                    {entry.changes.map((change, changeIndex) => {
+                      const config = changeTypeConfig[change.type];
+                      const Icon = config.icon;
+
+                      return (
+                        <div
+                          key={changeIndex}
+                          className={\`flex items-start gap-3 p-4 rounded-lg border transition-all duration-200 hover:scale-[1.02] \${config.bgColor} \${config.borderColor}\`}
+                        >
+                          {/* Icon */}
+                          <div className={\`shrink-0 mt-0.5 \${config.color}\`}>
+                            <Icon className="h-5 w-5" />
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className={\`text-xs font-semibold uppercase tracking-wide \${config.color}\`}>
+                                {config.label}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-900 dark:text-gray-100 leading-relaxed">
+                              {change.text}
+                            </p>
+                          </div>
+
+                          {/* Arrow indicator */}
+                          <ChevronRight className={\`shrink-0 h-5 w-5 opacity-0 group-hover:opacity-100 transition-opacity \${config.color}\`} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Decorative gradient bar */}
+                {isMajorVersion && (
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary/60 to-primary rounded-b-2xl" />
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Legend */}
+        <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4 text-center">
+              Change Types
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              {Object.entries(changeTypeConfig).map(([type, config]) => {
+                const Icon = config.icon;
+                return (
+                  <div
+                    key={type}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800"
+                  >
+                    <Icon className={\`h-4 w-4 \${config.color}\`} />
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      {config.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'changelog-3',
+    name: 'Changelog 3',
+    description: 'Timeline-based changelog with featured releases, grid layout for featured changes, and CTA section',
+    category: 'changelog',
+    tags: ['changelog', 'updates', 'releases', 'timeline', 'featured', 'product updates'],
+    dependencies: [
+      {
+        name: 'lucide-react',
+        version: '^0.263.1'
+      }
+    ],
+    previewProps: {},
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        default: 'Product Updates',
+        description: 'Main heading for the changelog section'
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        default: 'Stay up to date with the latest features and improvements',
+        description: 'Subtitle text below the main heading'
+      },
+      {
+        name: 'entries',
+        type: 'ChangelogEntry[]',
+        default: '[Array of changelog entries]',
+        description: 'Array of changelog entries with version, date, changes, and optional featured flag'
+      },
+      {
+        name: 'ctaText',
+        type: 'string',
+        default: 'Subscribe to Updates',
+        description: 'Text for the CTA button'
+      },
+      {
+        name: 'ctaLink',
+        type: 'string',
+        default: '#',
+        description: 'Link for the CTA button'
+      }
+    ],
+    code: `import { Calendar, Plus, Wrench, Bug, Zap, AlertCircle, ArrowRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+
+interface ChangelogItem {
+  type: 'added' | 'fixed' | 'improved' | 'changed' | 'removed';
+  text: string;
+}
+
+interface ChangelogEntry {
+  version: string;
+  date: string;
+  changes: ChangelogItem[];
+  featured?: boolean;
+}
+
+interface Changelog3Props {
+  title?: string;
+  subtitle?: string;
+  entries?: ChangelogEntry[];
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const changeTypeConfig = {
+  added: {
+    icon: Plus,
+    label: 'New',
+    color: 'text-emerald-600 dark:text-emerald-400',
+    bgColor: 'bg-emerald-50 dark:bg-emerald-950',
+    dotColor: 'bg-emerald-500'
+  },
+  fixed: {
+    icon: Bug,
+    label: 'Fix',
+    color: 'text-rose-600 dark:text-rose-400',
+    bgColor: 'bg-rose-50 dark:bg-rose-950',
+    dotColor: 'bg-rose-500'
+  },
+  improved: {
+    icon: Zap,
+    label: 'Improved',
+    color: 'text-sky-600 dark:text-sky-400',
+    bgColor: 'bg-sky-50 dark:bg-sky-950',
+    dotColor: 'bg-sky-500'
+  },
+  changed: {
+    icon: Wrench,
+    label: 'Changed',
+    color: 'text-amber-600 dark:text-amber-400',
+    bgColor: 'bg-amber-50 dark:bg-amber-950',
+    dotColor: 'bg-amber-500'
+  },
+  removed: {
+    icon: AlertCircle,
+    label: 'Removed',
+    color: 'text-slate-600 dark:text-slate-400',
+    bgColor: 'bg-slate-50 dark:bg-slate-950',
+    dotColor: 'bg-slate-500'
+  }
+};
+
+export default function Changelog3({
+  title = 'Product Updates',
+  subtitle = 'Stay up to date with the latest features and improvements',
+  ctaText = 'Subscribe to Updates',
+  ctaLink = '#',
+  entries = [
+    {
+      version: '3.0.0',
+      date: 'April 1, 2024',
+      featured: true,
+      changes: [
+        { type: 'added', text: 'Revolutionary AI-powered code suggestions' },
+        { type: 'added', text: 'Real-time collaboration with team members' },
+        { type: 'improved', text: 'Complete redesign of the user interface' },
+        { type: 'changed', text: 'New pricing model with flexible plans' }
+      ]
+    },
+    {
+      version: '2.8.5',
+      date: 'March 25, 2024',
+      changes: [
+        { type: 'fixed', text: 'Memory leak in background sync process' },
+        { type: 'fixed', text: 'Performance issues with large files' },
+        { type: 'improved', text: 'Faster startup time' }
+      ]
+    },
+    {
+      version: '2.8.0',
+      date: 'March 15, 2024',
+      changes: [
+        { type: 'added', text: 'Dark mode support for all components' },
+        { type: 'added', text: 'Export to multiple file formats' },
+        { type: 'improved', text: 'Better mobile responsive design' },
+        { type: 'fixed', text: 'Email notification settings not saving' }
+      ]
+    },
+    {
+      version: '2.7.2',
+      date: 'March 5, 2024',
+      changes: [
+        { type: 'fixed', text: 'Critical security vulnerability patched' },
+        { type: 'improved', text: 'API response time optimization' },
+        { type: 'changed', text: 'Updated third-party dependencies' }
+      ]
+    }
+  ]
+}: Changelog3Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[700px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Timeline Layout */}
+        <div className="max-w-5xl mx-auto">
+          <div className="space-y-12">
+            {entries.map((entry, entryIndex) => {
+              return (
+                <div key={entryIndex} className="relative">
+                  {/* Version Header */}
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                    <div className="flex items-center gap-3">
+                      <Badge
+                        variant={entry.featured ? 'default' : 'secondary'}
+                        className="text-base font-bold px-3 py-1"
+                      >
+                        v{entry.version}
+                      </Badge>
+                      {entry.featured && (
+                        <Badge variant="outline" className="text-xs border-primary text-primary">
+                          Featured Release
+                        </Badge>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                      <Calendar className="h-4 w-4" />
+                      <span>{entry.date}</span>
+                    </div>
+                  </div>
+
+                  {/* Changes List */}
+                  <div className={\`grid gap-4 \${entry.featured ? 'md:grid-cols-2' : 'md:grid-cols-1'}\`}>
+                    {entry.changes.map((change, changeIndex) => {
+                      const config = changeTypeConfig[change.type];
+                      const Icon = config.icon;
+
+                      return (
+                        <div
+                          key={changeIndex}
+                          className={\`group relative flex items-start gap-4 p-5 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-200 \${config.bgColor}\`}
+                        >
+                          {/* Icon Circle */}
+                          <div className={\`shrink-0 flex items-center justify-center w-10 h-10 rounded-full \${config.bgColor} border-2 border-gray-200 dark:border-gray-800\`}>
+                            <Icon className={\`h-5 w-5 \${config.color}\`} />
+                          </div>
+
+                          {/* Content */}
+                          <div className="flex-1 min-w-0 pt-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className={\`text-xs font-bold uppercase tracking-wider \${config.color}\`}>
+                                {config.label}
+                              </span>
+                              <div className={\`h-1 w-1 rounded-full \${config.dotColor}\`} />
+                            </div>
+                            <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                              {change.text}
+                            </p>
+                          </div>
+
+                          {/* Hover Arrow */}
+                          <ArrowRight className={\`shrink-0 h-5 w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200 \${config.color}\`} />
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Divider Line (except for last entry) */}
+                  {entryIndex < entries.length - 1 && (
+                    <div className="mt-12 w-full h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-700 to-transparent" />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* CTA Section */}
+          <div className="mt-16 pt-12 border-t border-gray-200 dark:border-gray-800">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-8 rounded-2xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20">
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  Never miss an update
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Get notified when we ship new features and improvements
+                </p>
+              </div>
+              <Button size="lg" className="shrink-0">
+                <a href={ctaLink} className="flex items-center gap-2">
+                  {ctaText}
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'changelog-4',
+    name: 'Changelog 4',
+    description: 'Compact changelog with grouped changes by type, statistics footer, and external links',
+    category: 'changelog',
+    tags: ['changelog', 'updates', 'releases', 'grouped', 'statistics', 'compact'],
+    dependencies: [
+      {
+        name: 'lucide-react',
+        version: '^0.263.1'
+      }
+    ],
+    previewProps: {},
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        default: 'Release Notes',
+        description: 'Main heading for the changelog section'
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        default: 'Track all the latest updates and improvements to our platform',
+        description: 'Subtitle text below the main heading'
+      },
+      {
+        name: 'entries',
+        type: 'ChangelogEntry[]',
+        default: '[Array of changelog entries]',
+        description: 'Array of changelog entries with version, date, optional tag, changes, and optional link'
+      }
+    ],
+    code: `import { Calendar, Plus, Wrench, Bug, Zap, AlertCircle, ExternalLink } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+
+interface ChangelogItem {
+  type: 'added' | 'fixed' | 'improved' | 'changed' | 'removed';
+  text: string;
+}
+
+interface ChangelogEntry {
+  version: string;
+  date: string;
+  tag?: string;
+  changes: ChangelogItem[];
+  link?: string;
+}
+
+interface Changelog4Props {
+  title?: string;
+  subtitle?: string;
+  entries?: ChangelogEntry[];
+}
+
+const changeTypeConfig = {
+  added: {
+    icon: Plus,
+    label: 'Added',
+    color: 'text-green-600 dark:text-green-400',
+    badgeVariant: 'default' as const
+  },
+  fixed: {
+    icon: Bug,
+    label: 'Fixed',
+    color: 'text-red-600 dark:text-red-400',
+    badgeVariant: 'destructive' as const
+  },
+  improved: {
+    icon: Zap,
+    label: 'Improved',
+    color: 'text-blue-600 dark:text-blue-400',
+    badgeVariant: 'default' as const
+  },
+  changed: {
+    icon: Wrench,
+    label: 'Changed',
+    color: 'text-orange-600 dark:text-orange-400',
+    badgeVariant: 'secondary' as const
+  },
+  removed: {
+    icon: AlertCircle,
+    label: 'Removed',
+    color: 'text-gray-600 dark:text-gray-400',
+    badgeVariant: 'outline' as const
+  }
+};
+
+export default function Changelog4({
+  title = 'Release Notes',
+  subtitle = 'Track all the latest updates and improvements to our platform',
+  entries = [
+    {
+      version: '4.2.0',
+      date: 'May 1, 2024',
+      tag: 'Latest',
+      link: '#',
+      changes: [
+        { type: 'added', text: 'Introduced advanced search with filters and sorting' },
+        { type: 'added', text: 'New dashboard widgets for better data visualization' },
+        { type: 'improved', text: 'Enhanced loading speed by 40% across all pages' },
+        { type: 'fixed', text: 'Resolved notification delivery issues' }
+      ]
+    },
+    {
+      version: '4.1.5',
+      date: 'April 20, 2024',
+      link: '#',
+      changes: [
+        { type: 'fixed', text: 'Fixed critical authentication bug affecting mobile users' },
+        { type: 'fixed', text: 'Corrected timezone display issues in reports' },
+        { type: 'improved', text: 'Optimized database queries for better performance' }
+      ]
+    },
+    {
+      version: '4.1.0',
+      date: 'April 10, 2024',
+      link: '#',
+      changes: [
+        { type: 'added', text: 'Multi-language support for 15 new languages' },
+        { type: 'added', text: 'Integration with popular third-party tools' },
+        { type: 'changed', text: 'Redesigned settings page with improved UX' },
+        { type: 'improved', text: 'Better error messages and user feedback' }
+      ]
+    },
+    {
+      version: '4.0.0',
+      date: 'March 28, 2024',
+      tag: 'Major',
+      link: '#',
+      changes: [
+        { type: 'added', text: 'Complete platform redesign with modern UI' },
+        { type: 'added', text: 'New API v4 with improved performance' },
+        { type: 'changed', text: 'Updated authentication system for better security' },
+        { type: 'removed', text: 'Deprecated API v2 endpoints' }
+      ]
+    },
+    {
+      version: '3.9.8',
+      date: 'March 15, 2024',
+      link: '#',
+      changes: [
+        { type: 'fixed', text: 'Security patch for XSS vulnerability' },
+        { type: 'improved', text: 'Reduced memory usage in background processes' }
+      ]
+    }
+  ]
+}: Changelog4Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+            {title}
+          </h2>
+          <p className="max-w-[700px] text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Changelog List - Compact Style */}
+        <div className="max-w-4xl mx-auto space-y-8">
+          {entries.map((entry, entryIndex) => {
+            // Group changes by type
+            const groupedChanges = entry.changes.reduce((acc, change) => {
+              if (!acc[change.type]) {
+                acc[change.type] = [];
+              }
+              acc[change.type].push(change);
+              return acc;
+            }, {} as Record<string, ChangelogItem[]>);
+
+            return (
+              <div
+                key={entryIndex}
+                className="bg-white dark:bg-gray-950 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-lg transition-shadow duration-300"
+              >
+                {/* Entry Header */}
+                <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/50">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                        v{entry.version}
+                      </h3>
+                      {entry.tag && (
+                        <Badge variant="default" className="text-xs">
+                          {entry.tag}
+                        </Badge>
+                      )}
+                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                        <Calendar className="h-4 w-4" />
+                        <span>{entry.date}</span>
+                      </div>
+                    </div>
+                    {entry.link && (
+                      <a
+                        href={entry.link}
+                        className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        View details
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Entry Body - Grouped by Type */}
+                <div className="p-6">
+                  <div className="space-y-4">
+                    {Object.entries(groupedChanges).map(([type, changes]) => {
+                      const config = changeTypeConfig[type as keyof typeof changeTypeConfig];
+                      const Icon = config.icon;
+
+                      return (
+                        <div key={type}>
+                          {/* Type Header */}
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className={\`flex items-center justify-center w-6 h-6 rounded \${config.color.replace('text-', 'bg-').replace('600', '100').replace('400', '900/30')}\`}>
+                              <Icon className={\`h-4 w-4 \${config.color}\`} />
+                            </div>
+                            <span className={\`text-sm font-semibold uppercase tracking-wide \${config.color}\`}>
+                              {config.label}
+                            </span>
+                            <Badge variant={config.badgeVariant} className="h-5 px-2 text-xs">
+                              {changes.length}
+                            </Badge>
+                          </div>
+
+                          {/* Changes List */}
+                          <ul className="space-y-2 ml-8">
+                            {changes.map((change, idx) => (
+                              <li
+                                key={idx}
+                                className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex items-start gap-2"
+                              >
+                                <span className={\`inline-block w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 \${config.color.replace('text-', 'bg-')}\`} />
+                                <span>{change.text}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Footer Stats */}
+        <div className="mt-16 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
+              <div className="text-2xl font-bold text-primary mb-1">{entries.length}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Releases</div>
+            </div>
+            <div className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
+              <div className="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
+                {entries.reduce((sum, e) => sum + e.changes.filter(c => c.type === 'added').length, 0)}
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Features Added</div>
+            </div>
+            <div className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
+              <div className="text-2xl font-bold text-red-600 dark:text-red-400 mb-1">
+                {entries.reduce((sum, e) => sum + e.changes.filter(c => c.type === 'fixed').length, 0)}
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Bugs Fixed</div>
+            </div>
+            <div className="bg-white dark:bg-gray-950 rounded-lg border border-gray-200 dark:border-gray-800 p-4 text-center">
+              <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">
+                {entries.reduce((sum, e) => sum + e.changes.filter(c => c.type === 'improved').length, 0)}
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Improvements</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
   }
 ];
 
