@@ -9434,6 +9434,950 @@ export default function Changelog4({
     </section>
   );
 }`
+  },
+  {
+    id: 'login-2',
+    name: 'Login 2',
+    description: 'Premium login form with gradient header, badge, social login, and security footer',
+    category: 'auth',
+    tags: ['login', 'auth', 'authentication', 'form', 'social', 'google', 'security', 'premium'],
+    dependencies: [
+      {
+        name: 'lucide-react',
+        version: '^0.263.1'
+      }
+    ],
+    previewProps: {},
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        default: 'Welcome Back',
+        description: 'Main title of the login form'
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        default: 'Enter your credentials to access your account',
+        description: 'Subtitle text below the title'
+      },
+      {
+        name: 'emailLabel',
+        type: 'string',
+        default: 'Email Address',
+        description: 'Label for the email input field'
+      },
+      {
+        name: 'passwordLabel',
+        type: 'string',
+        default: 'Password',
+        description: 'Label for the password input field'
+      },
+      {
+        name: 'loginButtonText',
+        type: 'string',
+        default: 'Sign In',
+        description: 'Text for the login button'
+      },
+      {
+        name: 'forgotPasswordText',
+        type: 'string',
+        default: 'Forgot password?',
+        description: 'Text for the forgot password link'
+      },
+      {
+        name: 'forgotPasswordLink',
+        type: 'string',
+        default: '#',
+        description: 'URL for the forgot password link'
+      },
+      {
+        name: 'signupText',
+        type: 'string',
+        default: "Don't have an account?",
+        description: 'Text before the signup link'
+      },
+      {
+        name: 'signupLinkText',
+        type: 'string',
+        default: 'Sign up',
+        description: 'Text for the signup link'
+      },
+      {
+        name: 'signupLink',
+        type: 'string',
+        default: '#',
+        description: 'URL for the signup link'
+      },
+      {
+        name: 'googleButtonText',
+        type: 'string',
+        default: 'Continue with Google',
+        description: 'Text for the Google login button'
+      },
+      {
+        name: 'showSocialLogin',
+        type: 'boolean',
+        default: 'true',
+        description: 'Whether to show the social login section'
+      }
+    ],
+    code: `import { Mail, Lock, Eye, EyeOff, ArrowRight, Chrome } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+
+interface Login2Props {
+  title?: string;
+  subtitle?: string;
+  emailLabel?: string;
+  passwordLabel?: string;
+  loginButtonText?: string;
+  forgotPasswordText?: string;
+  forgotPasswordLink?: string;
+  signupText?: string;
+  signupLinkText?: string;
+  signupLink?: string;
+  googleButtonText?: string;
+  showSocialLogin?: boolean;
+}
+
+export default function Login2({
+  title = 'Welcome Back',
+  subtitle = 'Enter your credentials to access your account',
+  emailLabel = 'Email Address',
+  passwordLabel = 'Password',
+  loginButtonText = 'Sign In',
+  forgotPasswordText = 'Forgot password?',
+  forgotPasswordLink = '#',
+  signupText = "Don't have an account?",
+  signupLinkText = 'Sign up',
+  signupLink = '#',
+  googleButtonText = 'Continue with Google',
+  showSocialLogin = true
+}: Login2Props) {
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-white to-primary/10 dark:from-primary/10 dark:via-gray-950 dark:to-primary/5 py-12 px-4">
+      <div className="w-full max-w-md">
+        {/* Card */}
+        <div className="bg-white dark:bg-gray-950 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+          {/* Header with Badge */}
+          <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 p-8 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
+
+            <div className="relative">
+              <Badge variant="secondary" className="mb-4">
+                Secure Login
+              </Badge>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                {title}
+              </h1>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {subtitle}
+              </p>
+            </div>
+          </div>
+
+          {/* Form */}
+          <div className="p-8">
+            <form className="space-y-5">
+              {/* Email Input */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                >
+                  <Mail className="h-4 w-4 text-primary" />
+                  {emailLabel}
+                </label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  className="h-11"
+                />
+              </div>
+
+              {/* Password Input */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2"
+                >
+                  <Lock className="h-4 w-4 text-primary" />
+                  {passwordLabel}
+                </label>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    className="h-11 pr-10"
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  >
+                    <EyeOff className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Forgot Password */}
+              <div className="flex items-center justify-end">
+                <a
+                  href={forgotPasswordLink}
+                  className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                >
+                  {forgotPasswordText}
+                </a>
+              </div>
+
+              {/* Login Button */}
+              <Button type="submit" className="w-full h-11 text-base font-semibold" size="lg">
+                {loginButtonText}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </form>
+
+            {/* Social Login */}
+            {showSocialLogin && (
+              <>
+                <div className="relative my-6">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-200 dark:border-gray-800" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-4 bg-white dark:bg-gray-950 text-gray-500 dark:text-gray-400">
+                      Or continue with
+                    </span>
+                  </div>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full h-11 text-base font-medium"
+                  size="lg"
+                >
+                  <Chrome className="mr-2 h-5 w-5" />
+                  {googleButtonText}
+                </Button>
+              </>
+            )}
+
+            {/* Sign Up Link */}
+            <div className="mt-6 text-center">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {signupText}{' '}
+                <a
+                  href={signupLink}
+                  className="font-semibold text-primary hover:text-primary/80 transition-colors"
+                >
+                  {signupLinkText}
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="px-8 py-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
+            <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+              <Lock className="h-3 w-3" />
+              <span>Your data is secure and encrypted</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Links */}
+        <div className="mt-6 text-center space-x-4">
+          <a
+            href="#"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+          >
+            Privacy Policy
+          </a>
+          <span className="text-gray-300 dark:text-gray-700">•</span>
+          <a
+            href="#"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+          >
+            Terms of Service
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'login-3',
+    name: 'Login 3',
+    description: 'Tabbed login/signup form with social login, remember me, and terms checkbox',
+    category: 'auth',
+    tags: ['login', 'auth', 'authentication', 'signup', 'register', 'tabs', 'social', 'remember me'],
+    dependencies: [
+      {
+        name: 'lucide-react',
+        version: '^0.263.1'
+      }
+    ],
+    previewProps: {},
+    props: [
+      {
+        name: 'title',
+        type: 'string',
+        default: 'Welcome',
+        description: 'Main title of the form'
+      },
+      {
+        name: 'subtitle',
+        type: 'string',
+        default: 'Sign in to your account or create a new one',
+        description: 'Subtitle text below the title'
+      },
+      {
+        name: 'loginTabLabel',
+        type: 'string',
+        default: 'Login',
+        description: 'Label for the login tab'
+      },
+      {
+        name: 'signupTabLabel',
+        type: 'string',
+        default: 'Sign Up',
+        description: 'Label for the signup tab'
+      },
+      {
+        name: 'emailPlaceholder',
+        type: 'string',
+        default: 'Email',
+        description: 'Placeholder text for email input'
+      },
+      {
+        name: 'passwordPlaceholder',
+        type: 'string',
+        default: 'Password',
+        description: 'Placeholder text for password input'
+      },
+      {
+        name: 'namePlaceholder',
+        type: 'string',
+        default: 'Full Name',
+        description: 'Placeholder text for name input'
+      },
+      {
+        name: 'loginButtonText',
+        type: 'string',
+        default: 'Sign In',
+        description: 'Text for the login button'
+      },
+      {
+        name: 'signupButtonText',
+        type: 'string',
+        default: 'Create Account',
+        description: 'Text for the signup button'
+      },
+      {
+        name: 'rememberMeText',
+        type: 'string',
+        default: 'Remember me',
+        description: 'Text for the remember me checkbox'
+      },
+      {
+        name: 'forgotPasswordText',
+        type: 'string',
+        default: 'Forgot password?',
+        description: 'Text for the forgot password link'
+      },
+      {
+        name: 'forgotPasswordLink',
+        type: 'string',
+        default: '#',
+        description: 'URL for the forgot password link'
+      },
+      {
+        name: 'termsText',
+        type: 'string',
+        default: 'I agree to the Terms & Conditions',
+        description: 'Text for the terms checkbox'
+      },
+      {
+        name: 'termsLink',
+        type: 'string',
+        default: '#',
+        description: 'URL for the terms link'
+      },
+      {
+        name: 'orText',
+        type: 'string',
+        default: 'Or continue with',
+        description: 'Text for the social login separator'
+      },
+      {
+        name: 'showSocialLogin',
+        type: 'boolean',
+        default: 'true',
+        description: 'Whether to show social login buttons'
+      },
+      {
+        name: 'githubText',
+        type: 'string',
+        default: 'GitHub',
+        description: 'Accessible text for GitHub button'
+      },
+      {
+        name: 'twitterText',
+        type: 'string',
+        default: 'Twitter',
+        description: 'Accessible text for Twitter button'
+      },
+      {
+        name: 'facebookText',
+        type: 'string',
+        default: 'Facebook',
+        description: 'Accessible text for Facebook button'
+      }
+    ],
+    code: `import { Mail, Lock, Github, Twitter, Facebook, LogIn } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+interface Login3Props {
+  title?: string;
+  subtitle?: string;
+  loginTabLabel?: string;
+  signupTabLabel?: string;
+  emailPlaceholder?: string;
+  passwordPlaceholder?: string;
+  namePlaceholder?: string;
+  loginButtonText?: string;
+  signupButtonText?: string;
+  rememberMeText?: string;
+  forgotPasswordText?: string;
+  forgotPasswordLink?: string;
+  termsText?: string;
+  termsLink?: string;
+  orText?: string;
+  showSocialLogin?: boolean;
+  githubText?: string;
+  twitterText?: string;
+  facebookText?: string;
+}
+
+export default function Login3({
+  title = 'Welcome',
+  subtitle = 'Sign in to your account or create a new one',
+  loginTabLabel = 'Login',
+  signupTabLabel = 'Sign Up',
+  emailPlaceholder = 'Email',
+  passwordPlaceholder = 'Password',
+  namePlaceholder = 'Full Name',
+  loginButtonText = 'Sign In',
+  signupButtonText = 'Create Account',
+  rememberMeText = 'Remember me',
+  forgotPasswordText = 'Forgot password?',
+  forgotPasswordLink = '#',
+  termsText = 'I agree to the Terms & Conditions',
+  termsLink = '#',
+  orText = 'Or continue with',
+  showSocialLogin = true,
+  githubText = 'GitHub',
+  twitterText = 'Twitter',
+  facebookText = 'Facebook'
+}: Login3Props) {
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 py-12 px-4">
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            {title}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Tabs Card */}
+        <Tabs defaultValue="login" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsTrigger value="login">{loginTabLabel}</TabsTrigger>
+            <TabsTrigger value="signup">{signupTabLabel}</TabsTrigger>
+          </TabsList>
+
+          {/* Login Tab */}
+          <TabsContent value="login">
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+              <form className="space-y-4">
+                {/* Email Input */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="login-email"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Email
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="login-email"
+                      type="email"
+                      placeholder={emailPlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Password Input */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="login-password"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="login-password"
+                      type="password"
+                      placeholder={passwordPlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Remember Me & Forgot Password */}
+                <div className="flex items-center justify-between">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
+                    />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {rememberMeText}
+                    </span>
+                  </label>
+                  <a
+                    href={forgotPasswordLink}
+                    className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    {forgotPasswordText}
+                  </a>
+                </div>
+
+                {/* Login Button */}
+                <Button type="submit" className="w-full h-11" size="lg">
+                  <LogIn className="mr-2 h-4 w-4" />
+                  {loginButtonText}
+                </Button>
+              </form>
+
+              {/* Social Login */}
+              {showSocialLogin && (
+                <>
+                  <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-gray-300 dark:border-gray-700" />
+                    </div>
+                    <div className="relative flex justify-center text-xs">
+                      <span className="px-2 bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400">
+                        {orText}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    <Button type="button" variant="outline" size="sm">
+                      <Github className="h-4 w-4" />
+                      <span className="sr-only">{githubText}</span>
+                    </Button>
+                    <Button type="button" variant="outline" size="sm">
+                      <Twitter className="h-4 w-4" />
+                      <span className="sr-only">{twitterText}</span>
+                    </Button>
+                    <Button type="button" variant="outline" size="sm">
+                      <Facebook className="h-4 w-4" />
+                      <span className="sr-only">{facebookText}</span>
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          </TabsContent>
+
+          {/* Sign Up Tab */}
+          <TabsContent value="signup">
+            <div className="bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-6">
+              <form className="space-y-4">
+                {/* Name Input */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="signup-name"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Full Name
+                  </label>
+                  <Input
+                    id="signup-name"
+                    type="text"
+                    placeholder={namePlaceholder}
+                    className="h-11"
+                  />
+                </div>
+
+                {/* Email Input */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="signup-email"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Email
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="signup-email"
+                      type="email"
+                      placeholder={emailPlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Password Input */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="signup-password"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Password
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="signup-password"
+                      type="password"
+                      placeholder={passwordPlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Terms Checkbox */}
+                <label className="flex items-start gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 mt-1 rounded border-gray-300 text-primary focus:ring-primary"
+                  />
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    {termsText}{' '}
+                    <a
+                      href={termsLink}
+                      className="text-primary hover:text-primary/80 transition-colors"
+                    >
+                      Terms & Conditions
+                    </a>
+                  </span>
+                </label>
+
+                {/* Sign Up Button */}
+                <Button type="submit" className="w-full h-11" size="lg">
+                  {signupButtonText}
+                </Button>
+              </form>
+
+              {/* Social Sign Up */}
+              {showSocialLogin && (
+                <>
+                  <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-gray-300 dark:border-gray-700" />
+                    </div>
+                    <div className="relative flex justify-center text-xs">
+                      <span className="px-2 bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400">
+                        {orText}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3">
+                    <Button type="button" variant="outline" size="sm">
+                      <Github className="h-4 w-4" />
+                      <span className="sr-only">{githubText}</span>
+                    </Button>
+                    <Button type="button" variant="outline" size="sm">
+                      <Twitter className="h-4 w-4" />
+                      <span className="sr-only">{twitterText}</span>
+                    </Button>
+                    <Button type="button" variant="outline" size="sm">
+                      <Facebook className="h-4 w-4" />
+                      <span className="sr-only">{facebookText}</span>
+                    </Button>
+                  </div>
+                </>
+              )}
+            </div>
+          </TabsContent>
+        </Tabs>
+
+        {/* Footer Note */}
+        <p className="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
+          By continuing, you agree to our Terms of Service and Privacy Policy
+        </p>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'login-4',
+    name: 'Login Split Screen',
+    description: 'Login form with split-screen design - image/benefits on left, form on right. Modern and visual.',
+    category: 'auth',
+    tags: ['login', 'auth', 'split-screen', 'benefits', 'image', 'modern'],
+    dependencies: [
+      { name: 'button', command: 'npx shadcn@latest add button' },
+      { name: 'input', command: 'npx shadcn@latest add input' }
+    ],
+    previewProps: {
+      title: 'Sign in to continue',
+      subtitle: 'Welcome back! Please enter your credentials to access your account.',
+      emailLabel: 'Email',
+      emailPlaceholder: 'you@example.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: '••••••••',
+      loginButtonText: 'Sign In',
+      forgotPasswordText: 'Forgot your password?',
+      forgotPasswordLink: '#',
+      signupText: "Don't have an account?",
+      signupLinkText: 'Create one now',
+      signupLink: '#',
+      imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000',
+      imageAlt: 'Modern office workspace',
+      benefits: [
+        'Access to all premium features',
+        'Priority customer support',
+        'Advanced analytics dashboard',
+        'Unlimited team members'
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Sign in to continue', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Welcome back! Please enter your credentials to access your account.', description: 'Subtitle text' },
+      { name: 'emailLabel', type: 'string', default: 'Email', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: '••••••••', description: 'Password field placeholder' },
+      { name: 'loginButtonText', type: 'string', default: 'Sign In', description: 'Login button text' },
+      { name: 'forgotPasswordText', type: 'string', default: 'Forgot your password?', description: 'Forgot password link text' },
+      { name: 'forgotPasswordLink', type: 'string', default: '#', description: 'Forgot password link URL' },
+      { name: 'signupText', type: 'string', default: "Don't have an account?", description: 'Sign up prompt text' },
+      { name: 'signupLinkText', type: 'string', default: 'Create one now', description: 'Sign up link text' },
+      { name: 'signupLink', type: 'string', default: '#', description: 'Sign up link URL' },
+      { name: 'imageUrl', type: 'string', default: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000', description: 'Background image URL for left side' },
+      { name: 'imageAlt', type: 'string', default: 'Modern office workspace', description: 'Alt text for image' },
+      { name: 'benefits', type: 'string[]', description: 'Array of benefit strings to display on left side' }
+    ],
+    code: `import { Mail, Lock, ArrowRight, Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+interface Login4Props {
+  title?: string;
+  subtitle?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  loginButtonText?: string;
+  forgotPasswordText?: string;
+  forgotPasswordLink?: string;
+  signupText?: string;
+  signupLinkText?: string;
+  signupLink?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  benefits?: string[];
+}
+
+export default function Login4({
+  title = 'Sign in to continue',
+  subtitle = 'Welcome back! Please enter your credentials to access your account.',
+  emailLabel = 'Email',
+  emailPlaceholder = 'you@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = '••••••••',
+  loginButtonText = 'Sign In',
+  forgotPasswordText = 'Forgot your password?',
+  forgotPasswordLink = '#',
+  signupText = "Don't have an account?",
+  signupLinkText = 'Create one now',
+  signupLink = '#',
+  imageUrl = 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000',
+  imageAlt = 'Modern office workspace',
+  benefits = [
+    'Access to all premium features',
+    'Priority customer support',
+    'Advanced analytics dashboard',
+    'Unlimited team members'
+  ]
+}: Login4Props) {
+  return (
+    <section className="w-full min-h-screen flex">
+      {/* Left Side - Image & Benefits */}
+      <div className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/90" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-center px-12 xl:px-16 text-white">
+          <div className="mb-12">
+            <h1 className="text-4xl xl:text-5xl font-bold mb-4 leading-tight">
+              The modern way to manage your business
+            </h1>
+            <p className="text-lg text-white/90 leading-relaxed">
+              Join thousands of teams already using our platform to streamline their workflow and boost productivity.
+            </p>
+          </div>
+
+          {/* Benefits List */}
+          <div className="space-y-4">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center mt-0.5">
+                  <Check className="h-4 w-4 text-white" />
+                </div>
+                <p className="text-white/95 leading-relaxed">{benefit}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Decorative Elements */}
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mb-32 -ml-32" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mt-48 -mr-48" />
+        </div>
+      </div>
+
+      {/* Right Side - Login Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 bg-white dark:bg-gray-950">
+        <div className="w-full max-w-md">
+          {/* Header */}
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+              {title}
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Form */}
+          <form className="space-y-5">
+            {/* Email Input */}
+            <div className="space-y-2">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+              >
+                {emailLabel}
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder={emailPlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+            </div>
+
+            {/* Password Input */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                >
+                  {passwordLabel}
+                </label>
+                <a
+                  href={forgotPasswordLink}
+                  className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                >
+                  {forgotPasswordText}
+                </a>
+              </div>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder={passwordPlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+            </div>
+
+            {/* Login Button */}
+            <Button type="submit" className="w-full h-12 text-base font-semibold" size="lg">
+              {loginButtonText}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </form>
+
+          {/* Divider */}
+          <div className="my-8 flex items-center gap-4">
+            <div className="flex-1 border-t border-gray-200 dark:border-gray-800" />
+            <span className="text-sm text-gray-500 dark:text-gray-400">or</span>
+            <div className="flex-1 border-t border-gray-200 dark:border-gray-800" />
+          </div>
+
+          {/* Sign Up Link */}
+          <div className="text-center">
+            <p className="text-gray-600 dark:text-gray-400">
+              {signupText}{' '}
+              <a
+                href={signupLink}
+                className="font-semibold text-primary hover:text-primary/80 transition-colors"
+              >
+                {signupLinkText}
+              </a>
+            </p>
+          </div>
+
+          {/* Mobile Benefits (visible only on small screens) */}
+          <div className="lg:hidden mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
+              What you get:
+            </h3>
+            <div className="space-y-3">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                    <Check className="h-3 w-3 text-primary" />
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{benefit}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
   }
 ];
 
