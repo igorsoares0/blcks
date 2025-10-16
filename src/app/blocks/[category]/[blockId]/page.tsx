@@ -56,6 +56,9 @@ import Login2 from '@/blocks/auth/login-2';
 import Login3 from '@/blocks/auth/login-3';
 import Login4 from '@/blocks/auth/login-4';
 import Signup1 from '@/blocks/auth/signup-1';
+import Signup2 from '@/blocks/auth/signup-2';
+import Signup3 from '@/blocks/auth/signup-3';
+import Signup4 from '@/blocks/auth/signup-4';
 import Testimonial1 from '@/blocks/testimonial/testimonial-1';
 import FAQ1 from '@/blocks/faq/faq-1';
 
@@ -119,6 +122,9 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'login-3': Login3,
   'login-4': Login4,
   'signup-1': Signup1,
+  'signup-2': Signup2,
+  'signup-3': Signup3,
+  'signup-4': Signup4,
   'testimonial-1': Testimonial1,
   'faq-1': FAQ1,
 };

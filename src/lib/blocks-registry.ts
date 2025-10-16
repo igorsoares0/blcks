@@ -10378,6 +10378,905 @@ export default function Login4({
     </section>
   );
 }`
+  },
+  {
+    id: 'signup-2',
+    name: 'Signup with Features',
+    description: 'Signup form with side-by-side layout - form on left, features and benefits on right. Includes trust indicators.',
+    category: 'auth',
+    tags: ['signup', 'register', 'auth', 'features', 'benefits', 'trial', 'two-column'],
+    dependencies: [
+      { name: 'button', command: 'npx shadcn@latest add button' },
+      { name: 'input', command: 'npx shadcn@latest add input' },
+      { name: 'badge', command: 'npx shadcn@latest add badge' }
+    ],
+    previewProps: {
+      title: 'Create your account',
+      subtitle: 'Start your 14-day free trial. No credit card required.',
+      fullNameLabel: 'Full Name',
+      fullNamePlaceholder: 'John Doe',
+      emailLabel: 'Email Address',
+      emailPlaceholder: 'you@example.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: 'At least 8 characters',
+      confirmPasswordLabel: 'Confirm Password',
+      confirmPasswordPlaceholder: 'Re-enter your password',
+      companyLabel: 'Company Name',
+      companyPlaceholder: 'Your company',
+      signupButtonText: 'Create Account',
+      termsText: 'By signing up, you agree to our',
+      termsLink: '#',
+      loginText: 'Already have an account?',
+      loginLinkText: 'Sign in',
+      loginLink: '#',
+      showCompanyField: true,
+      features: [
+        '14-day free trial',
+        'No credit card required',
+        'Cancel anytime',
+        'Full access to all features'
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Create your account', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Start your 14-day free trial. No credit card required.', description: 'Subtitle text' },
+      { name: 'fullNameLabel', type: 'string', default: 'Full Name', description: 'Full name field label' },
+      { name: 'fullNamePlaceholder', type: 'string', default: 'John Doe', description: 'Full name field placeholder' },
+      { name: 'emailLabel', type: 'string', default: 'Email Address', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'At least 8 characters', description: 'Password field placeholder' },
+      { name: 'confirmPasswordLabel', type: 'string', default: 'Confirm Password', description: 'Confirm password field label' },
+      { name: 'confirmPasswordPlaceholder', type: 'string', default: 'Re-enter your password', description: 'Confirm password placeholder' },
+      { name: 'companyLabel', type: 'string', default: 'Company Name', description: 'Company field label' },
+      { name: 'companyPlaceholder', type: 'string', default: 'Your company', description: 'Company field placeholder' },
+      { name: 'signupButtonText', type: 'string', default: 'Create Account', description: 'Signup button text' },
+      { name: 'termsText', type: 'string', default: 'By signing up, you agree to our', description: 'Terms agreement text' },
+      { name: 'termsLink', type: 'string', default: '#', description: 'Terms and privacy policy link URL' },
+      { name: 'loginText', type: 'string', default: 'Already have an account?', description: 'Login prompt text' },
+      { name: 'loginLinkText', type: 'string', default: 'Sign in', description: 'Login link text' },
+      { name: 'loginLink', type: 'string', default: '#', description: 'Login link URL' },
+      { name: 'showCompanyField', type: 'boolean', default: 'true', description: 'Show/hide company field' },
+      { name: 'features', type: 'string[]', description: 'Array of feature strings to display on right side' }
+    ],
+    code: `import { User, Mail, Lock, Building, CreditCard, Check, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+
+interface Signup2Props {
+  title?: string;
+  subtitle?: string;
+  fullNameLabel?: string;
+  fullNamePlaceholder?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  confirmPasswordLabel?: string;
+  confirmPasswordPlaceholder?: string;
+  companyLabel?: string;
+  companyPlaceholder?: string;
+  signupButtonText?: string;
+  termsText?: string;
+  termsLink?: string;
+  loginText?: string;
+  loginLinkText?: string;
+  loginLink?: string;
+  showCompanyField?: boolean;
+  features?: string[];
+}
+
+export default function Signup2({
+  title = 'Create your account',
+  subtitle = 'Start your 14-day free trial. No credit card required.',
+  fullNameLabel = 'Full Name',
+  fullNamePlaceholder = 'John Doe',
+  emailLabel = 'Email Address',
+  emailPlaceholder = 'you@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'At least 8 characters',
+  confirmPasswordLabel = 'Confirm Password',
+  confirmPasswordPlaceholder = 'Re-enter your password',
+  companyLabel = 'Company Name',
+  companyPlaceholder = 'Your company',
+  signupButtonText = 'Create Account',
+  termsText = 'By signing up, you agree to our',
+  termsLink = '#',
+  loginText = 'Already have an account?',
+  loginLinkText = 'Sign in',
+  loginLink = '#',
+  showCompanyField = true,
+  features = [
+    '14-day free trial',
+    'No credit card required',
+    'Cancel anytime',
+    'Full access to all features'
+  ]
+}: Signup2Props) {
+  return (
+    <section className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900 py-12 px-4">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Left Side - Form */}
+          <div className="order-2 lg:order-1">
+            <div className="bg-white dark:bg-gray-950 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 p-8 md:p-10">
+              {/* Header */}
+              <div className="mb-8">
+                <Badge variant="secondary" className="mb-4">
+                  Free Trial
+                </Badge>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+                  {title}
+                </h1>
+                <p className="text-gray-600 dark:text-gray-400">
+                  {subtitle}
+                </p>
+              </div>
+
+              {/* Form */}
+              <form className="space-y-5">
+                {/* Full Name */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="fullName"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+                  >
+                    {fullNameLabel}
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="fullName"
+                      type="text"
+                      placeholder={fullNamePlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+                  >
+                    {emailLabel}
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder={emailPlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Company (optional) */}
+                {showCompanyField && (
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="company"
+                      className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+                    >
+                      {companyLabel} <span className="text-gray-400">(optional)</span>
+                    </label>
+                    <div className="relative">
+                      <Building className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <Input
+                        id="company"
+                        type="text"
+                        placeholder={companyPlaceholder}
+                        className="pl-10 h-11"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Password */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="password"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+                  >
+                    {passwordLabel}
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder={passwordPlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Confirm Password */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+                  >
+                    {confirmPasswordLabel}
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <Input
+                      id="confirmPassword"
+                      type="password"
+                      placeholder={confirmPasswordPlaceholder}
+                      className="pl-10 h-11"
+                    />
+                  </div>
+                </div>
+
+                {/* Terms Checkbox */}
+                <div className="pt-2">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 mt-1 rounded border-gray-300 text-primary focus:ring-primary"
+                    />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {termsText}{' '}
+                      <a
+                        href={termsLink}
+                        className="font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Terms of Service
+                      </a>
+                      {' and '}
+                      <a
+                        href={termsLink}
+                        className="font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Privacy Policy
+                      </a>
+                    </span>
+                  </label>
+                </div>
+
+                {/* Submit Button */}
+                <Button type="submit" className="w-full h-12 text-base font-semibold" size="lg">
+                  {signupButtonText}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </form>
+
+              {/* Login Link */}
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {loginText}{' '}
+                  <a
+                    href={loginLink}
+                    className="font-semibold text-primary hover:text-primary/80 transition-colors"
+                  >
+                    {loginLinkText}
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Features & Benefits */}
+          <div className="order-1 lg:order-2">
+            <div className="space-y-8">
+              {/* Main Heading */}
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+                  Join thousands of teams already growing with us
+                </h2>
+                <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Get started with our platform today and experience the difference. No commitments, no hidden fees.
+                </p>
+              </div>
+
+              {/* Features List */}
+              <div className="space-y-4">
+                {features.map((feature, index) => (
+                  <div key={index} className="flex items-center gap-4 bg-white dark:bg-gray-900 rounded-xl p-4 shadow-sm border border-gray-200 dark:border-gray-800">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Check className="h-5 w-5 text-primary" />
+                    </div>
+                    <p className="text-gray-900 dark:text-white font-medium">{feature}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Trust Badge */}
+              <div className="bg-gradient-to-r from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 rounded-xl p-6 border border-primary/20">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                    <CreditCard className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
+                      No credit card required
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      Start your free trial today. Add payment details only when you're ready to upgrade.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile CTA - visible only on mobile */}
+              <div className="lg:hidden p-6 bg-gray-100 dark:bg-gray-900 rounded-xl text-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Trusted by 10,000+ teams worldwide
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Trust Indicators */}
+        <div className="hidden lg:flex items-center justify-center gap-8 mt-12 pt-12 border-t border-gray-200 dark:border-gray-800">
+          <div className="text-center">
+            <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">10,000+</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Active Users</div>
+          </div>
+          <div className="w-px h-12 bg-gray-200 dark:bg-gray-800" />
+          <div className="text-center">
+            <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">99.9%</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Uptime</div>
+          </div>
+          <div className="w-px h-12 bg-gray-200 dark:bg-gray-800" />
+          <div className="text-center">
+            <div className="text-3xl font-bold text-gray-900 dark:text-white mb-1">24/7</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">Support</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'signup-3',
+    name: 'Signup Minimal',
+    description: 'Minimal centered signup form with social login options (Google, GitHub, Apple) and password requirements.',
+    category: 'auth',
+    tags: ['signup', 'register', 'auth', 'social', 'minimal', 'clean', 'centered'],
+    dependencies: [
+      { name: 'button', command: 'npx shadcn@latest add button' },
+      { name: 'input', command: 'npx shadcn@latest add input' }
+    ],
+    previewProps: {
+      title: 'Create your account',
+      subtitle: 'Join us today and get started in seconds',
+      fullNamePlaceholder: 'Full name',
+      emailPlaceholder: 'Email address',
+      passwordPlaceholder: 'Create a password',
+      signupButtonText: 'Get Started',
+      termsText: 'By creating an account, you agree to our',
+      termsLink: '#',
+      privacyLink: '#',
+      orText: 'Or continue with',
+      showSocialSignup: true,
+      googleText: 'Google',
+      githubText: 'GitHub',
+      appleText: 'Apple',
+      loginText: 'Already have an account?',
+      loginLinkText: 'Sign in',
+      loginLink: '#'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Create your account', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Join us today and get started in seconds', description: 'Subtitle text' },
+      { name: 'fullNamePlaceholder', type: 'string', default: 'Full name', description: 'Full name field placeholder' },
+      { name: 'emailPlaceholder', type: 'string', default: 'Email address', description: 'Email field placeholder' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'Create a password', description: 'Password field placeholder' },
+      { name: 'signupButtonText', type: 'string', default: 'Get Started', description: 'Signup button text' },
+      { name: 'termsText', type: 'string', default: 'By creating an account, you agree to our', description: 'Terms agreement text' },
+      { name: 'termsLink', type: 'string', default: '#', description: 'Terms of Service link URL' },
+      { name: 'privacyLink', type: 'string', default: '#', description: 'Privacy Policy link URL' },
+      { name: 'orText', type: 'string', default: 'Or continue with', description: 'Divider text between social and email signup' },
+      { name: 'showSocialSignup', type: 'boolean', default: 'true', description: 'Show/hide social signup buttons' },
+      { name: 'googleText', type: 'string', default: 'Google', description: 'Google button accessible text' },
+      { name: 'githubText', type: 'string', default: 'GitHub', description: 'GitHub button accessible text' },
+      { name: 'appleText', type: 'string', default: 'Apple', description: 'Apple button accessible text' },
+      { name: 'loginText', type: 'string', default: 'Already have an account?', description: 'Login prompt text' },
+      { name: 'loginLinkText', type: 'string', default: 'Sign in', description: 'Login link text' },
+      { name: 'loginLink', type: 'string', default: '#', description: 'Login link URL' }
+    ],
+    code: `import { User, Mail, Lock, Github, Chrome, Apple } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+interface Signup3Props {
+  title?: string;
+  subtitle?: string;
+  fullNamePlaceholder?: string;
+  emailPlaceholder?: string;
+  passwordPlaceholder?: string;
+  signupButtonText?: string;
+  termsText?: string;
+  termsLink?: string;
+  privacyLink?: string;
+  orText?: string;
+  showSocialSignup?: boolean;
+  googleText?: string;
+  githubText?: string;
+  appleText?: string;
+  loginText?: string;
+  loginLinkText?: string;
+  loginLink?: string;
+}
+
+export default function Signup3({
+  title = 'Create your account',
+  subtitle = 'Join us today and get started in seconds',
+  fullNamePlaceholder = 'Full name',
+  emailPlaceholder = 'Email address',
+  passwordPlaceholder = 'Create a password',
+  signupButtonText = 'Get Started',
+  termsText = 'By creating an account, you agree to our',
+  termsLink = '#',
+  privacyLink = '#',
+  orText = 'Or continue with',
+  showSocialSignup = true,
+  googleText = 'Google',
+  githubText = 'GitHub',
+  appleText = 'Apple',
+  loginText = 'Already have an account?',
+  loginLinkText = 'Sign in',
+  loginLink = '#'
+}: Signup3Props) {
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 py-12 px-4">
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            {title}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Card */}
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 p-8">
+          {/* Social Signup Buttons */}
+          {showSocialSignup && (
+            <>
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                <Button type="button" variant="outline" className="h-11">
+                  <Chrome className="h-5 w-5" />
+                  <span className="sr-only">{googleText}</span>
+                </Button>
+                <Button type="button" variant="outline" className="h-11">
+                  <Github className="h-5 w-5" />
+                  <span className="sr-only">{githubText}</span>
+                </Button>
+                <Button type="button" variant="outline" className="h-11">
+                  <Apple className="h-5 w-5" />
+                  <span className="sr-only">{appleText}</span>
+                </Button>
+              </div>
+
+              {/* Divider */}
+              <div className="relative my-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200 dark:border-gray-800" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-4 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">
+                    {orText}
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Form */}
+          <form className="space-y-4">
+            {/* Full Name */}
+            <div className="space-y-2">
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="fullName"
+                  type="text"
+                  placeholder={fullNamePlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="space-y-2">
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder={emailPlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div className="space-y-2">
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder={passwordPlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+            </div>
+
+            {/* Password Requirements */}
+            <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
+              <p>Password must contain:</p>
+              <ul className="list-disc list-inside space-y-0.5 ml-2">
+                <li>At least 8 characters</li>
+                <li>One uppercase and one lowercase letter</li>
+                <li>One number</li>
+              </ul>
+            </div>
+
+            {/* Submit Button */}
+            <Button type="submit" className="w-full h-12 text-base font-semibold" size="lg">
+              {signupButtonText}
+            </Button>
+          </form>
+
+          {/* Terms */}
+          <div className="mt-6">
+            <p className="text-xs text-center text-gray-500 dark:text-gray-400 leading-relaxed">
+              {termsText}{' '}
+              <a
+                href={termsLink}
+                className="text-primary hover:text-primary/80 transition-colors underline"
+              >
+                Terms of Service
+              </a>
+              {' and '}
+              <a
+                href={privacyLink}
+                className="text-primary hover:text-primary/80 transition-colors underline"
+              >
+                Privacy Policy
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* Login Link */}
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {loginText}{' '}
+            <a
+              href={loginLink}
+              className="font-semibold text-primary hover:text-primary/80 transition-colors"
+            >
+              {loginLinkText}
+            </a>
+          </p>
+        </div>
+
+        {/* Security Badge */}
+        <div className="mt-8 flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+          <Lock className="h-3 w-3" />
+          <span>Your information is secure and encrypted</span>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'signup-4',
+    name: 'Signup Split Screen',
+    description: 'Signup form with split-screen design - image/benefits on left, form on right. Includes security badge.',
+    category: 'auth',
+    tags: ['signup', 'register', 'auth', 'split-screen', 'benefits', 'image', 'visual'],
+    dependencies: [
+      { name: 'button', command: 'npx shadcn@latest add button' },
+      { name: 'input', command: 'npx shadcn@latest add input' }
+    ],
+    previewProps: {
+      title: 'Start your journey today',
+      subtitle: 'Create your account and join thousands of users already growing with us.',
+      fullNameLabel: 'Full Name',
+      fullNamePlaceholder: 'John Doe',
+      emailLabel: 'Email',
+      emailPlaceholder: 'you@example.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: 'Create a strong password',
+      signupButtonText: 'Create Account',
+      termsText: 'By signing up, you agree to our',
+      termsLink: '#',
+      loginText: 'Already have an account?',
+      loginLinkText: 'Sign in here',
+      loginLink: '#',
+      imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000',
+      imageAlt: 'Team collaboration',
+      benefits: [
+        'Free 14-day trial, no credit card required',
+        'Access to all premium features',
+        '24/7 customer support',
+        'Cancel anytime, no questions asked'
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Start your journey today', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Create your account and join thousands of users already growing with us.', description: 'Subtitle text' },
+      { name: 'fullNameLabel', type: 'string', default: 'Full Name', description: 'Full name field label' },
+      { name: 'fullNamePlaceholder', type: 'string', default: 'John Doe', description: 'Full name field placeholder' },
+      { name: 'emailLabel', type: 'string', default: 'Email', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'Create a strong password', description: 'Password field placeholder' },
+      { name: 'signupButtonText', type: 'string', default: 'Create Account', description: 'Signup button text' },
+      { name: 'termsText', type: 'string', default: 'By signing up, you agree to our', description: 'Terms agreement text' },
+      { name: 'termsLink', type: 'string', default: '#', description: 'Terms and privacy policy link URL' },
+      { name: 'loginText', type: 'string', default: 'Already have an account?', description: 'Login prompt text' },
+      { name: 'loginLinkText', type: 'string', default: 'Sign in here', description: 'Login link text' },
+      { name: 'loginLink', type: 'string', default: '#', description: 'Login link URL' },
+      { name: 'imageUrl', type: 'string', default: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000', description: 'Background image URL for left side' },
+      { name: 'imageAlt', type: 'string', default: 'Team collaboration', description: 'Alt text for image' },
+      { name: 'benefits', type: 'string[]', description: 'Array of benefit strings to display on left side' }
+    ],
+    code: `import { User, Mail, Lock, ArrowRight, Check, Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
+interface Signup4Props {
+  title?: string;
+  subtitle?: string;
+  fullNameLabel?: string;
+  fullNamePlaceholder?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  signupButtonText?: string;
+  termsText?: string;
+  termsLink?: string;
+  loginText?: string;
+  loginLinkText?: string;
+  loginLink?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  benefits?: string[];
+}
+
+export default function Signup4({
+  title = 'Start your journey today',
+  subtitle = 'Create your account and join thousands of users already growing with us.',
+  fullNameLabel = 'Full Name',
+  fullNamePlaceholder = 'John Doe',
+  emailLabel = 'Email',
+  emailPlaceholder = 'you@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'Create a strong password',
+  signupButtonText = 'Create Account',
+  termsText = 'By signing up, you agree to our',
+  termsLink = '#',
+  loginText = 'Already have an account?',
+  loginLinkText = 'Sign in here',
+  loginLink = '#',
+  imageUrl = 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000',
+  imageAlt = 'Team collaboration',
+  benefits = [
+    'Free 14-day trial, no credit card required',
+    'Access to all premium features',
+    '24/7 customer support',
+    'Cancel anytime, no questions asked'
+  ]
+}: Signup4Props) {
+  return (
+    <section className="w-full min-h-screen flex">
+      {/* Left Side - Image & Benefits */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary to-primary/90 relative overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            className="w-full h-full object-cover opacity-15"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/90 to-primary/95" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-center px-12 xl:px-16 text-white">
+          <div className="mb-12">
+            <h1 className="text-4xl xl:text-5xl font-bold mb-4 leading-tight">
+              Join our growing community
+            </h1>
+            <p className="text-lg text-white/95 leading-relaxed">
+              Everything you need to succeed in one powerful platform. Get started in minutes and see results immediately.
+            </p>
+          </div>
+
+          {/* Benefits List */}
+          <div className="space-y-5">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-7 h-7 rounded-full bg-white/20 flex items-center justify-center mt-0.5">
+                  <Check className="h-4 w-4 text-white" />
+                </div>
+                <p className="text-white/95 text-lg leading-relaxed">{benefit}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Trust Badge */}
+          <div className="mt-12 p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0">
+                <Shield className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-white mb-1">
+                  Secure & Private
+                </h3>
+                <p className="text-sm text-white/90 leading-relaxed">
+                  Your data is encrypted and protected with enterprise-grade security. We never share your information.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Decorative Elements */}
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -mb-32 -ml-32" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mt-48 -mr-48" />
+        </div>
+      </div>
+
+      {/* Right Side - Signup Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-12 bg-white dark:bg-gray-950">
+        <div className="w-full max-w-md">
+          {/* Header */}
+          <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+              {title}
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Form */}
+          <form className="space-y-5">
+            {/* Full Name */}
+            <div className="space-y-2">
+              <label
+                htmlFor="fullName"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+              >
+                {fullNameLabel}
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="fullName"
+                  type="text"
+                  placeholder={fullNamePlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+            </div>
+
+            {/* Email */}
+            <div className="space-y-2">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+              >
+                {emailLabel}
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder={emailPlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+            </div>
+
+            {/* Password */}
+            <div className="space-y-2">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300 block"
+              >
+                {passwordLabel}
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder={passwordPlaceholder}
+                  className="pl-10 h-12 text-base"
+                />
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Must be at least 8 characters with letters and numbers
+              </p>
+            </div>
+
+            {/* Terms Checkbox */}
+            <div className="pt-1">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 mt-1 rounded border-gray-300 text-primary focus:ring-primary"
+                />
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {termsText}{' '}
+                  <a
+                    href={termsLink}
+                    className="font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Terms of Service
+                  </a>
+                  {' and '}
+                  <a
+                    href={termsLink}
+                    className="font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                </span>
+              </label>
+            </div>
+
+            {/* Submit Button */}
+            <Button type="submit" className="w-full h-12 text-base font-semibold" size="lg">
+              {signupButtonText}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </form>
+
+          {/* Login Link */}
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {loginText}{' '}
+              <a
+                href={loginLink}
+                className="font-semibold text-primary hover:text-primary/80 transition-colors"
+              >
+                {loginLinkText}
+              </a>
+            </p>
+          </div>
+
+          {/* Mobile Benefits (visible only on small screens) */}
+          <div className="lg:hidden mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
+              What you get:
+            </h3>
+            <div className="space-y-3">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                    <Check className="h-3 w-3 text-primary" />
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{benefit}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
   }
 ];
 
