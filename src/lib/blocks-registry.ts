@@ -2991,6 +2991,828 @@ export default function CTA1({
 }`
   },
   {
+    id: 'cta-2',
+    name: 'CTA with Image & Stats',
+    description: '2-column CTA with image, gradient background, statistics display and dual action buttons. Modern and engaging design.',
+    category: 'cta',
+    tags: ['cta', 'call-to-action', 'conversion', 'image', 'stats', 'metrics', 'gradient'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
+    previewProps: {
+      badge: 'Start Today',
+      title: 'Ready to transform your business?',
+      description: 'Join thousands of companies already using our platform to streamline their operations, boost productivity, and drive growth. Start your free trial today and see the difference.',
+      primaryCTA: 'Start Free Trial',
+      primaryHref: '#',
+      secondaryCTA: 'Schedule Demo',
+      secondaryHref: '#',
+      imageUrl: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop',
+      imageAlt: 'Team collaboration',
+      stats: [
+        {
+          value: '10K+',
+          label: 'Active Users',
+          icon: 'Users'
+        },
+        {
+          value: '98%',
+          label: 'Satisfaction Rate',
+          icon: 'Award'
+        },
+        {
+          value: '3x',
+          label: 'Faster Results',
+          icon: 'TrendingUp'
+        }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Start Today', description: 'Badge text displayed above title' },
+      { name: 'title', type: 'string', description: 'Main headline' },
+      { name: 'description', type: 'string', description: 'Supporting text' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary button text' },
+      { name: 'primaryHref', type: 'string', description: 'Primary button link' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary button text' },
+      { name: 'secondaryHref', type: 'string', description: 'Secondary button link' },
+      { name: 'imageUrl', type: 'string', description: 'Image source URL' },
+      { name: 'imageAlt', type: 'string', description: 'Image alt text' },
+      { name: 'stats', type: 'Stat[]', description: 'Array of statistics with value, label and icon' }
+    ],
+    code: `import { ArrowRight, Users, TrendingUp, Award } from 'lucide-react';
+
+interface Stat {
+  value: string;
+  label: string;
+  icon: string;
+}
+
+interface CTA2Props {
+  badge?: string;
+  title?: string;
+  description?: string;
+  primaryCTA?: string;
+  primaryHref?: string;
+  secondaryCTA?: string;
+  secondaryHref?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  stats?: Stat[];
+}
+
+export default function CTA2({
+  badge = 'Start Today',
+  title = 'Ready to transform your business?',
+  description = 'Join thousands of companies already using our platform to streamline their operations, boost productivity, and drive growth. Start your free trial today and see the difference.',
+  primaryCTA = 'Start Free Trial',
+  primaryHref = '#',
+  secondaryCTA = 'Schedule Demo',
+  secondaryHref = '#',
+  imageUrl = 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop',
+  imageAlt = 'Team collaboration',
+  stats = [
+    {
+      value: '10K+',
+      label: 'Active Users',
+      icon: 'Users'
+    },
+    {
+      value: '98%',
+      label: 'Satisfaction Rate',
+      icon: 'Award'
+    },
+    {
+      value: '3x',
+      label: 'Faster Results',
+      icon: 'TrendingUp'
+    }
+  ]
+}: CTA2Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, React.ReactElement> = {
+      Users: <Users className="h-5 w-5" />,
+      Award: <Award className="h-5 w-5" />,
+      TrendingUp: <TrendingUp className="h-5 w-5" />,
+    };
+    return icons[iconName] || <Users className="h-5 w-5" />;
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-primary/10 via-primary/5 to-background dark:from-primary/20 dark:via-primary/10 dark:to-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
+          {/* Left Column - Content */}
+          <div className="flex flex-col justify-center space-y-6">
+            {/* Badge */}
+            <div className="inline-flex items-center w-fit rounded-full bg-primary/10 dark:bg-primary/20 px-4 py-1.5 text-sm font-semibold text-primary">
+              {badge}
+            </div>
+
+            {/* Title */}
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 dark:text-white">
+              {title}
+            </h2>
+
+            {/* Description */}
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-xl">
+              {description}
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href={primaryHref}
+                className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8 shadow-lg hover:shadow-xl"
+              >
+                {primaryCTA}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </a>
+              <a
+                href={secondaryHref}
+                className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 h-12 px-8"
+              >
+                {secondaryCTA}
+              </a>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-4">
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-start gap-1"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="text-primary">
+                      {getIcon(stat.icon)}
+                    </div>
+                    <span className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                      {stat.value}
+                    </span>
+                  </div>
+                  <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column - Image */}
+          <div className="relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <img
+                src={imageUrl}
+                alt={imageAlt}
+                className="w-full h-auto object-cover aspect-[4/3]"
+              />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent dark:from-primary/40" />
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'cta-3',
+    name: 'CTA with Urgency & Benefits',
+    description: 'Centered CTA with urgency badge, benefit cards grid, dual CTAs and trust indicators. Designed for high conversion.',
+    category: 'cta',
+    tags: ['cta', 'call-to-action', 'conversion', 'urgency', 'benefits', 'trust', 'scarcity'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
+    previewProps: {
+      urgencyText: 'Limited Time Offer - 50% OFF',
+      title: "Don't miss out on this exclusive opportunity",
+      description: 'Join over 10,000 successful businesses that have transformed their operations with our platform.',
+      highlightText: 'Start your 14-day free trial today. No credit card required.',
+      benefits: [
+        {
+          title: 'Instant Setup',
+          description: 'Get started in less than 5 minutes',
+          icon: 'Zap'
+        },
+        {
+          title: 'Secure & Reliable',
+          description: 'Bank-level encryption and 99.9% uptime',
+          icon: 'Shield'
+        },
+        {
+          title: 'Full Access',
+          description: 'All premium features included in trial',
+          icon: 'CheckCircle'
+        }
+      ],
+      primaryCTA: 'Start Free Trial',
+      primaryHref: '#',
+      secondaryCTA: 'View Pricing',
+      secondaryHref: '#',
+      guaranteeText: '30-day money-back guarantee'
+    },
+    props: [
+      { name: 'urgencyText', type: 'string', default: 'Limited Time Offer - 50% OFF', description: 'Urgency text in red badge' },
+      { name: 'title', type: 'string', description: 'Main headline' },
+      { name: 'description', type: 'string', description: 'Supporting description' },
+      { name: 'highlightText', type: 'string', description: 'Highlighted text in primary color' },
+      { name: 'benefits', type: 'Benefit[]', description: 'Array of benefits with title, description and icon' },
+      { name: 'primaryCTA', type: 'string', description: 'Primary button text' },
+      { name: 'primaryHref', type: 'string', description: 'Primary button link' },
+      { name: 'secondaryCTA', type: 'string', description: 'Secondary button text' },
+      { name: 'secondaryHref', type: 'string', description: 'Secondary button link' },
+      { name: 'guaranteeText', type: 'string', default: '30-day money-back guarantee', description: 'Guarantee text below CTAs' }
+    ],
+    code: `import { Clock, Zap, Shield, CheckCircle, ArrowRight } from 'lucide-react';
+
+interface Benefit {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface CTA3Props {
+  urgencyText?: string;
+  title?: string;
+  description?: string;
+  highlightText?: string;
+  benefits?: Benefit[];
+  primaryCTA?: string;
+  primaryHref?: string;
+  secondaryCTA?: string;
+  secondaryHref?: string;
+  guaranteeText?: string;
+}
+
+export default function CTA3({
+  urgencyText = 'Limited Time Offer - 50% OFF',
+  title = "Don't miss out on this exclusive opportunity",
+  description = 'Join over 10,000 successful businesses that have transformed their operations with our platform.',
+  highlightText = 'Start your 14-day free trial today. No credit card required.',
+  benefits = [
+    {
+      title: 'Instant Setup',
+      description: 'Get started in less than 5 minutes',
+      icon: 'Zap'
+    },
+    {
+      title: 'Secure & Reliable',
+      description: 'Bank-level encryption and 99.9% uptime',
+      icon: 'Shield'
+    },
+    {
+      title: 'Full Access',
+      description: 'All premium features included in trial',
+      icon: 'CheckCircle'
+    }
+  ],
+  primaryCTA = 'Start Free Trial',
+  primaryHref = '#',
+  secondaryCTA = 'View Pricing',
+  secondaryHref = '#',
+  guaranteeText = '30-day money-back guarantee'
+}: CTA3Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, React.ReactElement> = {
+      Clock: <Clock className="h-6 w-6" />,
+      Zap: <Zap className="h-6 w-6" />,
+      Shield: <Shield className="h-6 w-6" />,
+      CheckCircle: <CheckCircle className="h-6 w-6" />,
+    };
+    return icons[iconName] || <Zap className="h-6 w-6" />;
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="max-w-5xl mx-auto">
+          {/* Urgency Badge */}
+          <div className="flex justify-center mb-8">
+            <div className="inline-flex items-center gap-2 rounded-full bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900 px-6 py-2">
+              <Clock className="h-4 w-4 text-red-600 dark:text-red-400" />
+              <span className="text-sm font-semibold text-red-600 dark:text-red-400">
+                {urgencyText}
+              </span>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="text-center space-y-6 mb-12">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 dark:text-white">
+              {title}
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              {description}
+            </p>
+            <p className="text-base md:text-lg font-semibold text-primary">
+              {highlightText}
+            </p>
+          </div>
+
+          {/* Benefits Grid */}
+          <div className="grid gap-6 md:grid-cols-3 mb-12">
+            {benefits.map((benefit, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center text-center p-6 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-lg"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary mb-4">
+                  {getIcon(benefit.icon)}
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                  {benefit.title}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <a
+              href={primaryHref}
+              className="inline-flex items-center justify-center rounded-lg text-base font-semibold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-10 shadow-lg hover:shadow-xl hover:scale-105 w-full sm:w-auto"
+            >
+              {primaryCTA}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
+            <a
+              href={secondaryHref}
+              className="inline-flex items-center justify-center rounded-lg text-base font-semibold transition-colors border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 h-14 px-10 w-full sm:w-auto"
+            >
+              {secondaryCTA}
+            </a>
+          </div>
+
+          {/* Guarantee */}
+          <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
+            <span>{guaranteeText}</span>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
+              <div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">10,000+</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Active Users</div>
+              </div>
+              <div className="hidden md:block w-px h-12 bg-gray-200 dark:bg-gray-800" />
+              <div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">4.9/5</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Customer Rating</div>
+              </div>
+              <div className="hidden md:block w-px h-12 bg-gray-200 dark:bg-gray-800" />
+              <div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">99.9%</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">Uptime SLA</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'cta-4',
+    name: 'Newsletter CTA',
+    description: 'Email newsletter signup with feature highlights, social proof avatars and centered form. Perfect for lead generation.',
+    category: 'cta',
+    tags: ['cta', 'newsletter', 'email', 'signup', 'subscription', 'lead-generation', 'social-proof'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
+    previewProps: {
+      badge: 'Join our newsletter',
+      title: 'Get exclusive updates delivered to your inbox',
+      description: 'Subscribe now and be the first to know about new features, special offers, and insider tips.',
+      features: [
+        {
+          text: 'Weekly insights and tips',
+          icon: 'Mail'
+        },
+        {
+          text: 'Exclusive discounts',
+          icon: 'Gift'
+        },
+        {
+          text: 'Early access to features',
+          icon: 'Bell'
+        },
+        {
+          text: 'No spam, unsubscribe anytime',
+          icon: 'Sparkles'
+        }
+      ],
+      placeholder: 'Enter your email address',
+      buttonText: 'Subscribe Now',
+      privacyText: 'We respect your privacy. Unsubscribe at any time.',
+      socialProof: 'Join 25,000+ subscribers',
+      avatars: [
+        'https://i.pravatar.cc/150?img=1',
+        'https://i.pravatar.cc/150?img=2',
+        'https://i.pravatar.cc/150?img=3',
+        'https://i.pravatar.cc/150?img=4'
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Join our newsletter', description: 'Badge text above title' },
+      { name: 'title', type: 'string', description: 'Main headline' },
+      { name: 'description', type: 'string', description: 'Supporting description' },
+      { name: 'features', type: 'Feature[]', description: 'Array of features with text and icon' },
+      { name: 'placeholder', type: 'string', default: 'Enter your email address', description: 'Email input placeholder' },
+      { name: 'buttonText', type: 'string', default: 'Subscribe Now', description: 'Submit button text' },
+      { name: 'privacyText', type: 'string', description: 'Privacy notice below form' },
+      { name: 'socialProof', type: 'string', description: 'Social proof text' },
+      { name: 'avatars', type: 'string[]', description: 'Array of avatar image URLs' }
+    ],
+    code: `import { Mail, Gift, Bell, Sparkles, ArrowRight } from 'lucide-react';
+
+interface Feature {
+  text: string;
+  icon: string;
+}
+
+interface CTA4Props {
+  badge?: string;
+  title?: string;
+  description?: string;
+  features?: Feature[];
+  placeholder?: string;
+  buttonText?: string;
+  privacyText?: string;
+  socialProof?: string;
+  avatars?: string[];
+}
+
+export default function CTA4({
+  badge = 'Join our newsletter',
+  title = 'Get exclusive updates delivered to your inbox',
+  description = 'Subscribe now and be the first to know about new features, special offers, and insider tips.',
+  features = [
+    {
+      text: 'Weekly insights and tips',
+      icon: 'Mail'
+    },
+    {
+      text: 'Exclusive discounts',
+      icon: 'Gift'
+    },
+    {
+      text: 'Early access to features',
+      icon: 'Bell'
+    },
+    {
+      text: 'No spam, unsubscribe anytime',
+      icon: 'Sparkles'
+    }
+  ],
+  placeholder = 'Enter your email address',
+  buttonText = 'Subscribe Now',
+  privacyText = 'We respect your privacy. Unsubscribe at any time.',
+  socialProof = 'Join 25,000+ subscribers',
+  avatars = [
+    'https://i.pravatar.cc/150?img=1',
+    'https://i.pravatar.cc/150?img=2',
+    'https://i.pravatar.cc/150?img=3',
+    'https://i.pravatar.cc/150?img=4'
+  ]
+}: CTA4Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, React.ReactElement> = {
+      Mail: <Mail className="h-5 w-5" />,
+      Gift: <Gift className="h-5 w-5" />,
+      Bell: <Bell className="h-5 w-5" />,
+      Sparkles: <Sparkles className="h-5 w-5" />,
+    };
+    return icons[iconName] || <Mail className="h-5 w-5" />;
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-primary/5 via-background to-primary/5 dark:from-primary/10 dark:via-gray-950 dark:to-primary/10">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="max-w-4xl mx-auto">
+          {/* Badge */}
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 dark:bg-primary/20 px-4 py-1.5 text-sm font-semibold text-primary">
+              <Mail className="h-4 w-4" />
+              {badge}
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4 text-gray-900 dark:text-white">
+              {title}
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              {description}
+            </p>
+          </div>
+
+          {/* Email Form */}
+          <div className="max-w-xl mx-auto mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 p-2 rounded-xl bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 shadow-lg">
+              <input
+                type="email"
+                placeholder={placeholder}
+                className="flex-1 px-4 py-3 rounded-lg bg-transparent border-0 focus:outline-none focus:ring-0 text-gray-900 dark:text-white placeholder-gray-500"
+              />
+              <button className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-6 whitespace-nowrap shadow-md hover:shadow-lg hover:scale-105">
+                {buttonText}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </button>
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-500 text-center mt-3">
+              {privacyText}
+            </p>
+          </div>
+
+          {/* Social Proof */}
+          <div className="flex items-center justify-center gap-3 mb-10">
+            <div className="flex -space-x-2">
+              {avatars.map((avatar, index) => (
+                <img
+                  key={index}
+                  src={avatar}
+                  alt={\`Subscriber \${index + 1}\`}
+                  className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-900"
+                />
+              ))}
+            </div>
+            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+              {socialProof}
+            </span>
+          </div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-3 p-4 rounded-lg bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800"
+              >
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 dark:bg-primary/20 text-primary shrink-0">
+                  {getIcon(feature.icon)}
+                </div>
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  {feature.text}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'cta-5',
+    name: 'Video Demo CTA',
+    description: 'Split-screen CTA with video preview, play button overlay, floating stats, and testimonial. Ideal for product demos and bookings.',
+    category: 'cta',
+    tags: ['cta', 'video', 'demo', 'testimonial', 'stats', 'booking', 'split-screen'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
+    previewProps: {
+      badge: 'Watch Demo',
+      title: 'See it in action',
+      subtitle: 'Experience the difference yourself',
+      description: 'Watch our 2-minute demo and discover how our platform can transform your workflow. Book a personalized demo with our team today.',
+      videoThumbnail: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop',
+      videoAlt: 'Product demo preview',
+      primaryCTA: 'Book a Demo',
+      primaryHref: '#',
+      secondaryCTA: 'Watch Video',
+      secondaryHref: '#',
+      benefits: [
+        'No credit card required',
+        'Free 30-day trial included',
+        'Setup in under 10 minutes'
+      ],
+      testimonial: {
+        name: 'Sarah Johnson',
+        role: 'Marketing Director',
+        avatar: 'https://i.pravatar.cc/150?img=5',
+        rating: 5
+      },
+      stats: [
+        { label: 'Customer Satisfaction', value: '98%' },
+        { label: 'Setup Time', value: '< 10 min' },
+        { label: 'ROI Increase', value: '3.5x' }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Watch Demo', description: 'Badge text above title' },
+      { name: 'title', type: 'string', description: 'Main headline' },
+      { name: 'subtitle', type: 'string', description: 'Subtitle highlighted text' },
+      { name: 'description', type: 'string', description: 'Supporting description' },
+      { name: 'videoThumbnail', type: 'string', description: 'Video thumbnail image URL' },
+      { name: 'videoAlt', type: 'string', description: 'Video image alt text' },
+      { name: 'primaryCTA', type: 'string', default: 'Book a Demo', description: 'Primary button text' },
+      { name: 'primaryHref', type: 'string', default: '#', description: 'Primary button link' },
+      { name: 'secondaryCTA', type: 'string', default: 'Watch Video', description: 'Secondary button text' },
+      { name: 'secondaryHref', type: 'string', default: '#', description: 'Secondary button link' },
+      { name: 'benefits', type: 'string[]', description: 'Array of benefit text items' },
+      { name: 'testimonial', type: 'Testimonial', description: 'Testimonial object with name, role, avatar, rating' },
+      { name: 'stats', type: 'Array<{label: string; value: string}>', description: 'Array of stat objects for floating card' }
+    ],
+    code: `import { Play, Calendar, CheckCircle2, Star, TrendingUp } from 'lucide-react';
+
+interface Testimonial {
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+}
+
+interface CTA5Props {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  videoThumbnail?: string;
+  videoAlt?: string;
+  primaryCTA?: string;
+  primaryHref?: string;
+  secondaryCTA?: string;
+  secondaryHref?: string;
+  benefits?: string[];
+  testimonial?: Testimonial;
+  stats?: {
+    label: string;
+    value: string;
+  }[];
+}
+
+export default function CTA5({
+  badge = 'Watch Demo',
+  title = 'See it in action',
+  subtitle = 'Experience the difference yourself',
+  description = 'Watch our 2-minute demo and discover how our platform can transform your workflow. Book a personalized demo with our team today.',
+  videoThumbnail = 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&h=800&fit=crop',
+  videoAlt = 'Product demo preview',
+  primaryCTA = 'Book a Demo',
+  primaryHref = '#',
+  secondaryCTA = 'Watch Video',
+  secondaryHref = '#',
+  benefits = [
+    'No credit card required',
+    'Free 30-day trial included',
+    'Setup in under 10 minutes'
+  ],
+  testimonial = {
+    name: 'Sarah Johnson',
+    role: 'Marketing Director',
+    avatar: 'https://i.pravatar.cc/150?img=5',
+    rating: 5
+  },
+  stats = [
+    { label: 'Customer Satisfaction', value: '98%' },
+    { label: 'Setup Time', value: '< 10 min' },
+    { label: 'ROI Increase', value: '3.5x' }
+  ]
+}: CTA5Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
+          {/* Left Column - Video/Visual */}
+          <div className="relative order-2 lg:order-1">
+            {/* Video Thumbnail */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
+              <img
+                src={videoThumbnail}
+                alt={videoAlt}
+                className="w-full h-auto object-cover aspect-video"
+              />
+
+              {/* Play Button Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-primary/20 to-transparent dark:from-primary/60 dark:via-primary/30 flex items-center justify-center">
+                <button className="w-20 h-20 rounded-full bg-white dark:bg-gray-900 shadow-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <Play className="h-8 w-8 text-primary ml-1" fill="currentColor" />
+                </button>
+              </div>
+
+              {/* Floating Stats Card */}
+              <div className="absolute bottom-4 left-4 right-4 bg-white dark:bg-gray-900 rounded-xl p-4 shadow-xl border border-gray-200 dark:border-gray-800">
+                <div className="grid grid-cols-3 gap-4 text-center">
+                  {stats.map((stat, index) => (
+                    <div key={index}>
+                      <div className="text-lg md:text-xl font-bold text-gray-900 dark:text-white">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -z-10 -top-4 -left-4 w-32 h-32 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl" />
+            <div className="absolute -z-10 -bottom-4 -right-4 w-40 h-40 bg-primary/10 dark:bg-primary/20 rounded-full blur-3xl" />
+          </div>
+
+          {/* Right Column - Content */}
+          <div className="flex flex-col justify-center space-y-6 order-1 lg:order-2">
+            {/* Badge */}
+            <div className="inline-flex items-center w-fit rounded-full bg-primary/10 dark:bg-primary/20 px-4 py-1.5 text-sm font-semibold text-primary">
+              <Play className="h-4 w-4 mr-2" />
+              {badge}
+            </div>
+
+            {/* Title */}
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-900 dark:text-white">
+                {title}
+              </h2>
+              <p className="text-xl font-semibold text-primary">
+                {subtitle}
+              </p>
+            </div>
+
+            {/* Description */}
+            <p className="text-lg text-gray-600 dark:text-gray-400">
+              {description}
+            </p>
+
+            {/* Benefits List */}
+            <div className="space-y-3">
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-100 dark:bg-green-950">
+                    <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
+                  </div>
+                  <span className="text-sm md:text-base text-gray-700 dark:text-gray-300">
+                    {benefit}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <a
+                href={primaryHref}
+                className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-all bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8 shadow-lg hover:shadow-xl hover:scale-105"
+              >
+                <Calendar className="mr-2 h-5 w-5" />
+                {primaryCTA}
+              </a>
+              <a
+                href={secondaryHref}
+                className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-800 h-12 px-8"
+              >
+                <Play className="mr-2 h-5 w-5" />
+                {secondaryCTA}
+              </a>
+            </div>
+
+            {/* Testimonial */}
+            <div className="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+              <img
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                className="w-12 h-12 rounded-full border-2 border-white dark:border-gray-800 shadow-md"
+              />
+              <div className="flex-1">
+                <div className="flex items-center gap-1 mb-1">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 text-yellow-500 fill-yellow-500" />
+                  ))}
+                </div>
+                <p className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {testimonial.name}
+                </p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  {testimonial.role}
+                </p>
+              </div>
+              <TrendingUp className="h-5 w-5 text-green-600 dark:text-green-400" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
     id: 'footer-1',
     name: 'Complete Footer',
     description: 'Footer with company information, link sections, social icons and copyright. Responsive layout.',

@@ -20,6 +20,10 @@ import Features2 from '@/blocks/features/features-2';
 import Features3 from '@/blocks/features/features-3';
 import Features4 from '@/blocks/features/features-4';
 import CTA1 from '@/blocks/cta/cta1';
+import CTA2 from '@/blocks/cta/cta-2';
+import CTA3 from '@/blocks/cta/cta-3';
+import CTA4 from '@/blocks/cta/cta-4';
+import CTA5 from '@/blocks/cta/cta-5';
 import Navbar1 from '@/blocks/navbar/navbar1';
 import Navbar2 from '@/blocks/navbar/navbar-2';
 import Navbar3 from '@/blocks/navbar/navbar-3';
@@ -96,6 +100,10 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'features-3': Features3,
   'features-4': Features4,
   'cta-1': CTA1,
+  'cta-2': CTA2,
+  'cta-3': CTA3,
+  'cta-4': CTA4,
+  'cta-5': CTA5,
   'footer-1': Footer1,
   'footer-2': Footer2,
   'footer-3': Footer3,
