@@ -64,6 +64,9 @@ import Testimonial2 from '@/blocks/testimonial/testimonial-2';
 import Testimonial3 from '@/blocks/testimonial/testimonial-3';
 import Testimonial4 from '@/blocks/testimonial/testimonial-4';
 import FAQ1 from '@/blocks/faq/faq-1';
+import FAQ2 from '@/blocks/faq/faq-2';
+import FAQ3 from '@/blocks/faq/faq-3';
+import FAQ4 from '@/blocks/faq/faq-4';
 
 interface PageProps {
   params: Promise<{
@@ -133,6 +136,9 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'testimonial-3': Testimonial3,
   'testimonial-4': Testimonial4,
   'faq-1': FAQ1,
+  'faq-2': FAQ2,
+  'faq-3': FAQ3,
+  'faq-4': FAQ4,
 };
 
 export default async function BlockPage({ params }: PageProps) {

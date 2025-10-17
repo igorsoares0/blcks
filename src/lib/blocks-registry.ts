@@ -4703,6 +4703,592 @@ export default function About3({
 }`
   },
   {
+    id: 'faq-2',
+    name: 'FAQ Grid Cards',
+    description: 'FAQ in 2-column grid layout with icon-based cards. Clean design with help icons, hover effects and contact CTA section.',
+    category: 'faq',
+    tags: ['faq', 'questions', 'help', 'support', 'grid', 'cards'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
+    previewProps: {
+      title: 'Frequently Asked Questions',
+      description: 'Everything you need to know about our product and services',
+      faqs: [
+        {
+          question: 'How does the free trial work?',
+          answer: 'You get 14 days of free access to all premium features. No credit card required. Cancel anytime during the trial period without being charged.'
+        },
+        {
+          question: 'What payment methods do you accept?',
+          answer: 'We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual plans.'
+        },
+        {
+          question: 'Can I change my plan later?',
+          answer: 'Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we prorate any payments.'
+        },
+        {
+          question: 'Is my data secure?',
+          answer: 'Absolutely. We use bank-level encryption (AES-256) and are fully compliant with GDPR, SOC 2, and ISO 27001 standards.'
+        },
+        {
+          question: 'Do you offer refunds?',
+          answer: 'Yes, we offer a 30-day money-back guarantee. If you are not satisfied, contact us for a full refund.'
+        },
+        {
+          question: 'How can I cancel my subscription?',
+          answer: 'You can cancel anytime from your account settings. Access continues until the end of your billing period.'
+        }
+      ],
+      contactText: 'Still have questions? Contact our support team',
+      contactLink: '#'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Frequently Asked Questions', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
+      { name: 'faqs', type: 'FAQItem[]', description: 'Array of FAQ items with question and answer' },
+      { name: 'contactText', type: 'string', description: 'Contact CTA text' },
+      { name: 'contactLink', type: 'string', description: 'Contact CTA link' }
+    ],
+    code: `import { HelpCircle, Plus } from 'lucide-react';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQ2Props {
+  title?: string;
+  description?: string;
+  faqs?: FAQItem[];
+  contactText?: string;
+  contactLink?: string;
+}
+
+export default function FAQ2({
+  title = 'Frequently Asked Questions',
+  description = 'Everything you need to know about our product and services',
+  faqs = [
+    {
+      question: 'How does the free trial work?',
+      answer: 'You get 14 days of free access to all premium features. No credit card required. Cancel anytime during the trial period without being charged.'
+    },
+    {
+      question: 'What payment methods do you accept?',
+      answer: 'We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual plans.'
+    },
+    {
+      question: 'Can I change my plan later?',
+      answer: 'Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we prorate any payments.'
+    },
+    {
+      question: 'Is my data secure?',
+      answer: 'Absolutely. We use bank-level encryption (AES-256) and are fully compliant with GDPR, SOC 2, and ISO 27001 standards.'
+    },
+    {
+      question: 'Do you offer refunds?',
+      answer: 'Yes, we offer a 30-day money-back guarantee. If you are not satisfied with our service, contact us for a full refund.'
+    },
+    {
+      question: 'How can I cancel my subscription?',
+      answer: 'You can cancel your subscription at any time from your account settings. Your access will continue until the end of your billing period.'
+    }
+  ],
+  contactText = "Still have questions? Contact our support team",
+  contactLink = "#"
+}: FAQ2Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
+            {title}
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            {description}
+          </p>
+        </div>
+
+        {/* FAQ Grid - 2 Columns */}
+        <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="group bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-lg"
+            >
+              {/* Question with Icon */}
+              <div className="flex items-start gap-4 mb-4">
+                <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center group-hover:bg-primary/20 dark:group-hover:bg-primary/30 transition-colors">
+                  <HelpCircle className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="font-bold text-lg text-gray-900 dark:text-white pt-1">
+                  {faq.question}
+                </h3>
+              </div>
+
+              {/* Answer */}
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed pl-14">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact CTA */}
+        <div className="max-w-3xl mx-auto mt-16 text-center">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Plus className="h-5 w-5 text-primary" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                {contactText}
+              </h3>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              Our team is here to help you with any questions you may have
+            </p>
+            <a
+              href={contactLink}
+              className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
+            >
+              Contact Support
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'faq-3',
+    name: 'FAQ with Categories',
+    description: 'Single-column FAQ with native HTML details/summary for expandable questions. Features category badges, smooth animations and gradient support CTA.',
+    category: 'faq',
+    tags: ['faq', 'questions', 'help', 'support', 'accordion', 'categories'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' }
+    ],
+    previewProps: {
+      title: 'Got questions? We have answers',
+      description: 'Find answers to the most commonly asked questions about our product',
+      faqs: [
+        {
+          question: 'What is included in the free trial?',
+          answer: 'The free trial includes full access to all premium features for 14 days. You can explore unlimited projects, advanced analytics, priority support, and all integrations without any restrictions. No credit card required to start.',
+          category: 'Pricing'
+        },
+        {
+          question: 'How do I upgrade or downgrade my plan?',
+          answer: 'You can change your plan anytime from your account settings. Go to Settings > Billing > Change Plan. Upgrades take effect immediately, and downgrades apply at the end of your current billing cycle.',
+          category: 'Billing'
+        },
+        {
+          question: 'Is my data secure and private?',
+          answer: 'Yes, absolutely. We use bank-level AES-256 encryption for all data at rest and in transit. We are SOC 2 Type II certified, GDPR compliant, and ISO 27001 certified.',
+          category: 'Security'
+        },
+        {
+          question: 'Can I integrate with other tools?',
+          answer: 'Yes! We offer native integrations with over 50 popular tools including Slack, Google Workspace, Microsoft Teams, Salesforce, and more. We also provide a robust REST API.',
+          category: 'Integrations'
+        }
+      ],
+      supportText: 'Still need help?',
+      supportEmail: 'support@example.com'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Got questions? We have answers', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
+      { name: 'faqs', type: 'FAQItem[]', description: 'Array of FAQ items with question, answer and optional category' },
+      { name: 'supportText', type: 'string', description: 'Support CTA text' },
+      { name: 'supportEmail', type: 'string', description: 'Support email address' }
+    ],
+    code: `import { MessageCircle, ChevronDown } from 'lucide-react';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+  category?: string;
+}
+
+interface FAQ3Props {
+  title?: string;
+  description?: string;
+  faqs?: FAQItem[];
+  supportText?: string;
+  supportEmail?: string;
+}
+
+export default function FAQ3({
+  title = 'Got questions? We have answers',
+  description = 'Find answers to the most commonly asked questions about our product',
+  faqs = [
+    {
+      question: 'What is included in the free trial?',
+      answer: 'The free trial includes full access to all premium features for 14 days. You can explore unlimited projects, advanced analytics, priority support, and all integrations without any restrictions. No credit card required to start.',
+      category: 'Pricing'
+    },
+    {
+      question: 'How do I upgrade or downgrade my plan?',
+      answer: 'You can change your plan anytime from your account settings. Go to Settings > Billing > Change Plan. Upgrades take effect immediately, and downgrades apply at the end of your current billing cycle. All changes are prorated automatically.',
+      category: 'Billing'
+    },
+    {
+      question: 'Is my data secure and private?',
+      answer: 'Yes, absolutely. We use bank-level AES-256 encryption for all data at rest and in transit. We are SOC 2 Type II certified, GDPR compliant, and ISO 27001 certified. Your data is stored in secure data centers with regular backups and 99.9% uptime SLA.',
+      category: 'Security'
+    },
+    {
+      question: 'Can I integrate with other tools?',
+      answer: 'Yes! We offer native integrations with over 50 popular tools including Slack, Google Workspace, Microsoft Teams, Salesforce, and more. We also provide a robust REST API and webhooks for custom integrations. Check our integrations page for the full list.',
+      category: 'Integrations'
+    },
+    {
+      question: 'What kind of support do you offer?',
+      answer: 'We provide multiple support channels: email support for all users (24-hour response time), live chat for Pro and Enterprise plans (available 9am-6pm EST), priority support with dedicated account managers for Enterprise, and extensive documentation, video tutorials, and community forum for self-service help.',
+      category: 'Support'
+    },
+    {
+      question: 'Can I cancel my subscription anytime?',
+      answer: 'Yes, you can cancel anytime without penalties. Your subscription remains active until the end of your billing period, and you will not be charged again. All your data remains accessible during this time. You can also export all your data before canceling.',
+      category: 'Billing'
+    }
+  ],
+  supportText = 'Still need help?',
+  supportEmail = 'support@example.com'
+}: FAQ3Props) {
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
+            {title}
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            {description}
+          </p>
+        </div>
+
+        {/* FAQ List - Single Column with Categories */}
+        <div className="max-w-4xl mx-auto space-y-4">
+          {faqs.map((faq, index) => (
+            <details
+              key={index}
+              className="group bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden hover:border-primary dark:hover:border-primary transition-all duration-300"
+            >
+              <summary className="flex items-center justify-between gap-4 p-6 cursor-pointer list-none">
+                <div className="flex items-start gap-4 flex-1">
+                  {faq.category && (
+                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-primary/10 text-primary shrink-0">
+                      {faq.category}
+                    </span>
+                  )}
+                  <h3 className="font-bold text-lg text-gray-900 dark:text-white">
+                    {faq.question}
+                  </h3>
+                </div>
+                <ChevronDown className="h-5 w-5 text-gray-500 shrink-0 transition-transform duration-300 group-open:rotate-180" />
+              </summary>
+              <div className="px-6 pb-6 pt-2">
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed pl-0 md:pl-20">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          ))}
+        </div>
+
+        {/* Support CTA */}
+        <div className="max-w-4xl mx-auto mt-16">
+          <div className="bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 dark:from-primary/10 dark:via-primary/20 dark:to-primary/10 rounded-xl p-8 border border-primary/20 dark:border-primary/30">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/20 dark:bg-primary/30 flex items-center justify-center shrink-0">
+                  <MessageCircle className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                    {supportText}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    Our support team is ready to assist you
+                  </p>
+                </div>
+              </div>
+              <a
+                href={\`mailto:\${supportEmail}\`}
+                className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 whitespace-nowrap"
+              >
+                Contact Support
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'faq-4',
+    name: 'FAQ with Category Grid',
+    description: '2-column grid FAQ organized by categories with search bar. Each category has an icon header and accordion-style questions. Modern design with gradient background.',
+    category: 'faq',
+    tags: ['faq', 'questions', 'help', 'support', 'categories', 'search', 'grid', 'accordion'],
+    dependencies: [
+      { name: 'lucide-react', version: '^0.544.0' },
+      { name: 'accordion', command: 'npx shadcn@latest add accordion' }
+    ],
+    previewProps: {
+      title: 'How can we help you?',
+      description: 'Search our FAQ for answers to anything you might ask',
+      searchPlaceholder: 'Search for answers...',
+      categories: [
+        {
+          title: 'Getting Started',
+          icon: 'BookOpen',
+          faqs: [
+            {
+              question: 'How do I create an account?',
+              answer: 'Click the "Sign Up" button in the top right corner. Enter your email, create a password, and verify your email address.'
+            },
+            {
+              question: 'What are the system requirements?',
+              answer: 'Our platform works on all modern browsers (Chrome, Firefox, Safari, Edge) on desktop and mobile.'
+            }
+          ]
+        },
+        {
+          title: 'Features',
+          icon: 'Zap',
+          faqs: [
+            {
+              question: 'What features are included in each plan?',
+              answer: 'Free plan includes basic features. Pro adds advanced analytics and team collaboration. Enterprise includes custom integrations.'
+            },
+            {
+              question: 'Can I try features before upgrading?',
+              answer: 'Yes! We offer a 14-day free trial of our Pro plan with full access to all premium features. No credit card required.'
+            }
+          ]
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'How can we help you?', description: 'Section title' },
+      { name: 'description', type: 'string', description: 'Section description' },
+      { name: 'searchPlaceholder', type: 'string', default: 'Search for answers...', description: 'Search input placeholder' },
+      { name: 'categories', type: 'FAQCategory[]', description: 'Array of FAQ categories with title, icon and faqs array' }
+    ],
+    code: `import { Search, BookOpen, Zap, Shield, CreditCard } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQCategory {
+  title: string;
+  icon: string;
+  faqs: FAQItem[];
+}
+
+interface FAQ4Props {
+  title?: string;
+  description?: string;
+  searchPlaceholder?: string;
+  categories?: FAQCategory[];
+}
+
+export default function FAQ4({
+  title = 'How can we help you?',
+  description = 'Search our FAQ for answers to anything you might ask',
+  searchPlaceholder = 'Search for answers...',
+  categories = [
+    {
+      title: 'Getting Started',
+      icon: 'BookOpen',
+      faqs: [
+        {
+          question: 'How do I create an account?',
+          answer: 'Click the "Sign Up" button in the top right corner. Enter your email, create a password, and verify your email address. You will be guided through a quick onboarding process to set up your profile.'
+        },
+        {
+          question: 'What are the system requirements?',
+          answer: 'Our platform works on all modern browsers (Chrome, Firefox, Safari, Edge) on desktop and mobile. We recommend using the latest version of your browser for the best experience. No downloads or installations required.'
+        },
+        {
+          question: 'Is there a mobile app?',
+          answer: 'Yes! We have native iOS and Android apps available on the App Store and Google Play. The mobile apps offer the same features as the web version with an optimized mobile experience.'
+        }
+      ]
+    },
+    {
+      title: 'Features',
+      icon: 'Zap',
+      faqs: [
+        {
+          question: 'What features are included in each plan?',
+          answer: 'Our Free plan includes basic features for individuals. Pro plan adds advanced analytics, priority support, and team collaboration. Enterprise includes everything plus custom integrations, dedicated support, and SLA guarantees.'
+        },
+        {
+          question: 'Can I try features before upgrading?',
+          answer: 'Yes! We offer a 14-day free trial of our Pro plan with full access to all premium features. No credit card required. You can downgrade to Free at any time without losing your data.'
+        },
+        {
+          question: 'How do integrations work?',
+          answer: 'We offer one-click integrations with popular tools like Slack, Google Drive, Dropbox, and more. Connect your accounts in Settings > Integrations. Premium plans also get access to our REST API for custom integrations.'
+        }
+      ]
+    },
+    {
+      title: 'Billing',
+      icon: 'CreditCard',
+      faqs: [
+        {
+          question: 'What payment methods do you accept?',
+          answer: 'We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and ACH transfers for annual Enterprise plans. All payments are processed securely through Stripe.'
+        },
+        {
+          question: 'Can I change my plan at any time?',
+          answer: 'Absolutely! You can upgrade or downgrade your plan anytime from your account settings. Upgrades take effect immediately. Downgrades apply at the end of your current billing cycle, and we prorate all charges.'
+        },
+        {
+          question: 'Do you offer refunds?',
+          answer: 'Yes, we offer a 30-day money-back guarantee on all paid plans. If you are not satisfied for any reason, contact our support team within 30 days of your purchase for a full refund.'
+        }
+      ]
+    },
+    {
+      title: 'Security',
+      icon: 'Shield',
+      faqs: [
+        {
+          question: 'How do you protect my data?',
+          answer: 'We use industry-standard AES-256 encryption for data at rest and TLS 1.3 for data in transit. All our servers are hosted in SOC 2 certified data centers with 24/7 monitoring and regular security audits.'
+        },
+        {
+          question: 'Are you GDPR compliant?',
+          answer: 'Yes, we are fully GDPR compliant. We have a dedicated Data Protection Officer, provide data processing agreements, and respect all data subject rights including the right to be forgotten.'
+        },
+        {
+          question: 'Do you perform security audits?',
+          answer: 'We conduct quarterly internal security audits and annual third-party penetration testing. We also participate in a responsible disclosure program and offer bug bounties for security researchers.'
+        }
+      ]
+    }
+  ]
+}: FAQ4Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, React.ReactElement> = {
+      BookOpen: <BookOpen className="h-5 w-5" />,
+      Zap: <Zap className="h-5 w-5" />,
+      CreditCard: <CreditCard className="h-5 w-5" />,
+      Shield: <Shield className="h-5 w-5" />,
+    };
+    return icons[iconName] || <BookOpen className="h-5 w-5" />;
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-4">
+            {title}
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+            {description}
+          </p>
+
+          {/* Search Bar (visual only) */}
+          <div className="relative max-w-2xl mx-auto">
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder={searchPlaceholder}
+              className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+            />
+          </div>
+        </div>
+
+        {/* FAQ Categories Grid */}
+        <div className="max-w-6xl mx-auto grid gap-8 md:grid-cols-2">
+          {categories.map((category, categoryIndex) => (
+            <div
+              key={categoryIndex}
+              className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
+              {/* Category Header */}
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary">
+                  {getIcon(category.icon)}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {category.title}
+                </h3>
+              </div>
+
+              {/* FAQ Accordion */}
+              <Accordion type="single" collapsible className="w-full">
+                {category.faqs.map((faq, faqIndex) => (
+                  <AccordionItem
+                    key={faqIndex}
+                    value={\`item-\${categoryIndex}-\${faqIndex}\`}
+                    className="border-b border-gray-200 dark:border-gray-700 last:border-0"
+                  >
+                    <AccordionTrigger className="text-left text-base font-semibold text-gray-900 dark:text-white hover:no-underline py-4">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-gray-600 dark:text-gray-400 pb-4">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="max-w-3xl mx-auto mt-16 text-center">
+          <div className="bg-primary/5 dark:bg-primary/10 rounded-xl p-8 border border-primary/20">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              Still have questions?
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              Can't find the answer you're looking for? Our support team is here to help.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a
+                href="#"
+                className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
+              >
+                Contact Support
+              </a>
+              <a
+                href="#"
+                className="inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-colors border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 h-11 px-8"
+              >
+                View Documentation
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
     id: 'blog-1',
     name: 'Blog Grid',
     description: 'Blog post grid with image, category, title, excerpt, meta information and author. Responsive 3-column layout.',
