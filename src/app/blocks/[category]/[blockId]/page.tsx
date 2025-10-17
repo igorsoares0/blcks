@@ -35,6 +35,8 @@ import Footer4 from '@/blocks/footer/footer-4';
 import Announcement1 from '@/blocks/announcement/announcement-1';
 import Announcement2 from '@/blocks/announcement/announcement-2';
 import Announcement3 from '@/blocks/announcement/announcement-3';
+import Announcement4 from '@/blocks/announcement/announcement-4';
+import Announcement5 from '@/blocks/announcement/announcement-5';
 import About1 from '@/blocks/about/about-1';
 import About2 from '@/blocks/about/about-2';
 import About3 from '@/blocks/about/about-3';
@@ -111,6 +113,8 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'announcement-1': Announcement1,
   'announcement-2': Announcement2,
   'announcement-3': Announcement3,
+  'announcement-4': Announcement4,
+  'announcement-5': Announcement5,
   'about-1': About1,
   'about-2': About2,
   'about-3': About3,
