@@ -60,6 +60,9 @@ import Signup2 from '@/blocks/auth/signup-2';
 import Signup3 from '@/blocks/auth/signup-3';
 import Signup4 from '@/blocks/auth/signup-4';
 import Testimonial1 from '@/blocks/testimonial/testimonial-1';
+import Testimonial2 from '@/blocks/testimonial/testimonial-2';
+import Testimonial3 from '@/blocks/testimonial/testimonial-3';
+import Testimonial4 from '@/blocks/testimonial/testimonial-4';
 import FAQ1 from '@/blocks/faq/faq-1';
 
 interface PageProps {
@@ -126,6 +129,9 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'signup-3': Signup3,
   'signup-4': Signup4,
   'testimonial-1': Testimonial1,
+  'testimonial-2': Testimonial2,
+  'testimonial-3': Testimonial3,
+  'testimonial-4': Testimonial4,
   'faq-1': FAQ1,
 };
 
