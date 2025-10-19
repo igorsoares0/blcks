@@ -53,6 +53,9 @@ import Pricing1 from '@/blocks/pricing/pricing-1';
 import Pricing2 from '@/blocks/pricing/pricing-2';
 import Pricing3 from '@/blocks/pricing/pricing-3';
 import Pricing4 from '@/blocks/pricing/pricing-4';
+import Pricing5 from '@/blocks/pricing/pricing-5';
+import Pricing6 from '@/blocks/pricing/pricing-6';
+import Pricing7 from '@/blocks/pricing/pricing-7';
 import Services1 from '@/blocks/services/services-1';
 import Services2 from '@/blocks/services/services-2';
 import Services3 from '@/blocks/services/services-3';
@@ -135,6 +138,9 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'pricing-2': Pricing2,
   'pricing-3': Pricing3,
   'pricing-4': Pricing4,
+  'pricing-5': Pricing5,
+  'pricing-6': Pricing6,
+  'pricing-7': Pricing7,
   'services-1': Services1,
   'services-2': Services2,
   'services-3': Services3,

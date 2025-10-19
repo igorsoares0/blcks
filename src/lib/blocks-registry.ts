@@ -11463,6 +11463,1111 @@ export default function Pricing4({
 }`
   },
   {
+    id: 'pricing-5',
+    name: 'Pricing Comparison Table',
+    description: 'Detailed pricing comparison table with feature breakdown, billing toggle, popular badge, and category grouping. Perfect for showcasing detailed plan differences.',
+    category: 'pricing',
+    tags: ['pricing', 'comparison', 'table', 'plans', 'features', 'toggle', 'annual', 'monthly'],
+    dependencies: [],
+    previewProps: {
+      badge: 'Pricing Plans',
+      title: 'Choose the perfect plan for your team',
+      subtitle: 'Compare all features and find the best fit for your needs',
+      billingToggle: {
+        monthly: 'Monthly',
+        annual: 'Annual',
+        savings: 'Save 20%'
+      },
+      plans: [
+        {
+          name: 'Starter',
+          monthlyPrice: '$29',
+          annualPrice: '$23',
+          description: 'Perfect for individuals and small projects',
+          features: {
+            'users': '5 users',
+            'storage': '10 GB',
+            'projects': '10 projects',
+            'api': false,
+            'support': 'Email',
+            'analytics': 'Basic',
+            'integrations': '5',
+            'customDomain': false,
+            'sso': false,
+            'priority': false
+          }
+        },
+        {
+          name: 'Professional',
+          monthlyPrice: '$79',
+          annualPrice: '$63',
+          description: 'For growing teams and businesses',
+          popular: true,
+          features: {
+            'users': '25 users',
+            'storage': '100 GB',
+            'projects': 'Unlimited',
+            'api': true,
+            'support': 'Priority',
+            'analytics': 'Advanced',
+            'integrations': 'Unlimited',
+            'customDomain': true,
+            'sso': false,
+            'priority': true
+          }
+        },
+        {
+          name: 'Enterprise',
+          monthlyPrice: '$199',
+          annualPrice: '$159',
+          description: 'For large organizations with advanced needs',
+          features: {
+            'users': 'Unlimited',
+            'storage': 'Unlimited',
+            'projects': 'Unlimited',
+            'api': true,
+            'support': '24/7 Phone',
+            'analytics': 'Custom',
+            'integrations': 'Unlimited',
+            'customDomain': true,
+            'sso': true,
+            'priority': true
+          }
+        }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Pricing Plans', description: 'Badge text above title' },
+      { name: 'title', type: 'string', default: 'Choose the perfect plan for your team', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Compare all features...', description: 'Description text below title' },
+      { name: 'billingToggle', type: 'object', description: 'Billing toggle settings with monthly, annual and savings text' },
+      { name: 'plans', type: 'PricingPlan[]', description: 'Array of pricing plans with features' },
+      { name: 'featureRows', type: 'FeatureRow[]', description: 'Array of feature rows with category grouping' }
+    ],
+    code: `import { Check, X, Zap } from 'lucide-react';
+
+interface PricingPlan {
+  name: string;
+  monthlyPrice: string;
+  annualPrice: string;
+  description: string;
+  popular?: boolean;
+  features: {
+    [key: string]: boolean | string;
+  };
+}
+
+interface FeatureRow {
+  name: string;
+  category?: string;
+}
+
+interface Pricing5Props {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  billingToggle?: {
+    monthly: string;
+    annual: string;
+    savings: string;
+  };
+  plans?: PricingPlan[];
+  featureRows?: FeatureRow[];
+}
+
+export default function Pricing5({
+  badge = 'Pricing Plans',
+  title = 'Choose the perfect plan for your team',
+  subtitle = 'Compare all features and find the best fit for your needs',
+  billingToggle = {
+    monthly: 'Monthly',
+    annual: 'Annual',
+    savings: 'Save 20%'
+  },
+  plans = [
+    {
+      name: 'Starter',
+      monthlyPrice: '$29',
+      annualPrice: '$23',
+      description: 'Perfect for individuals and small projects',
+      features: {
+        'users': '5 users',
+        'storage': '10 GB',
+        'projects': '10 projects',
+        'api': false,
+        'support': 'Email',
+        'analytics': 'Basic',
+        'integrations': '5',
+        'customDomain': false,
+        'sso': false,
+        'priority': false
+      }
+    },
+    {
+      name: 'Professional',
+      monthlyPrice: '$79',
+      annualPrice: '$63',
+      description: 'For growing teams and businesses',
+      popular: true,
+      features: {
+        'users': '25 users',
+        'storage': '100 GB',
+        'projects': 'Unlimited',
+        'api': true,
+        'support': 'Priority',
+        'analytics': 'Advanced',
+        'integrations': 'Unlimited',
+        'customDomain': true,
+        'sso': false,
+        'priority': true
+      }
+    },
+    {
+      name: 'Enterprise',
+      monthlyPrice: '$199',
+      annualPrice: '$159',
+      description: 'For large organizations with advanced needs',
+      features: {
+        'users': 'Unlimited',
+        'storage': 'Unlimited',
+        'projects': 'Unlimited',
+        'api': true,
+        'support': '24/7 Phone',
+        'analytics': 'Custom',
+        'integrations': 'Unlimited',
+        'customDomain': true,
+        'sso': true,
+        'priority': true
+      }
+    }
+  ],
+  featureRows = [
+    { name: 'Team Members', category: 'Core Features' },
+    { name: 'Storage', category: 'Core Features' },
+    { name: 'Projects', category: 'Core Features' },
+    { name: 'API Access', category: 'Core Features' },
+    { name: 'Support', category: 'Support & Service' },
+    { name: 'Analytics', category: 'Support & Service' },
+    { name: 'Integrations', category: 'Advanced' },
+    { name: 'Custom Domain', category: 'Advanced' },
+    { name: 'SSO', category: 'Advanced' },
+    { name: 'Priority Support', category: 'Advanced' }
+  ]
+}: Pricing5Props) {
+  const featureKeys = ['users', 'storage', 'projects', 'api', 'support', 'analytics', 'integrations', 'customDomain', 'sso', 'priority'];
+
+  const renderFeatureValue = (value: boolean | string) => {
+    if (typeof value === 'boolean') {
+      return value ? (
+        <Check className="h-5 w-5 text-green-600 dark:text-green-500 mx-auto" />
+      ) : (
+        <X className="h-5 w-5 text-gray-300 dark:text-gray-700 mx-auto" />
+      );
+    }
+    return <span className="text-sm text-gray-900 dark:text-white font-medium">{value}</span>;
+  };
+
+  let currentCategory = '';
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-12">
+          <div className="inline-flex items-center rounded-full border border-gray-200 dark:border-gray-800 px-4 py-1.5 text-sm font-medium bg-gray-50 dark:bg-gray-900">
+            {badge}
+          </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl max-w-3xl">
+            {title}
+          </h2>
+          <p className="max-w-2xl text-gray-600 md:text-xl dark:text-gray-400">
+            {subtitle}
+          </p>
+
+          {/* Billing Toggle */}
+          <div className="flex items-center gap-3 mt-8">
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              {billingToggle.monthly}
+            </span>
+            <button className="relative inline-flex h-6 w-11 items-center rounded-full bg-primary transition-colors">
+              <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6" />
+            </button>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {billingToggle.annual}
+            </span>
+            <span className="inline-flex items-center rounded-full bg-green-100 dark:bg-green-900 px-2.5 py-0.5 text-xs font-semibold text-green-800 dark:text-green-100">
+              {billingToggle.savings}
+            </span>
+          </div>
+        </div>
+
+        {/* Comparison Table */}
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b border-gray-200 dark:border-gray-800">
+                <th className="text-left py-6 px-4 w-1/4">
+                  <span className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Features
+                  </span>
+                </th>
+                {plans.map((plan, index) => (
+                  <th key={index} className="py-6 px-4 text-center relative">
+                    {plan.popular && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                          <Zap className="h-3 w-3" />
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+                    <div className="space-y-2">
+                      <div className="text-lg font-bold text-gray-900 dark:text-white">
+                        {plan.name}
+                      </div>
+                      <div className="flex items-baseline justify-center gap-1">
+                        <span className="text-4xl font-bold text-gray-900 dark:text-white">
+                          {plan.annualPrice}
+                        </span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                          /month
+                        </span>
+                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 line-through">
+                        {plan.monthlyPrice}/mo billed monthly
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 px-2">
+                        {plan.description}
+                      </p>
+                      <button
+                        className={\`w-full mt-4 inline-flex items-center justify-center rounded-lg text-sm font-semibold transition-all h-10 px-4 \${
+                          plan.popular
+                            ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg'
+                            : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary text-gray-900 dark:text-white'
+                        }\`}
+                      >
+                        Get Started
+                      </button>
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {featureRows.map((row, rowIndex) => {
+                const showCategoryHeader = row.category && row.category !== currentCategory;
+                if (showCategoryHeader) {
+                  currentCategory = row.category;
+                }
+
+                return (
+                  <React.Fragment key={rowIndex}>
+                    {showCategoryHeader && (
+                      <tr className="bg-gray-50 dark:bg-gray-900/50">
+                        <td colSpan={plans.length + 1} className="py-3 px-4">
+                          <span className="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider">
+                            {row.category}
+                          </span>
+                        </td>
+                      </tr>
+                    )}
+                    <tr className="border-b border-gray-100 dark:border-gray-900 hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors">
+                      <td className="py-4 px-4">
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          {row.name}
+                        </span>
+                      </td>
+                      {plans.map((plan, planIndex) => (
+                        <td key={planIndex} className="py-4 px-4 text-center">
+                          {renderFeatureValue(plan.features[featureKeys[rowIndex]])}
+                        </td>
+                      ))}
+                    </tr>
+                  </React.Fragment>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Need a custom plan? <a href="#" className="text-primary font-semibold hover:underline">Contact sales</a>
+          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-500">
+            All plans include a 14-day free trial. No credit card required.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'pricing-6',
+    name: 'Usage-Based Pricing',
+    description: 'Flexible usage-based pricing with cost calculator, included quotas, overage rates, and detailed feature breakdown. Perfect for SaaS products with variable usage.',
+    category: 'pricing',
+    tags: ['pricing', 'usage', 'calculator', 'flexible', 'overage', 'saas', 'metered'],
+    dependencies: [],
+    previewProps: {
+      badge: 'Flexible Pricing',
+      title: 'Pay only for what you use',
+      subtitle: 'Start small and scale as you grow. No hidden fees, no surprises.',
+      tiers: [
+        {
+          name: 'Starter',
+          basePrice: 29,
+          description: 'Perfect for small teams getting started',
+          included: {
+            users: 5,
+            storage: 50,
+            requests: 10000
+          },
+          overageRates: {
+            perUser: 5,
+            perGB: 0.50,
+            perRequest: 0.001
+          },
+          features: [
+            'Email support',
+            'Basic analytics',
+            '99.5% uptime SLA',
+            'API access'
+          ]
+        },
+        {
+          name: 'Professional',
+          basePrice: 99,
+          description: 'For growing businesses with higher needs',
+          highlight: true,
+          included: {
+            users: 25,
+            storage: 250,
+            requests: 100000
+          },
+          overageRates: {
+            perUser: 4,
+            perGB: 0.40,
+            perRequest: 0.0008
+          },
+          features: [
+            'Priority support',
+            'Advanced analytics',
+            '99.9% uptime SLA',
+            'API access',
+            'Custom integrations'
+          ]
+        }
+      ],
+      usageMetrics: [
+        { icon: 'Users', label: 'Team Members', unit: 'users', estimatedValue: 10 },
+        { icon: 'Database', label: 'Storage', unit: 'GB', estimatedValue: 100 },
+        { icon: 'TrendingUp', label: 'API Requests', unit: 'k/month', estimatedValue: 50 }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Flexible Pricing', description: 'Badge text above title' },
+      { name: 'title', type: 'string', default: 'Pay only for what you use', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Start small and scale...', description: 'Description text below title' },
+      { name: 'tiers', type: 'PricingTier[]', description: 'Array of pricing tiers with included quotas, overage rates and features' },
+      { name: 'usageMetrics', type: 'UsageMetric[]', description: 'Array of usage metrics for the calculator' },
+      { name: 'faqNote', type: 'string', description: 'Footer note about billing and trials' }
+    ],
+    code: `import { Check, Info, DollarSign, TrendingUp, Users, Database } from 'lucide-react';
+
+interface PricingTier {
+  name: string;
+  basePrice: number;
+  description: string;
+  included: {
+    users: number;
+    storage: number;
+    requests: number;
+  };
+  overageRates: {
+    perUser: number;
+    perGB: number;
+    perRequest: number;
+  };
+  features: string[];
+  highlight?: boolean;
+}
+
+interface UsageMetric {
+  icon: string;
+  label: string;
+  unit: string;
+  estimatedValue: number;
+}
+
+interface Pricing6Props {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  tiers?: PricingTier[];
+  usageMetrics?: UsageMetric[];
+  faqNote?: string;
+}
+
+export default function Pricing6({
+  badge = 'Flexible Pricing',
+  title = 'Pay only for what you use',
+  subtitle = 'Start small and scale as you grow. No hidden fees, no surprises.',
+  tiers = [
+    {
+      name: 'Starter',
+      basePrice: 29,
+      description: 'Perfect for small teams getting started',
+      included: {
+        users: 5,
+        storage: 50,
+        requests: 10000
+      },
+      overageRates: {
+        perUser: 5,
+        perGB: 0.50,
+        perRequest: 0.001
+      },
+      features: [
+        'Email support',
+        'Basic analytics',
+        '99.5% uptime SLA',
+        'API access'
+      ]
+    },
+    {
+      name: 'Professional',
+      basePrice: 99,
+      description: 'For growing businesses with higher needs',
+      highlight: true,
+      included: {
+        users: 25,
+        storage: 250,
+        requests: 100000
+      },
+      overageRates: {
+        perUser: 4,
+        perGB: 0.40,
+        perRequest: 0.0008
+      },
+      features: [
+        'Priority support',
+        'Advanced analytics',
+        '99.9% uptime SLA',
+        'API access',
+        'Custom integrations',
+        'Dedicated account manager'
+      ]
+    },
+    {
+      name: 'Enterprise',
+      basePrice: 299,
+      description: 'For large organizations with custom needs',
+      included: {
+        users: 100,
+        storage: 1000,
+        requests: 1000000
+      },
+      overageRates: {
+        perUser: 3,
+        perGB: 0.30,
+        perRequest: 0.0005
+      },
+      features: [
+        '24/7 phone support',
+        'Custom analytics',
+        '99.99% uptime SLA',
+        'API access',
+        'Custom integrations',
+        'Dedicated account manager',
+        'SLA guarantees',
+        'Custom contracts'
+      ]
+    }
+  ],
+  usageMetrics = [
+    { icon: 'Users', label: 'Team Members', unit: 'users', estimatedValue: 10 },
+    { icon: 'Database', label: 'Storage', unit: 'GB', estimatedValue: 100 },
+    { icon: 'TrendingUp', label: 'API Requests', unit: 'k/month', estimatedValue: 50 }
+  ],
+  faqNote = 'All plans include a 14-day free trial. Usage is calculated monthly and billed in arrears.'
+}: Pricing6Props) {
+  const iconMap: Record<string, React.ReactElement> = {
+    Users: <Users className="h-5 w-5" />,
+    Database: <Database className="h-5 w-5" />,
+    TrendingUp: <TrendingUp className="h-5 w-5" />
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+            {badge}
+          </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl max-w-3xl">
+            {title}
+          </h2>
+          <p className="max-w-2xl text-gray-600 md:text-xl dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Usage Estimator */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 shadow-lg">
+            <div className="flex items-center gap-2 mb-6">
+              <DollarSign className="h-5 w-5 text-primary" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                Estimate Your Monthly Cost
+              </h3>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-6">
+              {usageMetrics.map((metric, index) => (
+                <div key={index} className="space-y-2">
+                  <label className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="text-primary">{iconMap[metric.icon]}</span>
+                    {metric.label}
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      defaultValue={metric.estimatedValue}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-500 dark:text-gray-400">
+                      {metric.unit}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 p-4 bg-primary/10 rounded-lg">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Estimated Monthly Cost
+                </span>
+                <span className="text-2xl font-bold text-primary">
+                  $99/mo
+                </span>
+              </div>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
+                Based on Professional plan with your estimated usage
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Pricing Tiers */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+          {tiers.map((tier, index) => (
+            <div
+              key={index}
+              className={\`relative rounded-2xl p-8 \${
+                tier.highlight
+                  ? 'bg-primary text-primary-foreground shadow-2xl scale-105 border-2 border-primary'
+                  : 'bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800'
+              }\`}
+            >
+              {tier.highlight && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white dark:bg-gray-900 px-4 py-1 text-xs font-semibold text-primary border border-primary">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+
+              {/* Header */}
+              <div className="mb-6">
+                <h3 className={\`text-2xl font-bold mb-2 \${tier.highlight ? '' : 'text-gray-900 dark:text-white'}\`}>
+                  {tier.name}
+                </h3>
+                <p className={\`text-sm \${tier.highlight ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}\`}>
+                  {tier.description}
+                </p>
+              </div>
+
+              {/* Base Price */}
+              <div className="mb-6">
+                <div className="flex items-baseline gap-1 mb-1">
+                  <span className={\`text-4xl font-bold \${tier.highlight ? '' : 'text-gray-900 dark:text-white'}\`}>
+                    \${tier.basePrice}
+                  </span>
+                  <span className={\`text-sm \${tier.highlight ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}\`}>
+                    /month
+                  </span>
+                </div>
+                <p className={\`text-xs \${tier.highlight ? 'opacity-80' : 'text-gray-500 dark:text-gray-500'}\`}>
+                  base price + usage overages
+                </p>
+              </div>
+
+              {/* What's Included */}
+              <div className="mb-6 pb-6 border-b border-gray-200 dark:border-gray-800">
+                <h4 className={\`text-sm font-semibold mb-3 \${tier.highlight ? 'opacity-90' : 'text-gray-900 dark:text-white'}\`}>
+                  Included per month:
+                </h4>
+                <ul className="space-y-2">
+                  <li className={\`text-sm flex items-center gap-2 \${tier.highlight ? 'opacity-90' : 'text-gray-700 dark:text-gray-300'}\`}>
+                    <Check className="h-4 w-4 flex-shrink-0" />
+                    <span>{tier.included.users} users</span>
+                  </li>
+                  <li className={\`text-sm flex items-center gap-2 \${tier.highlight ? 'opacity-90' : 'text-gray-700 dark:text-gray-300'}\`}>
+                    <Check className="h-4 w-4 flex-shrink-0" />
+                    <span>{tier.included.storage} GB storage</span>
+                  </li>
+                  <li className={\`text-sm flex items-center gap-2 \${tier.highlight ? 'opacity-90' : 'text-gray-700 dark:text-gray-300'}\`}>
+                    <Check className="h-4 w-4 flex-shrink-0" />
+                    <span>{tier.included.requests.toLocaleString()} API requests</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Overage Rates */}
+              <div className="mb-6 pb-6 border-b border-gray-200 dark:border-gray-800">
+                <div className="flex items-center gap-2 mb-3">
+                  <h4 className={\`text-sm font-semibold \${tier.highlight ? 'opacity-90' : 'text-gray-900 dark:text-white'}\`}>
+                    Overage rates:
+                  </h4>
+                  <Info className="h-3.5 w-3.5 opacity-60" />
+                </div>
+                <ul className="space-y-1.5">
+                  <li className={\`text-xs \${tier.highlight ? 'opacity-80' : 'text-gray-600 dark:text-gray-400'}\`}>
+                    \${tier.overageRates.perUser}/user
+                  </li>
+                  <li className={\`text-xs \${tier.highlight ? 'opacity-80' : 'text-gray-600 dark:text-gray-400'}\`}>
+                    \${tier.overageRates.perGB}/GB
+                  </li>
+                  <li className={\`text-xs \${tier.highlight ? 'opacity-80' : 'text-gray-600 dark:text-gray-400'}\`}>
+                    \${tier.overageRates.perRequest}/1k requests
+                  </li>
+                </ul>
+              </div>
+
+              {/* Features */}
+              <div className="mb-8">
+                <h4 className={\`text-sm font-semibold mb-3 \${tier.highlight ? 'opacity-90' : 'text-gray-900 dark:text-white'}\`}>
+                  Features:
+                </h4>
+                <ul className="space-y-2">
+                  {tier.features.map((feature, fIndex) => (
+                    <li key={fIndex} className={\`text-sm flex items-start gap-2 \${tier.highlight ? 'opacity-90' : 'text-gray-700 dark:text-gray-300'}\`}>
+                      <Check className="h-4 w-4 flex-shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* CTA Button */}
+              <button
+                className={\`w-full py-3 px-6 rounded-lg font-semibold transition-all \${
+                  tier.highlight
+                    ? 'bg-white text-primary hover:bg-gray-100'
+                    : 'bg-primary text-primary-foreground hover:bg-primary/90'
+                }\`}
+              >
+                Get Started
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Note */}
+        <div className="text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {faqNote}
+          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+            Need a custom plan? <a href="#" className="text-primary font-semibold hover:underline">Contact our sales team</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'pricing-7',
+    name: 'Tiered Features Pricing',
+    description: 'Comprehensive pricing table with categorized features, visual tier indicators, and side-by-side plan comparison. Perfect for showcasing feature differences across plans.',
+    category: 'pricing',
+    tags: ['pricing', 'comparison', 'features', 'tiers', 'table', 'plans', 'categories'],
+    dependencies: [],
+    previewProps: {
+      badge: 'Simple Pricing',
+      title: 'Choose your plan',
+      subtitle: 'Get started with a plan that fits your needs. Upgrade or downgrade at any time.',
+      plans: [
+        {
+          name: 'Starter',
+          price: '$19',
+          period: 'per month',
+          description: 'Essential features for individuals',
+          cta: 'Start Free Trial',
+          ctaVariant: 'secondary'
+        },
+        {
+          name: 'Business',
+          price: '$49',
+          period: 'per month',
+          description: 'Advanced features for teams',
+          recommended: true,
+          cta: 'Start Free Trial',
+          ctaVariant: 'primary'
+        },
+        {
+          name: 'Enterprise',
+          price: '$99',
+          period: 'per month',
+          description: 'Custom solutions for organizations',
+          cta: 'Contact Sales',
+          ctaVariant: 'secondary'
+        }
+      ],
+      featureCategories: [
+        {
+          name: 'Core Features',
+          icon: 'Zap',
+          features: [
+            {
+              name: 'Projects',
+              tier: 'all',
+              values: { starter: '3', business: '15', enterprise: 'Unlimited' }
+            },
+            {
+              name: 'Team Members',
+              tier: 'all',
+              values: { starter: '3', business: '10', enterprise: 'Unlimited' }
+            }
+          ]
+        },
+        {
+          name: 'Collaboration',
+          icon: 'Star',
+          features: [
+            {
+              name: 'Real-time Collaboration',
+              tier: 'standard',
+              values: { starter: false, business: true, enterprise: true }
+            }
+          ]
+        }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Simple Pricing', description: 'Badge text above title' },
+      { name: 'title', type: 'string', default: 'Choose your plan', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Get started with a plan...', description: 'Description text below title' },
+      { name: 'plans', type: 'PricingPlan[]', description: 'Array of pricing plans with recommended flag' },
+      { name: 'featureCategories', type: 'FeatureCategory[]', description: 'Array of feature categories with icon and features' },
+      { name: 'note', type: 'string', description: 'Footer note about trials' }
+    ],
+    code: `import { Check, X, Star, ArrowRight, Shield, Zap } from 'lucide-react';
+
+interface PricingPlan {
+  name: string;
+  price: string;
+  period: string;
+  description: string;
+  recommended?: boolean;
+  cta: string;
+  ctaVariant?: 'primary' | 'secondary';
+}
+
+interface Feature {
+  name: string;
+  tier: 'basic' | 'standard' | 'premium' | 'all';
+  values: {
+    starter: boolean | string;
+    business: boolean | string;
+    enterprise: boolean | string;
+  };
+}
+
+interface FeatureCategory {
+  name: string;
+  icon: string;
+  features: Feature[];
+}
+
+interface Pricing7Props {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  plans?: PricingPlan[];
+  featureCategories?: FeatureCategory[];
+  note?: string;
+}
+
+export default function Pricing7({
+  badge = 'Simple Pricing',
+  title = 'Choose your plan',
+  subtitle = 'Get started with a plan that fits your needs. Upgrade or downgrade at any time.',
+  plans = [
+    {
+      name: 'Starter',
+      price: '$19',
+      period: 'per month',
+      description: 'Essential features for individuals',
+      cta: 'Start Free Trial',
+      ctaVariant: 'secondary'
+    },
+    {
+      name: 'Business',
+      price: '$49',
+      period: 'per month',
+      description: 'Advanced features for teams',
+      recommended: true,
+      cta: 'Start Free Trial',
+      ctaVariant: 'primary'
+    },
+    {
+      name: 'Enterprise',
+      price: '$99',
+      period: 'per month',
+      description: 'Custom solutions for organizations',
+      cta: 'Contact Sales',
+      ctaVariant: 'secondary'
+    }
+  ],
+  featureCategories = [
+    {
+      name: 'Core Features',
+      icon: 'Zap',
+      features: [
+        {
+          name: 'Projects',
+          tier: 'all',
+          values: { starter: '3', business: '15', enterprise: 'Unlimited' }
+        },
+        {
+          name: 'Team Members',
+          tier: 'all',
+          values: { starter: '3', business: '10', enterprise: 'Unlimited' }
+        },
+        {
+          name: 'Storage',
+          tier: 'all',
+          values: { starter: '5 GB', business: '50 GB', enterprise: '500 GB' }
+        },
+        {
+          name: 'File Upload Size',
+          tier: 'all',
+          values: { starter: '10 MB', business: '100 MB', enterprise: '1 GB' }
+        }
+      ]
+    },
+    {
+      name: 'Collaboration',
+      icon: 'Star',
+      features: [
+        {
+          name: 'Real-time Collaboration',
+          tier: 'standard',
+          values: { starter: false, business: true, enterprise: true }
+        },
+        {
+          name: 'Comments & Mentions',
+          tier: 'standard',
+          values: { starter: false, business: true, enterprise: true }
+        },
+        {
+          name: 'Activity Feed',
+          tier: 'standard',
+          values: { starter: false, business: true, enterprise: true }
+        },
+        {
+          name: 'Guest Access',
+          tier: 'premium',
+          values: { starter: false, business: false, enterprise: true }
+        }
+      ]
+    },
+    {
+      name: 'Security & Compliance',
+      icon: 'Shield',
+      features: [
+        {
+          name: '2FA Authentication',
+          tier: 'standard',
+          values: { starter: false, business: true, enterprise: true }
+        },
+        {
+          name: 'SSO (SAML)',
+          tier: 'premium',
+          values: { starter: false, business: false, enterprise: true }
+        },
+        {
+          name: 'Advanced Permissions',
+          tier: 'premium',
+          values: { starter: false, business: false, enterprise: true }
+        },
+        {
+          name: 'Audit Logs',
+          tier: 'premium',
+          values: { starter: false, business: false, enterprise: true }
+        }
+      ]
+    }
+  ],
+  note = 'All plans include a 14-day free trial. No credit card required.'
+}: Pricing7Props) {
+  const iconMap: Record<string, React.ReactElement> = {
+    Zap: <Zap className="h-5 w-5" />,
+    Star: <Star className="h-5 w-5" />,
+    Shield: <Shield className="h-5 w-5" />
+  };
+
+  const renderFeatureValue = (value: boolean | string) => {
+    if (typeof value === 'boolean') {
+      return value ? (
+        <Check className="h-5 w-5 text-green-600 dark:text-green-500" />
+      ) : (
+        <X className="h-5 w-5 text-gray-300 dark:text-gray-700" />
+      );
+    }
+    return <span className="text-sm font-semibold text-gray-900 dark:text-white">{value}</span>;
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <div className="inline-flex items-center rounded-full border border-gray-200 dark:border-gray-800 px-4 py-1.5 text-sm font-medium bg-gray-50 dark:bg-gray-900">
+            {badge}
+          </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl max-w-3xl">
+            {title}
+          </h2>
+          <p className="max-w-2xl text-gray-600 md:text-xl dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Plans Header */}
+        <div className="grid lg:grid-cols-4 gap-8 mb-8">
+          <div className="hidden lg:block"></div>
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={\`relative rounded-2xl p-6 text-center \${
+                plan.recommended
+                  ? 'bg-primary text-primary-foreground shadow-xl ring-2 ring-primary'
+                  : 'bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800'
+              }\`}
+            >
+              {plan.recommended && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-white dark:bg-gray-900 px-3 py-1 text-xs font-semibold text-primary border border-primary">
+                    <Star className="h-3 w-3" />
+                    Recommended
+                  </span>
+                </div>
+              )}
+              <h3 className={\`text-xl font-bold mb-2 \${plan.recommended ? '' : 'text-gray-900 dark:text-white'}\`}>
+                {plan.name}
+              </h3>
+              <div className="mb-4">
+                <div className="flex items-baseline justify-center gap-1">
+                  <span className={\`text-4xl font-bold \${plan.recommended ? '' : 'text-gray-900 dark:text-white'}\`}>
+                    {plan.price}
+                  </span>
+                </div>
+                <p className={\`text-sm \${plan.recommended ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}\`}>
+                  {plan.period}
+                </p>
+              </div>
+              <p className={\`text-sm mb-6 \${plan.recommended ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}\`}>
+                {plan.description}
+              </p>
+              <button
+                className={\`w-full inline-flex items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-all h-11 px-6 \${
+                  plan.ctaVariant === 'primary'
+                    ? 'bg-white text-primary hover:bg-gray-100'
+                    : plan.recommended
+                    ? 'bg-white/10 backdrop-blur hover:bg-white/20 border border-white/20'
+                    : 'bg-primary text-primary-foreground hover:bg-primary/90'
+                }\`}
+              >
+                {plan.cta}
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Feature Categories */}
+        {featureCategories.map((category, catIndex) => (
+          <div key={catIndex} className="mb-8">
+            {/* Category Header */}
+            <div className="bg-gradient-to-r from-gray-100 to-gray-50 dark:from-gray-900 dark:to-gray-900/50 border-y border-gray-200 dark:border-gray-800 py-4 mb-4">
+              <div className="grid lg:grid-cols-4 gap-8">
+                <div className="flex items-center gap-3 px-6">
+                  <div className="text-primary">
+                    {iconMap[category.icon]}
+                  </div>
+                  <h4 className="font-bold text-gray-900 dark:text-white">
+                    {category.name}
+                  </h4>
+                </div>
+                <div className="hidden lg:block"></div>
+                <div className="hidden lg:block"></div>
+                <div className="hidden lg:block"></div>
+              </div>
+            </div>
+
+            {/* Features in Category */}
+            {category.features.map((feature, featureIndex) => (
+              <div
+                key={featureIndex}
+                className="grid lg:grid-cols-4 gap-8 py-4 border-b border-gray-100 dark:border-gray-900 hover:bg-gray-50 dark:hover:bg-gray-900/30 transition-colors"
+              >
+                <div className="px-6">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">
+                      {feature.name}
+                    </span>
+                    {feature.tier === 'premium' && (
+                      <span className="inline-flex items-center rounded-full bg-purple-100 dark:bg-purple-900/30 px-2 py-0.5 text-xs font-medium text-purple-700 dark:text-purple-400">
+                        Premium
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center justify-center lg:justify-center">
+                  {renderFeatureValue(feature.values.starter)}
+                </div>
+                <div className="flex items-center justify-center lg:justify-center">
+                  {renderFeatureValue(feature.values.business)}
+                </div>
+                <div className="flex items-center justify-center lg:justify-center">
+                  {renderFeatureValue(feature.values.enterprise)}
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+
+        {/* Bottom Note */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {note}
+          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+            Questions? <a href="#" className="text-primary font-semibold hover:underline">Contact our sales team</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
     id: 'services-2',
     name: 'Services with Gradient Icons',
     description: 'Services section with gradient icon backgrounds, hover effects, and individual CTAs. Clean card layout with bottom section CTA.',
