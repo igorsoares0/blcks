@@ -42,6 +42,8 @@ import About2 from '@/blocks/about/about-2';
 import About3 from '@/blocks/about/about-3';
 import About4 from '@/blocks/about/about-4';
 import About5 from '@/blocks/about/about-5';
+import About6 from '@/blocks/about/about-6';
+import About7 from '@/blocks/about/about-7';
 import Blog1 from '@/blocks/blog/blog-1';
 import Blog2 from '@/blocks/blog/blog-2';
 import Blog3 from '@/blocks/blog/blog-3';
@@ -122,6 +124,8 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'about-3': About3,
   'about-4': About4,
   'about-5': About5,
+  'about-6': About6,
+  'about-7': About7,
   'blog-1': Blog1,
   'blog-2': Blog2,
   'blog-3': Blog3,

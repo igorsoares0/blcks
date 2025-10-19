@@ -6352,6 +6352,582 @@ export default function About5({
 }`
   },
   {
+    id: 'about-6',
+    name: 'Team Showcase About',
+    description: 'About section featuring team members grid with avatars, bios, social links, company stats and join CTA. Perfect for showcasing your team.',
+    category: 'about',
+    tags: ['about', 'team', 'people', 'members', 'staff', 'employees', 'leadership', 'stats', 'social'],
+    dependencies: [],
+    previewProps: {
+      badge: 'Our Team',
+      title: 'Meet the people behind our success',
+      description: 'We are a diverse team of passionate individuals dedicated to building exceptional products and creating meaningful impact.',
+      stats: [
+        { icon: 'Users', value: '50+', label: 'Team Members' },
+        { icon: 'Globe', value: '12', label: 'Countries' },
+        { icon: 'TrendingUp', value: '200%', label: 'Growth' },
+        { icon: 'Award', value: '15+', label: 'Awards' }
+      ],
+      teamMembers: [
+        {
+          name: 'Sarah Johnson',
+          role: 'CEO & Co-Founder',
+          avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
+          bio: 'Visionary leader with 15+ years in tech. Previously led product at Fortune 500 companies.',
+          socials: { linkedin: '#', twitter: '#' }
+        },
+        {
+          name: 'Michael Chen',
+          role: 'CTO & Co-Founder',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+          bio: 'Tech innovator passionate about scalable architecture and developer experience.',
+          socials: { linkedin: '#', github: '#' }
+        },
+        {
+          name: 'Emily Rodriguez',
+          role: 'Head of Design',
+          avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
+          bio: 'Award-winning designer focused on creating delightful and accessible user experiences.',
+          socials: { linkedin: '#', twitter: '#' }
+        }
+      ],
+      ctaText: 'Join Our Team',
+      ctaHref: '#'
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Our Team', description: 'Badge text above title' },
+      { name: 'title', type: 'string', default: 'Meet the people behind our success', description: 'Main heading' },
+      { name: 'description', type: 'string', default: 'We are a diverse team...', description: 'Description text below title' },
+      { name: 'stats', type: 'Stat[]', description: 'Array of company stats with icon, value and label' },
+      { name: 'teamMembers', type: 'TeamMember[]', description: 'Array of team members with name, role, avatar, bio and social links' },
+      { name: 'ctaText', type: 'string', default: 'Join Our Team', description: 'CTA button text' },
+      { name: 'ctaHref', type: 'string', default: '#', description: 'CTA button link' }
+    ],
+    code: `import { Linkedin, Twitter, Github, Mail, Users, TrendingUp, Globe, Award } from 'lucide-react';
+
+interface TeamMember {
+  name: string;
+  role: string;
+  avatar: string;
+  bio: string;
+  socials?: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+  };
+}
+
+interface Stat {
+  icon: string;
+  value: string;
+  label: string;
+}
+
+interface About6Props {
+  badge?: string;
+  title?: string;
+  description?: string;
+  stats?: Stat[];
+  teamMembers?: TeamMember[];
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+export default function About6({
+  badge = 'Our Team',
+  title = 'Meet the people behind our success',
+  description = 'We are a diverse team of passionate individuals dedicated to building exceptional products and creating meaningful impact.',
+  stats = [
+    { icon: 'Users', value: '50+', label: 'Team Members' },
+    { icon: 'Globe', value: '12', label: 'Countries' },
+    { icon: 'TrendingUp', value: '200%', label: 'Growth' },
+    { icon: 'Award', value: '15+', label: 'Awards' }
+  ],
+  teamMembers = [
+    {
+      name: 'Sarah Johnson',
+      role: 'CEO & Co-Founder',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
+      bio: 'Visionary leader with 15+ years in tech. Previously led product at Fortune 500 companies.',
+      socials: { linkedin: '#', twitter: '#' }
+    },
+    {
+      name: 'Michael Chen',
+      role: 'CTO & Co-Founder',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
+      bio: 'Tech innovator passionate about scalable architecture and developer experience.',
+      socials: { linkedin: '#', github: '#' }
+    },
+    {
+      name: 'Emily Rodriguez',
+      role: 'Head of Design',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
+      bio: 'Award-winning designer focused on creating delightful and accessible user experiences.',
+      socials: { linkedin: '#', twitter: '#' }
+    },
+    {
+      name: 'David Kim',
+      role: 'Head of Engineering',
+      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
+      bio: 'Full-stack expert building robust systems that scale with best-in-class performance.',
+      socials: { linkedin: '#', github: '#' }
+    },
+    {
+      name: 'Lisa Anderson',
+      role: 'Head of Marketing',
+      avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop',
+      bio: 'Growth marketer with a data-driven approach to building brands that resonate.',
+      socials: { linkedin: '#', twitter: '#' }
+    },
+    {
+      name: 'James Wilson',
+      role: 'Head of Sales',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
+      bio: 'Customer-focused sales leader helping businesses transform through technology.',
+      socials: { linkedin: '#' }
+    }
+  ],
+  ctaText = 'Join Our Team',
+  ctaHref = '#'
+}: About6Props) {
+  const iconMap: Record<string, React.ReactElement> = {
+    Users: <Users className="h-6 w-6" />,
+    Globe: <Globe className="h-6 w-6" />,
+    TrendingUp: <TrendingUp className="h-6 w-6" />,
+    Award: <Award className="h-6 w-6" />
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <div className="inline-flex items-center rounded-full border border-gray-200 dark:border-gray-800 px-4 py-1.5 text-sm font-medium bg-gray-50 dark:bg-gray-900">
+            {badge}
+          </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl max-w-3xl">
+            {title}
+          </h2>
+          <p className="max-w-2xl text-gray-500 md:text-xl dark:text-gray-400">
+            {description}
+          </p>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center p-6 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-700 transition-colors"
+            >
+              <div className="mb-3 text-primary">
+                {iconMap[stat.icon]}
+              </div>
+              <div className="text-3xl md:text-4xl font-bold mb-1">{stat.value}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Team Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {teamMembers.map((member, index) => (
+            <div
+              key={index}
+              className="group relative overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-gray-300 dark:hover:border-gray-700 transition-all hover:shadow-lg"
+            >
+              {/* Avatar */}
+              <div className="aspect-square overflow-hidden bg-gray-100 dark:bg-gray-800">
+                <img
+                  src={member.avatar}
+                  alt={member.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+                <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  {member.bio}
+                </p>
+
+                {/* Social Links */}
+                {member.socials && (
+                  <div className="flex gap-3">
+                    {member.socials.linkedin && (
+                      <a
+                        href={member.socials.linkedin}
+                        className="text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label="LinkedIn"
+                      >
+                        <Linkedin className="h-5 w-5" />
+                      </a>
+                    )}
+                    {member.socials.twitter && (
+                      <a
+                        href={member.socials.twitter}
+                        className="text-gray-400 hover:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                        aria-label="Twitter"
+                      >
+                        <Twitter className="h-5 w-5" />
+                      </a>
+                    )}
+                    {member.socials.github && (
+                      <a
+                        href={member.socials.github}
+                        className="text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+                        aria-label="GitHub"
+                      >
+                        <Github className="h-5 w-5" />
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="flex justify-center">
+          <a
+            href={ctaHref}
+            className="inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 text-sm font-medium transition-colors"
+          >
+            <Mail className="h-4 w-4" />
+            {ctaText}
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'about-7',
+    name: 'Stats & Achievements About',
+    description: 'About section highlighting company stats, awards, certifications and compliance. Perfect for building trust with impressive metrics and recognitions.',
+    category: 'about',
+    tags: ['about', 'stats', 'numbers', 'achievements', 'awards', 'certifications', 'compliance', 'metrics', 'trust'],
+    dependencies: [],
+    previewProps: {
+      badge: 'By The Numbers',
+      title: 'Building trust through excellence',
+      subtitle: 'Our commitment to quality and innovation is reflected in every metric, award, and certification we have earned.',
+      stats: [
+        {
+          icon: 'Users',
+          value: '500K+',
+          label: 'Active Users',
+          description: 'Worldwide customers trust our platform'
+        },
+        {
+          icon: 'Building2',
+          value: '1,200+',
+          label: 'Enterprise Clients',
+          description: 'Fortune 500 companies using our solutions'
+        },
+        {
+          icon: 'MapPin',
+          value: '150+',
+          label: 'Countries',
+          description: 'Global presence across all continents'
+        },
+        {
+          icon: 'TrendingUp',
+          value: '99.9%',
+          label: 'Uptime',
+          description: 'Industry-leading reliability and performance'
+        }
+      ],
+      achievements: [
+        {
+          icon: 'Award',
+          title: 'Best SaaS Product',
+          year: '2024',
+          description: 'Recognized by TechCrunch for innovation and user experience'
+        },
+        {
+          icon: 'Star',
+          title: 'Top Rated Platform',
+          year: '2023',
+          description: '4.9/5 stars from over 10,000 verified reviews on G2'
+        },
+        {
+          icon: 'Zap',
+          title: 'Fastest Growing Startup',
+          year: '2023',
+          description: 'Featured in Forbes 30 Under 30 list for technology'
+        }
+      ],
+      certifications: [
+        {
+          name: 'ISO 27001',
+          issuer: 'Information Security',
+          logo: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=200&h=200&fit=crop'
+        },
+        {
+          name: 'SOC 2 Type II',
+          issuer: 'Data Security',
+          logo: 'https://images.unsplash.com/photo-1614064548237-d3c8c7e8f7f6?w=200&h=200&fit=crop'
+        },
+        {
+          name: 'GDPR Compliant',
+          issuer: 'Data Privacy',
+          logo: 'https://images.unsplash.com/photo-1614064549629-f4c8b3b5c92a?w=200&h=200&fit=crop'
+        }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'By The Numbers', description: 'Badge text above title' },
+      { name: 'title', type: 'string', default: 'Building trust through excellence', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Our commitment to quality...', description: 'Description text below title' },
+      { name: 'stats', type: 'Stat[]', description: 'Array of statistics with icon, value, label and description' },
+      { name: 'achievements', type: 'Achievement[]', description: 'Array of awards and recognitions with icon, title, year and description' },
+      { name: 'certifications', type: 'Certification[]', description: 'Array of certifications with name, issuer and logo' }
+    ],
+    code: `import { Users, Building2, MapPin, TrendingUp, Award, Shield, Star, Zap } from 'lucide-react';
+
+interface Stat {
+  icon: string;
+  value: string;
+  label: string;
+  description: string;
+}
+
+interface Achievement {
+  icon: string;
+  title: string;
+  year: string;
+  description: string;
+}
+
+interface Certification {
+  name: string;
+  issuer: string;
+  logo: string;
+}
+
+interface About7Props {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  stats?: Stat[];
+  achievements?: Achievement[];
+  certifications?: Certification[];
+}
+
+export default function About7({
+  badge = 'By The Numbers',
+  title = 'Building trust through excellence',
+  subtitle = 'Our commitment to quality and innovation is reflected in every metric, award, and certification we have earned.',
+  stats = [
+    {
+      icon: 'Users',
+      value: '500K+',
+      label: 'Active Users',
+      description: 'Worldwide customers trust our platform'
+    },
+    {
+      icon: 'Building2',
+      value: '1,200+',
+      label: 'Enterprise Clients',
+      description: 'Fortune 500 companies using our solutions'
+    },
+    {
+      icon: 'MapPin',
+      value: '150+',
+      label: 'Countries',
+      description: 'Global presence across all continents'
+    },
+    {
+      icon: 'TrendingUp',
+      value: '99.9%',
+      label: 'Uptime',
+      description: 'Industry-leading reliability and performance'
+    }
+  ],
+  achievements = [
+    {
+      icon: 'Award',
+      title: 'Best SaaS Product',
+      year: '2024',
+      description: 'Recognized by TechCrunch for innovation and user experience'
+    },
+    {
+      icon: 'Star',
+      title: 'Top Rated Platform',
+      year: '2023',
+      description: '4.9/5 stars from over 10,000 verified reviews on G2'
+    },
+    {
+      icon: 'Zap',
+      title: 'Fastest Growing Startup',
+      year: '2023',
+      description: 'Featured in Forbes 30 Under 30 list for technology'
+    },
+    {
+      icon: 'Shield',
+      title: 'Security Excellence',
+      year: '2022',
+      description: 'Awarded for best security practices and data protection'
+    }
+  ],
+  certifications = [
+    {
+      name: 'ISO 27001',
+      issuer: 'Information Security',
+      logo: 'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=200&h=200&fit=crop'
+    },
+    {
+      name: 'SOC 2 Type II',
+      issuer: 'Data Security',
+      logo: 'https://images.unsplash.com/photo-1614064548237-d3c8c7e8f7f6?w=200&h=200&fit=crop'
+    },
+    {
+      name: 'GDPR Compliant',
+      issuer: 'Data Privacy',
+      logo: 'https://images.unsplash.com/photo-1614064549629-f4c8b3b5c92a?w=200&h=200&fit=crop'
+    },
+    {
+      name: 'PCI DSS',
+      issuer: 'Payment Security',
+      logo: 'https://images.unsplash.com/photo-1614064642938-393fb7c04e83?w=200&h=200&fit=crop'
+    }
+  ]
+}: About7Props) {
+  const iconMap: Record<string, React.ReactElement> = {
+    Users: <Users className="h-8 w-8" />,
+    Building2: <Building2 className="h-8 w-8" />,
+    MapPin: <MapPin className="h-8 w-8" />,
+    TrendingUp: <TrendingUp className="h-8 w-8" />,
+    Award: <Award className="h-6 w-6" />,
+    Star: <Star className="h-6 w-6" />,
+    Zap: <Zap className="h-6 w-6" />,
+    Shield: <Shield className="h-6 w-6" />
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+            {badge}
+          </div>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl max-w-3xl">
+            {title}
+          </h2>
+          <p className="max-w-2xl text-gray-600 md:text-xl dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Stats Grid - Large Cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className="relative group overflow-hidden rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 hover:border-primary/50 dark:hover:border-primary/50 transition-all hover:shadow-xl"
+            >
+              {/* Background Gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary mb-6 group-hover:scale-110 transition-transform">
+                  {iconMap[stat.icon]}
+                </div>
+                <div className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {stat.label}
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {stat.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Achievements Section */}
+        <div className="mb-20">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
+            Awards & Recognition
+          </h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {achievements.map((achievement, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center text-center p-6 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all hover:shadow-lg group"
+              >
+                {/* Icon */}
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-500/20 to-orange-500/20 flex items-center justify-center text-yellow-600 dark:text-yellow-500 mb-4 group-hover:scale-110 transition-transform">
+                  {iconMap[achievement.icon]}
+                </div>
+
+                {/* Year Badge */}
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                  {achievement.year}
+                </div>
+
+                {/* Title */}
+                <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                  {achievement.title}
+                </h4>
+
+                {/* Description */}
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {achievement.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Certifications Section */}
+        <div>
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-12">
+            Certifications & Compliance
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-4xl mx-auto">
+            {certifications.map((cert, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center p-6 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-primary/50 dark:hover:border-primary/50 transition-all hover:shadow-lg group"
+              >
+                {/* Logo */}
+                <div className="w-16 h-16 rounded-lg bg-gray-100 dark:bg-gray-800 mb-4 overflow-hidden group-hover:scale-105 transition-transform">
+                  <img
+                    src={cert.logo}
+                    alt={cert.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Name */}
+                <div className="text-sm font-bold text-gray-900 dark:text-white text-center mb-1">
+                  {cert.name}
+                </div>
+
+                {/* Issuer */}
+                <div className="text-xs text-gray-500 dark:text-gray-400 text-center">
+                  {cert.issuer}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
     id: 'faq-2',
     name: 'FAQ Grid Cards',
     description: 'FAQ in 2-column grid layout with icon-based cards. Clean design with help icons, hover effects and contact CTA section.',
