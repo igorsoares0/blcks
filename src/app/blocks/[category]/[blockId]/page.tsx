@@ -28,6 +28,7 @@ import Navbar1 from '@/blocks/navbar/navbar1';
 import Navbar2 from '@/blocks/navbar/navbar-2';
 import Navbar3 from '@/blocks/navbar/navbar-3';
 import Navbar4 from '@/blocks/navbar/navbar-4';
+import Navbar5 from '@/blocks/navbar/navbar-5';
 import Footer1 from '@/blocks/footer/footer-1';
 import Footer2 from '@/blocks/footer/footer-2';
 import Footer3 from '@/blocks/footer/footer-3';
@@ -94,6 +95,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'navbar-2': Navbar2,
   'navbar-3': Navbar3,
   'navbar-4': Navbar4,
+  'navbar-5': Navbar5,
   'hero-1': Hero1,
   'hero-2': Hero2,
   'hero-3': Hero3,
