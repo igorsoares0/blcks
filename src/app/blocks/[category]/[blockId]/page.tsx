@@ -33,6 +33,8 @@ import Footer1 from '@/blocks/footer/footer-1';
 import Footer2 from '@/blocks/footer/footer-2';
 import Footer3 from '@/blocks/footer/footer-3';
 import Footer4 from '@/blocks/footer/footer-4';
+import Footer5 from '@/blocks/footer/footer-5';
+import Footer6 from '@/blocks/footer/footer-6';
 import Announcement1 from '@/blocks/announcement/announcement-1';
 import Announcement2 from '@/blocks/announcement/announcement-2';
 import Announcement3 from '@/blocks/announcement/announcement-3';
@@ -81,6 +83,7 @@ import FAQ1 from '@/blocks/faq/faq-1';
 import FAQ2 from '@/blocks/faq/faq-2';
 import FAQ3 from '@/blocks/faq/faq-3';
 import FAQ4 from '@/blocks/faq/faq-4';
+import FAQ5 from '@/blocks/faq/faq-5';
 
 interface PageProps {
   params: Promise<{
@@ -119,6 +122,8 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'footer-2': Footer2,
   'footer-3': Footer3,
   'footer-4': Footer4,
+  'footer-5': Footer5,
+  'footer-6': Footer6,
   'announcement-1': Announcement1,
   'announcement-2': Announcement2,
   'announcement-3': Announcement3,
@@ -167,6 +172,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'faq-2': FAQ2,
   'faq-3': FAQ3,
   'faq-4': FAQ4,
+  'faq-5': FAQ5,
 };
 
 export default async function BlockPage({ params }: PageProps) {
