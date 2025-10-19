@@ -79,6 +79,7 @@ import Testimonial1 from '@/blocks/testimonial/testimonial-1';
 import Testimonial2 from '@/blocks/testimonial/testimonial-2';
 import Testimonial3 from '@/blocks/testimonial/testimonial-3';
 import Testimonial4 from '@/blocks/testimonial/testimonial-4';
+import Testimonial5 from '@/blocks/testimonial/testimonial-5';
 import FAQ1 from '@/blocks/faq/faq-1';
 import FAQ2 from '@/blocks/faq/faq-2';
 import FAQ3 from '@/blocks/faq/faq-3';
@@ -168,6 +169,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'testimonial-2': Testimonial2,
   'testimonial-3': Testimonial3,
   'testimonial-4': Testimonial4,
+  'testimonial-5': Testimonial5,
   'faq-1': FAQ1,
   'faq-2': FAQ2,
   'faq-3': FAQ3,
