@@ -82,10 +82,16 @@ import Login1 from '@/blocks/auth/login-1';
 import Login2 from '@/blocks/auth/login-2';
 import Login3 from '@/blocks/auth/login-3';
 import Login4 from '@/blocks/auth/login-4';
+import Login5 from '@/blocks/auth/login-5';
+import Login6 from '@/blocks/auth/login-6';
+import Login7 from '@/blocks/auth/login-7';
 import Signup1 from '@/blocks/auth/signup-1';
 import Signup2 from '@/blocks/auth/signup-2';
 import Signup3 from '@/blocks/auth/signup-3';
 import Signup4 from '@/blocks/auth/signup-4';
+import Signup5 from '@/blocks/auth/signup-5';
+import Signup6 from '@/blocks/auth/signup-6';
+import Signup7 from '@/blocks/auth/signup-7';
 import Testimonial1 from '@/blocks/testimonial/testimonial-1';
 import Testimonial2 from '@/blocks/testimonial/testimonial-2';
 import Testimonial3 from '@/blocks/testimonial/testimonial-3';
@@ -183,10 +189,16 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'login-2': Login2,
   'login-3': Login3,
   'login-4': Login4,
+  'login-5': Login5,
+  'login-6': Login6,
+  'login-7': Login7,
   'signup-1': Signup1,
   'signup-2': Signup2,
   'signup-3': Signup3,
   'signup-4': Signup4,
+  'signup-5': Signup5,
+  'signup-6': Signup6,
+  'signup-7': Signup7,
   'testimonial-1': Testimonial1,
   'testimonial-2': Testimonial2,
   'testimonial-3': Testimonial3,

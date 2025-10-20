@@ -16166,6 +16166,1167 @@ export default function Signup4({
 }`
   },
   {
+    id: 'signup-5',
+    name: 'Signup with Progress Steps',
+    description: 'Modern signup form with visual progress stepper, password strength indicator, and animated background. Features step-by-step guidance and feature highlights.',
+    category: 'auth',
+    tags: ['signup', 'register', 'auth', 'stepper', 'progress', 'animated', 'modern', 'password-strength'],
+    dependencies: [],
+    previewProps: {
+      title: 'Create Your Account',
+      subtitle: 'Get started with your free account in less than a minute',
+      currentStep: 1,
+      steps: [
+        { number: 1, title: 'Account Info', icon: 'User' },
+        { number: 2, title: 'Verification', icon: 'Mail' },
+        { number: 3, title: 'Complete', icon: 'CheckCircle2' }
+      ],
+      fullNameLabel: 'Full Name',
+      fullNamePlaceholder: 'John Doe',
+      emailLabel: 'Email Address',
+      emailPlaceholder: 'you@example.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: 'Create a strong password',
+      signupButtonText: 'Continue',
+      termsText: 'By signing up, you agree to our',
+      termsLink: '#',
+      loginText: 'Already have an account?',
+      loginLinkText: 'Sign in',
+      loginLink: '#',
+      features: [
+        { icon: 'Zap', text: 'Instant setup' },
+        { icon: 'Shield', text: 'Secure & encrypted' },
+        { icon: 'Sparkles', text: 'Premium features' }
+      ],
+      badge: '14-day free trial'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Create Your Account', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Get started with your free account in less than a minute', description: 'Subtitle text' },
+      { name: 'currentStep', type: 'number', default: '1', description: 'Current active step number' },
+      { name: 'steps', type: 'Step[]', description: 'Array of step objects with number, title, and icon name' },
+      { name: 'fullNameLabel', type: 'string', default: 'Full Name', description: 'Full name field label' },
+      { name: 'fullNamePlaceholder', type: 'string', default: 'John Doe', description: 'Full name field placeholder' },
+      { name: 'emailLabel', type: 'string', default: 'Email Address', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'Create a strong password', description: 'Password field placeholder' },
+      { name: 'signupButtonText', type: 'string', default: 'Continue', description: 'Signup button text' },
+      { name: 'termsText', type: 'string', default: 'By signing up, you agree to our', description: 'Terms agreement text' },
+      { name: 'termsLink', type: 'string', default: '#', description: 'Terms and privacy policy link URL' },
+      { name: 'loginText', type: 'string', default: 'Already have an account?', description: 'Login prompt text' },
+      { name: 'loginLinkText', type: 'string', default: 'Sign in', description: 'Login link text' },
+      { name: 'loginLink', type: 'string', default: '#', description: 'Login link URL' },
+      { name: 'features', type: 'Feature[]', description: 'Array of feature objects with icon and text' },
+      { name: 'badge', type: 'string', default: '14-day free trial', description: 'Badge text displayed at the top' }
+    ],
+    code: `import { User, Mail, Lock, ArrowRight, CheckCircle2, Sparkles, Zap, Shield } from 'lucide-react';
+
+interface Step {
+  number: number;
+  title: string;
+  icon: string;
+}
+
+interface Feature {
+  icon: string;
+  text: string;
+}
+
+interface Signup5Props {
+  title?: string;
+  subtitle?: string;
+  currentStep?: number;
+  steps?: Step[];
+  fullNameLabel?: string;
+  fullNamePlaceholder?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  signupButtonText?: string;
+  termsText?: string;
+  termsLink?: string;
+  loginText?: string;
+  loginLinkText?: string;
+  loginLink?: string;
+  features?: Feature[];
+  badge?: string;
+}
+
+export default function Signup5({
+  title = 'Create Your Account',
+  subtitle = 'Get started with your free account in less than a minute',
+  currentStep = 1,
+  steps = [
+    { number: 1, title: 'Account Info', icon: 'User' },
+    { number: 2, title: 'Verification', icon: 'Mail' },
+    { number: 3, title: 'Complete', icon: 'CheckCircle2' }
+  ],
+  fullNameLabel = 'Full Name',
+  fullNamePlaceholder = 'John Doe',
+  emailLabel = 'Email Address',
+  emailPlaceholder = 'you@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'Create a strong password',
+  signupButtonText = 'Continue',
+  termsText = 'By signing up, you agree to our',
+  termsLink = '#',
+  loginText = 'Already have an account?',
+  loginLinkText = 'Sign in',
+  loginLink = '#',
+  features = [
+    { icon: 'Zap', text: 'Instant setup' },
+    { icon: 'Shield', text: 'Secure & encrypted' },
+    { icon: 'Sparkles', text: 'Premium features' }
+  ],
+  badge = '14-day free trial'
+}: Signup5Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, any> = {
+      User: User,
+      Mail: Mail,
+      CheckCircle2: CheckCircle2,
+      Zap: Zap,
+      Shield: Shield,
+      Sparkles: Sparkles
+    };
+    return icons[iconName] || User;
+  };
+
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center py-12 px-4 bg-white dark:bg-gray-950 relative overflow-hidden">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 opacity-5 dark:opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: \`url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f46e5' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3Ccircle cx='0' cy='0' r='2'/%3E%3Ccircle cx='60' cy='60' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")\`
+        }} />
+      </div>
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+
+      <div className="w-full max-w-5xl relative z-10">
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Left Side - Progress & Features */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Header */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+                <Sparkles className="h-4 w-4" />
+                {badge}
+              </div>
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+                {title}
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                {subtitle}
+              </p>
+            </div>
+
+            {/* Progress Steps */}
+            <div className="space-y-4">
+              {steps.map((step, index) => {
+                const IconComponent = getIcon(step.icon);
+                const isActive = currentStep === step.number;
+                const isCompleted = currentStep > step.number;
+
+                return (
+                  <div key={step.number} className="flex items-center gap-4">
+                    {/* Step Circle */}
+                    <div
+                      className={\`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 \${
+                        isActive
+                          ? 'border-primary bg-primary text-white shadow-lg shadow-primary/30'
+                          : isCompleted
+                          ? 'border-primary bg-primary/10 text-primary'
+                          : 'border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 text-gray-400'
+                      }\`}
+                    >
+                      {isCompleted ? (
+                        <CheckCircle2 className="h-6 w-6" />
+                      ) : (
+                        <IconComponent className="h-6 w-6" />
+                      )}
+                    </div>
+
+                    {/* Step Info */}
+                    <div className="flex-1">
+                      <div
+                        className={\`text-sm font-medium transition-colors \${
+                          isActive || isCompleted
+                            ? 'text-gray-900 dark:text-white'
+                            : 'text-gray-500 dark:text-gray-500'
+                        }\`}
+                      >
+                        Step {step.number}
+                      </div>
+                      <div
+                        className={\`text-base font-semibold transition-colors \${
+                          isActive || isCompleted
+                            ? 'text-gray-900 dark:text-white'
+                            : 'text-gray-400 dark:text-gray-600'
+                        }\`}
+                      >
+                        {step.title}
+                      </div>
+                    </div>
+
+                    {/* Connector Line */}
+                    {index < steps.length - 1 && (
+                      <div
+                        className={\`absolute left-6 w-0.5 h-8 mt-16 transition-colors \${
+                          currentStep > step.number
+                            ? 'bg-primary'
+                            : 'bg-gray-200 dark:bg-gray-800'
+                        }\`}
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Features */}
+            <div className="hidden lg:block space-y-3 pt-6 border-t border-gray-200 dark:border-gray-800">
+              {features.map((feature, index) => {
+                const IconComponent = getIcon(feature.icon);
+                return (
+                  <div key={index} className="flex items-center gap-3">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <IconComponent className="h-4 w-4 text-primary" />
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {feature.text}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right Side - Form */}
+          <div className="lg:col-span-3">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-8 md:p-10">
+              <form className="space-y-6">
+                {/* Full Name */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="fullName"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {fullNameLabel}
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="fullName"
+                      type="text"
+                      placeholder={fullNamePlaceholder}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {emailLabel}
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder={emailPlaceholder}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Password */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="password"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {passwordLabel}
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="password"
+                      type="password"
+                      placeholder={passwordPlaceholder}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                  </div>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    At least 8 characters with letters, numbers and symbols
+                  </p>
+                </div>
+
+                {/* Password Strength Indicator */}
+                <div className="space-y-2">
+                  <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                    <span>Password strength</span>
+                    <span className="font-medium text-yellow-600 dark:text-yellow-400">Medium</span>
+                  </div>
+                  <div className="flex gap-1 h-1.5">
+                    <div className="flex-1 rounded-full bg-primary" />
+                    <div className="flex-1 rounded-full bg-primary" />
+                    <div className="flex-1 rounded-full bg-gray-200 dark:bg-gray-800" />
+                    <div className="flex-1 rounded-full bg-gray-200 dark:bg-gray-800" />
+                  </div>
+                </div>
+
+                {/* Terms */}
+                <div className="pt-2">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 mt-1 rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0"
+                    />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {termsText}{' '}
+                      <a
+                        href={termsLink}
+                        className="font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Terms of Service
+                      </a>
+                      {' and '}
+                      <a
+                        href={termsLink}
+                        className="font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Privacy Policy
+                      </a>
+                    </span>
+                  </label>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-primary/80 text-white font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300"
+                >
+                  {signupButtonText}
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </form>
+
+              {/* Login Link */}
+              <div className="mt-8 text-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {loginText}{' '}
+                  <a
+                    href={loginLink}
+                    className="font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    {loginLinkText}
+                  </a>
+                </p>
+              </div>
+
+              {/* Mobile Features */}
+              <div className="lg:hidden mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 grid grid-cols-3 gap-4">
+                {features.map((feature, index) => {
+                  const IconComponent = getIcon(feature.icon);
+                  return (
+                    <div key={index} className="text-center">
+                      <div className="inline-flex w-10 h-10 rounded-lg bg-primary/10 items-center justify-center mb-2">
+                        <IconComponent className="h-5 w-5 text-primary" />
+                      </div>
+                      <p className="text-xs text-gray-600 dark:text-gray-400">
+                        {feature.text}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'signup-6',
+    name: 'Signup Dark Theme with Social Proof',
+    description: 'Dark-themed signup form with neon gradients, user testimonials, stats showcase, and trust badges. Perfect for modern, conversion-focused landing pages.',
+    category: 'auth',
+    tags: ['signup', 'register', 'auth', 'dark', 'testimonials', 'social-proof', 'stats', 'modern', 'neon'],
+    dependencies: [],
+    previewProps: {
+      title: 'Join 50,000+ Users',
+      subtitle: 'Start building amazing things today. No credit card required.',
+      fullNameLabel: 'Full Name',
+      fullNamePlaceholder: 'John Doe',
+      emailLabel: 'Email',
+      emailPlaceholder: 'you@example.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: 'At least 8 characters',
+      signupButtonText: 'Get Started Free',
+      termsText: 'By signing up, you agree to our',
+      termsLink: '#',
+      loginText: 'Already have an account?',
+      loginLinkText: 'Sign in',
+      loginLink: '#',
+      testimonials: [
+        {
+          name: 'Sarah Johnson',
+          role: 'Product Designer',
+          avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+          rating: 5,
+          comment: 'Best decision for our team. Setup took less than 5 minutes!'
+        },
+        {
+          name: 'Michael Chen',
+          role: 'Developer',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+          rating: 5,
+          comment: 'The features are incredible. Highly recommend to everyone.'
+        }
+      ],
+      stats: [
+        { icon: 'Users', value: '50K+', label: 'Active Users' },
+        { icon: 'TrendingUp', value: '99.9%', label: 'Uptime' },
+        { icon: 'Award', value: '4.9/5', label: 'Rating' }
+      ],
+      trustBadge: 'Trusted by teams at Google, Meta, and Netflix'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Join 50,000+ Users', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Start building amazing things today. No credit card required.', description: 'Subtitle text' },
+      { name: 'fullNameLabel', type: 'string', default: 'Full Name', description: 'Full name field label' },
+      { name: 'fullNamePlaceholder', type: 'string', default: 'John Doe', description: 'Full name field placeholder' },
+      { name: 'emailLabel', type: 'string', default: 'Email', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'At least 8 characters', description: 'Password field placeholder' },
+      { name: 'signupButtonText', type: 'string', default: 'Get Started Free', description: 'Signup button text' },
+      { name: 'termsText', type: 'string', default: 'By signing up, you agree to our', description: 'Terms agreement text' },
+      { name: 'termsLink', type: 'string', default: '#', description: 'Terms and privacy policy link URL' },
+      { name: 'loginText', type: 'string', default: 'Already have an account?', description: 'Login prompt text' },
+      { name: 'loginLinkText', type: 'string', default: 'Sign in', description: 'Login link text' },
+      { name: 'loginLink', type: 'string', default: '#', description: 'Login link URL' },
+      { name: 'testimonials', type: 'Testimonial[]', description: 'Array of testimonial objects with name, role, avatar, rating, and comment' },
+      { name: 'stats', type: 'Stat[]', description: 'Array of stat objects with icon, value, and label' },
+      { name: 'trustBadge', type: 'string', default: 'Trusted by teams at Google, Meta, and Netflix', description: 'Trust badge text' }
+    ],
+    code: `import { User, Mail, Lock, ArrowRight, Star, Users, TrendingUp, Award } from 'lucide-react';
+
+interface Testimonial {
+  name: string;
+  role: string;
+  avatar: string;
+  rating: number;
+  comment: string;
+}
+
+interface Stat {
+  icon: string;
+  value: string;
+  label: string;
+}
+
+interface Signup6Props {
+  title?: string;
+  subtitle?: string;
+  fullNameLabel?: string;
+  fullNamePlaceholder?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  signupButtonText?: string;
+  termsText?: string;
+  termsLink?: string;
+  loginText?: string;
+  loginLinkText?: string;
+  loginLink?: string;
+  testimonials?: Testimonial[];
+  stats?: Stat[];
+  trustBadge?: string;
+}
+
+export default function Signup6({
+  title = 'Join 50,000+ Users',
+  subtitle = 'Start building amazing things today. No credit card required.',
+  fullNameLabel = 'Full Name',
+  fullNamePlaceholder = 'John Doe',
+  emailLabel = 'Email',
+  emailPlaceholder = 'you@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'At least 8 characters',
+  signupButtonText = 'Get Started Free',
+  termsText = 'By signing up, you agree to our',
+  termsLink = '#',
+  loginText = 'Already have an account?',
+  loginLinkText = 'Sign in',
+  loginLink = '#',
+  testimonials = [
+    {
+      name: 'Sarah Johnson',
+      role: 'Product Designer',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+      rating: 5,
+      comment: 'Best decision for our team. Setup took less than 5 minutes!'
+    },
+    {
+      name: 'Michael Chen',
+      role: 'Developer',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+      rating: 5,
+      comment: 'The features are incredible. Highly recommend to everyone.'
+    }
+  ],
+  stats = [
+    { icon: 'Users', value: '50K+', label: 'Active Users' },
+    { icon: 'TrendingUp', value: '99.9%', label: 'Uptime' },
+    { icon: 'Award', value: '4.9/5', label: 'Rating' }
+  ],
+  trustBadge = 'Trusted by teams at Google, Meta, and Netflix'
+}: Signup6Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, any> = {
+      Users: Users,
+      TrendingUp: TrendingUp,
+      Award: Award
+    };
+    return icons[iconName] || Users;
+  };
+
+  return (
+    <section className="w-full min-h-screen bg-gradient-to-br from-gray-900 via-gray-950 to-black py-12 px-4 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0" style={{
+          backgroundImage: \`url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")\`
+        }} />
+      </div>
+
+      {/* Gradient Orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl" />
+
+      <div className="container mx-auto max-w-6xl relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Social Proof & Stats */}
+          <div className="space-y-8">
+            {/* Header */}
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                {title}
+              </h1>
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                {subtitle}
+              </p>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-4">
+              {stats.map((stat, index) => {
+                const IconComponent = getIcon(stat.icon);
+                return (
+                  <div
+                    key={index}
+                    className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-primary/50 transition-all duration-300"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center mb-3">
+                        <IconComponent className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="text-2xl font-bold text-white mb-1">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs text-gray-400">
+                        {stat.label}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Testimonials */}
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+                What users say
+              </h3>
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:border-primary/30 transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-primary/50"
+                    />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="flex gap-0.5">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          ))}
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-300 mb-2 leading-relaxed">
+                        {testimonial.comment}
+                      </p>
+                      <div>
+                        <div className="text-sm font-semibold text-white">
+                          {testimonial.name}
+                        </div>
+                        <div className="text-xs text-gray-400">
+                          {testimonial.role}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Trust Badge */}
+            <div className="flex items-center gap-3 text-sm text-gray-400">
+              <Award className="h-5 w-5 text-primary" />
+              <span>{trustBadge}</span>
+            </div>
+          </div>
+
+          {/* Right Side - Signup Form */}
+          <div>
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 p-8 md:p-10">
+              {/* Form Header */}
+              <div className="mb-8 text-center">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+                  <Star className="h-4 w-4" />
+                  Free 14-day trial
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                  Create your account
+                </h2>
+                <p className="text-gray-600 dark:text-gray-400">
+                  No credit card required
+                </p>
+              </div>
+
+              <form className="space-y-5">
+                {/* Full Name */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="fullName"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {fullNameLabel}
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="fullName"
+                      type="text"
+                      placeholder={fullNamePlaceholder}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {emailLabel}
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder={emailPlaceholder}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Password */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="password"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {passwordLabel}
+                  </label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="password"
+                      type="password"
+                      placeholder={passwordPlaceholder}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Terms */}
+                <div className="pt-2">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="w-4 h-4 mt-1 rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0"
+                    />
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {termsText}{' '}
+                      <a
+                        href={termsLink}
+                        className="font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Terms of Service
+                      </a>
+                      {' and '}
+                      <a
+                        href={termsLink}
+                        className="font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Privacy Policy
+                      </a>
+                    </span>
+                  </label>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-gradient-to-r from-primary via-primary to-cyan-600 text-white text-base font-semibold hover:shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300"
+                >
+                  {signupButtonText}
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </form>
+
+              {/* Login Link */}
+              <div className="mt-8 text-center">
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {loginText}{' '}
+                  <a
+                    href={loginLink}
+                    className="font-medium text-primary hover:text-primary/80 transition-colors"
+                  >
+                    {loginLinkText}
+                  </a>
+                </p>
+              </div>
+
+              {/* Security Badge */}
+              <div className="mt-6 flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                <Lock className="h-3.5 w-3.5" />
+                <span>256-bit SSL encryption. Your data is safe with us.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'signup-7',
+    name: 'Signup with Plan Selection & Validation',
+    description: 'Comprehensive signup form with inline plan selection cards, real-time email validation, password requirements checklist, and trust indicators. Perfect for SaaS onboarding.',
+    category: 'auth',
+    tags: ['signup', 'register', 'auth', 'plans', 'pricing', 'validation', 'wizard', 'saas', 'onboarding'],
+    dependencies: [],
+    previewProps: {
+      title: 'Create Your Account',
+      subtitle: 'Choose your plan and get started in minutes',
+      fullNameLabel: 'Full Name',
+      fullNamePlaceholder: 'John Doe',
+      emailLabel: 'Work Email',
+      emailPlaceholder: 'you@company.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: 'At least 8 characters',
+      planLabel: 'Select Your Plan',
+      signupButtonText: 'Create Account',
+      termsText: 'By signing up, you agree to our',
+      termsLink: '#',
+      loginText: 'Already have an account?',
+      loginLinkText: 'Sign in',
+      loginLink: '#',
+      plans: [
+        {
+          name: 'Starter',
+          price: '$29',
+          period: '/month',
+          icon: 'Zap',
+          features: ['Up to 5 users', '10 GB storage', 'Email support']
+        },
+        {
+          name: 'Pro',
+          price: '$99',
+          period: '/month',
+          icon: 'Crown',
+          recommended: true,
+          features: ['Up to 50 users', '100 GB storage', 'Priority support', 'Advanced analytics']
+        },
+        {
+          name: 'Enterprise',
+          price: '$299',
+          period: '/month',
+          icon: 'Shield',
+          features: ['Unlimited users', 'Unlimited storage', '24/7 dedicated support', 'Custom integrations']
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Create Your Account', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Choose your plan and get started in minutes', description: 'Subtitle text' },
+      { name: 'fullNameLabel', type: 'string', default: 'Full Name', description: 'Full name field label' },
+      { name: 'fullNamePlaceholder', type: 'string', default: 'John Doe', description: 'Full name field placeholder' },
+      { name: 'emailLabel', type: 'string', default: 'Work Email', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@company.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'At least 8 characters', description: 'Password field placeholder' },
+      { name: 'planLabel', type: 'string', default: 'Select Your Plan', description: 'Plan selection section label' },
+      { name: 'signupButtonText', type: 'string', default: 'Create Account', description: 'Signup button text' },
+      { name: 'termsText', type: 'string', default: 'By signing up, you agree to our', description: 'Terms agreement text' },
+      { name: 'termsLink', type: 'string', default: '#', description: 'Terms and privacy policy link URL' },
+      { name: 'loginText', type: 'string', default: 'Already have an account?', description: 'Login prompt text' },
+      { name: 'loginLinkText', type: 'string', default: 'Sign in', description: 'Login link text' },
+      { name: 'loginLink', type: 'string', default: '#', description: 'Login link URL' },
+      { name: 'plans', type: 'PlanOption[]', description: 'Array of plan objects with name, price, period, icon, features, and optional recommended flag' }
+    ],
+    code: `import { User, Mail, Lock, ArrowRight, Check, X, Shield, Zap, Crown, Sparkles } from 'lucide-react';
+
+interface PlanOption {
+  name: string;
+  price: string;
+  period: string;
+  features: string[];
+  recommended?: boolean;
+  icon: string;
+}
+
+interface Signup7Props {
+  title?: string;
+  subtitle?: string;
+  fullNameLabel?: string;
+  fullNamePlaceholder?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  planLabel?: string;
+  signupButtonText?: string;
+  termsText?: string;
+  termsLink?: string;
+  loginText?: string;
+  loginLinkText?: string;
+  loginLink?: string;
+  plans?: PlanOption[];
+}
+
+export default function Signup7({
+  title = 'Create Your Account',
+  subtitle = 'Choose your plan and get started in minutes',
+  fullNameLabel = 'Full Name',
+  fullNamePlaceholder = 'John Doe',
+  emailLabel = 'Work Email',
+  emailPlaceholder = 'you@company.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'At least 8 characters',
+  planLabel = 'Select Your Plan',
+  signupButtonText = 'Create Account',
+  termsText = 'By signing up, you agree to our',
+  termsLink = '#',
+  loginText = 'Already have an account?',
+  loginLinkText = 'Sign in',
+  loginLink = '#',
+  plans = [
+    {
+      name: 'Starter',
+      price: '$29',
+      period: '/month',
+      icon: 'Zap',
+      features: ['Up to 5 users', '10 GB storage', 'Email support']
+    },
+    {
+      name: 'Pro',
+      price: '$99',
+      period: '/month',
+      icon: 'Crown',
+      recommended: true,
+      features: ['Up to 50 users', '100 GB storage', 'Priority support', 'Advanced analytics']
+    },
+    {
+      name: 'Enterprise',
+      price: '$299',
+      period: '/month',
+      icon: 'Shield',
+      features: ['Unlimited users', 'Unlimited storage', '24/7 dedicated support', 'Custom integrations']
+    }
+  ]
+}: Signup7Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, any> = {
+      Zap: Zap,
+      Crown: Crown,
+      Shield: Shield
+    };
+    return icons[iconName] || Zap;
+  };
+
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+      <div className="w-full max-w-4xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+            <Sparkles className="h-4 w-4" />
+            Start your free trial today
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">
+            {title}
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Main Card */}
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+          {/* Plan Selection */}
+          <div className="p-8 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
+            <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-4">
+              {planLabel}
+            </label>
+            <div className="grid md:grid-cols-3 gap-4">
+              {plans.map((plan, index) => {
+                const IconComponent = getIcon(plan.icon);
+                return (
+                  <div
+                    key={index}
+                    className={\`relative p-5 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:scale-105 \${
+                      plan.recommended
+                        ? 'border-primary bg-primary/5 shadow-lg shadow-primary/20'
+                        : 'border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 hover:border-primary/50'
+                    }\`}
+                  >
+                    {plan.recommended && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-primary text-white text-xs font-semibold">
+                          <Crown className="h-3 w-3" />
+                          Recommended
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={\`w-10 h-10 rounded-lg flex items-center justify-center \${
+                        plan.recommended ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
+                      }\`}>
+                        <IconComponent className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-gray-900 dark:text-white">
+                          {plan.name}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400">
+                          <span className="text-xl font-bold text-gray-900 dark:text-white">{plan.price}</span>
+                          {plan.period}
+                        </div>
+                      </div>
+                    </div>
+                    <ul className="space-y-2">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                          <Check className={\`h-4 w-4 flex-shrink-0 \${
+                            plan.recommended ? 'text-primary' : 'text-green-500'
+                          }\`} />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Form */}
+          <div className="p-8">
+            <form className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Full Name */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="fullName"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {fullNameLabel}
+                  </label>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="fullName"
+                      type="text"
+                      placeholder={fullNamePlaceholder}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-gray-900 dark:text-white block"
+                  >
+                    {emailLabel}
+                  </label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder={emailPlaceholder}
+                      className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    />
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                      <Check className="h-5 w-5 text-green-500" />
+                    </div>
+                  </div>
+                  <p className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
+                    <Check className="h-3 w-3" />
+                    Valid work email
+                  </p>
+                </div>
+              </div>
+
+              {/* Password */}
+              <div className="space-y-2">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-medium text-gray-900 dark:text-white block"
+                >
+                  {passwordLabel}
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder={passwordPlaceholder}
+                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  />
+                </div>
+                {/* Password Requirements Checklist */}
+                <div className="grid grid-cols-2 gap-2 mt-3">
+                  <div className="flex items-center gap-2 text-xs">
+                    <Check className="h-3.5 w-3.5 text-green-500" />
+                    <span className="text-green-600 dark:text-green-400">At least 8 characters</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs">
+                    <Check className="h-3.5 w-3.5 text-green-500" />
+                    <span className="text-green-600 dark:text-green-400">Contains number</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs">
+                    <Check className="h-3.5 w-3.5 text-green-500" />
+                    <span className="text-green-600 dark:text-green-400">Contains uppercase</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs">
+                    <X className="h-3.5 w-3.5 text-gray-400" />
+                    <span className="text-gray-500 dark:text-gray-500">Contains symbol</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Terms */}
+              <div className="pt-2">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="w-4 h-4 mt-1 rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0"
+                  />
+                  <span className="text-sm text-gray-600 dark:text-gray-400">
+                    {termsText}{' '}
+                    <a
+                      href={termsLink}
+                      className="font-medium text-primary hover:text-primary/80 transition-colors"
+                    >
+                      Terms of Service
+                    </a>
+                    {' and '}
+                    <a
+                      href={termsLink}
+                      className="font-medium text-primary hover:text-primary/80 transition-colors"
+                    >
+                      Privacy Policy
+                    </a>
+                  </span>
+                </label>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-lg bg-gradient-to-r from-primary to-primary/80 text-white text-base font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300"
+              >
+                {signupButtonText}
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </form>
+
+            {/* Login Link */}
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {loginText}{' '}
+                <a
+                  href={loginLink}
+                  className="font-medium text-primary hover:text-primary/80 transition-colors"
+                >
+                  {loginLinkText}
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Trust Indicators Footer */}
+          <div className="px-8 py-6 bg-gray-50 dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600 dark:text-gray-400">
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-primary" />
+                <span>SSL Encrypted</span>
+              </div>
+              <div className="w-px h-4 bg-gray-300 dark:bg-gray-700" />
+              <div className="flex items-center gap-2">
+                <Check className="h-4 w-4 text-green-500" />
+                <span>No credit card required</span>
+              </div>
+              <div className="w-px h-4 bg-gray-300 dark:bg-gray-700" />
+              <div className="flex items-center gap-2">
+                <Zap className="h-4 w-4 text-primary" />
+                <span>Start in 2 minutes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
     id: 'footer-5',
     name: 'Footer with CTA and Badges',
     description: 'Comprehensive footer with integrated CTA section, newsletter signup, social links, and trust badges. Perfect for conversion-focused pages.',
@@ -20538,6 +21699,861 @@ export default function CTA7({
           {/* Decorative Elements */}
           <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl -z-10" />
           <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl -z-10" />
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'login-5',
+    name: 'Login with Gradient Header',
+    description: 'Modern login form with gradient header, trust badge, email/password fields, remember me checkbox, forgot password link, social login buttons (Google, GitHub, Apple), and sign up link. Features gradient button and shadow effects.',
+    category: 'auth',
+    tags: ['login', 'auth', 'authentication', 'form', 'social-login', 'signin'],
+    dependencies: [],
+    previewProps: {
+      title: 'Welcome Back',
+      subtitle: 'Sign in to your account to continue'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Welcome Back', description: 'Main title' },
+      { name: 'subtitle', type: 'string', default: 'Sign in to your account to continue', description: 'Subtitle text' },
+      { name: 'emailLabel', type: 'string', default: 'Email', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'name@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'Enter your password', description: 'Password field placeholder' },
+      { name: 'rememberMeText', type: 'string', default: 'Remember me', description: 'Remember me checkbox text' },
+      { name: 'forgotPasswordText', type: 'string', default: 'Forgot password?', description: 'Forgot password link text' },
+      { name: 'forgotPasswordHref', type: 'string', default: '#', description: 'Forgot password link URL' },
+      { name: 'loginButtonText', type: 'string', default: 'Sign In', description: 'Login button text' },
+      { name: 'loginButtonHref', type: 'string', default: '#', description: 'Login button URL' },
+      { name: 'signupText', type: 'string', default: "Don't have an account?", description: 'Sign up prompt text' },
+      { name: 'signupLinkText', type: 'string', default: 'Sign up', description: 'Sign up link text' },
+      { name: 'signupHref', type: 'string', default: '#', description: 'Sign up link URL' },
+      { name: 'orText', type: 'string', default: 'Or continue with', description: 'Divider text before social login' },
+      { name: 'socialProviders', type: 'SocialProvider[]', description: 'Array of social providers with name, icon, and href' },
+      { name: 'badge', type: 'string', default: 'Trusted by 50,000+ users', description: 'Trust badge text in gradient header' }
+    ],
+    code: `import { Mail, Lock, Eye, ArrowRight, Github, Apple, Sparkles } from 'lucide-react';
+
+interface SocialProvider {
+  name: string;
+  icon: string;
+  href: string;
+}
+
+interface Login5Props {
+  title?: string;
+  subtitle?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  rememberMeText?: string;
+  forgotPasswordText?: string;
+  forgotPasswordHref?: string;
+  loginButtonText?: string;
+  loginButtonHref?: string;
+  signupText?: string;
+  signupLinkText?: string;
+  signupHref?: string;
+  orText?: string;
+  socialProviders?: SocialProvider[];
+  badge?: string;
+}
+
+export default function Login5({
+  title = 'Welcome Back',
+  subtitle = 'Sign in to your account to continue',
+  emailLabel = 'Email',
+  emailPlaceholder = 'name@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'Enter your password',
+  rememberMeText = 'Remember me',
+  forgotPasswordText = 'Forgot password?',
+  forgotPasswordHref = '#',
+  loginButtonText = 'Sign In',
+  loginButtonHref = '#',
+  signupText = "Don't have an account?",
+  signupLinkText = 'Sign up',
+  signupHref = '#',
+  orText = 'Or continue with',
+  socialProviders = [
+    { name: 'Google', icon: 'Google', href: '#' },
+    { name: 'GitHub', icon: 'Github', href: '#' },
+    { name: 'Apple', icon: 'Apple', href: '#' }
+  ],
+  badge = 'Trusted by 50,000+ users'
+}: Login5Props) {
+  const GoogleIcon = () => (
+    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+  );
+
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, any> = {
+      Google: GoogleIcon,
+      Github: Github,
+      Apple: Apple
+    };
+    return icons[iconName] || Github;
+  };
+
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950">
+      <div className="w-full max-w-md">
+        {/* Card */}
+        <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+          {/* Header with Gradient */}
+          <div className="bg-gradient-to-br from-primary to-primary/80 px-8 py-10 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-semibold mb-4">
+              <Sparkles className="h-4 w-4" />
+              {badge}
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-2">
+              {title}
+            </h1>
+            <p className="text-white/90">
+              {subtitle}
+            </p>
+          </div>
+
+          <div className="p-8">
+            {/* Form */}
+            <form className="space-y-6">
+            {/* Email Field */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+                {emailLabel}
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <input
+                  type="email"
+                  id="email"
+                  placeholder={emailPlaceholder}
+                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-900 dark:text-white mb-2">
+                {passwordLabel}
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <input
+                  type="password"
+                  id="password"
+                  placeholder={passwordPlaceholder}
+                  className="w-full pl-10 pr-12 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                >
+                  <Eye className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Remember Me & Forgot Password */}
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0"
+                />
+                <span className="text-sm text-gray-600 dark:text-gray-400">
+                  {rememberMeText}
+                </span>
+              </label>
+              <a
+                href={forgotPasswordHref}
+                className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                {forgotPasswordText}
+              </a>
+            </div>
+
+            {/* Sign In Button */}
+            <button
+              type="submit"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-primary to-primary/80 text-white font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300"
+            >
+              {loginButtonText}
+              <ArrowRight className="h-5 w-5" />
+            </button>
+          </form>
+
+          {/* Divider */}
+          <div className="relative my-8">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-200 dark:border-gray-800" />
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400">
+                {orText}
+              </span>
+            </div>
+          </div>
+
+          {/* Social Login */}
+          <div className="grid grid-cols-3 gap-3">
+            {socialProviders.map((provider, index) => {
+              const IconComponent = getIcon(provider.icon);
+              return (
+                <a
+                  key={index}
+                  href={provider.href}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-300 hover:border-primary hover:shadow-md"
+                >
+                  <IconComponent className="h-5 w-5" />
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Sign Up Link */}
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {signupText}{' '}
+              <a
+                href={signupHref}
+                className="font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                {signupLinkText}
+              </a>
+            </p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'login-6',
+    name: 'Login with 3D Card & Recent Users',
+    description: 'Modern login form with 3D floating card effect, parallax background orbs, quick stats showcase, recent users list with avatars, and security indicators. Perfect for premium applications.',
+    category: 'auth',
+    tags: ['login', 'auth', 'authentication', 'form', '3d', 'modern', 'premium', 'recent-users'],
+    dependencies: [],
+    previewProps: {
+      title: 'Welcome Back',
+      subtitle: 'Sign in to continue to your dashboard',
+      emailLabel: 'Email Address',
+      emailPlaceholder: 'you@example.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: 'Enter your password',
+      rememberMeText: 'Keep me signed in',
+      forgotPasswordText: 'Forgot password?',
+      forgotPasswordHref: '#',
+      loginButtonText: 'Sign In',
+      signupText: "Don't have an account?",
+      signupLinkText: 'Create one',
+      signupHref: '#',
+      recentUsers: [
+        {
+          name: 'Sarah Chen',
+          email: 'sarah@company.com',
+          avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop'
+        },
+        {
+          name: 'Alex Kim',
+          email: 'alex@company.com',
+          avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop'
+        },
+        {
+          name: 'Jordan Lee',
+          email: 'jordan@company.com',
+          avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop'
+        }
+      ],
+      quickStats: [
+        { icon: 'Shield', label: 'Secure', value: '256-bit SSL' },
+        { icon: 'Clock', label: 'Fast', value: '<100ms' },
+        { icon: 'CheckCircle2', label: 'Reliable', value: '99.9%' }
+      ],
+      securityBadge: 'Your connection is secure and encrypted'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Welcome Back', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Sign in to continue to your dashboard', description: 'Subtitle text' },
+      { name: 'emailLabel', type: 'string', default: 'Email Address', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'Enter your password', description: 'Password field placeholder' },
+      { name: 'rememberMeText', type: 'string', default: 'Keep me signed in', description: 'Remember me checkbox text' },
+      { name: 'forgotPasswordText', type: 'string', default: 'Forgot password?', description: 'Forgot password link text' },
+      { name: 'forgotPasswordHref', type: 'string', default: '#', description: 'Forgot password link URL' },
+      { name: 'loginButtonText', type: 'string', default: 'Sign In', description: 'Login button text' },
+      { name: 'signupText', type: 'string', default: "Don't have an account?", description: 'Signup prompt text' },
+      { name: 'signupLinkText', type: 'string', default: 'Create one', description: 'Signup link text' },
+      { name: 'signupHref', type: 'string', default: '#', description: 'Signup link URL' },
+      { name: 'recentUsers', type: 'RecentUser[]', description: 'Array of recent user objects with name, email, and avatar' },
+      { name: 'quickStats', type: 'QuickStat[]', description: 'Array of quick stat objects with icon, label, and value' },
+      { name: 'securityBadge', type: 'string', default: 'Your connection is secure and encrypted', description: 'Security badge text in footer' }
+    ],
+    code: `import { Mail, Lock, ArrowRight, Fingerprint, Shield, Clock, CheckCircle2, Eye } from 'lucide-react';
+
+interface RecentUser {
+  name: string;
+  email: string;
+  avatar: string;
+}
+
+interface QuickStat {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+interface Login6Props {
+  title?: string;
+  subtitle?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  rememberMeText?: string;
+  forgotPasswordText?: string;
+  forgotPasswordHref?: string;
+  loginButtonText?: string;
+  signupText?: string;
+  signupLinkText?: string;
+  signupHref?: string;
+  recentUsers?: RecentUser[];
+  quickStats?: QuickStat[];
+  securityBadge?: string;
+}
+
+export default function Login6({
+  title = 'Welcome Back',
+  subtitle = 'Sign in to continue to your dashboard',
+  emailLabel = 'Email Address',
+  emailPlaceholder = 'you@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'Enter your password',
+  rememberMeText = 'Keep me signed in',
+  forgotPasswordText = 'Forgot password?',
+  forgotPasswordHref = '#',
+  loginButtonText = 'Sign In',
+  signupText = "Don't have an account?",
+  signupLinkText = 'Create one',
+  signupHref = '#',
+  recentUsers = [
+    {
+      name: 'Sarah Chen',
+      email: 'sarah@company.com',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop'
+    },
+    {
+      name: 'Alex Kim',
+      email: 'alex@company.com',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop'
+    },
+    {
+      name: 'Jordan Lee',
+      email: 'jordan@company.com',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop'
+    }
+  ],
+  quickStats = [
+    { icon: 'Shield', label: 'Secure', value: '256-bit SSL' },
+    { icon: 'Clock', label: 'Fast', value: '<100ms' },
+    { icon: 'CheckCircle2', label: 'Reliable', value: '99.9%' }
+  ],
+  securityBadge = 'Your connection is secure and encrypted'
+}: Login6Props) {
+  const getIcon = (iconName: string) => {
+    const icons: Record<string, any> = {
+      Shield: Shield,
+      Clock: Clock,
+      CheckCircle2: CheckCircle2
+    };
+    return icons[iconName] || Shield;
+  };
+
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center py-12 px-4 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-950 dark:via-blue-950 dark:to-purple-950 relative overflow-hidden">
+      {/* Floating Orbs Background */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/30 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+
+      <div className="w-full max-w-6xl relative z-10">
+        <div className="grid lg:grid-cols-5 gap-8 items-center">
+          {/* Left Side - Info & Quick Stats */}
+          <div className="lg:col-span-2 space-y-8">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+                {title}
+              </h1>
+              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                {subtitle}
+              </p>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="grid grid-cols-3 gap-4">
+              {quickStats.map((stat, index) => {
+                const IconComponent = getIcon(stat.icon);
+                return (
+                  <div
+                    key={index}
+                    className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm rounded-xl p-4 border border-gray-200/50 dark:border-gray-800/50 shadow-lg hover:scale-105 transition-all duration-300"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+                        <IconComponent className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="text-xs font-semibold text-gray-900 dark:text-white mb-1">
+                        {stat.label}
+                      </div>
+                      <div className="text-xs text-gray-600 dark:text-gray-400">
+                        {stat.value}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Recent Users */}
+            <div className="hidden lg:block">
+              <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-4">
+                Recent sign-ins
+              </h3>
+              <div className="space-y-3">
+                {recentUsers.map((user, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-white/60 dark:bg-gray-900/60 backdrop-blur-sm border border-gray-200/50 dark:border-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-900/80 transition-all duration-300 cursor-pointer group"
+                  >
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-10 h-10 rounded-full object-cover border-2 border-primary/30 group-hover:border-primary transition-all"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                        {user.name}
+                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                        {user.email}
+                      </div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-primary transition-colors" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Login Card */}
+          <div className="lg:col-span-3">
+            <div className="relative">
+              {/* 3D Card Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-2xl blur-xl transform translate-y-2" />
+
+              <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+                {/* Card Header with Fingerprint Icon */}
+                <div className="p-8 pb-6 border-b border-gray-100 dark:border-gray-800">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg">
+                      <Fingerprint className="h-6 w-6 text-white" />
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                      <Shield className="h-3.5 w-3.5" />
+                      <span>Secure login</span>
+                    </div>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                    Sign in to your account
+                  </h2>
+                </div>
+
+                <div className="p-8">
+                  <form className="space-y-6">
+                    {/* Email */}
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="email"
+                        className="text-sm font-medium text-gray-900 dark:text-white block"
+                      >
+                        {emailLabel}
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <input
+                          id="email"
+                          type="email"
+                          placeholder={emailPlaceholder}
+                          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Password */}
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="password"
+                        className="text-sm font-medium text-gray-900 dark:text-white block"
+                      >
+                        {passwordLabel}
+                      </label>
+                      <div className="relative">
+                        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <input
+                          id="password"
+                          type="password"
+                          placeholder={passwordPlaceholder}
+                          className="w-full pl-10 pr-12 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        />
+                        <button
+                          type="button"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                        >
+                          <Eye className="h-5 w-5" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Remember Me & Forgot Password */}
+                    <div className="flex items-center justify-between">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0"
+                        />
+                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                          {rememberMeText}
+                        </span>
+                      </label>
+                      <a
+                        href={forgotPasswordHref}
+                        className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        {forgotPasswordText}
+                      </a>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-gradient-to-r from-primary via-purple-600 to-primary text-white text-base font-semibold hover:shadow-2xl hover:shadow-primary/50 hover:scale-105 transition-all duration-300"
+                    >
+                      {loginButtonText}
+                      <ArrowRight className="h-5 w-5" />
+                    </button>
+                  </form>
+
+                  {/* Signup Link */}
+                  <div className="mt-8 text-center">
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {signupText}{' '}
+                      <a
+                        href={signupHref}
+                        className="font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        {signupLinkText}
+                      </a>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Security Footer */}
+                <div className="px-8 py-4 bg-gray-50 dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800">
+                  <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                    <Shield className="h-3.5 w-3.5 text-green-500" />
+                    <span>{securityBadge}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'login-7',
+    name: 'Login with QR Code & Biometric',
+    description: 'Advanced multi-method authentication page with traditional email/password login, QR code scanning option, biometric authentication, and session timeout timer. Perfect for enterprise applications requiring multiple authentication methods.',
+    category: 'auth',
+    tags: ['login', 'auth', 'authentication', 'form', 'qr-code', 'biometric', 'multi-factor', 'enterprise', 'security'],
+    dependencies: [],
+    previewProps: {
+      title: 'Sign In',
+      subtitle: 'Choose your preferred authentication method',
+      emailLabel: 'Email',
+      emailPlaceholder: 'you@example.com',
+      passwordLabel: 'Password',
+      passwordPlaceholder: 'Enter your password',
+      rememberMeText: 'Remember me for 30 days',
+      forgotPasswordText: 'Forgot password?',
+      forgotPasswordHref: '#',
+      loginButtonText: 'Sign In',
+      signupText: "Don't have an account?",
+      signupLinkText: 'Create account',
+      signupHref: '#',
+      qrCodeText: 'Scan QR code with your mobile app',
+      biometricText: 'Use fingerprint or face ID',
+      sessionTimeout: 'Session expires in 15:00'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Sign In', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Choose your preferred authentication method', description: 'Subtitle text' },
+      { name: 'emailLabel', type: 'string', default: 'Email', description: 'Email field label' },
+      { name: 'emailPlaceholder', type: 'string', default: 'you@example.com', description: 'Email field placeholder' },
+      { name: 'passwordLabel', type: 'string', default: 'Password', description: 'Password field label' },
+      { name: 'passwordPlaceholder', type: 'string', default: 'Enter your password', description: 'Password field placeholder' },
+      { name: 'rememberMeText', type: 'string', default: 'Remember me for 30 days', description: 'Remember me checkbox text' },
+      { name: 'forgotPasswordText', type: 'string', default: 'Forgot password?', description: 'Forgot password link text' },
+      { name: 'forgotPasswordHref', type: 'string', default: '#', description: 'Forgot password link URL' },
+      { name: 'loginButtonText', type: 'string', default: 'Sign In', description: 'Login button text' },
+      { name: 'signupText', type: 'string', default: "Don't have an account?", description: 'Signup prompt text' },
+      { name: 'signupLinkText', type: 'string', default: 'Create account', description: 'Signup link text' },
+      { name: 'signupHref', type: 'string', default: '#', description: 'Signup link URL' },
+      { name: 'qrCodeText', type: 'string', default: 'Scan QR code with your mobile app', description: 'QR code authentication description' },
+      { name: 'biometricText', type: 'string', default: 'Use fingerprint or face ID', description: 'Biometric authentication description' },
+      { name: 'sessionTimeout', type: 'string', default: 'Session expires in 15:00', description: 'Session timeout text displayed in header' }
+    ],
+    code: `import { Mail, Lock, ArrowRight, QrCode, Smartphone, Fingerprint, Clock, Shield, Eye } from 'lucide-react';
+
+interface Login7Props {
+  title?: string;
+  subtitle?: string;
+  emailLabel?: string;
+  emailPlaceholder?: string;
+  passwordLabel?: string;
+  passwordPlaceholder?: string;
+  rememberMeText?: string;
+  forgotPasswordText?: string;
+  forgotPasswordHref?: string;
+  loginButtonText?: string;
+  signupText?: string;
+  signupLinkText?: string;
+  signupHref?: string;
+  qrCodeText?: string;
+  biometricText?: string;
+  sessionTimeout?: string;
+}
+
+export default function Login7({
+  title = 'Sign In',
+  subtitle = 'Choose your preferred authentication method',
+  emailLabel = 'Email',
+  emailPlaceholder = 'you@example.com',
+  passwordLabel = 'Password',
+  passwordPlaceholder = 'Enter your password',
+  rememberMeText = 'Remember me for 30 days',
+  forgotPasswordText = 'Forgot password?',
+  forgotPasswordHref = '#',
+  loginButtonText = 'Sign In',
+  signupText = "Don't have an account?",
+  signupLinkText = 'Create account',
+  signupHref = '#',
+  qrCodeText = 'Scan QR code with your mobile app',
+  biometricText = 'Use fingerprint or face ID',
+  sessionTimeout = 'Session expires in 15:00'
+}: Login7Props) {
+  return (
+    <section className="w-full min-h-screen flex items-center justify-center py-12 px-4 bg-gray-50 dark:bg-gray-950">
+      <div className="w-full max-w-5xl">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">
+            {title}
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Main Login Form */}
+          <div className="lg:col-span-2">
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
+              {/* Header with Timer */}
+              <div className="px-8 py-6 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950 border-b border-gray-200 dark:border-gray-800">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Shield className="h-5 w-5 text-primary" />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+                        Secure Login
+                      </h2>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">
+                        Enter your credentials
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800">
+                    <Clock className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
+                    <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">
+                      {sessionTimeout}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8">
+                <form className="space-y-6">
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="email"
+                      className="text-sm font-medium text-gray-900 dark:text-white block"
+                    >
+                      {emailLabel}
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <input
+                        id="email"
+                        type="email"
+                        placeholder={emailPlaceholder}
+                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Password */}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="password"
+                      className="text-sm font-medium text-gray-900 dark:text-white block"
+                    >
+                      {passwordLabel}
+                    </label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                      <input
+                        id="password"
+                        type="password"
+                        placeholder={passwordPlaceholder}
+                        className="w-full pl-10 pr-12 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                      >
+                        <Eye className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Remember Me & Forgot Password */}
+                  <div className="flex items-center justify-between">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                        {rememberMeText}
+                      </span>
+                    </label>
+                    <a
+                      href={forgotPasswordHref}
+                      className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                    >
+                      {forgotPasswordText}
+                    </a>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-white text-base font-semibold hover:bg-primary/90 hover:shadow-lg transition-all duration-300"
+                  >
+                    {loginButtonText}
+                    <ArrowRight className="h-5 w-5" />
+                  </button>
+                </form>
+
+                {/* Signup Link */}
+                <div className="mt-8 text-center">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {signupText}{' '}
+                    <a
+                      href={signupHref}
+                      className="font-medium text-primary hover:text-primary/80 transition-colors"
+                    >
+                      {signupLinkText}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Alternative Login Methods */}
+          <div className="space-y-6">
+            {/* QR Code Login */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 p-6">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-4 shadow-lg">
+                  <QrCode className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                  QR Code
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  {qrCodeText}
+                </p>
+                {/* Mock QR Code */}
+                <div className="w-32 h-32 bg-white border-4 border-gray-200 dark:border-gray-700 rounded-lg flex items-center justify-center mb-4">
+                  <div className="grid grid-cols-4 gap-1">
+                    {[...Array(16)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={\`w-2 h-2 \${
+                          Math.random() > 0.5 ? 'bg-gray-900' : 'bg-white'
+                        }\`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <button className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border-2 border-primary text-primary font-semibold hover:bg-primary hover:text-white transition-all duration-300">
+                  <Smartphone className="h-4 w-4" />
+                  Open App
+                </button>
+              </div>
+            </div>
+
+            {/* Biometric Login */}
+            <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 p-6">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-4 shadow-lg">
+                  <Fingerprint className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                  Biometric
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  {biometricText}
+                </p>
+                <button className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+                  <Fingerprint className="h-4 w-4" />
+                  Authenticate
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
