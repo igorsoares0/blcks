@@ -52,8 +52,13 @@ import About7 from '@/blocks/about/about-7';
 import Blog1 from '@/blocks/blog/blog-1';
 import Blog2 from '@/blocks/blog/blog-2';
 import Blog3 from '@/blocks/blog/blog-3';
+import Blog4 from '@/blocks/blog/blog-4';
+import Blog5 from '@/blocks/blog/blog-5';
 import BlogPost1 from '@/blocks/blog/blog-post-1';
 import BlogPost2 from '@/blocks/blog/blog-post-2';
+import BlogPost3 from '@/blocks/blog/blog-post-3';
+import BlogPost4 from '@/blocks/blog/blog-post-4';
+import BlogPost5 from '@/blocks/blog/blog-post-5';
 import Pricing1 from '@/blocks/pricing/pricing-1';
 import Pricing2 from '@/blocks/pricing/pricing-2';
 import Pricing3 from '@/blocks/pricing/pricing-3';
@@ -146,8 +151,13 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'blog-1': Blog1,
   'blog-2': Blog2,
   'blog-3': Blog3,
+  'blog-4': Blog4,
+  'blog-5': Blog5,
   'blog-post-1': BlogPost1,
   'blog-post-2': BlogPost2,
+  'blog-post-3': BlogPost3,
+  'blog-post-4': BlogPost4,
+  'blog-post-5': BlogPost5,
   'pricing-1': Pricing1,
   'pricing-2': Pricing2,
   'pricing-3': Pricing3,

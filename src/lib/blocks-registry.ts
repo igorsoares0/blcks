@@ -18694,6 +18694,1512 @@ export default function Footer7({
     </footer>
   );
 }`
+  },
+  {
+    id: 'blog-post-3',
+    name: 'Blog Post with Sidebar',
+    description: 'Full blog post layout with cover image, author bio, tags, engagement actions (likes, comments, bookmark), share buttons sidebar, and related articles section.',
+    category: 'blog',
+    tags: ['blog', 'post', 'article', 'content', 'author', 'sidebar', 'share'],
+    dependencies: [],
+    previewProps: {
+      title: 'The Complete Guide to Building Modern Web Applications',
+      excerpt: 'Learn how to build scalable, performant web applications using the latest technologies and best practices in 2024.',
+      author: {
+        name: 'Sarah Johnson',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
+        bio: 'Senior Software Engineer and Technical Writer',
+        role: 'Lead Developer'
+      },
+      publishDate: 'March 15, 2024',
+      readTime: '12 min read',
+      coverImage: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=600&fit=crop',
+      tags: [
+        { label: 'Web Development', href: '#' },
+        { label: 'React', href: '#' },
+        { label: 'TypeScript', href: '#' }
+      ],
+      commentsCount: 24,
+      likesCount: 156
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'The Complete Guide to Building...', description: 'Article title' },
+      { name: 'excerpt', type: 'string', default: 'Learn how to build scalable...', description: 'Article excerpt/subtitle' },
+      { name: 'author', type: 'Author', description: 'Author object with name, avatar, bio, and role' },
+      { name: 'publishDate', type: 'string', default: 'March 15, 2024', description: 'Publication date' },
+      { name: 'readTime', type: 'string', default: '12 min read', description: 'Estimated read time' },
+      { name: 'coverImage', type: 'string', description: 'Cover image URL' },
+      { name: 'tags', type: 'Tag[]', description: 'Array of tags with label and href' },
+      { name: 'content', type: 'string', description: 'HTML content of the article' },
+      { name: 'relatedPosts', type: 'RelatedPost[]', description: 'Array of related posts' },
+      { name: 'backText', type: 'string', default: 'Back to Blog', description: 'Back link text' },
+      { name: 'shareText', type: 'string', default: 'Share this article', description: 'Share section heading' },
+      { name: 'commentsCount', type: 'number', default: '24', description: 'Number of comments' },
+      { name: 'likesCount', type: 'number', default: '156', description: 'Number of likes' },
+      { name: 'bookmarked', type: 'boolean', default: 'false', description: 'Whether article is bookmarked' }
+    ],
+    code: `import { Calendar, Clock, User, Tag, Share2, Twitter, Linkedin, Facebook, Link2, ArrowLeft, ArrowRight, Bookmark, Heart, MessageCircle } from 'lucide-react';
+
+interface Author {
+  name: string;
+  avatar: string;
+  bio?: string;
+  role?: string;
+}
+
+interface Tag {
+  label: string;
+  href: string;
+}
+
+interface RelatedPost {
+  title: string;
+  excerpt: string;
+  image: string;
+  href: string;
+  readTime: string;
+}
+
+interface BlogPost3Props {
+  title?: string;
+  excerpt?: string;
+  author?: Author;
+  publishDate?: string;
+  readTime?: string;
+  coverImage?: string;
+  tags?: Tag[];
+  content?: string;
+  relatedPosts?: RelatedPost[];
+  backText?: string;
+  shareText?: string;
+  commentsCount?: number;
+  likesCount?: number;
+  bookmarked?: boolean;
+}
+
+export default function BlogPost3({
+  title = 'The Complete Guide to Building Modern Web Applications',
+  excerpt = 'Learn how to build scalable, performant web applications using the latest technologies and best practices in 2024.',
+  author = {
+    name: 'Sarah Johnson',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop',
+    bio: 'Senior Software Engineer and Technical Writer',
+    role: 'Lead Developer'
+  },
+  publishDate = 'March 15, 2024',
+  readTime = '12 min read',
+  coverImage = 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=600&fit=crop',
+  tags = [
+    { label: 'Web Development', href: '#' },
+    { label: 'React', href: '#' },
+    { label: 'TypeScript', href: '#' },
+    { label: 'Performance', href: '#' }
+  ],
+  content = \`
+    <p>Modern web development has evolved significantly over the past few years. With the rise of frameworks like React, Vue, and Angular, developers now have powerful tools at their disposal to build complex, interactive applications.</p>
+
+    <h2>Getting Started</h2>
+    <p>Before diving into building your application, it's crucial to understand the foundational concepts that will guide your development process.</p>
+
+    <blockquote>
+      "The best code is no code at all. The second best is code that's simple, clear, and easy to understand." - Anonymous
+    </blockquote>
+
+    <h3>State Management</h3>
+    <p>Managing state effectively is one of the most challenging aspects of web development.</p>
+
+    <ul>
+      <li>Implement code splitting to reduce initial bundle size</li>
+      <li>Use lazy loading for images and components</li>
+      <li>Optimize render performance with React.memo</li>
+    </ul>
+  \`,
+  relatedPosts = [
+    {
+      title: 'Advanced React Patterns You Should Know',
+      excerpt: 'Discover powerful React patterns that will improve your code quality.',
+      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop',
+      href: '#',
+      readTime: '8 min read'
+    }
+  ],
+  backText = 'Back to Blog',
+  shareText = 'Share this article',
+  commentsCount = 24,
+  likesCount = 156,
+  bookmarked = false
+}: BlogPost3Props) {
+  return (
+    <article className="w-full bg-white dark:bg-gray-950">
+      {/* Header */}
+      <div className="border-b border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto px-4 md:px-6 py-6">
+          <a href="#" className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+            <ArrowLeft className="h-4 w-4" />
+            {backText}
+          </a>
+        </div>
+      </div>
+
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex flex-wrap gap-2 mb-6">
+            {tags.map((tag, index) => (
+              <a key={index} href={tag.href} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium hover:bg-primary/20 transition-colors">
+                <Tag className="h-3 w-3" />
+                {tag.label}
+              </a>
+            ))}
+          </div>
+
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            {title}
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+            {excerpt}
+          </p>
+
+          <div className="flex flex-wrap items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-800">
+            <div className="flex items-center gap-3">
+              <img src={author.avatar} alt={author.name} className="w-12 h-12 rounded-full object-cover" />
+              <div>
+                <div className="font-semibold text-gray-900 dark:text-white">{author.name}</div>
+                {author.role && <div className="text-sm text-gray-600 dark:text-gray-400">{author.role}</div>}
+              </div>
+            </div>
+            <div className="flex items-center gap-6 text-sm text-gray-600 dark:text-gray-400">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                {publishDate}
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                {readTime}
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-12 rounded-2xl overflow-hidden">
+            <img src={coverImage} alt={title} className="w-full h-auto object-cover" />
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto px-4 md:px-6 pb-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-8">
+              <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
+
+              <div className="flex items-center gap-6 mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
+                <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-900">
+                  <Heart className="h-5 w-5" />
+                  <span>{likesCount}</span>
+                </button>
+                <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-900">
+                  <MessageCircle className="h-5 w-5" />
+                  <span>{commentsCount}</span>
+                </button>
+              </div>
+
+              <div className="mt-12 p-6 rounded-2xl bg-gray-50 dark:bg-gray-900">
+                <div className="flex items-start gap-4">
+                  <img src={author.avatar} alt={author.name} className="w-16 h-16 rounded-full object-cover" />
+                  <div>
+                    <div className="text-xl font-bold mb-2">{author.name}</div>
+                    {author.bio && <p>{author.bio}</p>}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4">
+              <div className="lg:sticky lg:top-8">
+                <div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-900">
+                  <h3 className="text-sm font-semibold mb-4">{shareText}</h3>
+                  <div className="flex flex-col gap-2">
+                    <button className="inline-flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white dark:bg-gray-800">
+                      <Twitter className="h-4 w-4" />
+                      Share on Twitter
+                    </button>
+                    <button className="inline-flex items-center gap-3 px-4 py-2.5 rounded-lg bg-white dark:bg-gray-800">
+                      <Linkedin className="h-4 w-4" />
+                      Share on LinkedIn
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Related Posts */}
+      <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8">Related Articles</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {relatedPosts.map((post, index) => (
+                <a key={index} href={post.href} className="group bg-white dark:bg-gray-950 rounded-xl overflow-hidden border hover:border-primary transition-all">
+                  <div className="aspect-video overflow-hidden">
+                    <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-semibold mb-2 line-clamp-2">{post.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">{post.excerpt}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}`
+  },
+  {
+    id: 'blog-post-4',
+    name: 'Blog Post with ToC',
+    description: 'Long-form blog post with table of contents sidebar, key takeaways, stats bar, author bio, and next article suggestion. Perfect for technical articles and guides.',
+    category: 'blog',
+    tags: ['blog', 'post', 'article', 'toc', 'long-form', 'technical', 'guide'],
+    dependencies: [],
+    previewProps: {
+      title: 'Mastering Server-Side Rendering in Modern Web Applications',
+      excerpt: 'A comprehensive deep dive into SSR techniques, performance optimization, and best practices for building fast, SEO-friendly web applications.',
+      author: {
+        name: 'Alex Martinez',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop',
+        role: 'Principal Engineer'
+      },
+      publishDate: 'March 20, 2024',
+      readTime: '18 min read',
+      category: 'Engineering',
+      coverImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop',
+      stats: [
+        { label: 'Time to First Byte', value: '< 200ms' },
+        { label: 'Lighthouse Score', value: '98/100' },
+        { label: 'Core Web Vitals', value: 'All Green' }
+      ],
+      keyTakeaways: [
+        'SSR improves initial page load performance by 40-60%',
+        'Server-rendered content is immediately crawlable by search engines',
+        'Implement caching strategies to reduce server load'
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Mastering Server-Side Rendering...', description: 'Article title' },
+      { name: 'excerpt', type: 'string', default: 'A comprehensive deep dive...', description: 'Article excerpt' },
+      { name: 'author', type: 'Author', description: 'Author object with name, avatar, and role' },
+      { name: 'publishDate', type: 'string', default: 'March 20, 2024', description: 'Publication date' },
+      { name: 'readTime', type: 'string', default: '18 min read', description: 'Estimated read time' },
+      { name: 'category', type: 'string', default: 'Engineering', description: 'Article category' },
+      { name: 'coverImage', type: 'string', description: 'Cover image URL' },
+      { name: 'tableOfContents', type: 'TableOfContentsItem[]', description: 'Array of ToC items with id, title, and level' },
+      { name: 'content', type: 'string', description: 'HTML content of the article' },
+      { name: 'stats', type: 'Stat[]', description: 'Array of statistics with label and value' },
+      { name: 'keyTakeaways', type: 'string[]', description: 'Array of key takeaway strings' },
+      { name: 'nextPost', type: 'NextPost', description: 'Next article suggestion object' },
+      { name: 'backText', type: 'string', default: 'Back to Articles', description: 'Back link text' },
+      { name: 'downloadText', type: 'string', default: 'Download PDF', description: 'Download button text' }
+    ],
+    code: `import { Calendar, Clock, User, ArrowLeft, ChevronRight, Hash, CheckCircle, ExternalLink, Download } from 'lucide-react';
+
+interface Author {
+  name: string;
+  avatar: string;
+  role?: string;
+}
+
+interface TableOfContentsItem {
+  id: string;
+  title: string;
+  level: number;
+}
+
+interface Stat {
+  label: string;
+  value: string;
+}
+
+interface NextPost {
+  title: string;
+  excerpt: string;
+  image: string;
+  href: string;
+  category: string;
+}
+
+interface BlogPost4Props {
+  title?: string;
+  excerpt?: string;
+  author?: Author;
+  publishDate?: string;
+  readTime?: string;
+  category?: string;
+  coverImage?: string;
+  tableOfContents?: TableOfContentsItem[];
+  content?: string;
+  stats?: Stat[];
+  keyTakeaways?: string[];
+  nextPost?: NextPost;
+  backText?: string;
+  downloadText?: string;
+}
+
+export default function BlogPost4({
+  title = 'Mastering Server-Side Rendering in Modern Web Applications',
+  excerpt = 'A comprehensive deep dive into SSR techniques, performance optimization, and best practices.',
+  author = {
+    name: 'Alex Martinez',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop',
+    role: 'Principal Engineer'
+  },
+  publishDate = 'March 20, 2024',
+  readTime = '18 min read',
+  category = 'Engineering',
+  coverImage = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=600&fit=crop',
+  tableOfContents = [
+    { id: 'introduction', title: 'Introduction', level: 1 },
+    { id: 'why-ssr', title: 'Why Server-Side Rendering?', level: 1 },
+    { id: 'performance', title: 'Performance Benefits', level: 2 }
+  ],
+  content = \`
+    <h2 id="introduction">Introduction</h2>
+    <p>Server-side rendering has become essential in modern web development.</p>
+    <h2 id="why-ssr">Why Server-Side Rendering?</h2>
+    <p>Understanding the benefits of SSR is crucial.</p>
+  \`,
+  stats = [
+    { label: 'Time to First Byte', value: '< 200ms' },
+    { label: 'Lighthouse Score', value: '98/100' }
+  ],
+  keyTakeaways = [
+    'SSR improves initial page load performance',
+    'Server-rendered content is crawlable'
+  ],
+  nextPost = {
+    title: 'Progressive Web Apps',
+    excerpt: 'Learn how to build PWAs.',
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop',
+    href: '#',
+    category: 'Mobile'
+  },
+  backText = 'Back to Articles',
+  downloadText = 'Download PDF'
+}: BlogPost4Props) {
+  return (
+    <article className="w-full bg-white dark:bg-gray-950">
+      <div className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+        <div className="container mx-auto px-4 md:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <a href="#" className="inline-flex items-center gap-2 text-sm">
+              <ArrowLeft className="h-4 w-4" />
+              {backText}
+            </a>
+            <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg">
+              <Download className="h-4 w-4" />
+              {downloadText}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div className="max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+            {category}
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{title}</h1>
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8">{excerpt}</p>
+
+          <div className="flex flex-wrap items-center gap-6 pb-8 border-b">
+            <div className="flex items-center gap-3">
+              <img src={author.avatar} alt={author.name} className="w-14 h-14 rounded-full" />
+              <div>
+                <div className="font-semibold">{author.name}</div>
+                {author.role && <div className="text-sm text-gray-600 dark:text-gray-400">{author.role}</div>}
+              </div>
+            </div>
+            <div className="flex items-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                {publishDate}
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                {readTime}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 mb-12">
+        <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden">
+          <img src={coverImage} alt={title} className="w-full h-auto object-cover" />
+        </div>
+      </div>
+
+      <div className="bg-gray-50 dark:bg-gray-900 border-y">
+        <div className="container mx-auto px-4 md:px-6 py-8">
+          <div className="max-w-4xl mx-auto grid grid-cols-3 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">{stat.value}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 py-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-12">
+            <aside className="lg:col-span-3">
+              <div className="lg:sticky lg:top-8">
+                <div className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-900">
+                  <h3 className="text-sm font-semibold mb-4">Table of Contents</h3>
+                  <nav className="space-y-2">
+                    {tableOfContents.map((item, index) => (
+                      <a key={index} href={\`#\${item.id}\`} className={\`block text-sm \${item.level === 2 ? 'pl-4' : ''}\`}>
+                        {item.title}
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+                <div className="mt-6 p-6 rounded-2xl bg-primary/5">
+                  <h3 className="text-sm font-semibold mb-4">Key Takeaways</h3>
+                  <ul className="space-y-3">
+                    {keyTakeaways.map((takeaway, index) => (
+                      <li key={index} className="flex items-start gap-2 text-sm">
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5" />
+                        <span>{takeaway}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </aside>
+
+            <div className="lg:col-span-9">
+              <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {nextPost && (
+        <div className="bg-gray-50 dark:bg-gray-900 border-t">
+          <div className="container mx-auto px-4 md:px-6 py-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-sm font-semibold mb-4">Read Next</div>
+              <a href={nextPost.href} className="block bg-white dark:bg-gray-950 rounded-2xl overflow-hidden">
+                <div className="grid md:grid-cols-5 gap-6">
+                  <div className="md:col-span-2">
+                    <img src={nextPost.image} alt={nextPost.title} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="md:col-span-3 p-6">
+                    <h3 className="text-2xl font-bold mb-3">{nextPost.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400">{nextPost.excerpt}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </article>
+  );
+}`
+  },
+  {
+    id: 'blog-post-5',
+    name: 'Blog Post with Comments',
+    description: 'Interactive blog post with sticky navigation bar, engagement metrics (views, likes, comments), social sharing, author bio, comments section, and related articles. Perfect for community-driven blogs.',
+    category: 'blog',
+    tags: ['blog', 'post', 'article', 'comments', 'social', 'engagement', 'community'],
+    dependencies: [],
+    previewProps: {
+      title: 'Building a Design System from Scratch: Lessons Learned',
+      author: {
+        name: 'Emily Chen',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
+        twitter: '@emilychen'
+      },
+      publishDate: 'March 25, 2024',
+      readTime: '10 min read',
+      views: '12.5K',
+      likes: 342,
+      commentsCount: 28,
+      coverImage: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=600&fit=crop',
+      tags: [
+        { label: 'Design Systems', href: '#' },
+        { label: 'UI/UX', href: '#' }
+      ],
+      comments: [
+        {
+          id: '1',
+          author: 'Marcus Rodriguez',
+          avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop',
+          content: 'Great insights! We\'re just starting our design system journey.',
+          timestamp: '2 hours ago',
+          likes: 12
+        }
+      ]
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Building a Design System from Scratch...', description: 'Article title' },
+      { name: 'author', type: 'Author', description: 'Author object with name, avatar, and twitter' },
+      { name: 'publishDate', type: 'string', default: 'March 25, 2024', description: 'Publication date' },
+      { name: 'readTime', type: 'string', default: '10 min read', description: 'Estimated read time' },
+      { name: 'views', type: 'string', default: '12.5K', description: 'View count' },
+      { name: 'likes', type: 'number', default: '342', description: 'Number of likes' },
+      { name: 'commentsCount', type: 'number', default: '28', description: 'Number of comments' },
+      { name: 'coverImage', type: 'string', description: 'Cover image URL' },
+      { name: 'tags', type: 'Tag[]', description: 'Array of tags with label and href' },
+      { name: 'content', type: 'string', description: 'HTML content of the article' },
+      { name: 'comments', type: 'Comment[]', description: 'Array of comments with author, avatar, content, timestamp, and likes' },
+      { name: 'relatedPosts', type: 'RelatedPost[]', description: 'Array of related posts' },
+      { name: 'backText', type: 'string', default: 'Back to Blog', description: 'Back link text' },
+      { name: 'likeText', type: 'string', default: 'Like', description: 'Like button text' },
+      { name: 'saveText', type: 'string', default: 'Save', description: 'Save button text' },
+      { name: 'shareText', type: 'string', default: 'Share', description: 'Share button text' },
+      { name: 'commentsTitle', type: 'string', default: 'Comments', description: 'Comments section title' },
+      { name: 'relatedTitle', type: 'string', default: 'Related Articles', description: 'Related posts section title' }
+    ],
+    code: `import { Calendar, Clock, User, Eye, ThumbsUp, MessageSquare, Share2, Bookmark, ArrowLeft, ArrowRight, Twitter, Linkedin, Facebook, Link2, Mail, TrendingUp } from 'lucide-react';
+
+interface Author {
+  name: string;
+  avatar: string;
+  twitter?: string;
+}
+
+interface Tag {
+  label: string;
+  href: string;
+}
+
+interface Comment {
+  id: string;
+  author: string;
+  avatar: string;
+  content: string;
+  timestamp: string;
+  likes: number;
+}
+
+interface RelatedPost {
+  title: string;
+  image: string;
+  href: string;
+  readTime: string;
+  views: string;
+}
+
+interface BlogPost5Props {
+  title?: string;
+  author?: Author;
+  publishDate?: string;
+  readTime?: string;
+  views?: string;
+  likes?: number;
+  commentsCount?: number;
+  coverImage?: string;
+  tags?: Tag[];
+  content?: string;
+  comments?: Comment[];
+  relatedPosts?: RelatedPost[];
+  backText?: string;
+  likeText?: string;
+  saveText?: string;
+  shareText?: string;
+  commentsTitle?: string;
+  relatedTitle?: string;
+}
+
+export default function BlogPost5({
+  title = 'Building a Design System from Scratch',
+  author = {
+    name: 'Emily Chen',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop',
+    twitter: '@emilychen'
+  },
+  publishDate = 'March 25, 2024',
+  readTime = '10 min read',
+  views = '12.5K',
+  likes = 342,
+  commentsCount = 28,
+  coverImage = 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=600&fit=crop',
+  tags = [
+    { label: 'Design Systems', href: '#' },
+    { label: 'UI/UX', href: '#' }
+  ],
+  content = \`<p>Creating a design system is impactful and challenging.</p>\`,
+  comments = [],
+  relatedPosts = [],
+  backText = 'Back to Blog',
+  likeText = 'Like',
+  saveText = 'Save',
+  shareText = 'Share',
+  commentsTitle = 'Comments',
+  relatedTitle = 'Related Articles'
+}: BlogPost5Props) {
+  return (
+    <article className="w-full bg-white dark:bg-gray-950">
+      <div className="sticky top-0 z-40 border-b bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm">
+        <div className="container mx-auto px-4 md:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <a href="#" className="inline-flex items-center gap-2 text-sm">
+              <ArrowLeft className="h-4 w-4" />
+              {backText}
+            </a>
+            <div className="flex items-center gap-2">
+              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg">
+                <ThumbsUp className="h-4 w-4" />
+                <span>{likes}</span>
+              </button>
+              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg">
+                <Bookmark className="h-4 w-4" />
+              </button>
+              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-lg">
+                <Share2 className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div className="max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8">{title}</h1>
+
+          <div className="flex flex-wrap items-center gap-6 mb-8">
+            <div className="flex items-center gap-3">
+              <img src={author.avatar} alt={author.name} className="w-12 h-12 rounded-full" />
+              <div>
+                <div className="font-semibold">{author.name}</div>
+                {author.twitter && <a href="#" className="text-sm text-primary">{author.twitter}</a>}
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-1.5">
+                <Calendar className="h-4 w-4" />
+                {publishDate}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4" />
+                {readTime}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Eye className="h-4 w-4" />
+                {views} views
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap gap-2 mb-8">
+            {tags.map((tag, index) => (
+              <a key={index} href={tag.href} className="px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-900">
+                {tag.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-12">
+        <img src={coverImage} alt={title} className="w-full h-auto object-cover max-h-[600px]" />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 pb-12">
+        <div className="max-w-3xl mx-auto">
+          <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
+
+          <div className="mt-12 pt-8 border-t">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <span className="text-sm font-medium">Share this article:</span>
+                <div className="flex items-center gap-2">
+                  <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900">
+                    <Twitter className="h-4 w-4 mx-auto" />
+                  </button>
+                  <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-900">
+                    <Linkedin className="h-4 w-4 mx-auto" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-50 dark:bg-gray-900 border-t">
+        <div className="container mx-auto px-4 md:px-6 py-12">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold mb-8">{commentsTitle} ({commentsCount})</h2>
+            <div className="space-y-6">
+              {comments.map((comment) => (
+                <div key={comment.id} className="p-6 rounded-xl bg-white dark:bg-gray-950">
+                  <div className="flex items-start gap-4">
+                    <img src={comment.avatar} alt={comment.author} className="w-12 h-12 rounded-full" />
+                    <div className="flex-1">
+                      <div className="font-semibold mb-2">{comment.author}</div>
+                      <p className="mb-3">{comment.content}</p>
+                      <button className="inline-flex items-center gap-1.5 text-sm">
+                        <ThumbsUp className="h-3.5 w-3.5" />
+                        {comment.likes}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}`
+  },
+  {
+    id: 'blog-4',
+    name: 'Blog with Search & Filter',
+    description: 'Complete blog listing page with search bar, category filters, featured post, and grid layout. Includes pagination and category pills.',
+    category: 'blog',
+    tags: ['blog', 'search', 'filter', 'featured', 'grid', 'pagination', 'categories'],
+    dependencies: [],
+    previewProps: {
+      title: 'Our Blog',
+      subtitle: 'Insights, stories and ideas from our team'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Our Blog', description: 'Main title of the blog section' },
+      { name: 'subtitle', type: 'string', default: 'Insights, stories and ideas from our team', description: 'Subtitle below the title' },
+      { name: 'posts', type: 'Post[]', description: 'Array of blog posts with title, excerpt, image, author, date, readTime, category, tags, and href' },
+      { name: 'categories', type: 'Category[]', description: 'Array of categories with name, count, and href' },
+      { name: 'featuredTitle', type: 'string', default: 'Featured Post', description: 'Title for featured section' },
+      { name: 'searchPlaceholder', type: 'string', default: 'Search articles...', description: 'Placeholder text for search input' },
+      { name: 'filterText', type: 'string', default: 'Filter by category', description: 'Label for filter dropdown' },
+      { name: 'allCategoriesText', type: 'string', default: 'All Categories', description: 'Text for all categories option' },
+      { name: 'readMoreText', type: 'string', default: 'Read More', description: 'Text for read more link' },
+      { name: 'loadMoreText', type: 'string', default: 'Load More Articles', description: 'Text for load more button' }
+    ],
+    code: `import { Calendar, Clock, User, ArrowRight, Search, Filter, Tag, TrendingUp } from 'lucide-react';
+
+interface Author {
+  name: string;
+  avatar: string;
+}
+
+interface Post {
+  title: string;
+  excerpt: string;
+  image: string;
+  author: Author;
+  date: string;
+  readTime: string;
+  category: string;
+  tags: string[];
+  href: string;
+  featured?: boolean;
+}
+
+interface Category {
+  name: string;
+  count: number;
+  href: string;
+}
+
+interface Blog4Props {
+  title?: string;
+  subtitle?: string;
+  posts?: Post[];
+  categories?: Category[];
+  featuredTitle?: string;
+  searchPlaceholder?: string;
+  filterText?: string;
+  allCategoriesText?: string;
+  readMoreText?: string;
+  loadMoreText?: string;
+}
+
+export default function Blog4({
+  title = 'Our Blog',
+  subtitle = 'Insights, stories and ideas from our team',
+  posts = [
+    {
+      title: 'Building Scalable Applications with Next.js 15',
+      excerpt: 'Learn how to leverage the latest features in Next.js 15 to build performant and scalable web applications.',
+      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=500&fit=crop',
+      author: {
+        name: 'Alex Thompson',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop'
+      },
+      date: 'Mar 18, 2024',
+      readTime: '8 min read',
+      category: 'Development',
+      tags: ['Next.js', 'React', 'Performance'],
+      href: '#',
+      featured: true
+    },
+    {
+      title: 'The Future of Web Design: Trends for 2024',
+      excerpt: 'Explore the emerging design trends that are shaping the future of web development and user experience.',
+      image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=500&fit=crop',
+      author: {
+        name: 'Sarah Miller',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop'
+      },
+      date: 'Mar 15, 2024',
+      readTime: '6 min read',
+      category: 'Design',
+      tags: ['UI/UX', 'Trends', 'Design'],
+      href: '#'
+    },
+    {
+      title: 'TypeScript Best Practices for Large Projects',
+      excerpt: 'Discover essential TypeScript patterns and practices that will help you maintain clean code in large-scale applications.',
+      image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=500&fit=crop',
+      author: {
+        name: 'Michael Chen',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop'
+      },
+      date: 'Mar 12, 2024',
+      readTime: '10 min read',
+      category: 'Development',
+      tags: ['TypeScript', 'Best Practices', 'Code Quality'],
+      href: '#'
+    },
+    {
+      title: 'Optimizing Web Performance: A Complete Guide',
+      excerpt: 'Deep dive into performance optimization techniques that will make your web applications lightning fast.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
+      author: {
+        name: 'Emma Wilson',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop'
+      },
+      date: 'Mar 10, 2024',
+      readTime: '12 min read',
+      category: 'Performance',
+      tags: ['Performance', 'Optimization', 'Web Vitals'],
+      href: '#'
+    },
+    {
+      title: 'Introduction to Server Components in React',
+      excerpt: 'Understanding React Server Components and how they can improve your application architecture.',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop',
+      author: {
+        name: 'David Park',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop'
+      },
+      date: 'Mar 8, 2024',
+      readTime: '7 min read',
+      category: 'Development',
+      tags: ['React', 'Server Components', 'Architecture'],
+      href: '#'
+    },
+    {
+      title: 'Designing Accessible Web Interfaces',
+      excerpt: 'Learn the principles of accessible design and how to create inclusive experiences for all users.',
+      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=500&fit=crop',
+      author: {
+        name: 'Lisa Anderson',
+        avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop'
+      },
+      date: 'Mar 5, 2024',
+      readTime: '9 min read',
+      category: 'Design',
+      tags: ['Accessibility', 'UX', 'Inclusive Design'],
+      href: '#'
+    }
+  ],
+  categories = [
+    { name: 'All', count: 42, href: '#' },
+    { name: 'Development', count: 18, href: '#' },
+    { name: 'Design', count: 12, href: '#' },
+    { name: 'Performance', count: 8, href: '#' },
+    { name: 'Business', count: 4, href: '#' }
+  ],
+  featuredTitle = 'Featured Post',
+  searchPlaceholder = 'Search articles...',
+  filterText = 'Filter by category',
+  allCategoriesText = 'All Categories',
+  readMoreText = 'Read More',
+  loadMoreText = 'Load More Articles'
+}: Blog4Props) {
+  const featuredPost = posts.find(post => post.featured);
+  const regularPosts = posts.filter(post => !post.featured);
+
+  return (
+    <section className="w-full py-12 md:py-20 lg:py-24 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-12">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {title}
+          </h1>
+          <p className="max-w-2xl text-xl text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Search & Filter Bar */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Search */}
+            <div className="flex-1 relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder={searchPlaceholder}
+                className="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+
+            {/* Category Filter */}
+            <div className="relative min-w-[200px]">
+              <Filter className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+              <select className="w-full appearance-none pl-12 pr-10 py-3 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                <option>{allCategoriesText}</option>
+                {categories.slice(1).map((category, index) => (
+                  <option key={index}>{category.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Categories Pills */}
+          <div className="flex flex-wrap gap-2 mt-6">
+            {categories.map((category, index) => (
+              <a
+                key={index}
+                href={category.href}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-all duration-300 text-sm font-medium"
+              >
+                {category.name}
+                <span className="text-xs opacity-75">({category.count})</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Featured Post */}
+        {featuredPost && (
+          <div className="mb-16">
+            <div className="flex items-center gap-2 mb-6">
+              <TrendingUp className="h-5 w-5 text-primary" />
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                {featuredTitle}
+              </h2>
+            </div>
+            <a
+              href={featuredPost.href}
+              className="group block bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-2xl"
+            >
+              <div className="grid md:grid-cols-2 gap-0">
+                <div className="aspect-video md:aspect-auto overflow-hidden">
+                  <img
+                    src={featuredPost.image}
+                    alt={featuredPost.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-8 md:p-10 flex flex-col justify-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 w-fit">
+                    {featuredPost.category}
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-primary transition-colors">
+                    {featuredPost.title}
+                  </h3>
+                  <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 line-clamp-3">
+                    {featuredPost.excerpt}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-6 mb-6">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={featuredPost.author.avatar}
+                        alt={featuredPost.author.name}
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div className="text-sm">
+                        <div className="font-medium text-gray-900 dark:text-white">
+                          {featuredPost.author.name}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="h-4 w-4" />
+                        {featuredPost.date}
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="h-4 w-4" />
+                        {featuredPost.readTime}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {featuredPost.tags.map((tag, idx) => (
+                      <span
+                        key={idx}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs font-medium"
+                      >
+                        <Tag className="h-3 w-3" />
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="inline-flex items-center gap-2 text-primary font-semibold group-hover:gap-4 transition-all">
+                    {readMoreText}
+                    <ArrowRight className="h-5 w-5" />
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        )}
+
+        {/* Regular Posts Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {regularPosts.map((post, index) => (
+            <a
+              key={index}
+              href={post.href}
+              className="group block bg-white dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-xl"
+            >
+              <div className="aspect-video overflow-hidden">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3">
+                  {post.category}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                  {post.excerpt}
+                </p>
+                <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200 dark:border-gray-800">
+                  <img
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                  <div className="text-sm font-medium text-gray-900 dark:text-white">
+                    {post.author.name}
+                  </div>
+                </div>
+                <div className="flex items-center justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {post.date}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5" />
+                    {post.readTime}
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* Load More Button */}
+        <div className="flex justify-center">
+          <button className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300 hover:shadow-lg">
+            {loadMoreText}
+            <ArrowRight className="h-5 w-5" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'blog-5',
+    name: 'Blog with Trending & Stats',
+    description: 'Modern blog listing with trending section, engagement metrics (views, likes, comments), bookmark buttons, and gradient CTA. Features masonry-style grid layout.',
+    category: 'blog',
+    tags: ['blog', 'trending', 'stats', 'engagement', 'masonry', 'social'],
+    dependencies: [],
+    previewProps: {
+      title: 'Latest Stories',
+      subtitle: 'Discover insights, tutorials, and stories from our community'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Latest Stories', description: 'Main title of the blog section' },
+      { name: 'subtitle', type: 'string', default: 'Discover insights, tutorials, and stories from our community', description: 'Subtitle below the title' },
+      { name: 'posts', type: 'Post[]', description: 'Array of blog posts with title, excerpt, image, author, date, readTime, category, views, likes, comments, trending flag, and href' },
+      { name: 'ctaText', type: 'string', default: 'Read Article', description: 'Text for read article button' },
+      { name: 'viewAllText', type: 'string', default: 'View All Articles', description: 'Text for view all button' },
+      { name: 'trendingText', type: 'string', default: 'Trending', description: 'Text for trending label' }
+    ],
+    code: `import { Calendar, Clock, User, ArrowRight, Bookmark, Heart, MessageCircle, Eye, TrendingUp, Sparkles } from 'lucide-react';
+
+interface Author {
+  name: string;
+  avatar: string;
+  role?: string;
+}
+
+interface Post {
+  title: string;
+  excerpt: string;
+  image: string;
+  author: Author;
+  date: string;
+  readTime: string;
+  category: string;
+  href: string;
+  views?: string;
+  likes?: string;
+  comments?: string;
+  trending?: boolean;
+}
+
+interface Blog5Props {
+  title?: string;
+  subtitle?: string;
+  posts?: Post[];
+  ctaText?: string;
+  viewAllText?: string;
+  trendingText?: string;
+}
+
+export default function Blog5({
+  title = 'Latest Stories',
+  subtitle = 'Discover insights, tutorials, and stories from our community',
+  posts = [
+    {
+      title: 'Mastering React Server Components',
+      excerpt: 'A deep dive into React Server Components and how they revolutionize data fetching in modern web applications.',
+      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=600&fit=crop',
+      author: {
+        name: 'Alex Rivera',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
+        role: 'Tech Lead'
+      },
+      date: 'Mar 20, 2024',
+      readTime: '10 min',
+      category: 'React',
+      href: '#',
+      views: '2.4k',
+      likes: '156',
+      comments: '24',
+      trending: true
+    },
+    {
+      title: 'Building Accessible Design Systems',
+      excerpt: 'Learn how to create inclusive design systems that work for everyone, with practical examples and best practices.',
+      image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=600&fit=crop',
+      author: {
+        name: 'Maya Chen',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+        role: 'Design Engineer'
+      },
+      date: 'Mar 18, 2024',
+      readTime: '8 min',
+      category: 'Design',
+      href: '#',
+      views: '1.8k',
+      likes: '98',
+      comments: '15',
+      trending: true
+    },
+    {
+      title: 'TypeScript 5.4: What\\'s New',
+      excerpt: 'Explore the latest features in TypeScript 5.4 and how they improve developer experience and type safety.',
+      image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=600&fit=crop',
+      author: {
+        name: 'Jordan Lee',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+        role: 'Senior Developer'
+      },
+      date: 'Mar 15, 2024',
+      readTime: '6 min',
+      category: 'TypeScript',
+      href: '#',
+      views: '3.1k',
+      likes: '203',
+      comments: '31'
+    },
+    {
+      title: 'Web Performance in 2024',
+      excerpt: 'Essential performance optimization techniques that will make your websites blazing fast this year.',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      author: {
+        name: 'Sam Rodriguez',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop',
+        role: 'Performance Expert'
+      },
+      date: 'Mar 12, 2024',
+      readTime: '12 min',
+      category: 'Performance',
+      href: '#',
+      views: '2.7k',
+      likes: '178',
+      comments: '42'
+    },
+    {
+      title: 'CSS Grid Layout Patterns',
+      excerpt: 'Master modern CSS Grid patterns for building complex, responsive layouts with ease.',
+      image: 'https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=600&fit=crop',
+      author: {
+        name: 'Taylor Kim',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop',
+        role: 'CSS Specialist'
+      },
+      date: 'Mar 10, 2024',
+      readTime: '9 min',
+      category: 'CSS',
+      href: '#',
+      views: '1.5k',
+      likes: '89',
+      comments: '18'
+    },
+    {
+      title: 'API Design Best Practices',
+      excerpt: 'Learn how to design RESTful APIs that are intuitive, scalable, and easy to maintain.',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop',
+      author: {
+        name: 'Chris Martinez',
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
+        role: 'Backend Engineer'
+      },
+      date: 'Mar 8, 2024',
+      readTime: '11 min',
+      category: 'Backend',
+      href: '#',
+      views: '2.1k',
+      likes: '134',
+      comments: '28'
+    }
+  ],
+  ctaText = 'Read Article',
+  viewAllText = 'View All Articles',
+  trendingText = 'Trending'
+}: Blog5Props) {
+  const trendingPosts = posts.filter(post => post.trending);
+  const regularPosts = posts.filter(post => !post.trending);
+
+  return (
+    <section className="w-full py-12 md:py-20 lg:py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-2">
+            <Sparkles className="h-4 w-4" />
+            New Stories Every Week
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white max-w-3xl">
+            {title}
+          </h1>
+          <p className="max-w-2xl text-xl text-gray-600 dark:text-gray-400">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Trending Section */}
+        {trendingPosts.length > 0 && (
+          <div className="mb-16">
+            <div className="flex items-center gap-2 mb-8">
+              <TrendingUp className="h-6 w-6 text-primary" />
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+                {trendingText}
+              </h2>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-8">
+              {trendingPosts.map((post, index) => (
+                <a
+                  key={index}
+                  href={post.href}
+                  className="group relative bg-white dark:bg-gray-900 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-2xl"
+                >
+                  {/* Badge */}
+                  <div className="absolute top-4 right-4 z-10">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary text-white text-xs font-bold shadow-lg">
+                      <TrendingUp className="h-3 w-3" />
+                      {trendingText}
+                    </div>
+                  </div>
+
+                  {/* Image */}
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 md:p-8">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
+                      {post.category}
+                    </div>
+
+                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+
+                    <p className="text-gray-600 dark:text-gray-400 mb-6 line-clamp-2">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Author & Meta */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={post.author.avatar}
+                          alt={post.author.name}
+                          className="w-12 h-12 rounded-full object-cover"
+                        />
+                        <div>
+                          <div className="font-semibold text-gray-900 dark:text-white text-sm">
+                            {post.author.name}
+                          </div>
+                          {post.author.role && (
+                            <div className="text-xs text-gray-600 dark:text-gray-400">
+                              {post.author.role}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          {post.readTime}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Engagement Stats */}
+                    <div className="flex items-center gap-6 mt-6 pt-6 border-t border-gray-200 dark:border-gray-800 text-sm text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center gap-1.5">
+                        <Eye className="h-4 w-4" />
+                        {post.views}
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <Heart className="h-4 w-4" />
+                        {post.likes}
+                      </div>
+                      <div className="flex items-center gap-1.5">
+                        <MessageCircle className="h-4 w-4" />
+                        {post.comments}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Regular Posts - Masonry Style */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {regularPosts.map((post, index) => (
+            <a
+              key={index}
+              href={post.href}
+              className="group bg-white dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-all duration-300 hover:shadow-xl flex flex-col"
+            >
+              {/* Image */}
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-1">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">
+                    {post.category}
+                  </span>
+                  <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                    <Bookmark className="h-4 w-4 text-gray-600 dark:text-gray-400" />
+                  </button>
+                </div>
+
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 flex-1">
+                  {post.excerpt}
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-3 mb-4 pb-4 border-b border-gray-200 dark:border-gray-800">
+                  <img
+                    src={post.author.avatar}
+                    alt={post.author.name}
+                    className="w-9 h-9 rounded-full object-cover"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                      {post.author.name}
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
+                      <Calendar className="h-3 w-3" />
+                      {post.date}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center gap-1">
+                      <Eye className="h-3.5 w-3.5" />
+                      {post.views}
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Heart className="h-3.5 w-3.5" />
+                      {post.likes}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1 text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                    Read
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="flex justify-center">
+          <a
+            href="#"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-primary to-primary/80 text-white font-semibold hover:shadow-xl hover:scale-105 transition-all duration-300"
+          >
+            {viewAllText}
+            <ArrowRight className="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}`
   }
 ];
 
