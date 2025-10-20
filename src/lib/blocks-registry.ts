@@ -18018,6 +18018,682 @@ export default function Services5({
     </section>
   );
 }`
+  },
+  {
+    id: 'changelog-5',
+    name: 'Changelog Timeline',
+    description: 'Vertical timeline changelog with release versions, dates, and categorized changes. Features color-coded badges for different change types and featured releases.',
+    category: 'changelog',
+    tags: ['changelog', 'timeline', 'updates', 'releases', 'versions', 'product'],
+    dependencies: [],
+    previewProps: {
+      badge: 'Product Updates',
+      title: 'What\'s new in our platform',
+      subtitle: 'Stay up to date with the latest features, improvements, and fixes. We ship updates regularly to make your experience better.',
+      releases: [
+        {
+          version: 'v2.5.0',
+          date: '2024-01-15',
+          title: 'Advanced Analytics & Performance Boost',
+          highlights: 'Major update with new analytics dashboard and 40% performance improvement',
+          featured: true,
+          changes: [
+            {
+              type: 'feature',
+              title: 'Real-time Analytics Dashboard',
+              description: 'New comprehensive analytics dashboard with real-time metrics, custom date ranges, and exportable reports.'
+            },
+            {
+              type: 'improvement',
+              title: 'Performance Optimization',
+              description: 'Reduced load times by 40% with improved caching and code optimization.'
+            },
+            {
+              type: 'security',
+              title: 'Enhanced Security',
+              description: 'Added two-factor authentication and improved encryption for sensitive data.'
+            }
+          ]
+        },
+        {
+          version: 'v2.4.2',
+          date: '2024-01-08',
+          title: 'Bug Fixes & Stability',
+          changes: [
+            {
+              type: 'fix',
+              title: 'Fixed Export Issues',
+              description: 'Resolved problems with CSV exports containing special characters.'
+            },
+            {
+              type: 'improvement',
+              title: 'Improved Error Messages',
+              description: 'Made error messages more descriptive and actionable for users.'
+            }
+          ]
+        }
+      ]
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Product Updates', description: 'Badge text above title' },
+      { name: 'title', type: 'string', default: 'What\'s new in our platform', description: 'Main heading' },
+      { name: 'subtitle', type: 'string', default: 'Stay up to date with the latest...', description: 'Subtitle text' },
+      { name: 'releases', type: 'Release[]', description: 'Array of releases with version, date, title, highlights, changes, and featured flag' },
+      { name: 'viewAllText', type: 'string', default: 'View Full Changelog', description: 'Bottom CTA button text' }
+    ],
+    code: `import { Sparkles, Zap, Bug, Shield, TrendingUp, Wrench, Plus, ArrowRight, Calendar } from 'lucide-react';
+
+interface ChangeItem {
+  type: 'feature' | 'improvement' | 'fix' | 'security';
+  title: string;
+  description: string;
+}
+
+interface Release {
+  version: string;
+  date: string;
+  title: string;
+  highlights?: string;
+  changes: ChangeItem[];
+  featured?: boolean;
+}
+
+interface Changelog5Props {
+  badge?: string;
+  title?: string;
+  subtitle?: string;
+  releases?: Release[];
+  viewAllText?: string;
+}
+
+export default function Changelog5({
+  badge = 'Product Updates',
+  title = 'What\\'s new in our platform',
+  subtitle = 'Stay up to date with the latest features, improvements, and fixes. We ship updates regularly to make your experience better.',
+  releases = [
+    {
+      version: 'v2.5.0',
+      date: '2024-01-15',
+      title: 'Advanced Analytics & Performance Boost',
+      highlights: 'Major update with new analytics dashboard and 40% performance improvement',
+      featured: true,
+      changes: [
+        {
+          type: 'feature',
+          title: 'Real-time Analytics Dashboard',
+          description: 'New comprehensive analytics dashboard with real-time metrics, custom date ranges, and exportable reports.'
+        },
+        {
+          type: 'feature',
+          title: 'Team Collaboration Tools',
+          description: 'Invite team members, assign roles, and collaborate in real-time with comments and notifications.'
+        },
+        {
+          type: 'improvement',
+          title: 'Performance Optimization',
+          description: 'Reduced load times by 40% with improved caching and code optimization.'
+        },
+        {
+          type: 'security',
+          title: 'Enhanced Security',
+          description: 'Added two-factor authentication and improved encryption for sensitive data.'
+        }
+      ]
+    },
+    {
+      version: 'v2.4.2',
+      date: '2024-01-08',
+      title: 'Bug Fixes & Stability',
+      changes: [
+        {
+          type: 'fix',
+          title: 'Fixed Export Issues',
+          description: 'Resolved problems with CSV exports containing special characters.'
+        },
+        {
+          type: 'fix',
+          title: 'Mobile Responsiveness',
+          description: 'Fixed layout issues on mobile devices for the settings page.'
+        },
+        {
+          type: 'improvement',
+          title: 'Improved Error Messages',
+          description: 'Made error messages more descriptive and actionable for users.'
+        }
+      ]
+    },
+    {
+      version: 'v2.4.0',
+      date: '2024-01-01',
+      title: 'API Integration & Webhooks',
+      changes: [
+        {
+          type: 'feature',
+          title: 'Webhooks Support',
+          description: 'Configure webhooks to receive real-time notifications about events in your account.'
+        },
+        {
+          type: 'feature',
+          title: 'REST API v2',
+          description: 'New API version with improved endpoints, better documentation, and rate limiting.'
+        },
+        {
+          type: 'improvement',
+          title: 'Faster Search',
+          description: 'Implemented new search algorithm that is 3x faster for large datasets.'
+        }
+      ]
+    },
+    {
+      version: 'v2.3.5',
+      date: '2023-12-20',
+      title: 'UI/UX Improvements',
+      changes: [
+        {
+          type: 'improvement',
+          title: 'Dark Mode Refinements',
+          description: 'Improved contrast and readability in dark mode across all components.'
+        },
+        {
+          type: 'feature',
+          title: 'Keyboard Shortcuts',
+          description: 'Added keyboard shortcuts for common actions to improve productivity.'
+        },
+        {
+          type: 'fix',
+          title: 'Form Validation',
+          description: 'Fixed validation issues in multi-step forms.'
+        }
+      ]
+    }
+  ],
+  viewAllText = 'View Full Changelog'
+}: Changelog5Props) {
+  const getChangeIcon = (type: string) => {
+    switch (type) {
+      case 'feature':
+        return <Sparkles className="h-4 w-4" />;
+      case 'improvement':
+        return <TrendingUp className="h-4 w-4" />;
+      case 'fix':
+        return <Bug className="h-4 w-4" />;
+      case 'security':
+        return <Shield className="h-4 w-4" />;
+      default:
+        return <Wrench className="h-4 w-4" />;
+    }
+  };
+
+  const getChangeBadgeColor = (type: string) => {
+    switch (type) {
+      case 'feature':
+        return 'bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800';
+      case 'improvement':
+        return 'bg-green-100 dark:bg-green-950 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800';
+      case 'fix':
+        return 'bg-orange-100 dark:bg-orange-950 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800';
+      case 'security':
+        return 'bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800';
+      default:
+        return 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700';
+    }
+  };
+
+  const getChangeTypeLabel = (type: string) => {
+    switch (type) {
+      case 'feature':
+        return 'New';
+      case 'improvement':
+        return 'Improved';
+      case 'fix':
+        return 'Fixed';
+      case 'security':
+        return 'Security';
+      default:
+        return 'Update';
+    }
+  };
+
+  return (
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center text-center space-y-4 mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20">
+            <Zap className="h-4 w-4 text-primary" />
+            <span className="text-sm font-medium text-primary">{badge}</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white max-w-3xl">
+            {title}
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl">
+            {subtitle}
+          </p>
+        </div>
+
+        {/* Timeline */}
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            {/* Vertical Line */}
+            <div className="absolute left-0 md:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-primary/50 to-transparent" />
+
+            {/* Releases */}
+            <div className="space-y-8 md:space-y-12">
+              {releases.map((release, index) => (
+                <div key={index} className="relative pl-8 md:pl-20">
+                  {/* Timeline Dot */}
+                  <div className="absolute left-0 md:left-8 top-0 w-0 h-0 flex items-center justify-center -translate-x-1/2">
+                    <div className={\`w-4 h-4 rounded-full border-4 \${
+                      release.featured
+                        ? 'bg-primary border-primary shadow-lg shadow-primary/50'
+                        : 'bg-white dark:bg-gray-900 border-primary/50'
+                    }\`} />
+                  </div>
+
+                  {/* Release Card */}
+                  <div className={\`group bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-8 border-2 transition-all duration-300 hover:shadow-xl \${
+                    release.featured
+                      ? 'border-primary shadow-lg shadow-primary/10'
+                      : 'border-gray-200 dark:border-gray-800 hover:border-primary/50'
+                  }\`}>
+                    {/* Header */}
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-4">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold">
+                            {release.version}
+                          </span>
+                          {release.featured && (
+                            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary text-white text-xs font-semibold">
+                              <Sparkles className="h-3 w-3" />
+                              Latest
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                          {release.title}
+                        </h3>
+                        {release.highlights && (
+                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                            {release.highlights}
+                          </p>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                        <Calendar className="h-4 w-4" />
+                        {release.date}
+                      </div>
+                    </div>
+
+                    {/* Changes List */}
+                    <div className="space-y-3">
+                      {release.changes.map((change, changeIndex) => (
+                        <div key={changeIndex} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800">
+                          <div className={\`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium border \${getChangeBadgeColor(change.type)}\`}>
+                            {getChangeIcon(change.type)}
+                            {getChangeTypeLabel(change.type)}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">
+                              {change.title}
+                            </h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                              {change.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-12">
+          <a
+            href="#"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-white font-medium border-2 border-gray-200 dark:border-gray-800 hover:border-primary dark:hover:border-primary transition-colors"
+          >
+            {viewAllText}
+            <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'footer-7',
+    name: 'Footer with Newsletter',
+    description: 'Comprehensive dark footer with brand section, newsletter subscription, contact info, 4-column links, and social media. Features modern design with dark background.',
+    category: 'footer',
+    tags: ['footer', 'newsletter', 'contact', 'social', 'dark', 'comprehensive'],
+    dependencies: [],
+    previewProps: {
+      logo: 'Blcks',
+      tagline: 'Build faster, ship smarter',
+      description: 'Beautiful, responsive components for your next project. Copy, paste, and customize to fit your needs.',
+      sections: [
+        {
+          title: 'Product',
+          links: [
+            { label: 'Features', href: '#' },
+            { label: 'Pricing', href: '#' },
+            { label: 'Documentation', href: '#' },
+            { label: 'Changelog', href: '#' }
+          ]
+        },
+        {
+          title: 'Company',
+          links: [
+            { label: 'About', href: '#' },
+            { label: 'Blog', href: '#' },
+            { label: 'Careers', href: '#' },
+            { label: 'Contact', href: '#' }
+          ]
+        },
+        {
+          title: 'Resources',
+          links: [
+            { label: 'Help Center', href: '#' },
+            { label: 'Community', href: '#' },
+            { label: 'Templates', href: '#' },
+            { label: 'Support', href: '#' }
+          ]
+        },
+        {
+          title: 'Legal',
+          links: [
+            { label: 'Privacy Policy', href: '#' },
+            { label: 'Terms of Service', href: '#' },
+            { label: 'Cookie Policy', href: '#' },
+            { label: 'Security', href: '#' }
+          ]
+        }
+      ],
+      contactInfo: [
+        { icon: 'Mail', text: 'hello@blcks.com', href: 'mailto:hello@blcks.com' },
+        { icon: 'Phone', text: '+1 (555) 123-4567', href: 'tel:+15551234567' },
+        { icon: 'MapPin', text: 'San Francisco, CA 94102' }
+      ],
+      socialLinks: [
+        { icon: 'Twitter', href: '#', label: 'Twitter' },
+        { icon: 'Linkedin', href: '#', label: 'LinkedIn' },
+        { icon: 'Github', href: '#', label: 'GitHub' },
+        { icon: 'Youtube', href: '#', label: 'YouTube' }
+      ]
+    },
+    props: [
+      { name: 'logo', type: 'string', default: 'Blcks', description: 'Brand logo text' },
+      { name: 'tagline', type: 'string', default: 'Build faster, ship smarter', description: 'Brand tagline' },
+      { name: 'description', type: 'string', default: 'Beautiful, responsive components...', description: 'Brand description' },
+      { name: 'sections', type: 'FooterSection[]', description: 'Array of link sections with title and links' },
+      { name: 'contactInfo', type: 'ContactInfo[]', description: 'Array of contact information with icon, text, and optional href' },
+      { name: 'socialLinks', type: 'SocialLink[]', description: 'Array of social links with icon, href, and label' },
+      { name: 'newsletterTitle', type: 'string', default: 'Subscribe to our newsletter', description: 'Newsletter heading' },
+      { name: 'newsletterDescription', type: 'string', default: 'Get the latest updates...', description: 'Newsletter description' },
+      { name: 'emailPlaceholder', type: 'string', default: 'Enter your email', description: 'Email input placeholder' },
+      { name: 'subscribeText', type: 'string', default: 'Subscribe', description: 'Subscribe button text' },
+      { name: 'bottomText', type: 'string', default: '© 2024 Blcks. All rights reserved.', description: 'Copyright text' },
+      { name: 'bottomLinks', type: 'FooterLink[]', description: 'Array of bottom bar links' }
+    ],
+    code: `import { Mail, MapPin, Phone, Twitter, Linkedin, Github, Youtube, Instagram, Facebook, ArrowRight, Zap } from 'lucide-react';
+
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterSection {
+  title: string;
+  links: FooterLink[];
+}
+
+interface SocialLink {
+  icon: string;
+  href: string;
+  label: string;
+}
+
+interface ContactInfo {
+  icon: string;
+  text: string;
+  href?: string;
+}
+
+interface Footer7Props {
+  logo?: string;
+  tagline?: string;
+  description?: string;
+  sections?: FooterSection[];
+  contactInfo?: ContactInfo[];
+  socialLinks?: SocialLink[];
+  newsletterTitle?: string;
+  newsletterDescription?: string;
+  emailPlaceholder?: string;
+  subscribeText?: string;
+  bottomText?: string;
+  bottomLinks?: FooterLink[];
+}
+
+export default function Footer7({
+  logo = 'Blcks',
+  tagline = 'Build faster, ship smarter',
+  description = 'Beautiful, responsive components for your next project. Copy, paste, and customize to fit your needs.',
+  sections = [
+    {
+      title: 'Product',
+      links: [
+        { label: 'Features', href: '#' },
+        { label: 'Pricing', href: '#' },
+        { label: 'Documentation', href: '#' },
+        { label: 'Changelog', href: '#' },
+        { label: 'Roadmap', href: '#' }
+      ]
+    },
+    {
+      title: 'Company',
+      links: [
+        { label: 'About', href: '#' },
+        { label: 'Blog', href: '#' },
+        { label: 'Careers', href: '#' },
+        { label: 'Press', href: '#' },
+        { label: 'Contact', href: '#' }
+      ]
+    },
+    {
+      title: 'Resources',
+      links: [
+        { label: 'Help Center', href: '#' },
+        { label: 'API Reference', href: '#' },
+        { label: 'Community', href: '#' },
+        { label: 'Templates', href: '#' },
+        { label: 'Support', href: '#' }
+      ]
+    },
+    {
+      title: 'Legal',
+      links: [
+        { label: 'Privacy Policy', href: '#' },
+        { label: 'Terms of Service', href: '#' },
+        { label: 'Cookie Policy', href: '#' },
+        { label: 'Security', href: '#' },
+        { label: 'GDPR', href: '#' }
+      ]
+    }
+  ],
+  contactInfo = [
+    { icon: 'Mail', text: 'hello@blcks.com', href: 'mailto:hello@blcks.com' },
+    { icon: 'Phone', text: '+1 (555) 123-4567', href: 'tel:+15551234567' },
+    { icon: 'MapPin', text: 'San Francisco, CA 94102' }
+  ],
+  socialLinks = [
+    { icon: 'Twitter', href: '#', label: 'Twitter' },
+    { icon: 'Linkedin', href: '#', label: 'LinkedIn' },
+    { icon: 'Github', href: '#', label: 'GitHub' },
+    { icon: 'Youtube', href: '#', label: 'YouTube' },
+    { icon: 'Instagram', href: '#', label: 'Instagram' }
+  ],
+  newsletterTitle = 'Subscribe to our newsletter',
+  newsletterDescription = 'Get the latest updates, articles, and resources delivered to your inbox weekly.',
+  emailPlaceholder = 'Enter your email',
+  subscribeText = 'Subscribe',
+  bottomText = '© 2024 Blcks. All rights reserved.',
+  bottomLinks = [
+    { label: 'Privacy', href: '#' },
+    { label: 'Terms', href: '#' },
+    { label: 'Cookies', href: '#' }
+  ]
+}: Footer7Props) {
+  const iconMap: Record<string, any> = {
+    Mail,
+    Phone,
+    MapPin,
+    Twitter,
+    Linkedin,
+    Github,
+    Youtube,
+    Instagram,
+    Facebook
+  };
+
+  return (
+    <footer className="w-full bg-gray-900 dark:bg-black text-white">
+      {/* Main Content */}
+      <div className="border-b border-gray-800 dark:border-gray-900">
+        <div className="container mx-auto px-4 md:px-6 py-12 md:py-16 lg:py-20">
+          <div className="grid gap-12 lg:grid-cols-12">
+            {/* Brand & Newsletter Column */}
+            <div className="lg:col-span-4">
+              {/* Logo & Description */}
+              <div className="mb-8">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                    <Zap className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="text-2xl font-bold">{logo}</span>
+                </div>
+                <p className="text-sm text-gray-400 dark:text-gray-500 mb-1 font-medium">
+                  {tagline}
+                </p>
+                <p className="text-sm text-gray-400 dark:text-gray-500 leading-relaxed">
+                  {description}
+                </p>
+              </div>
+
+              {/* Newsletter */}
+              <div className="mb-8">
+                <h3 className="text-sm font-semibold mb-3">{newsletterTitle}</h3>
+                <p className="text-sm text-gray-400 dark:text-gray-500 mb-4">
+                  {newsletterDescription}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="email"
+                    placeholder={emailPlaceholder}
+                    className="flex-1 px-4 py-2.5 rounded-lg bg-gray-800 dark:bg-gray-900 border border-gray-700 dark:border-gray-800 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                  />
+                  <button className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 transition-colors text-sm whitespace-nowrap">
+                    {subscribeText}
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <div className="space-y-3">
+                {contactInfo.map((contact, index) => {
+                  const IconComponent = iconMap[contact.icon] || Mail;
+                  const content = (
+                    <div className="flex items-center gap-3 text-sm text-gray-400 dark:text-gray-500 hover:text-white transition-colors">
+                      <IconComponent className="h-4 w-4 flex-shrink-0" />
+                      <span>{contact.text}</span>
+                    </div>
+                  );
+
+                  return contact.href ? (
+                    <a key={index} href={contact.href}>
+                      {content}
+                    </a>
+                  ) : (
+                    <div key={index}>{content}</div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Links Sections */}
+            <div className="lg:col-span-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {sections.map((section, index) => (
+                  <div key={index}>
+                    <h3 className="text-sm font-semibold mb-4">{section.title}</h3>
+                    <ul className="space-y-3">
+                      {section.links.map((link, linkIndex) => (
+                        <li key={linkIndex}>
+                          <a
+                            href={link.href}
+                            className="text-sm text-gray-400 dark:text-gray-500 hover:text-white transition-colors"
+                          >
+                            {link.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="container mx-auto px-4 md:px-6 py-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* Copyright */}
+          <p className="text-sm text-gray-400 dark:text-gray-500">
+            {bottomText}
+          </p>
+
+          {/* Bottom Links */}
+          <div className="flex items-center gap-6">
+            {bottomLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="text-sm text-gray-400 dark:text-gray-500 hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Social Links */}
+          <div className="flex items-center gap-3">
+            {socialLinks.map((social, index) => {
+              const IconComponent = iconMap[social.icon] || Twitter;
+              return (
+                <a
+                  key={index}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-9 h-9 rounded-lg bg-gray-800 dark:bg-gray-900 flex items-center justify-center text-gray-400 dark:text-gray-500 hover:bg-primary hover:text-white transition-all duration-300"
+                >
+                  <IconComponent className="h-4 w-4" />
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}`
   }
 ];
 

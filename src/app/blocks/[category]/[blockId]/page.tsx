@@ -36,6 +36,7 @@ import Footer3 from '@/blocks/footer/footer-3';
 import Footer4 from '@/blocks/footer/footer-4';
 import Footer5 from '@/blocks/footer/footer-5';
 import Footer6 from '@/blocks/footer/footer-6';
+import Footer7 from '@/blocks/footer/footer-7';
 import Announcement1 from '@/blocks/announcement/announcement-1';
 import Announcement2 from '@/blocks/announcement/announcement-2';
 import Announcement3 from '@/blocks/announcement/announcement-3';
@@ -69,6 +70,7 @@ import Changelog1 from '@/blocks/changelog/changelog-1';
 import Changelog2 from '@/blocks/changelog/changelog-2';
 import Changelog3 from '@/blocks/changelog/changelog-3';
 import Changelog4 from '@/blocks/changelog/changelog-4';
+import Changelog5 from '@/blocks/changelog/changelog-5';
 import Login1 from '@/blocks/auth/login-1';
 import Login2 from '@/blocks/auth/login-2';
 import Login3 from '@/blocks/auth/login-3';
@@ -128,6 +130,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'footer-4': Footer4,
   'footer-5': Footer5,
   'footer-6': Footer6,
+  'footer-7': Footer7,
   'announcement-1': Announcement1,
   'announcement-2': Announcement2,
   'announcement-3': Announcement3,
@@ -161,6 +164,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'changelog-2': Changelog2,
   'changelog-3': Changelog3,
   'changelog-4': Changelog4,
+  'changelog-5': Changelog5,
   'login-1': Login1,
   'login-2': Login2,
   'login-3': Login3,
