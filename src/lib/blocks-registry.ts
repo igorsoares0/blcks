@@ -20200,6 +20200,349 @@ export default function Blog5({
     </section>
   );
 }`
+  },
+  {
+    id: 'cta-6',
+    name: 'CTA with Stats & Image',
+    description: 'Premium CTA section with gradient background, statistics showcase, trust indicators (star rating), floating info cards, and side image. Features two-column layout with decorative elements.',
+    category: 'cta',
+    tags: ['cta', 'call-to-action', 'stats', 'image', 'gradient', 'premium', 'conversion'],
+    dependencies: [],
+    previewProps: {
+      badge: 'Limited Time Offer',
+      title: 'Transform Your Workflow Today',
+      description: 'Join thousands of teams who have already revolutionized their productivity with our platform.'
+    },
+    props: [
+      { name: 'badge', type: 'string', default: 'Limited Time Offer', description: 'Badge text above title' },
+      { name: 'title', type: 'string', default: 'Transform Your Workflow Today', description: 'Main headline' },
+      { name: 'description', type: 'string', default: 'Join thousands of teams who have already revolutionized their productivity with our platform. Start your journey to success now.', description: 'Description text' },
+      { name: 'primaryButtonText', type: 'string', default: 'Get Started Free', description: 'Primary button text' },
+      { name: 'primaryButtonHref', type: 'string', default: '#', description: 'Primary button link' },
+      { name: 'secondaryButtonText', type: 'string', default: 'Watch Demo', description: 'Secondary button text' },
+      { name: 'secondaryButtonHref', type: 'string', default: '#', description: 'Secondary button link' },
+      { name: 'stats', type: 'Stat[]', description: 'Array of statistics with value and label' },
+      { name: 'image', type: 'string', default: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop', description: 'Image URL for right side' }
+    ],
+    code: `import { ArrowRight, Sparkles, Star, Zap, TrendingUp } from 'lucide-react';
+
+interface Stat {
+  value: string;
+  label: string;
+}
+
+interface CTA6Props {
+  badge?: string;
+  title?: string;
+  description?: string;
+  primaryButtonText?: string;
+  primaryButtonHref?: string;
+  secondaryButtonText?: string;
+  secondaryButtonHref?: string;
+  stats?: Stat[];
+  image?: string;
+}
+
+export default function CTA6({
+  badge = 'Limited Time Offer',
+  title = 'Transform Your Workflow Today',
+  description = 'Join thousands of teams who have already revolutionized their productivity with our platform. Start your journey to success now.',
+  primaryButtonText = 'Get Started Free',
+  primaryButtonHref = '#',
+  secondaryButtonText = 'Watch Demo',
+  secondaryButtonHref = '#',
+  stats = [
+    { value: '50K+', label: 'Active Users' },
+    { value: '4.9/5', label: 'Rating' },
+    { value: '99.9%', label: 'Uptime' }
+  ],
+  image = 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop'
+}: CTA6Props) {
+  return (
+    <section className="w-full py-12 md:py-20 lg:py-24 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 dark:from-primary/10 dark:via-primary/20 dark:to-primary/10 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="relative">
+          {/* Background decorative elements */}
+          <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl" />
+
+          <div className="relative bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800">
+            <div className="grid lg:grid-cols-2 gap-0">
+              {/* Content Side */}
+              <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                {/* Badge */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6 w-fit">
+                  <Sparkles className="h-4 w-4" />
+                  {badge}
+                </div>
+
+                {/* Title */}
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+                  {title}
+                </h2>
+
+                {/* Description */}
+                <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
+                  {description}
+                </p>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-800">
+                  {stats.map((stat, index) => (
+                    <div key={index} className="text-center lg:text-left">
+                      <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
+                        {stat.value}
+                      </div>
+                      <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                        {stat.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href={primaryButtonHref}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:scale-105"
+                  >
+                    {primaryButtonText}
+                    <ArrowRight className="h-5 w-5" />
+                  </a>
+                  <a
+                    href={secondaryButtonHref}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-semibold hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                  >
+                    {secondaryButtonText}
+                  </a>
+                </div>
+
+                {/* Trust indicators */}
+                <div className="flex items-center gap-2 mt-8 text-sm text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <span>Trusted by 50,000+ companies worldwide</span>
+                </div>
+              </div>
+
+              {/* Image Side */}
+              <div className="relative lg:min-h-[600px] bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/30 dark:to-primary/10">
+                <div className="absolute inset-0 flex items-center justify-center p-8">
+                  <div className="relative w-full h-full">
+                    <img
+                      src={image}
+                      alt="CTA"
+                      className="w-full h-full object-cover rounded-2xl shadow-2xl"
+                    />
+
+                    {/* Floating elements */}
+                    <div className="absolute -top-4 -right-4 bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-4 border border-gray-200 dark:border-gray-800 hidden lg:block">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                          <Zap className="h-6 w-6 text-green-600 dark:text-green-400" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900 dark:text-white">Fast Setup</div>
+                          <div className="text-xs text-gray-600 dark:text-gray-400">Under 5 minutes</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="absolute -bottom-4 -left-4 bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-4 border border-gray-200 dark:border-gray-800 hidden lg:block">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                          <TrendingUp className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-gray-900 dark:text-white">Growing Fast</div>
+                          <div className="text-xs text-gray-600 dark:text-gray-400">+127% this month</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}`
+  },
+  {
+    id: 'cta-7',
+    name: 'CTA with Pattern Background',
+    description: 'Bold CTA with gradient primary background, SVG pattern overlay, user avatars showcase, feature grid with icons, and glassmorphism effects. Perfect for high-conversion landing pages.',
+    category: 'cta',
+    tags: ['cta', 'call-to-action', 'gradient', 'pattern', 'avatars', 'glassmorphism', 'bold'],
+    dependencies: [],
+    previewProps: {
+      title: 'Ready to 10x Your Productivity?',
+      description: 'Join over 50,000 teams already using our platform to streamline their workflow and boost performance.'
+    },
+    props: [
+      { name: 'title', type: 'string', default: 'Ready to 10x Your Productivity?', description: 'Main headline' },
+      { name: 'description', type: 'string', default: 'Join over 50,000 teams already using our platform to streamline their workflow and boost performance.', description: 'Description text' },
+      { name: 'features', type: 'Feature[]', description: 'Array of features with icon name and text' },
+      { name: 'buttonText', type: 'string', default: 'Start Free Trial', description: 'Primary button text' },
+      { name: 'buttonHref', type: 'string', default: '#', description: 'Primary button link' },
+      { name: 'secondaryText', type: 'string', default: 'Book a Demo', description: 'Secondary button text' },
+      { name: 'secondaryHref', type: 'string', default: '#', description: 'Secondary button link' },
+      { name: 'trustBadge', type: 'string', default: 'No credit card required', description: 'Trust badge text' },
+      { name: 'avatars', type: 'string[]', description: 'Array of avatar image URLs' }
+    ],
+    code: `import { ArrowRight, Check, Users, Zap, Shield, Clock } from 'lucide-react';
+
+interface Feature {
+  icon: string;
+  text: string;
+}
+
+interface CTA7Props {
+  title?: string;
+  description?: string;
+  features?: Feature[];
+  buttonText?: string;
+  buttonHref?: string;
+  secondaryText?: string;
+  secondaryHref?: string;
+  trustBadge?: string;
+  avatars?: string[];
+}
+
+export default function CTA7({
+  title = 'Ready to 10x Your Productivity?',
+  description = 'Join over 50,000 teams already using our platform to streamline their workflow and boost performance.',
+  features = [
+    { icon: 'Zap', text: 'Setup in under 5 minutes' },
+    { icon: 'Shield', text: 'Enterprise-grade security' },
+    { icon: 'Users', text: 'Unlimited team members' },
+    { icon: 'Clock', text: '24/7 priority support' }
+  ],
+  buttonText = 'Start Free Trial',
+  buttonHref = '#',
+  secondaryText = 'Book a Demo',
+  secondaryHref = '#',
+  trustBadge = 'No credit card required',
+  avatars = [
+    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
+    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop',
+    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop'
+  ]
+}: CTA7Props) {
+  const getIcon = (iconName: string) => {
+    const icons = {
+      Zap: Zap,
+      Shield: Shield,
+      Users: Users,
+      Clock: Clock,
+      Check: Check
+    };
+    return icons[iconName as keyof typeof icons] || Check;
+  };
+
+  return (
+    <section className="w-full py-12 md:py-20 lg:py-24 bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="relative">
+          {/* Main Card */}
+          <div className="relative bg-gradient-to-br from-primary via-primary to-primary/80 rounded-3xl shadow-2xl overflow-hidden">
+            {/* Pattern Background */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{
+                backgroundImage: \`url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")\`
+              }} />
+            </div>
+
+            <div className="relative px-8 py-12 md:px-12 md:py-16 lg:px-16 lg:py-20">
+              <div className="max-w-4xl mx-auto">
+                {/* Content */}
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                    {title}
+                  </h2>
+                  <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8">
+                    {description}
+                  </p>
+
+                  {/* User Avatars */}
+                  <div className="flex items-center justify-center gap-4 mb-8">
+                    <div className="flex -space-x-3">
+                      {avatars.map((avatar, index) => (
+                        <img
+                          key={index}
+                          src={avatar}
+                          alt={\`User \${index + 1}\`}
+                          className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                        />
+                      ))}
+                    </div>
+                    <div className="text-left">
+                      <div className="text-sm font-semibold text-white">50,000+ Users</div>
+                      <div className="text-xs text-white/80">Already transformed their workflow</div>
+                    </div>
+                  </div>
+
+                  {/* Buttons */}
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                    <a
+                      href={buttonHref}
+                      className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-white text-primary font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 w-full sm:w-auto"
+                    >
+                      {buttonText}
+                      <ArrowRight className="h-5 w-5" />
+                    </a>
+                    <a
+                      href={secondaryHref}
+                      className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-white/10 backdrop-blur-sm text-white font-semibold hover:bg-white/20 transition-all duration-300 border border-white/20 w-full sm:w-auto"
+                    >
+                      {secondaryText}
+                    </a>
+                  </div>
+
+                  {/* Trust Badge */}
+                  <div className="flex items-center justify-center gap-2 text-white/90 text-sm">
+                    <Check className="h-4 w-4" />
+                    {trustBadge}
+                  </div>
+                </div>
+
+                {/* Features Grid */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {features.map((feature, index) => {
+                    const IconComponent = getIcon(feature.icon);
+                    return (
+                      <div
+                        key={index}
+                        className="flex items-center gap-3 p-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20"
+                      >
+                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
+                          <IconComponent className="h-5 w-5 text-white" />
+                        </div>
+                        <div className="text-sm font-medium text-white">
+                          {feature.text}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Decorative Elements */}
+          <div className="absolute -top-6 -left-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl -z-10" />
+          <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl -z-10" />
+        </div>
+      </div>
+    </section>
+  );
+}`
   }
 ];
 

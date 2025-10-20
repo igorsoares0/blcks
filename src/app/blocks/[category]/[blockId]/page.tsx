@@ -25,6 +25,8 @@ import CTA2 from '@/blocks/cta/cta-2';
 import CTA3 from '@/blocks/cta/cta-3';
 import CTA4 from '@/blocks/cta/cta-4';
 import CTA5 from '@/blocks/cta/cta-5';
+import CTA6 from '@/blocks/cta/cta-6';
+import CTA7 from '@/blocks/cta/cta-7';
 import Navbar1 from '@/blocks/navbar/navbar1';
 import Navbar2 from '@/blocks/navbar/navbar-2';
 import Navbar3 from '@/blocks/navbar/navbar-3';
@@ -129,6 +131,8 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'cta-3': CTA3,
   'cta-4': CTA4,
   'cta-5': CTA5,
+  'cta-6': CTA6,
+  'cta-7': CTA7,
   'footer-1': Footer1,
   'footer-2': Footer2,
   'footer-3': Footer3,
