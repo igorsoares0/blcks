@@ -19,6 +19,7 @@ import Features1 from '@/blocks/features/features1';
 import Features2 from '@/blocks/features/features-2';
 import Features3 from '@/blocks/features/features-3';
 import Features4 from '@/blocks/features/features-4';
+import Features5 from '@/blocks/features/features-5';
 import CTA1 from '@/blocks/cta/cta1';
 import CTA2 from '@/blocks/cta/cta-2';
 import CTA3 from '@/blocks/cta/cta-3';
@@ -63,6 +64,7 @@ import Services1 from '@/blocks/services/services-1';
 import Services2 from '@/blocks/services/services-2';
 import Services3 from '@/blocks/services/services-3';
 import Services4 from '@/blocks/services/services-4';
+import Services5 from '@/blocks/services/services-5';
 import Changelog1 from '@/blocks/changelog/changelog-1';
 import Changelog2 from '@/blocks/changelog/changelog-2';
 import Changelog3 from '@/blocks/changelog/changelog-3';
@@ -114,6 +116,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'features-2': Features2,
   'features-3': Features3,
   'features-4': Features4,
+  'features-5': Features5,
   'cta-1': CTA1,
   'cta-2': CTA2,
   'cta-3': CTA3,
@@ -153,6 +156,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'services-2': Services2,
   'services-3': Services3,
   'services-4': Services4,
+  'services-5': Services5,
   'changelog-1': Changelog1,
   'changelog-2': Changelog2,
   'changelog-3': Changelog3,
