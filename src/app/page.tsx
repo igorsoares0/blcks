@@ -1,13 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { blocksRegistry, getAllCategories } from '@/lib/blocks-registry';
 import { BlockCard } from '@/components/block-card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Search, Blocks } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Search, Blocks, User } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
+  const { data: session, status } = useSession();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -29,13 +33,44 @@ export default function Home() {
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 py-6">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary">
-              <Blocks className="h-6 w-6 text-primary-foreground" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary">
+                <Blocks className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold">Blcks</h1>
+                <p className="text-sm text-gray-500">React Blocks Library</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold">Blcks</h1>
-              <p className="text-sm text-gray-500">React Blocks Library</p>
+
+            {/* Auth Buttons */}
+            <div className="flex items-center gap-3">
+              {status === 'loading' ? (
+                <div className="h-9 w-20 bg-gray-200 dark:bg-gray-800 animate-pulse rounded-md"></div>
+              ) : session ? (
+                <div className="flex items-center gap-3">
+                  <Link href="/dashboard">
+                    <Button variant="outline" size="sm" className="gap-2">
+                      <User className="h-4 w-4" />
+                      Dashboard
+                    </Button>
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <Link href="/auth/login">
+                    <Button variant="outline" size="sm">
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/auth/signup">
+                    <Button size="sm">
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
