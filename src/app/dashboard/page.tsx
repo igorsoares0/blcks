@@ -1,22 +1,178 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
-import { Card } from '@/components/ui/card';
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import {
+  ArrowLeft,
+  Users,
+  Mail,
+  Trash2,
+  CheckCircle2,
+  Clock,
+  XCircle,
+  Loader2,
+  Plus,
+  Crown,
+  Calendar,
+} from 'lucide-react';
+import Link from 'next/link';
+import { inviteTeamMember, removeTeamMember, getMyTeamLicense } from '@/actions/team';
 import { logout } from '@/actions/logout';
 
-export default async function DashboardPage() {
-  const session = await auth();
+interface TeamMember {
+  id: string;
+  email: string;
+  name: string | null;
+  status: string;
+  role: string;
+  inviteExpiresAt: Date | null;
+}
 
-  if (!session?.user) {
-    redirect('/auth/login');
+interface TeamLicense {
+  id: string;
+  type: string;
+  teamSeats: number;
+  purchasedAt: Date;
+  members: TeamMember[];
+}
+
+export default function DashboardPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [license, setLicense] = useState<TeamLicense | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteLoading, setInviteLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth/login');
+      return;
+    }
+
+    if (status === 'authenticated') {
+      loadLicense();
+    }
+  }, [status, router]);
+
+  async function loadLicense() {
+    setLoading(true);
+    const result = await getMyTeamLicense();
+
+    if (result.success && result.license) {
+      setLicense(result.license);
+    }
+    setLoading(false);
   }
 
+  async function handleInvite(e: React.FormEvent) {
+    e.preventDefault();
+    setError('');
+    setSuccess('');
+    setInviteLoading(true);
+
+    const result = await inviteTeamMember(inviteEmail);
+
+    if (result.success) {
+      setSuccess('Invite sent successfully!');
+      setInviteEmail('');
+      loadLicense(); // Reload to show new member
+    } else {
+      setError(result.error || 'Failed to send invite');
+    }
+
+    setInviteLoading(false);
+  }
+
+  async function handleRemove(memberId: string) {
+    if (!confirm('Are you sure you want to remove this team member?')) {
+      return;
+    }
+
+    setError('');
+    setSuccess('');
+
+    const result = await removeTeamMember(memberId);
+
+    if (result.success) {
+      setSuccess('Team member removed successfully');
+      loadLicense(); // Reload to update list
+    } else {
+      setError(result.error || 'Failed to remove team member');
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!license) {
+    return (
+      <div className="min-h-screen bg-background">
+        <header className="border-b border-gray-200 dark:border-gray-800">
+          <div className="container mx-auto px-6 md:px-8 lg:px-12 py-6 flex items-center justify-between">
+            <Link href="/">
+              <Button variant="ghost" size="sm" className="gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Blocks
+              </Button>
+            </Link>
+            <form action={logout}>
+              <Button type="submit" variant="outline" size="sm">
+                Logout
+              </Button>
+            </form>
+          </div>
+        </header>
+
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-16">
+          <Card className="max-w-2xl mx-auto">
+            <CardHeader className="text-center">
+              <CardTitle>No Team License Found</CardTitle>
+              <CardDescription>
+                You need a team license to access this dashboard
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-center space-y-4">
+              <p className="text-gray-600 dark:text-gray-400">
+                Only users with an active team license can manage team members.
+              </p>
+              <Link href="/pricing">
+                <Button>View Pricing</Button>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  const activeMembers = license.members.filter((m) => m.status === 'active');
+  const pendingMembers = license.members.filter((m) => m.status === 'invited');
+  const availableSeats = license.teamSeats - activeMembers.length - pendingMembers.length;
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950">
-        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-4 flex items-center justify-between">
-          <h1 className="text-xl font-bold">Dashboard</h1>
+      <header className="border-b border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto px-6 md:px-8 lg:px-12 py-6 flex items-center justify-between">
+          <Link href="/">
+            <Button variant="ghost" size="sm" className="gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Blocks
+            </Button>
+          </Link>
           <form action={logout}>
             <Button type="submit" variant="outline" size="sm">
               Logout
@@ -25,73 +181,218 @@ export default async function DashboardPage() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-6 md:px-8 lg:px-12 py-12">
-        <div className="max-w-4xl mx-auto space-y-8">
-          {/* Welcome Card */}
-          <Card className="p-8">
-            <h2 className="text-2xl font-bold mb-4">
-              Welcome back, {session.user.name || 'User'}!
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              You&apos;ve successfully logged in to your Blcks account.
-            </p>
-          </Card>
-
-          {/* User Info Card */}
-          <Card className="p-8">
-            <h3 className="text-lg font-semibold mb-4">Account Information</h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                {session.user.image && (
-                  <img
-                    src={session.user.image}
-                    alt={session.user.name || 'User'}
-                    className="w-16 h-16 rounded-full"
-                  />
-                )}
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Name
-                </label>
-                <p className="text-base mt-1">{session.user.name || 'Not provided'}</p>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Email
-                </label>
-                <p className="text-base mt-1">{session.user.email}</p>
-              </div>
-
-              <div>
-                <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  User ID
-                </label>
-                <p className="text-base mt-1 font-mono text-sm">{session.user.id}</p>
-              </div>
-            </div>
-          </Card>
-
-          {/* Quick Actions */}
-          <Card className="p-8">
-            <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
-            <div className="space-y-3">
-              <Button asChild variant="outline" className="w-full justify-start">
-                <a href="/">Browse Blocks</a>
-              </Button>
-              <Button asChild variant="outline" className="w-full justify-start">
-                <a href="/blocks/hero">Hero Sections</a>
-              </Button>
-              <Button asChild variant="outline" className="w-full justify-start">
-                <a href="/blocks/features">Features</a>
-              </Button>
-            </div>
-          </Card>
+      <div className="container mx-auto px-6 md:px-8 lg:px-12 py-12">
+        {/* Page Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">Team Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Manage your team members and invites
+          </p>
         </div>
-      </main>
+
+        {/* Alerts */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-800 dark:text-red-200">
+            {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg text-green-800 dark:text-green-200">
+            {success}
+          </div>
+        )}
+
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* License Info */}
+          <div className="lg:col-span-1">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Crown className="h-5 w-5 text-yellow-500" />
+                  License Info
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Type</div>
+                  <Badge className="capitalize">{license.type}</Badge>
+                </div>
+
+                <div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Team Seats</div>
+                  <div className="text-2xl font-bold">
+                    {activeMembers.length + pendingMembers.length} / {license.teamSeats}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                    {availableSeats} seat{availableSeats !== 1 ? 's' : ''} available
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    Purchased
+                  </div>
+                  <div className="text-sm">
+                    {new Date(license.purchasedAt).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Team Members & Invites */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Invite Form */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Plus className="h-5 w-5" />
+                  Invite Team Member
+                </CardTitle>
+                <CardDescription>
+                  Send an invite to a new team member via email
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleInvite} className="flex gap-2">
+                  <Input
+                    type="email"
+                    placeholder="teammate@example.com"
+                    value={inviteEmail}
+                    onChange={(e) => setInviteEmail(e.target.value)}
+                    disabled={inviteLoading || availableSeats === 0}
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    disabled={inviteLoading || availableSeats === 0}
+                    className="gap-2 shrink-0"
+                  >
+                    {inviteLoading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="h-4 w-4" />
+                        Send Invite
+                      </>
+                    )}
+                  </Button>
+                </form>
+                {availableSeats === 0 && (
+                  <p className="text-sm text-orange-600 dark:text-orange-400 mt-2">
+                    Your team is full. Remove a member to invite someone new.
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Active Members */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Users className="h-5 w-5" />
+                  Active Members ({activeMembers.length})
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {activeMembers.length === 0 ? (
+                  <p className="text-gray-500 dark:text-gray-400 text-center py-8">
+                    No active team members yet. Invite your first member above!
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {activeMembers.map((member) => (
+                      <div
+                        key={member.id}
+                        className="flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900"
+                      >
+                        <div className="flex items-center gap-3">
+                          <CheckCircle2 className="h-5 w-5 text-green-600" />
+                          <div>
+                            <div className="font-medium">{member.name || member.email}</div>
+                            {member.name && (
+                              <div className="text-sm text-gray-500">{member.email}</div>
+                            )}
+                          </div>
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => handleRemove(member.id)}
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Pending Invites */}
+            {pendingMembers.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Clock className="h-5 w-5" />
+                    Pending Invites ({pendingMembers.length})
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {pendingMembers.map((member) => {
+                      const isExpired =
+                        member.inviteExpiresAt && new Date(member.inviteExpiresAt) < new Date();
+
+                      return (
+                        <div
+                          key={member.id}
+                          className="flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-800"
+                        >
+                          <div className="flex items-center gap-3">
+                            {isExpired ? (
+                              <XCircle className="h-5 w-5 text-red-600" />
+                            ) : (
+                              <Clock className="h-5 w-5 text-yellow-600" />
+                            )}
+                            <div>
+                              <div className="font-medium">{member.email}</div>
+                              {member.inviteExpiresAt && (
+                                <div className="text-sm text-gray-500">
+                                  {isExpired ? 'Expired' : 'Expires'}{' '}
+                                  {new Date(member.inviteExpiresAt).toLocaleDateString()}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleRemove(member.id)}
+                            className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

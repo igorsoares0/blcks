@@ -7,11 +7,13 @@ import { BlockCard } from '@/components/block-card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Search, Blocks, User } from 'lucide-react';
+import { Search, Blocks, User, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useLicense } from '@/hooks/use-license';
 
 export default function Home() {
   const { data: session, status } = useSession();
+  const { hasLicense } = useLicense();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -133,6 +135,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Premium Banner (show if user doesn't have license) */}
+      {!hasLicense && (
+        <section className="container mx-auto px-6 md:px-8 lg:px-12 py-8">
+          <div className="bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 dark:from-yellow-600 dark:via-yellow-500 dark:to-yellow-600 rounded-xl p-6 md:p-8 shadow-lg">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-start gap-4">
+                <div className="bg-white dark:bg-gray-900 p-3 rounded-lg">
+                  <Sparkles className="h-6 w-6 text-yellow-500" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Unlock All Premium Blocks
+                  </h3>
+                  <p className="text-gray-800 dark:text-gray-100 text-sm md:text-base">
+                    Get access to all <strong>110 blocks</strong> with a one-time payment. Currently viewing <strong>33 free blocks</strong>.
+                  </p>
+                </div>
+              </div>
+              <Link href="/pricing">
+                <Button size="lg" variant="secondary" className="bg-white text-gray-900 hover:bg-gray-100 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-800 shadow-md whitespace-nowrap">
+                  View Pricing →
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Blocks Grid */}
       <section className="container mx-auto px-6 md:px-8 lg:px-12 py-12">
         {filteredBlocks.length === 0 ? (
@@ -144,7 +174,11 @@ export default function Home() {
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredBlocks.map((block) => (
-              <BlockCard key={block.id} block={block} />
+              <BlockCard
+                key={block.id}
+                block={block}
+                hasAccess={!block.isPremium || hasLicense}
+              />
             ))}
           </div>
         )}

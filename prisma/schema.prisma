@@ -20,8 +20,14 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  accounts Account[]
-  sessions Session[]
+  // License fields (cache for performance)
+  hasActiveLicense Boolean @default(false)
+  licenseType      String  @default("none") // "none" | "individual" | "team"
+
+  accounts     Account[]
+  sessions     Session[]
+  ownedLicense License?       @relation("LicenseOwner")
+  teamMemberships TeamMember[]
 
   @@index([email])
 }
@@ -71,4 +77,45 @@ model PasswordResetToken {
   createdAt DateTime @default(now())
 
   @@unique([email, token])
+}
+
+model License {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  type             String   // "individual" | "team"
+  stripePaymentId  String   @unique
+  stripeCustomerId String?
+  status           String   @default("active") // "active" | "cancelled" | "expired"
+  teamSeats        Int      @default(1) // 1 for individual, 5 for team
+  purchasedAt      DateTime @default(now())
+  expiresAt        DateTime? // null = lifetime
+
+  user        User         @relation("LicenseOwner", fields: [userId], references: [id], onDelete: Cascade)
+  teamMembers TeamMember[]
+
+  @@index([userId])
+  @@index([stripePaymentId])
+  @@index([status])
+}
+
+model TeamMember {
+  id               String    @id @default(cuid())
+  licenseId        String
+  userId           String?
+  invitedEmail     String
+  role             String    @default("member") // "owner" | "member"
+  status           String    @default("invited") // "invited" | "active" | "removed"
+  invitedAt        DateTime  @default(now())
+  joinedAt         DateTime?
+  inviteToken      String?   @unique
+  inviteExpiresAt  DateTime?
+
+  license License @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([licenseId])
+  @@index([userId])
+  @@index([invitedEmail])
+  @@index([inviteToken])
+  @@unique([licenseId, invitedEmail])
 }

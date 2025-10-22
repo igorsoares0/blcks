@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CodeBlock } from './code-block';
 import { Card } from '@/components/ui/card';
 import { BlockMetadata } from '@/lib/blocks-registry';
+import { PremiumGate } from './premium-gate';
 
 interface BlockPreviewProps {
   block: BlockMetadata;
@@ -44,13 +45,17 @@ export function BlockPreview({ block, children }: BlockPreviewProps) {
         </div>
 
         <TabsContent value="preview" className="p-0 m-0">
-          <div className={previewClasses}>
-            {children}
-          </div>
+          <PremiumGate isPremium={block.isPremium} blockName={block.name}>
+            <div className={previewClasses}>
+              {children}
+            </div>
+          </PremiumGate>
         </TabsContent>
 
         <TabsContent value="code" className="p-4 m-0">
-          <CodeBlock code={block.code} language="tsx" />
+          <PremiumGate isPremium={block.isPremium} blockName={block.name}>
+            <CodeBlock code={block.code} language="tsx" />
+          </PremiumGate>
         </TabsContent>
 
         <TabsContent value="dependencies" className="p-6 m-0">

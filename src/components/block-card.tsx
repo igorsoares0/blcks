@@ -2,16 +2,35 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BlockMetadata } from '@/lib/blocks-registry';
+import { Lock } from 'lucide-react';
 
 interface BlockCardProps {
   block: BlockMetadata;
+  hasAccess?: boolean;
 }
 
-export function BlockCard({ block }: BlockCardProps) {
+export function BlockCard({ block, hasAccess = true }: BlockCardProps) {
+  const isLocked = block.isPremium && !hasAccess;
+
   return (
     <Link href={`/blocks/${block.category}/${block.id}`}>
-      <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50 cursor-pointer group flex flex-col">
-        <div className="aspect-video w-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+      <Card className={`h-full transition-all hover:shadow-lg cursor-pointer group flex flex-col ${
+        isLocked
+          ? 'hover:border-yellow-500/50 border-yellow-500/20'
+          : 'hover:border-primary/50'
+      }`}>
+        <div className={`aspect-video w-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden ${
+          isLocked ? 'opacity-60' : ''
+        }`}>
+          {/* Lock overlay for premium blocks without access */}
+          {isLocked && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/10 backdrop-blur-[2px] z-10">
+              <div className="bg-yellow-500 text-white p-3 rounded-full shadow-lg">
+                <Lock className="h-6 w-6" />
+              </div>
+            </div>
+          )}
+
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
@@ -27,9 +46,27 @@ export function BlockCard({ block }: BlockCardProps) {
             <CardTitle className="text-lg group-hover:text-primary transition-colors leading-tight">
               {block.name}
             </CardTitle>
-            <Badge variant="secondary" className="shrink-0 text-xs">
-              {block.category}
-            </Badge>
+            <div className="flex flex-col gap-1.5 shrink-0">
+              <Badge variant="secondary" className="text-xs">
+                {block.category}
+              </Badge>
+              {block.isPremium ? (
+                <Badge
+                  variant={isLocked ? "default" : "outline"}
+                  className={`text-xs ${
+                    isLocked
+                      ? 'bg-yellow-500 hover:bg-yellow-600 text-white border-yellow-600'
+                      : 'border-green-600 text-green-600'
+                  }`}
+                >
+                  {isLocked ? '🔒 Premium' : '✓ Premium'}
+                </Badge>
+              ) : (
+                <Badge variant="outline" className="text-xs border-blue-600 text-blue-600">
+                  Free
+                </Badge>
+              )}
+            </div>
           </div>
           <CardDescription className="line-clamp-2 text-sm">
             {block.description}

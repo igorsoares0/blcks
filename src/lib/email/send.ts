@@ -56,3 +56,26 @@ export async function sendPasswordResetConfirmation(email: string) {
     return { success: false, error };
   }
 }
+
+interface SendEmailOptions {
+  to: string;
+  subject: string;
+  html: string;
+  text?: string;
+}
+
+export async function sendEmail({ to, subject, html, text }: SendEmailOptions) {
+  try {
+    await mg.messages.create(MAILGUN_DOMAIN, {
+      from: MAILGUN_FROM,
+      to: [to],
+      subject,
+      html,
+      text: text || '',
+    });
+    return { success: true };
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return { success: false, error };
+  }
+}

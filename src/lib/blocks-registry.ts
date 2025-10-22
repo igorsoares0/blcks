@@ -10,6 +10,7 @@ export interface BlockMetadata {
   description: string;
   category: string;
   tags: string[];
+  isPremium: boolean; // true = paid, false = free (first 2 of each category)
   dependencies: BlockDependency[];
   code: string;
   previewProps?: Record<string, any>;
@@ -34,6 +35,7 @@ export const blocksRegistry: BlockMetadata[] = [
     name: 'Responsive Navbar',
     description: 'Modern navigation bar with mobile menu, sticky header and backdrop blur. Fully responsive.',
     category: 'navbar',
+    isPremium: false,
     tags: ['navbar', 'navigation', 'menu', 'header', 'mobile'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -161,6 +163,7 @@ export default function Navbar1({
     name: 'Simple Clean Navbar',
     description: 'Clean and minimal navbar with hamburger menu for mobile. Zero external dependencies except Sheet for mobile menu.',
     category: 'navbar',
+    isPremium: false,
     tags: ['navbar', 'navigation', 'menu', 'header', 'mobile', 'simple', 'clean'],
     dependencies: [
       { name: 'sheet', command: 'npx shadcn@latest add sheet' }
@@ -312,6 +315,7 @@ export default function Navbar2({
     name: 'Navbar with Dropdown and Search',
     description: 'Advanced navbar with dropdown menu, search bar, and mobile-responsive design. Perfect for content-heavy sites.',
     category: 'navbar',
+    isPremium: true,
     tags: ['navbar', 'navigation', 'menu', 'header', 'mobile', 'dropdown', 'search', 'advanced'],
     dependencies: [
       { name: 'sheet', command: 'npx shadcn@latest add sheet' }
@@ -585,6 +589,7 @@ export default function Navbar3({
     name: 'Navbar with Centered Links',
     description: 'Modern navbar with logo on left, centered navigation links, and dual action buttons (Sign In + Sign Up). Clean and balanced design.',
     category: 'navbar',
+    isPremium: true,
     tags: ['navbar', 'navigation', 'menu', 'header', 'mobile', 'centered', 'dual-cta', 'auth'],
     dependencies: [
       { name: 'sheet', command: 'npx shadcn@latest add sheet' }
@@ -761,6 +766,7 @@ export default function Navbar4({
     name: 'Hero with Image on Right',
     description: 'Modern hero section with text on the left and image on the right. Fully responsive and customizable.',
     category: 'hero',
+    isPremium: false,
     tags: ['hero', 'landing', 'cta', 'image'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -843,6 +849,7 @@ export default function Hero1({
     name: 'Hero with Gradient Background',
     description: 'Hero section with vibrant gradient background and modern visual effects.',
     category: 'hero',
+    isPremium: false,
     tags: ['hero', 'landing', 'gradient', 'modern'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -917,6 +924,7 @@ export default function Hero2({
     name: 'Hero with Video Preview & Stats',
     description: 'Hero section with video/image preview, play button overlay and floating stats cards. Modern and engaging design.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'video', 'stats', 'modern', 'cards'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -1076,6 +1084,7 @@ export default function Hero3({
     name: 'Hero with Features & Social Proof',
     description: 'Hero section with gradient background, feature badges, avatar social proof and decorative bottom cards. Modern and engaging design with blue-purple gradient theme.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'features', 'social-proof', 'gradient', 'modern', 'cards'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -1302,6 +1311,7 @@ export default function Hero4({
     name: 'Hero Split Screen',
     description: 'Hero section with split screen layout - content on left with stats and features, dashboard mockup on right with floating notification cards. Clean and professional design.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'split-screen', 'dashboard', 'stats', 'features'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -1492,6 +1502,7 @@ export default function Hero5({
     name: 'Hero with Search Bar',
     description: 'Centered hero section with prominent search bar, category badges, star rating and trust indicators. Perfect for marketplaces and directory sites.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'search', 'marketplace', 'directory', 'centered', 'rating'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -1675,6 +1686,7 @@ export default function Hero6({
     name: 'Hero with Newsletter Signup',
     description: 'Centered hero section with email newsletter signup form, company logos showcase and status indicators. Perfect for product launches and lead generation.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'newsletter', 'email', 'signup', 'logos', 'launch'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -1824,6 +1836,7 @@ export default function Hero7({
     name: 'Hero with Benefits Grid',
     description: 'Centered hero section with prominent CTA, trust indicators, and a 4-column benefits grid. Clean design with subtle gradient background.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'benefits', 'features', 'cta', 'grid'],
     dependencies: [],
     previewProps: {
@@ -1982,6 +1995,7 @@ export default function Hero8({
     name: 'Hero with Social Proof',
     description: 'Two-column hero with image, floating testimonial cards, and metrics. Perfect for showcasing customer satisfaction and trust.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'testimonials', 'social-proof', 'metrics', 'image'],
     dependencies: [],
     previewProps: {
@@ -2166,6 +2180,7 @@ export default function Hero9({
     name: 'Hero with Code Preview',
     description: 'Centered hero with terminal/code preview window, feature badges, and stats. Perfect for developer tools and technical products.',
     category: 'hero',
+    isPremium: true,
     tags: ['hero', 'landing', 'code', 'developer', 'terminal', 'cli', 'stats'],
     dependencies: [],
     previewProps: {
@@ -2336,6 +2351,7 @@ npx blcks deploy
     name: 'Features Grid with Icons',
     description: 'Features grid with icons, title and description. Responsive 3-column layout.',
     category: 'features',
+    isPremium: false,
     tags: ['features', 'grid', 'icons', 'services'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -2461,6 +2477,7 @@ export default function Features1({
     name: 'Features with Image',
     description: 'Features grid with emoji icons and side image. 2x3 grid layout with configurable image position (left or right).',
     category: 'features',
+    isPremium: false,
     tags: ['features', 'grid', 'image', 'emoji', 'icons', 'services'],
     dependencies: [],
     previewProps: {
@@ -2623,6 +2640,7 @@ export default function Features2({
     name: 'Features Bento Grid',
     description: 'Modern bento-style grid layout with asymmetric cards. Features can span 1 or 2 columns for visual hierarchy.',
     category: 'features',
+    isPremium: true,
     tags: ['features', 'bento', 'grid', 'modern', 'asymmetric', 'emoji', 'icons'],
     dependencies: [],
     previewProps: {
@@ -2784,6 +2802,7 @@ export default function Features3({
     name: 'Features List Detailed',
     description: 'Vertical list layout with detailed feature descriptions. Perfect for in-depth feature showcases with longer content.',
     category: 'features',
+    isPremium: true,
     tags: ['features', 'list', 'detailed', 'vertical', 'emoji', 'icons'],
     dependencies: [],
     previewProps: {
@@ -2931,6 +2950,7 @@ export default function Features4({
     name: 'Simple CTA',
     description: 'Clean and direct call-to-action with title, description and action buttons.',
     category: 'cta',
+    isPremium: false,
     tags: ['cta', 'call-to-action', 'conversion'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -2995,6 +3015,7 @@ export default function CTA1({
     name: 'CTA with Image & Stats',
     description: '2-column CTA with image, gradient background, statistics display and dual action buttons. Modern and engaging design.',
     category: 'cta',
+    isPremium: false,
     tags: ['cta', 'call-to-action', 'conversion', 'image', 'stats', 'metrics', 'gradient'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -3185,6 +3206,7 @@ export default function CTA2({
     name: 'CTA with Urgency & Benefits',
     description: 'Centered CTA with urgency badge, benefit cards grid, dual CTAs and trust indicators. Designed for high conversion.',
     category: 'cta',
+    isPremium: true,
     tags: ['cta', 'call-to-action', 'conversion', 'urgency', 'benefits', 'trust', 'scarcity'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -3388,6 +3410,7 @@ export default function CTA3({
     name: 'Newsletter CTA',
     description: 'Email newsletter signup with feature highlights, social proof avatars and centered form. Perfect for lead generation.',
     category: 'cta',
+    isPremium: true,
     tags: ['cta', 'newsletter', 'email', 'signup', 'subscription', 'lead-generation', 'social-proof'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -3582,6 +3605,7 @@ export default function CTA4({
     name: 'Video Demo CTA',
     description: 'Split-screen CTA with video preview, play button overlay, floating stats, and testimonial. Ideal for product demos and bookings.',
     category: 'cta',
+    isPremium: true,
     tags: ['cta', 'video', 'demo', 'testimonial', 'stats', 'booking', 'split-screen'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -3817,6 +3841,7 @@ export default function CTA5({
     name: 'Complete Footer',
     description: 'Footer with company information, link sections, social icons and copyright. Responsive layout.',
     category: 'footer',
+    isPremium: false,
     tags: ['footer', 'links', 'social', 'navigation', 'company'],
     dependencies: [],
     previewProps: {
@@ -3996,6 +4021,7 @@ export default function Footer1({
     name: 'Footer with Newsletter',
     description: 'Comprehensive footer with company info, newsletter signup, multiple link sections, social media icons and bottom bar. Modern design.',
     category: 'footer',
+    isPremium: false,
     tags: ['footer', 'newsletter', 'subscribe', 'links', 'social', 'navigation'],
     dependencies: [],
     previewProps: {
@@ -4252,6 +4278,7 @@ export default function Footer2({
     name: 'Footer with Contact Info',
     description: 'Professional footer with company description, contact details (email, phone, address), multiple link columns and legal links. Clean layout.',
     category: 'footer',
+    isPremium: true,
     tags: ['footer', 'contact', 'links', 'address', 'business', 'professional'],
     dependencies: [],
     previewProps: {
@@ -4476,6 +4503,7 @@ export default function Footer3({
     name: 'Footer with Language Selector',
     description: 'Modern footer with brand section, 4 link columns, social media icons, language selector and bottom bar with badge. Clean and international.',
     category: 'footer',
+    isPremium: true,
     tags: ['footer', 'international', 'language', 'social', 'links', 'i18n'],
     dependencies: [],
     previewProps: {
@@ -4756,6 +4784,7 @@ export default function Footer4({
     name: 'Announcement Bar',
     description: 'Fixed announcement bar at the top with message, link and close button using shadcn/ui Button. Includes 3 color variations.',
     category: 'announcement',
+    isPremium: false,
     tags: ['announcement', 'banner', 'notification', 'top-bar'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -4828,6 +4857,7 @@ export default function Announcement1({
     name: 'Announcement Badge Banner',
     description: 'Clean announcement banner with badge, message and link. Subtle design with hover effects using lucide-react icons.',
     category: 'announcement',
+    isPremium: false,
     tags: ['announcement', 'banner', 'badge', 'notification', 'news'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -4901,6 +4931,7 @@ export default function Announcement2({
     name: 'Announcement Card Banner',
     description: 'Colored announcement banner with Bell icon, title, message and link. Includes 4 color variants (blue, green, purple, orange).',
     category: 'announcement',
+    isPremium: true,
     tags: ['announcement', 'banner', 'notification', 'alert', 'colored'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -5009,6 +5040,7 @@ export default function Announcement3({
     name: 'Premium Promo Banner',
     description: 'Full-featured promotional banner with gradient background, countdown timer, dual CTAs, and decorative elements. Perfect for special offers and launches.',
     category: 'announcement',
+    isPremium: true,
     tags: ['announcement', 'banner', 'promo', 'countdown', 'timer', 'offer', 'gradient', 'premium'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -5155,6 +5187,7 @@ export default function Announcement4({
     name: 'Feature Highlights Banner',
     description: 'Multi-segment announcement banner with icon highlights, animated background, megaphone icon, and NEW badge. Perfect for celebrating milestones.',
     category: 'announcement',
+    isPremium: true,
     tags: ['announcement', 'banner', 'highlights', 'milestone', 'celebration', 'animated', 'gradient'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -5322,6 +5355,7 @@ export default function Announcement5({
     name: 'About Section',
     description: 'Complete company section with description, mission, statistics and team. Responsive and modern layout.',
     category: 'about',
+    isPremium: false,
     tags: ['about', 'team', 'mission', 'company', 'stats'],
     dependencies: [],
     previewProps: {
@@ -5482,6 +5516,7 @@ export default function About1({
     name: 'About with Values & Stats',
     description: 'About section with split layout, company values grid, statistics and team image. Modern design with emoji icons.',
     category: 'about',
+    isPremium: false,
     tags: ['about', 'values', 'mission', 'stats', 'company', 'team'],
     dependencies: [],
     previewProps: {
@@ -5661,6 +5696,7 @@ export default function About2({
     name: 'About with Story & Team',
     description: 'Comprehensive about section with company story, hero image, and team member grid. Perfect for detailed company pages.',
     category: 'about',
+    isPremium: true,
     tags: ['about', 'story', 'team', 'company', 'people', 'founders'],
     dependencies: [],
     previewProps: {
@@ -5842,6 +5878,7 @@ export default function About3({
     name: 'Company Timeline About',
     description: 'Timeline-based about section with company milestones, achievements metrics, and founder quote. Perfect for storytelling and showcasing growth.',
     category: 'about',
+    isPremium: true,
     tags: ['about', 'timeline', 'history', 'milestones', 'achievements', 'quote', 'journey'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -6092,6 +6129,7 @@ export default function About4({
     name: 'Mission Vision Values About',
     description: 'About section focused on mission, vision and core values. Features image background cards, icon-based value grid, and career CTA.',
     category: 'about',
+    isPremium: true,
     tags: ['about', 'mission', 'vision', 'values', 'culture', 'careers', 'purpose'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -6356,6 +6394,7 @@ export default function About5({
     name: 'Team Showcase About',
     description: 'About section featuring team members grid with avatars, bios, social links, company stats and join CTA. Perfect for showcasing your team.',
     category: 'about',
+    isPremium: true,
     tags: ['about', 'team', 'people', 'members', 'staff', 'employees', 'leadership', 'stats', 'social'],
     dependencies: [],
     previewProps: {
@@ -6610,6 +6649,7 @@ export default function About6({
     name: 'Stats & Achievements About',
     description: 'About section highlighting company stats, awards, certifications and compliance. Perfect for building trust with impressive metrics and recognitions.',
     category: 'about',
+    isPremium: true,
     tags: ['about', 'stats', 'numbers', 'achievements', 'awards', 'certifications', 'compliance', 'metrics', 'trust'],
     dependencies: [],
     previewProps: {
@@ -6932,6 +6972,7 @@ export default function About7({
     name: 'FAQ Grid Cards',
     description: 'FAQ in 2-column grid layout with icon-based cards. Clean design with help icons, hover effects and contact CTA section.',
     category: 'faq',
+    isPremium: false,
     tags: ['faq', 'questions', 'help', 'support', 'grid', 'cards'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -7090,6 +7131,7 @@ export default function FAQ2({
     name: 'FAQ with Categories',
     description: 'Single-column FAQ with native HTML details/summary for expandable questions. Features category badges, smooth animations and gradient support CTA.',
     category: 'faq',
+    isPremium: true,
     tags: ['faq', 'questions', 'help', 'support', 'accordion', 'categories'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -7261,6 +7303,7 @@ export default function FAQ3({
     name: 'FAQ with Category Grid',
     description: '2-column grid FAQ organized by categories with search bar. Each category has an icon header and accordion-style questions. Modern design with gradient background.',
     category: 'faq',
+    isPremium: true,
     tags: ['faq', 'questions', 'help', 'support', 'categories', 'search', 'grid', 'accordion'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -7518,6 +7561,7 @@ export default function FAQ4({
     name: 'Blog Grid',
     description: 'Blog post grid with image, category, title, excerpt, meta information and author. Responsive 3-column layout.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'posts', 'articles', 'grid', 'content'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -7702,6 +7746,7 @@ export default function Blog1({
     name: 'Pricing Table',
     description: 'Pricing table with 3 plans, features with check/x, highlight for popular plan. Responsive grid layout.',
     category: 'pricing',
+    isPremium: true,
     tags: ['pricing', 'plans', 'subscription', 'features', 'comparison'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -7926,6 +7971,7 @@ export default function Pricing1({
     name: 'Services Grid',
     description: 'Services grid with icons, title, description and feature list. Responsive 3-column layout with hover effects.',
     category: 'services',
+    isPremium: false,
     tags: ['services', 'features', 'grid', 'icons', 'business'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -8103,6 +8149,7 @@ export default function Services1({
     name: 'Blog Post Article',
     description: 'Complete blog article layout with cover image, meta information, author, formatted content and tags. Typography optimized for reading.',
     category: 'blog',
+    isPremium: false,
     tags: ['blog', 'article', 'post', 'content', 'reading'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -8277,6 +8324,7 @@ export default function BlogPost1({
     name: 'Changelog Timeline',
     description: 'Changelog timeline with versions, dates and change categorization (added, fixed, improved, changed, removed). Modern visual with icons and colors.',
     category: 'changelog',
+    isPremium: false,
     tags: ['changelog', 'updates', 'releases', 'versions', 'timeline'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -8479,6 +8527,7 @@ export default function Changelog1({
     name: 'Login Form',
     description: 'Complete login form using shadcn/ui components (Input, Button, Checkbox), with email/password, social login (Google, GitHub), remember me and password recovery. Modern and responsive design.',
     category: 'auth',
+    isPremium: false,
     tags: ['login', 'authentication', 'form', 'social-login', 'auth'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -8649,6 +8698,7 @@ export default function Login1({
     name: 'Signup Form',
     description: 'Complete signup form using shadcn/ui components (Input, Button, Checkbox), with name, email, password, terms acceptance and social signup (Google, GitHub). Modern and responsive design.',
     category: 'auth',
+    isPremium: false,
     tags: ['signup', 'register', 'authentication', 'form', 'social-signup'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -8842,6 +8892,7 @@ export default function Signup1({
     name: 'Testimonials Grid',
     description: 'Testimonials grid with avatar, name, role/company, star rating and quote. Responsive 3-column layout with quote icon.',
     category: 'testimonial',
+    isPremium: false,
     tags: ['testimonial', 'reviews', 'social-proof', 'ratings', 'feedback'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -8985,6 +9036,7 @@ export default function Testimonial1({
     name: 'Featured Testimonial Hero',
     description: 'Testimonials with large featured card and smaller secondary cards. Includes star ratings, navigation arrows and trust badge. Modern gradient background.',
     category: 'testimonial',
+    isPremium: false,
     tags: ['testimonial', 'reviews', 'social-proof', 'ratings', 'feedback', 'featured', 'hero'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -9205,6 +9257,7 @@ export default function Testimonial2({
     name: 'Testimonials Vertical List',
     description: 'Testimonials in vertical list layout with side-by-side avatar and content. Clean design with quote icons, star ratings and CTA button.',
     category: 'testimonial',
+    isPremium: true,
     tags: ['testimonial', 'reviews', 'social-proof', 'ratings', 'feedback', 'list', 'vertical'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -9388,6 +9441,7 @@ export default function Testimonial3({
     name: 'Testimonials Carousel Grid',
     description: 'Testimonials in 2-column grid layout with carousel navigation. Includes large quote backgrounds, star ratings, and stats section below.',
     category: 'testimonial',
+    isPremium: true,
     tags: ['testimonial', 'reviews', 'social-proof', 'ratings', 'feedback', 'carousel', 'grid', 'stats'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -9623,6 +9677,7 @@ export default function Testimonial4({
     name: 'FAQ Accordion',
     description: 'FAQ with interactive accordion using shadcn/ui Accordion, smooth open/close animations and contact CTA. First item open by default.',
     category: 'faq',
+    isPremium: false,
     tags: ['faq', 'accordion', 'questions', 'help', 'support'],
     dependencies: [
       { name: 'accordion', command: 'npx shadcn@latest add accordion' }
@@ -9742,6 +9797,7 @@ export default function FAQ1({
     name: 'Blog Featured + Grid',
     description: 'Blog section with featured post in 2-column layout plus grid of regular posts. Includes author avatars and metadata.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'posts', 'articles', 'featured', 'grid', 'author', 'content'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -10034,6 +10090,7 @@ export default function Blog2({
     name: 'Blog Vertical List',
     description: 'Blog section with vertical list layout. Each post has large image, full content preview, tags, and author info with role.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'posts', 'articles', 'list', 'vertical', 'author', 'tags', 'content'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' }
@@ -10294,6 +10351,7 @@ export default function Blog3({
     name: 'Blog Post with Sidebar',
     description: 'Complete blog post layout with full-width cover image, rich content area with prose styling, and sidebar with related posts and share buttons.',
     category: 'blog',
+    isPremium: false,
     tags: ['blog', 'post', 'article', 'content', 'sidebar', 'related', 'author', 'reading'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -10643,6 +10701,7 @@ export default function BlogPost2({
     name: 'Pricing with Popular Badge',
     description: 'Advanced pricing table with 3 plans, popular badge, feature comparison with checkmarks and X marks, and highlighted recommended plan.',
     category: 'pricing',
+    isPremium: true,
     tags: ['pricing', 'plans', 'subscription', 'comparison', 'popular', 'features', 'payment'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -10912,6 +10971,7 @@ export default function Pricing2({
     name: 'Pricing with Annual Toggle',
     description: 'Interactive pricing table with monthly/annual billing toggle, automatic discount calculation, and 3 tiers. Includes highlighted recommended plan.',
     category: 'pricing',
+    isPremium: true,
     tags: ['pricing', 'plans', 'subscription', 'toggle', 'annual', 'monthly', 'discount', 'interactive'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -11181,6 +11241,7 @@ export default function Pricing3({
     name: 'Pricing with Icons',
     description: 'Modern pricing table with icon badges, gradient background, and feature comparison. Shows free tier with paid upgrades.',
     category: 'pricing',
+    isPremium: true,
     tags: ['pricing', 'plans', 'subscription', 'icons', 'free-tier', 'features'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -11467,6 +11528,7 @@ export default function Pricing4({
     name: 'Pricing Comparison Table',
     description: 'Detailed pricing comparison table with feature breakdown, billing toggle, popular badge, and category grouping. Perfect for showcasing detailed plan differences.',
     category: 'pricing',
+    isPremium: true,
     tags: ['pricing', 'comparison', 'table', 'plans', 'features', 'toggle', 'annual', 'monthly'],
     dependencies: [],
     previewProps: {
@@ -11809,6 +11871,7 @@ export default function Pricing5({
     name: 'Usage-Based Pricing',
     description: 'Flexible usage-based pricing with cost calculator, included quotas, overage rates, and detailed feature breakdown. Perfect for SaaS products with variable usage.',
     category: 'pricing',
+    isPremium: true,
     tags: ['pricing', 'usage', 'calculator', 'flexible', 'overage', 'saas', 'metered'],
     dependencies: [],
     previewProps: {
@@ -12195,6 +12258,7 @@ export default function Pricing6({
     name: 'Tiered Features Pricing',
     description: 'Comprehensive pricing table with categorized features, visual tier indicators, and side-by-side plan comparison. Perfect for showcasing feature differences across plans.',
     category: 'pricing',
+    isPremium: true,
     tags: ['pricing', 'comparison', 'features', 'tiers', 'table', 'plans', 'categories'],
     dependencies: [],
     previewProps: {
@@ -12572,6 +12636,7 @@ export default function Pricing7({
     name: 'Navbar with Mega Menu',
     description: 'Modern navigation with mega menu dropdown, integrated search bar, and mobile-responsive sheet menu. Perfect for content-rich sites.',
     category: 'navbar',
+    isPremium: true,
     tags: ['navbar', 'navigation', 'menu', 'mega-menu', 'search', 'mobile', 'dropdown'],
     dependencies: [
       { name: 'sheet', command: 'npx shadcn@latest add sheet' }
@@ -12905,6 +12970,7 @@ export default function Navbar5({
     name: 'Services with Gradient Icons',
     description: 'Services section with gradient icon backgrounds, hover effects, and individual CTAs. Clean card layout with bottom section CTA.',
     category: 'services',
+    isPremium: false,
     tags: ['services', 'features', 'cards', 'gradient', 'cta', 'grid'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -13114,6 +13180,7 @@ export default function Services2({
     name: 'Services with Stats',
     description: 'Premium services section with animated badges, hover effects with glow, and bottom statistics. Features decorative elements and 2-border design.',
     category: 'services',
+    isPremium: true,
     tags: ['services', 'features', 'stats', 'badges', 'animated', 'premium'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -13312,6 +13379,7 @@ export default function Services3({
     name: 'Services Grid with Numbers',
     description: 'Modern services grid with numbered cards, large background numbers, and grid separator lines. Features header with CTA and bottom banner.',
     category: 'services',
+    isPremium: true,
     tags: ['services', 'features', 'grid', 'numbers', 'minimal', 'modern'],
     dependencies: [
       { name: 'lucide-react', version: '^0.544.0' },
@@ -13518,6 +13586,7 @@ export default function Services4({
     name: 'Changelog 2',
     description: 'Card-based changelog layout with color-coded change types and major release highlighting',
     category: 'changelog',
+    isPremium: false,
     tags: ['changelog', 'updates', 'releases', 'version history', 'cards', 'badges'],
     dependencies: [
       {
@@ -13780,6 +13849,7 @@ export default function Changelog2({
     name: 'Changelog 3',
     description: 'Timeline-based changelog with featured releases, grid layout for featured changes, and CTA section',
     category: 'changelog',
+    isPremium: true,
     tags: ['changelog', 'updates', 'releases', 'timeline', 'featured', 'product updates'],
     dependencies: [
       {
@@ -14044,6 +14114,7 @@ export default function Changelog3({
     name: 'Changelog 4',
     description: 'Compact changelog with grouped changes by type, statistics footer, and external links',
     category: 'changelog',
+    isPremium: true,
     tags: ['changelog', 'updates', 'releases', 'grouped', 'statistics', 'compact'],
     dependencies: [
       {
@@ -14327,6 +14398,7 @@ export default function Changelog4({
     name: 'Login 2',
     description: 'Premium login form with gradient header, badge, social login, and security footer',
     category: 'auth',
+    isPremium: false,
     tags: ['login', 'auth', 'authentication', 'form', 'social', 'google', 'security', 'premium'],
     dependencies: [
       {
@@ -14603,6 +14675,7 @@ export default function Login2({
     name: 'Login 3',
     description: 'Tabbed login/signup form with social login, remember me, and terms checkbox',
     category: 'auth',
+    isPremium: true,
     tags: ['login', 'auth', 'authentication', 'signup', 'register', 'tabs', 'social', 'remember me'],
     dependencies: [
       {
@@ -15025,6 +15098,7 @@ export default function Login3({
     name: 'Login Split Screen',
     description: 'Login form with split-screen design - image/benefits on left, form on right. Modern and visual.',
     category: 'auth',
+    isPremium: true,
     tags: ['login', 'auth', 'split-screen', 'benefits', 'image', 'modern'],
     dependencies: [
       { name: 'button', command: 'npx shadcn@latest add button' },
@@ -15271,6 +15345,7 @@ export default function Login4({
     name: 'Signup with Features',
     description: 'Signup form with side-by-side layout - form on left, features and benefits on right. Includes trust indicators.',
     category: 'auth',
+    isPremium: false,
     tags: ['signup', 'register', 'auth', 'features', 'benefits', 'trial', 'two-column'],
     dependencies: [
       { name: 'button', command: 'npx shadcn@latest add button' },
@@ -15627,6 +15702,7 @@ export default function Signup2({
     name: 'Signup Minimal',
     description: 'Minimal centered signup form with social login options (Google, GitHub, Apple) and password requirements.',
     category: 'auth',
+    isPremium: true,
     tags: ['signup', 'register', 'auth', 'social', 'minimal', 'clean', 'centered'],
     dependencies: [
       { name: 'button', command: 'npx shadcn@latest add button' },
@@ -15866,6 +15942,7 @@ export default function Signup3({
     name: 'Signup Split Screen',
     description: 'Signup form with split-screen design - image/benefits on left, form on right. Includes security badge.',
     category: 'auth',
+    isPremium: true,
     tags: ['signup', 'register', 'auth', 'split-screen', 'benefits', 'image', 'visual'],
     dependencies: [
       { name: 'button', command: 'npx shadcn@latest add button' },
@@ -16170,6 +16247,7 @@ export default function Signup4({
     name: 'Signup with Progress Steps',
     description: 'Modern signup form with visual progress stepper, password strength indicator, and animated background. Features step-by-step guidance and feature highlights.',
     category: 'auth',
+    isPremium: true,
     tags: ['signup', 'register', 'auth', 'stepper', 'progress', 'animated', 'modern', 'password-strength'],
     dependencies: [],
     previewProps: {
@@ -16562,6 +16640,7 @@ export default function Signup5({
     name: 'Signup Dark Theme with Social Proof',
     description: 'Dark-themed signup form with neon gradients, user testimonials, stats showcase, and trust badges. Perfect for modern, conversion-focused landing pages.',
     category: 'auth',
+    isPremium: true,
     tags: ['signup', 'register', 'auth', 'dark', 'testimonials', 'social-proof', 'stats', 'modern', 'neon'],
     dependencies: [],
     previewProps: {
@@ -16946,6 +17025,7 @@ export default function Signup6({
     name: 'Signup with Plan Selection & Validation',
     description: 'Comprehensive signup form with inline plan selection cards, real-time email validation, password requirements checklist, and trust indicators. Perfect for SaaS onboarding.',
     category: 'auth',
+    isPremium: true,
     tags: ['signup', 'register', 'auth', 'plans', 'pricing', 'validation', 'wizard', 'saas', 'onboarding'],
     dependencies: [],
     previewProps: {
@@ -17331,6 +17411,7 @@ export default function Signup7({
     name: 'Footer with CTA and Badges',
     description: 'Comprehensive footer with integrated CTA section, newsletter signup, social links, and trust badges. Perfect for conversion-focused pages.',
     category: 'footer',
+    isPremium: true,
     tags: ['footer', 'cta', 'newsletter', 'badges', 'social', 'trust', 'certification'],
     dependencies: [],
     previewProps: {
@@ -17679,6 +17760,7 @@ export default function Footer5({
     name: 'Footer with Newsletter Focus',
     description: 'Clean footer with prominent newsletter signup section, comprehensive link grid, social links, and language selector. Minimalist and organized design.',
     category: 'footer',
+    isPremium: true,
     tags: ['footer', 'newsletter', 'subscription', 'social', 'links', 'language', 'minimal'],
     dependencies: [],
     previewProps: {
@@ -17980,6 +18062,7 @@ export default function Footer6({
     name: 'FAQ with Tabs and Resources',
     description: 'Modern FAQ section with tabbed categories, accordion questions, badge header, and helpful resources cards. Perfect for comprehensive support pages.',
     category: 'faq',
+    isPremium: true,
     tags: ['faq', 'questions', 'support', 'tabs', 'accordion', 'resources', 'help'],
     dependencies: [
       { name: 'tabs', command: 'npx shadcn@latest add tabs' },
@@ -18336,6 +18419,7 @@ export default function FAQ5({
     name: 'Testimonial with Stats and Metrics',
     description: 'Testimonials section with badge header, statistics cards, bento grid layout with featured testimonial, and individual impact metrics. Perfect for showcasing measurable results.',
     category: 'testimonial',
+    isPremium: true,
     tags: ['testimonial', 'reviews', 'stats', 'metrics', 'social-proof', 'bento', 'grid'],
     dependencies: [],
     previewProps: {
@@ -18643,6 +18727,7 @@ export default function Testimonial5({
     name: 'Features with Metrics',
     description: 'Feature grid with icons, descriptions, and metric badges. Includes gradient background, hover effects, and dual CTAs.',
     category: 'features',
+    isPremium: true,
     tags: ['features', 'metrics', 'grid', 'statistics', 'analytics', 'performance'],
     dependencies: [],
     previewProps: {
@@ -18893,6 +18978,7 @@ export default function Features5({
     name: 'Wall of Love Testimonials',
     description: 'Masonry-style testimonials grid with video testimonials, social proof badges, and stats. Features play buttons for video content and text/video mixed layout.',
     category: 'testimonial',
+    isPremium: true,
     tags: ['testimonial', 'video', 'social-proof', 'masonry', 'wall-of-love', 'reviews', 'twitter', 'linkedin'],
     dependencies: [],
     previewProps: {
@@ -19227,6 +19313,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     name: 'Testimonial Carousel Slider',
     description: 'Horizontal scrollable testimonials carousel with verified badges, company logos, impact metrics, and navigation arrows. Features gradient overlays and company logo strip.',
     category: 'testimonial',
+    isPremium: true,
     tags: ['testimonial', 'carousel', 'slider', 'verified', 'logos', 'impact', 'scroll', 'horizontal'],
     dependencies: [],
     previewProps: {
@@ -19506,6 +19593,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     name: 'Services with Pricing',
     description: 'Professional services showcase with feature lists, pricing, and popular badge. Includes gradient cards with hover effects and individual CTAs.',
     category: 'services',
+    isPremium: true,
     tags: ['services', 'pricing', 'features', 'professional', 'consultation', 'packages'],
     dependencies: [],
     previewProps: {
@@ -19798,6 +19886,7 @@ export default function Services5({
     name: 'Services Zigzag Layout',
     description: 'Unique zigzag layout with large gradient icon circles alternating left/right, detailed service descriptions, benefits list, and numbered badges. Perfect for process-oriented service showcases.',
     category: 'services',
+    isPremium: true,
     tags: ['services', 'process', 'methodology', 'zigzag', 'timeline', 'benefits', 'workflow'],
     dependencies: [],
     previewProps: {
@@ -20036,6 +20125,7 @@ export default function Services6({
     name: 'Services Magazine Layout',
     description: 'Magazine-style layout with image backgrounds, gradient overlays, and featured service card. Modern design with hover effects and call-to-actions on each card.',
     category: 'services',
+    isPremium: true,
     tags: ['services', 'magazine', 'images', 'featured', 'cards', 'visual', 'portfolio'],
     dependencies: [],
     previewProps: {
@@ -20284,6 +20374,7 @@ function ServiceCard({ service, large = false }: { service: Service; large?: boo
     name: 'Changelog Timeline',
     description: 'Vertical timeline changelog with release versions, dates, and categorized changes. Features color-coded badges for different change types and featured releases.',
     category: 'changelog',
+    isPremium: true,
     tags: ['changelog', 'timeline', 'updates', 'releases', 'versions', 'product'],
     dependencies: [],
     previewProps: {
@@ -20631,6 +20722,7 @@ export default function Changelog5({
     name: 'Footer with Newsletter',
     description: 'Comprehensive dark footer with brand section, newsletter subscription, contact info, 4-column links, and social media. Features modern design with dark background.',
     category: 'footer',
+    isPremium: true,
     tags: ['footer', 'newsletter', 'contact', 'social', 'dark', 'comprehensive'],
     dependencies: [],
     previewProps: {
@@ -20960,6 +21052,7 @@ export default function Footer7({
     name: 'Blog Post with Sidebar',
     description: 'Full blog post layout with cover image, author bio, tags, engagement actions (likes, comments, bookmark), share buttons sidebar, and related articles section.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'post', 'article', 'content', 'author', 'sidebar', 'share'],
     dependencies: [],
     previewProps: {
@@ -21226,6 +21319,7 @@ export default function BlogPost3({
     name: 'Blog Post with ToC',
     description: 'Long-form blog post with table of contents sidebar, key takeaways, stats bar, author bio, and next article suggestion. Perfect for technical articles and guides.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'post', 'article', 'toc', 'long-form', 'technical', 'guide'],
     dependencies: [],
     previewProps: {
@@ -21483,6 +21577,7 @@ export default function BlogPost4({
     name: 'Blog Post with Comments',
     description: 'Interactive blog post with sticky navigation bar, engagement metrics (views, likes, comments), social sharing, author bio, comments section, and related articles. Perfect for community-driven blogs.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'post', 'article', 'comments', 'social', 'engagement', 'community'],
     dependencies: [],
     previewProps: {
@@ -21733,6 +21828,7 @@ export default function BlogPost5({
     name: 'Blog with Search & Filter',
     description: 'Complete blog listing page with search bar, category filters, featured post, and grid layout. Includes pagination and category pills.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'search', 'filter', 'featured', 'grid', 'pagination', 'categories'],
     dependencies: [],
     previewProps: {
@@ -22093,6 +22189,7 @@ export default function Blog4({
     name: 'Blog with Trending & Stats',
     description: 'Modern blog listing with trending section, engagement metrics (views, likes, comments), bookmark buttons, and gradient CTA. Features masonry-style grid layout.',
     category: 'blog',
+    isPremium: true,
     tags: ['blog', 'trending', 'stats', 'engagement', 'masonry', 'social'],
     dependencies: [],
     previewProps: {
@@ -22466,6 +22563,7 @@ export default function Blog5({
     name: 'CTA with Stats & Image',
     description: 'Premium CTA section with gradient background, statistics showcase, trust indicators (star rating), floating info cards, and side image. Features two-column layout with decorative elements.',
     category: 'cta',
+    isPremium: true,
     tags: ['cta', 'call-to-action', 'stats', 'image', 'gradient', 'premium', 'conversion'],
     dependencies: [],
     previewProps: {
@@ -22638,6 +22736,7 @@ export default function CTA6({
     name: 'CTA with Pattern Background',
     description: 'Bold CTA with gradient primary background, SVG pattern overlay, user avatars showcase, feature grid with icons, and glassmorphism effects. Perfect for high-conversion landing pages.',
     category: 'cta',
+    isPremium: true,
     tags: ['cta', 'call-to-action', 'gradient', 'pattern', 'avatars', 'glassmorphism', 'bold'],
     dependencies: [],
     previewProps: {
@@ -22809,6 +22908,7 @@ export default function CTA7({
     name: 'Login with Gradient Header',
     description: 'Modern login form with gradient header, trust badge, email/password fields, remember me checkbox, forgot password link, social login buttons (Google, GitHub, Apple), and sign up link. Features gradient button and shadow effects.',
     category: 'auth',
+    isPremium: true,
     tags: ['login', 'auth', 'authentication', 'form', 'social-login', 'signin'],
     dependencies: [],
     previewProps: {
@@ -23044,6 +23144,7 @@ export default function Login5({
     name: 'Login with 3D Card & Recent Users',
     description: 'Modern login form with 3D floating card effect, parallax background orbs, quick stats showcase, recent users list with avatars, and security indicators. Perfect for premium applications.',
     category: 'auth',
+    isPremium: true,
     tags: ['login', 'auth', 'authentication', 'form', '3d', 'modern', 'premium', 'recent-users'],
     dependencies: [],
     previewProps: {
@@ -23391,6 +23492,7 @@ export default function Login6({
     name: 'Login with QR Code & Biometric',
     description: 'Advanced multi-method authentication page with traditional email/password login, QR code scanning option, biometric authentication, and session timeout timer. Perfect for enterprise applications requiring multiple authentication methods.',
     category: 'auth',
+    isPremium: true,
     tags: ['login', 'auth', 'authentication', 'form', 'qr-code', 'biometric', 'multi-factor', 'enterprise', 'security'],
     dependencies: [],
     previewProps: {
@@ -23681,4 +23783,18 @@ export const searchBlocks = (query: string): BlockMetadata[] => {
     block.description.toLowerCase().includes(lowerQuery) ||
     block.tags.some(tag => tag.toLowerCase().includes(lowerQuery))
   );
+};
+
+// Premium/Free block helpers
+export const getFreeBlocks = (): BlockMetadata[] => {
+  return blocksRegistry.filter(b => !b.isPremium);
+};
+
+export const getPremiumBlocks = (): BlockMetadata[] => {
+  return blocksRegistry.filter(b => b.isPremium);
+};
+
+export const isBlockPremium = (blockId: string): boolean => {
+  const block = blocksRegistry.find(b => b.id === blockId);
+  return block?.isPremium || false;
 };
