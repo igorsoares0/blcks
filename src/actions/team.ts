@@ -450,6 +450,83 @@ export async function getMyTeamLicense() {
   }
 }
 
+// Get team membership info if user is a member (not owner)
+export async function getMyTeamMembership() {
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return { success: false, error: 'Unauthorized' };
+    }
+
+    const membership = await db.teamMember.findFirst({
+      where: {
+        userId: session.user.id,
+        status: 'active',
+      },
+      include: {
+        license: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                email: true,
+              },
+            },
+            teamMembers: {
+              where: {
+                status: 'active',
+              },
+              include: {
+                user: {
+                  select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!membership || membership.license.status !== 'active') {
+      return { success: false, error: 'No active team membership found' };
+    }
+
+    return {
+      success: true,
+      membership: {
+        id: membership.id,
+        role: membership.role,
+        joinedAt: membership.joinedAt,
+        teamOwner: {
+          name: membership.license.user.name,
+          email: membership.license.user.email,
+        },
+        license: {
+          id: membership.license.id,
+          type: membership.license.type,
+          teamSeats: membership.license.teamSeats,
+          purchasedAt: membership.license.purchasedAt,
+        },
+        teamMembers: membership.license.teamMembers.map((m) => ({
+          id: m.id,
+          email: m.user?.email || m.invitedEmail,
+          name: m.user?.name,
+          isMe: m.userId === session.user.id,
+        })),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching team membership:', error);
+    return { success: false, error: 'Failed to fetch team membership' };
+  }
+}
+
 function generateInviteEmail(
   inviterName: string,
   inviteeEmail: string,
