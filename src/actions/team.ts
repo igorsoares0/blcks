@@ -80,7 +80,8 @@ export async function inviteTeamMember(email: string) {
 
     // Send invite email
     const appUrl = process.env.APP_URL || 'http://localhost:3000';
-    const inviteUrl = `${appUrl}/team/accept-invite?token=${inviteToken}`;
+    const signupUrl = `${appUrl}/auth/signup?inviteEmail=${encodeURIComponent(email)}&inviteToken=${inviteToken}`;
+    const acceptUrl = `${appUrl}/team/accept-invite?token=${inviteToken}`;
 
     await sendEmail({
       to: email,
@@ -88,7 +89,8 @@ export async function inviteTeamMember(email: string) {
       html: generateInviteEmail(
         session.user.name || session.user.email || 'A team member',
         email,
-        inviteUrl,
+        signupUrl,
+        acceptUrl,
         expiresAt
       ),
     });
@@ -293,6 +295,102 @@ export async function acceptInvite(token: string) {
   }
 }
 
+// Auto-accept pending invites for a user (used after signup/login)
+export async function autoAcceptPendingInvites(userId: string, userEmail: string) {
+  try {
+    // Find all pending invites for this email
+    const pendingInvites = await db.teamMember.findMany({
+      where: {
+        invitedEmail: userEmail.toLowerCase().trim(),
+        status: 'invited',
+        inviteExpiresAt: {
+          gte: new Date(), // Not expired
+        },
+      },
+      include: {
+        license: {
+          include: {
+            user: true,
+          },
+        },
+      },
+    });
+
+    if (pendingInvites.length === 0) {
+      return { success: true, accepted: 0 };
+    }
+
+    let acceptedCount = 0;
+    const ownerNames: string[] = [];
+
+    for (const invite of pendingInvites) {
+      // Check if license is still active
+      if (invite.license.status !== 'active') {
+        continue;
+      }
+
+      // Check if team is not full
+      const activeMembers = await db.teamMember.count({
+        where: {
+          licenseId: invite.licenseId,
+          status: 'active',
+        },
+      });
+
+      if (activeMembers >= invite.license.teamSeats) {
+        continue;
+      }
+
+      // Accept the invite
+      await db.teamMember.update({
+        where: { id: invite.id },
+        data: {
+          userId,
+          status: 'active',
+          joinedAt: new Date(),
+          inviteToken: null,
+          inviteExpiresAt: null,
+        },
+      });
+
+      acceptedCount++;
+      if (invite.license.user.name) {
+        ownerNames.push(invite.license.user.name);
+      }
+
+      // Send confirmation email to owner
+      await sendEmail({
+        to: invite.license.user.email!,
+        subject: `${userEmail} joined your Blcks team`,
+        html: generateAcceptedEmail(
+          invite.license.user.name || 'there',
+          userEmail
+        ),
+      });
+    }
+
+    // Update user cache if any invites were accepted
+    if (acceptedCount > 0) {
+      await db.user.update({
+        where: { id: userId },
+        data: {
+          hasActiveLicense: true,
+          licenseType: 'team',
+        },
+      });
+    }
+
+    return {
+      success: true,
+      accepted: acceptedCount,
+      ownerNames,
+    };
+  } catch (error) {
+    console.error('Error auto-accepting invites:', error);
+    return { success: false, accepted: 0, error: 'Failed to accept invites' };
+  }
+}
+
 export async function getMyTeamLicense() {
   try {
     const session = await auth();
@@ -355,7 +453,8 @@ export async function getMyTeamLicense() {
 function generateInviteEmail(
   inviterName: string,
   inviteeEmail: string,
-  inviteUrl: string,
+  signupUrl: string,
+  acceptUrl: string,
   expiresAt: Date
 ): string {
   const expiryDate = expiresAt.toLocaleDateString('en-US', {
@@ -416,12 +515,20 @@ function generateInviteEmail(
                 </tr>
               </table>
 
-              <!-- CTA Button -->
+              <!-- CTA Buttons -->
               <table role="presentation" style="margin: 30px 0;" width="100%" cellspacing="0" cellpadding="0" border="0">
                 <tr>
                   <td style="text-align: center;">
-                    <a href="${inviteUrl}" style="display: inline-block; padding: 14px 32px; background-color: #667eea; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">
-                      Accept Invite
+                    <a href="${signupUrl}" style="display: inline-block; padding: 14px 32px; background-color: #667eea; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px; margin-bottom: 12px;">
+                      Create Account & Join Team
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="text-align: center; padding-top: 8px;">
+                    <p style="margin: 0 0 8px; color: #6b7280; font-size: 14px;">Already have an account?</p>
+                    <a href="${acceptUrl}" style="display: inline-block; padding: 12px 28px; background-color: transparent; color: #667eea; text-decoration: none; border: 2px solid #667eea; border-radius: 6px; font-weight: 600; font-size: 14px;">
+                      Log In & Accept Invite
                     </a>
                   </td>
                 </tr>

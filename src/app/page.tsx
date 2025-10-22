@@ -1,21 +1,35 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import { useSearchParams } from 'next/navigation';
 import { blocksRegistry, getAllCategories } from '@/lib/blocks-registry';
 import { BlockCard } from '@/components/block-card';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Search, Blocks, User, Sparkles } from 'lucide-react';
+import { Search, Blocks, User, Sparkles, CheckCircle2, X } from 'lucide-react';
 import Link from 'next/link';
 import { useLicense } from '@/hooks/use-license';
 
 export default function Home() {
   const { data: session, status } = useSession();
   const { hasLicense } = useLicense();
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [showInviteToast, setShowInviteToast] = useState(false);
+
+  // Check if user just logged in after accepting invite
+  useEffect(() => {
+    const inviteAccepted = searchParams.get('inviteAccepted');
+    if (inviteAccepted === 'true' && status === 'authenticated') {
+      setShowInviteToast(true);
+      // Auto-hide after 10 seconds
+      const timer = setTimeout(() => setShowInviteToast(false), 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [searchParams, status]);
 
   const categories = getAllCategories();
 
@@ -32,6 +46,31 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Toast notification for auto-accepted invite */}
+      {showInviteToast && (
+        <div className="fixed top-4 right-4 z-50 max-w-md animate-in slide-in-from-top-5">
+          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 shadow-lg">
+            <div className="flex items-start gap-3">
+              <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <h3 className="font-semibold text-green-900 dark:text-green-100 mb-1">
+                  Welcome to the Team! 🎉
+                </h3>
+                <p className="text-sm text-green-800 dark:text-green-200">
+                  Your team invite has been automatically accepted. You now have access to all premium blocks!
+                </p>
+              </div>
+              <button
+                onClick={() => setShowInviteToast(false)}
+                className="text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 py-6">

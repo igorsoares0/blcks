@@ -7,10 +7,16 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-export function SignupForm() {
+interface SignupFormProps {
+  inviteEmail?: string | null;
+  inviteToken?: string | null;
+}
+
+export function SignupForm({ inviteEmail, inviteToken }: SignupFormProps) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const isInvite = inviteEmail && inviteToken;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,7 +38,12 @@ export function SignupForm() {
     if (result.error) {
       setError(result.error);
       setLoading(false);
+    } else if (result.inviteAccepted) {
+      // Invite was auto-accepted, redirect to login with success message
+      const ownerNames = result.ownerNames?.join(', ') || 'the team';
+      router.push(`/auth/login?inviteAccepted=true&ownerNames=${encodeURIComponent(ownerNames)}`);
     } else {
+      // Normal signup, go to email verification
       router.push('/auth/verify-email?sent=true');
     }
   }
@@ -72,8 +83,21 @@ export function SignupForm() {
           required
           maxLength={254}
           disabled={loading}
+          defaultValue={inviteEmail || ''}
+          readOnly={isInvite}
+          className={isInvite ? 'bg-gray-50 dark:bg-gray-900 cursor-not-allowed' : ''}
         />
+        {isInvite && (
+          <p className="text-xs text-blue-600 dark:text-blue-400">
+            This email is from your team invite and cannot be changed
+          </p>
+        )}
       </div>
+
+      {/* Hidden field for invite token */}
+      {inviteToken && (
+        <input type="hidden" name="inviteToken" value={inviteToken} />
+      )}
 
       <div className="space-y-2">
         <label htmlFor="password" className="text-sm font-medium">

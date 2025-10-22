@@ -35,6 +35,10 @@ export function LoginForm() {
         setNeedsVerification(true);
       }
       setLoading(false);
+    } else if (result.inviteAccepted) {
+      // Redirect to homepage with notification
+      router.push('/?inviteAccepted=true');
+      router.refresh();
     } else {
       router.push('/dashboard');
       router.refresh();

@@ -7,6 +7,7 @@ import { isValidEmail, isValidName, isValidPassword, sanitizeString } from '@/li
 import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from '@/lib/rate-limit';
 import { headers } from 'next/headers';
 import crypto from 'crypto';
+import { autoAcceptPendingInvites } from './team';
 
 export async function signup(formData: FormData) {
   // Rate limiting
@@ -29,6 +30,7 @@ export async function signup(formData: FormData) {
   const rawName = formData.get('name') as string;
   const rawEmail = formData.get('email') as string;
   const password = formData.get('password') as string;
+  const inviteToken = formData.get('inviteToken') as string | null;
 
   // Validate input
   if (!rawName || !rawEmail || !password) {
@@ -63,39 +65,71 @@ export async function signup(formData: FormData) {
     return { error: 'Email already registered' };
   }
 
+  // Check if signup is from a valid team invite
+  let isValidInvite = false;
+  if (inviteToken) {
+    const invite = await db.teamMember.findFirst({
+      where: {
+        inviteToken,
+        invitedEmail: email.toLowerCase().trim(),
+        status: 'invited',
+        inviteExpiresAt: {
+          gte: new Date(),
+        },
+      },
+    });
+    isValidInvite = !!invite;
+  }
+
   // Hash password
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  // Create user
+  // Create user (auto-verify if from valid invite)
   const user = await db.user.create({
     data: {
       name,
       email,
       password: hashedPassword,
+      emailVerified: isValidInvite ? new Date() : null,
     },
   });
 
-  // Generate verification token
-  const token = crypto.randomUUID();
-  const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+  if (isValidInvite) {
+    // Auto-accept the invite
+    const acceptResult = await autoAcceptPendingInvites(user.id, email);
 
-  await db.verificationToken.create({
-    data: {
-      email,
-      token,
-      expires,
-    },
-  });
+    console.log('Auto-accepted invites after signup:', acceptResult);
 
-  // Send verification email
-  const emailResult = await sendVerificationEmail(email, token);
+    return {
+      success: true,
+      autoVerified: true,
+      inviteAccepted: true,
+      message: 'Account created and team invite accepted! You can now log in.',
+      ownerNames: acceptResult.ownerNames,
+    };
+  } else {
+    // Regular signup flow - send verification email
+    const token = crypto.randomUUID();
+    const expires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
 
-  if (!emailResult.success) {
-    // If email fails, delete the user and token
-    await db.user.delete({ where: { id: user.id } });
-    await db.verificationToken.delete({ where: { token } });
-    return { error: 'Error sending verification email. Please try again.' };
+    await db.verificationToken.create({
+      data: {
+        email,
+        token,
+        expires,
+      },
+    });
+
+    // Send verification email
+    const emailResult = await sendVerificationEmail(email, token);
+
+    if (!emailResult.success) {
+      // If email fails, delete the user and token
+      await db.user.delete({ where: { id: user.id } });
+      await db.verificationToken.delete({ where: { token } });
+      return { error: 'Error sending verification email. Please try again.' };
+    }
+
+    return { success: true, message: 'Account created! Please check your email to verify your account.' };
   }
-
-  return { success: true, message: 'Account created! Please check your email to verify your account.' };
 }

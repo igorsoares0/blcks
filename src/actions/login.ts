@@ -1,10 +1,11 @@
 'use server';
 
-import { signIn } from '@/lib/auth';
+import { signIn, auth } from '@/lib/auth';
 import { AuthError } from 'next-auth';
 import { isValidEmail, sanitizeString } from '@/lib/validation';
 import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from '@/lib/rate-limit';
 import { headers } from 'next/headers';
+import { autoAcceptPendingInvites } from './team';
 
 export async function login(formData: FormData) {
   // Rate limiting
@@ -44,6 +45,21 @@ export async function login(formData: FormData) {
       password,
       redirect: false,
     });
+
+    // After successful login, check for pending invites
+    const session = await auth();
+    if (session?.user?.id && session?.user?.email) {
+      const acceptResult = await autoAcceptPendingInvites(session.user.id, session.user.email);
+
+      if (acceptResult.accepted && acceptResult.accepted > 0) {
+        console.log(`Auto-accepted ${acceptResult.accepted} team invite(s) after login`);
+        return {
+          success: true,
+          inviteAccepted: true,
+          inviteCount: acceptResult.accepted
+        };
+      }
+    }
 
     return { success: true };
   } catch (error) {
