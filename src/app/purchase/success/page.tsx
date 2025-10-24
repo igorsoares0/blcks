@@ -25,8 +25,14 @@ export default function PurchaseSuccessPage() {
       return;
     }
 
+    let attempts = 0;
+    const MAX_ATTEMPTS = 10; // Max 30 seconds (10 attempts * 3 seconds)
+    let timeoutId: NodeJS.Timeout;
+
     async function verifyPayment() {
       try {
+        attempts++;
+
         const response = await fetch(`/api/checkout/verify-session?session_id=${sessionId}`);
         const data = await response.json();
 
@@ -47,22 +53,45 @@ export default function PurchaseSuccessPage() {
           }
         } else if (data.status === 'paid' && !data.licenseCreated) {
           // Payment successful but license not created yet (webhook processing)
-          setMessage('Payment successful! Activating your license...');
+          if (attempts >= MAX_ATTEMPTS) {
+            // Timed out, but payment was successful - show success anyway
+            setStatus('success');
+            setMessage('Purchase successful! Your license will be activated shortly.');
+            setPlanType(data.plan);
 
-          // Retry after a delay
-          setTimeout(verifyPayment, 3000);
+            if (update) {
+              await update();
+            }
+          } else {
+            setMessage(`Payment successful! Activating your license... (${attempts}/${MAX_ATTEMPTS})`);
+            // Retry after a delay
+            timeoutId = setTimeout(verifyPayment, 3000);
+          }
         } else {
           setStatus('error');
           setMessage('Payment was not completed');
         }
       } catch (error) {
         console.error('Verification error:', error);
-        setStatus('error');
-        setMessage('Failed to verify purchase. Please contact support.');
+
+        if (attempts >= MAX_ATTEMPTS) {
+          setStatus('error');
+          setMessage('Failed to verify purchase. Please contact support with your session ID.');
+        } else {
+          // Retry on network error
+          timeoutId = setTimeout(verifyPayment, 3000);
+        }
       }
     }
 
     verifyPayment();
+
+    // Cleanup timeout on unmount
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [sessionId, update]);
 
   return (
