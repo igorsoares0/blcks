@@ -71,7 +71,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   }
 
   try {
-    // Check if license already exists
+    // Check if license already exists for this session (prevent duplicate processing)
     const existingLicense = await db.license.findFirst({
       where: { stripePaymentId: session.id },
     });
@@ -84,9 +84,19 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     // Determine team seats
     const teamSeats = plan === 'team' ? 5 : 1;
 
-    // Create license
-    const license = await db.license.create({
-      data: {
+    // Upsert license (update if user already has one, create if not)
+    const license = await db.license.upsert({
+      where: { userId },
+      update: {
+        type: plan,
+        stripePaymentId: session.id,
+        stripeCustomerId: session.customer as string,
+        status: 'active',
+        teamSeats,
+        expiresAt: null, // lifetime
+        purchasedAt: new Date(),
+      },
+      create: {
         userId,
         type: plan,
         stripePaymentId: session.id,
