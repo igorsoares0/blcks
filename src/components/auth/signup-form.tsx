@@ -38,13 +38,17 @@ export function SignupForm({ inviteEmail, inviteToken }: SignupFormProps) {
     if (result.error) {
       setError(result.error);
       setLoading(false);
-    } else if (result.inviteAccepted) {
-      // Invite was auto-accepted, redirect to login with success message
-      const ownerNames = result.ownerNames?.join(', ') || 'the team';
-      router.push(`/auth/login?inviteAccepted=true&ownerNames=${encodeURIComponent(ownerNames)}`);
     } else {
-      // Normal signup, go to email verification
-      router.push('/auth/verify-email?sent=true');
+      // Use window.location for reliable navigation after successful signup
+      if (result.inviteAccepted) {
+        // Invite was auto-accepted, redirect to login with success message
+        const ownerNames = result.ownerNames?.join(', ') || 'the team';
+        window.location.href = `/auth/login?inviteAccepted=true&ownerNames=${encodeURIComponent(ownerNames)}`;
+      } else {
+        // Normal signup, go to email verification
+        window.location.href = '/auth/verify-email?sent=true';
+      }
+      // Keep loading state true since page will navigate
     }
   }
 

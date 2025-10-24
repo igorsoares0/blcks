@@ -37,7 +37,9 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
       setError(result.error);
       setLoading(false);
     } else {
-      router.push('/auth/login?reset=success');
+      // Use window.location for reliable navigation after successful password reset
+      window.location.href = '/auth/login?reset=success';
+      // Keep loading state true since page will navigate
     }
   }
 

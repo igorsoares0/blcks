@@ -35,13 +35,14 @@ export function LoginForm() {
         setNeedsVerification(true);
       }
       setLoading(false);
-    } else if (result.inviteAccepted) {
-      // Redirect to homepage with notification
-      router.push('/?inviteAccepted=true');
-      router.refresh();
     } else {
-      router.push('/dashboard');
-      router.refresh();
+      // Use window.location for reliable navigation after successful login
+      if (result.inviteAccepted) {
+        window.location.href = '/?inviteAccepted=true';
+      } else {
+        window.location.href = '/dashboard';
+      }
+      // Keep loading state true since page will navigate
     }
   }
 
