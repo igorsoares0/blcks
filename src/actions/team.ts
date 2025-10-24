@@ -450,6 +450,42 @@ export async function getMyTeamLicense() {
   }
 }
 
+// Get individual license info
+export async function getMyIndividualLicense() {
+  try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      return { success: false, error: 'Unauthorized' };
+    }
+
+    const license = await db.license.findFirst({
+      where: {
+        userId: session.user.id,
+        type: 'individual',
+        status: 'active',
+      },
+    });
+
+    if (!license) {
+      return { success: false, error: 'No individual license found' };
+    }
+
+    return {
+      success: true,
+      license: {
+        id: license.id,
+        type: license.type,
+        status: license.status,
+        purchasedAt: license.purchasedAt,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching individual license:', error);
+    return { success: false, error: 'Failed to fetch individual license' };
+  }
+}
+
 // Get team membership info if user is a member (not owner)
 export async function getMyTeamMembership() {
   try {
