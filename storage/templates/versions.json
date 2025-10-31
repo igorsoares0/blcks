@@ -1,0 +1,14 @@
+{
+  "dashboard": {
+    "version": "1.0.0",
+    "updated": "2025-01-28",
+    "changelog": "Initial release - Complete admin dashboard with authentication, charts, and tables",
+    "filename": "dashboard.zip"
+  },
+  "landing": {
+    "version": "1.0.0",
+    "updated": "2025-01-28",
+    "changelog": "Initial release - High-converting SaaS landing page with 15+ sections",
+    "filename": "landing.zip"
+  }
+}

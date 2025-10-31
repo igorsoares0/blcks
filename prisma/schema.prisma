@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // License fields (cache for performance)
+  hasActiveLicense Boolean @default(false)
+  licenseType      String  @default("none") // "none" | "individual" | "team"
+
+  accounts     Account[]
+  sessions     Session[]
+  ownedLicense License?       @relation("LicenseOwner")
+  teamMemberships TeamMember[]
+
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, token])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, token])
+}
+
+model License {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  type             String   // "individual" | "team"
+  stripePaymentId  String   @unique
+  stripeCustomerId String?
+  status           String   @default("active") // "active" | "cancelled" | "expired"
+  teamSeats        Int      @default(1) // 1 for individual, 5 for team
+  purchasedAt      DateTime @default(now())
+  expiresAt        DateTime? // null = lifetime
+
+  user        User         @relation("LicenseOwner", fields: [userId], references: [id], onDelete: Cascade)
+  teamMembers TeamMember[]
+
+  @@index([userId])
+  @@index([stripePaymentId])
+  @@index([status])
+}
+
+model TeamMember {
+  id               String    @id @default(cuid())
+  licenseId        String
+  userId           String?
+  invitedEmail     String
+  role             String    @default("member") // "owner" | "member"
+  status           String    @default("invited") // "invited" | "active" | "removed"
+  invitedAt        DateTime  @default(now())
+  joinedAt         DateTime?
+  inviteToken      String?   @unique
+  inviteExpiresAt  DateTime?
+
+  license License @relation(fields: [licenseId], references: [id], onDelete: Cascade)
+  user    User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([licenseId])
+  @@index([userId])
+  @@index([invitedEmail])
+  @@index([inviteToken])
+  @@unique([licenseId, invitedEmail])
+}
+
+model TemplatePurchase {
+  id                    String   @id @default(cuid())
+  userId                String
+  templateId            String   // "dashboard" | "landing"
+  stripePaymentIntentId String   @unique
+  purchasedAt           DateTime @default(now())
+
+  @@index([userId])
+  @@index([templateId])
+  @@unique([userId, templateId])
+}
