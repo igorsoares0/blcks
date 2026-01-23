@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Check, ArrowLeft, Loader2, ExternalLink, Layout, LayoutDashboard, Download } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Check, ArrowLeft, Loader2, ExternalLink, Layout, LayoutDashboard, Github, X, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useLicense } from '@/hooks/use-license';
 import { useSession } from 'next-auth/react';
@@ -68,13 +69,35 @@ const templates: Template[] = [
   },
 ];
 
+interface InviteModalState {
+  isOpen: boolean;
+  templateId: string | null;
+  templateName: string;
+}
+
+interface InviteResult {
+  success: boolean;
+  message: string;
+  repoUrl?: string;
+}
+
 export default function TemplatesPage() {
-  const { hasLicense, licenseType } = useLicense();
+  const { hasLicense } = useLicense();
   const { data: session } = useSession();
   const router = useRouter();
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [templateAccess, setTemplateAccess] = useState<Record<string, { hasAccess: boolean; reason?: string }>>({});
   const [checkingAccess, setCheckingAccess] = useState(true);
+
+  // GitHub invite modal state
+  const [inviteModal, setInviteModal] = useState<InviteModalState>({
+    isOpen: false,
+    templateId: null,
+    templateName: '',
+  });
+  const [githubUsername, setGithubUsername] = useState('');
+  const [inviteLoading, setInviteLoading] = useState(false);
+  const [inviteResult, setInviteResult] = useState<InviteResult | null>(null);
 
   // Check access for each template
   useEffect(() => {
@@ -108,58 +131,60 @@ export default function TemplatesPage() {
     checkAccess();
   }, [session]);
 
-  const handleDownload = async (templateId: string) => {
-    try {
-      setCheckoutLoading(templateId);
+  const openInviteModal = (templateId: string, templateName: string) => {
+    setInviteModal({ isOpen: true, templateId, templateName });
+    setGithubUsername('');
+    setInviteResult(null);
+  };
 
-      console.log('Starting download for template:', templateId);
-      const response = await fetch(`/api/templates/download/${templateId}`, {
-        method: 'GET',
+  const closeInviteModal = () => {
+    setInviteModal({ isOpen: false, templateId: null, templateName: '' });
+    setGithubUsername('');
+    setInviteResult(null);
+  };
+
+  const handleInvite = async () => {
+    if (!inviteModal.templateId || !githubUsername.trim()) return;
+
+    try {
+      setInviteLoading(true);
+      setInviteResult(null);
+
+      const response = await fetch(`/api/templates/invite/${inviteModal.templateId}`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ githubUsername: githubUsername.trim() }),
       });
 
-      console.log('Response status:', response.status);
-      console.log('Response headers:', Object.fromEntries(response.headers.entries()));
+      const data = await response.json();
 
       if (!response.ok) {
-        let errorMessage = 'Failed to download template';
-        try {
-          const data = await response.json();
-          errorMessage = data.error || errorMessage;
-        } catch (e) {
-          errorMessage = `Server error: ${response.status} ${response.statusText}`;
-        }
-        throw new Error(errorMessage);
+        setInviteResult({
+          success: false,
+          message: data.error || 'Failed to send invitation',
+        });
+        return;
       }
 
-      // Create a blob from the response
-      console.log('Creating blob from response...');
-      const blob = await response.blob();
-      console.log('Blob size:', blob.size, 'bytes');
-
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${templateId}-template.zip`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(a);
-
-      console.log('Download completed successfully');
+      setInviteResult({
+        success: true,
+        message: data.message,
+        repoUrl: data.repoUrl,
+      });
     } catch (error) {
-      console.error('Download error:', error);
-      const message = error instanceof Error ? error.message : 'Failed to download template. Please try again.';
-      alert(message);
+      console.error('Invite error:', error);
+      setInviteResult({
+        success: false,
+        message: 'Failed to send invitation. Please try again.',
+      });
     } finally {
-      setCheckoutLoading(null);
+      setInviteLoading(false);
     }
   };
 
   const handlePurchase = async (templateId: string) => {
-    // Check if user is logged in
     if (!session) {
       router.push('/auth/login?callbackUrl=/templates');
       return;
@@ -182,7 +207,6 @@ export default function TemplatesPage() {
         throw new Error(data.error || 'Failed to create checkout session');
       }
 
-      // Redirect to Stripe Checkout
       if (data.url) {
         window.location.href = data.url;
       }
@@ -195,6 +219,127 @@ export default function TemplatesPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* GitHub Username Modal */}
+      {inviteModal.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={closeInviteModal}
+          />
+          <div className="relative bg-background border rounded-lg shadow-xl w-full max-w-md mx-4 p-6">
+            <button
+              onClick={closeInviteModal}
+              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {inviteResult?.success ? (
+              // Success state
+              <div className="text-center py-4">
+                <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Invitation Sent!</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  {inviteResult.message}
+                </p>
+                {inviteResult.repoUrl && (
+                  <Button asChild className="mt-2">
+                    <a href={inviteResult.repoUrl} target="_blank" rel="noopener noreferrer">
+                      <Github className="h-4 w-4 mr-2" />
+                      Open Repository
+                    </a>
+                  </Button>
+                )}
+                <Button variant="outline" onClick={closeInviteModal} className="mt-4 ml-2">
+                  Close
+                </Button>
+              </div>
+            ) : (
+              // Form state
+              <>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                    <Github className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold">Get Repository Access</h3>
+                    <p className="text-sm text-gray-500">{inviteModal.templateName}</p>
+                  </div>
+                </div>
+
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                  Enter your GitHub username to receive an invitation to the private repository.
+                  You'll get an email from GitHub to accept the invitation.
+                </p>
+
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="github-username" className="block text-sm font-medium mb-2">
+                      GitHub Username
+                    </label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">@</span>
+                      <Input
+                        id="github-username"
+                        type="text"
+                        placeholder="username"
+                        value={githubUsername}
+                        onChange={(e) => setGithubUsername(e.target.value)}
+                        className="pl-8"
+                        disabled={inviteLoading}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' && githubUsername.trim()) {
+                            handleInvite();
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {inviteResult && !inviteResult.success && (
+                    <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                      <p className="text-sm text-red-600 dark:text-red-400">
+                        {inviteResult.message}
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="flex gap-3">
+                    <Button
+                      variant="outline"
+                      onClick={closeInviteModal}
+                      className="flex-1"
+                      disabled={inviteLoading}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={handleInvite}
+                      className="flex-1"
+                      disabled={!githubUsername.trim() || inviteLoading}
+                    >
+                      {inviteLoading ? (
+                        <>
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Github className="h-4 w-4 mr-2" />
+                          Send Invite
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-6 md:px-8 lg:px-12 py-6">
@@ -226,7 +371,7 @@ export default function TemplatesPage() {
           <div className="max-w-5xl mx-auto mb-12">
             <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4 text-center">
               <p className="text-green-800 dark:text-green-200 font-medium">
-                ✓ You have an active license! Templates are available at special member pricing.
+                You have an active license! Templates are included - just enter your GitHub username to get access.
               </p>
             </div>
           </div>
@@ -235,8 +380,6 @@ export default function TemplatesPage() {
         {/* Templates Grid */}
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {templates.map((template) => {
-            const Icon = template.icon;
-
             return (
               <Card
                 key={template.id}
@@ -301,20 +444,10 @@ export default function TemplatesPage() {
                       <Button
                         size="lg"
                         className="flex-1 gap-2"
-                        onClick={() => handleDownload(template.id)}
-                        disabled={checkoutLoading !== null}
+                        onClick={() => openInviteModal(template.id, template.name)}
                       >
-                        {checkoutLoading === template.id ? (
-                          <>
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                            Downloading...
-                          </>
-                        ) : (
-                          <>
-                            <Download className="h-4 w-4" />
-                            Download Template
-                          </>
-                        )}
+                        <Github className="h-4 w-4" />
+                        Get Access
                       </Button>
                     ) : (
                       <Button
@@ -413,9 +546,9 @@ export default function TemplatesPage() {
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-semibold mb-2">What do I get after purchase?</h3>
+              <h3 className="text-lg font-semibold mb-2">How do I access the template after purchase?</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                You'll get instant access to download the complete source code, documentation, and all assets. Plus lifetime updates.
+                After purchase, click "Get Access" and enter your GitHub username. You'll receive an invitation to the private repository with full source code and documentation.
               </p>
             </div>
           </div>
