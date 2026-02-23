@@ -1,10 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CodeBlock } from './code-block';
 import { Card } from '@/components/ui/card';
 import { BlockMetadata } from '@/lib/blocks-registry';
 import { PremiumGate } from './premium-gate';
+import { ThemeSelector } from './theme-selector';
+import { themes, type Theme } from '@/lib/themes';
 
 interface BlockPreviewProps {
   block: BlockMetadata;
@@ -12,16 +15,21 @@ interface BlockPreviewProps {
 }
 
 export function BlockPreview({ block, children }: BlockPreviewProps) {
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(themes[0]);
+
   // Different layouts based on block category
   const isNavbar = block.category === 'navbar';
   const previewClasses = isNavbar
     ? "w-full min-h-[200px] bg-gray-50 dark:bg-gray-950"
     : "w-full min-h-[400px] flex items-center justify-center bg-gray-50 dark:bg-gray-950";
 
+  // Build CSS variable overrides for the selected theme
+  const themeStyles: Record<string, string> = selectedTheme.colors;
+
   return (
     <Card className="overflow-hidden">
       <Tabs defaultValue="preview" className="w-full">
-        <div className="border-b border-gray-200 dark:border-gray-800 px-4">
+        <div className="border-b border-gray-200 dark:border-gray-800 px-4 flex items-center justify-between">
           <TabsList className="w-full justify-start border-none bg-transparent p-0">
             <TabsTrigger
               value="preview"
@@ -42,11 +50,15 @@ export function BlockPreview({ block, children }: BlockPreviewProps) {
               Dependencies
             </TabsTrigger>
           </TabsList>
+          <ThemeSelector
+            currentTheme={selectedTheme}
+            onThemeChange={setSelectedTheme}
+          />
         </div>
 
         <TabsContent value="preview" className="p-0 m-0">
           <PremiumGate isPremium={block.isPremium} blockName={block.name}>
-            <div className={previewClasses}>
+            <div style={themeStyles} className={previewClasses}>
               {children}
             </div>
           </PremiumGate>
