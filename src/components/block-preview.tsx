@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CodeBlock } from './code-block';
 import { Card } from '@/components/ui/card';
@@ -8,6 +8,15 @@ import { BlockMetadata } from '@/lib/blocks-registry';
 import { PremiumGate } from './premium-gate';
 import { ThemeSelector } from './theme-selector';
 import { themes, type Theme } from '@/lib/themes';
+import { Monitor, Tablet, Smartphone } from 'lucide-react';
+
+type ViewportSize = 'desktop' | 'tablet' | 'mobile';
+
+const viewportConfig: Record<ViewportSize, { width: number; label: string }> = {
+  desktop: { width: 1280, label: 'Desktop' },
+  tablet: { width: 768, label: 'Tablet' },
+  mobile: { width: 375, label: 'Mobile' },
+};
 
 interface BlockPreviewProps {
   block: BlockMetadata;
@@ -16,15 +25,55 @@ interface BlockPreviewProps {
 
 export function BlockPreview({ block, children }: BlockPreviewProps) {
   const [selectedTheme, setSelectedTheme] = useState<Theme>(themes[0]);
+  const [viewport, setViewport] = useState<ViewportSize>('desktop');
+  const [iframeHeight, setIframeHeight] = useState(400);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Different layouts based on block category
-  const isNavbar = block.category === 'navbar';
-  const previewClasses = isNavbar
-    ? "w-full min-h-[200px] bg-gray-50 dark:bg-gray-950"
-    : "w-full min-h-[400px] flex items-center justify-center bg-gray-50 dark:bg-gray-950";
+  const iframeSrc = `/preview/${block.id}${selectedTheme.id !== 'default' ? `?theme=${selectedTheme.id}` : ''}`;
 
-  // Build CSS variable overrides for the selected theme
-  const themeStyles: Record<string, string> = selectedTheme.colors;
+  // Measure iframe content height
+  const updateHeight = useCallback(() => {
+    try {
+      const iframe = iframeRef.current;
+      if (iframe?.contentDocument?.body) {
+        const height = iframe.contentDocument.body.scrollHeight;
+        if (height > 0) {
+          setIframeHeight(height);
+        }
+      }
+    } catch {
+      // Cross-origin or not ready yet
+    }
+  }, []);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const handleLoad = () => {
+      updateHeight();
+      // Also observe for dynamic content changes
+      try {
+        if (iframe.contentDocument?.body) {
+          const observer = new ResizeObserver(() => updateHeight());
+          observer.observe(iframe.contentDocument.body);
+          return () => observer.disconnect();
+        }
+      } catch {
+        // Cross-origin
+      }
+    };
+
+    iframe.addEventListener('load', handleLoad);
+    return () => iframe.removeEventListener('load', handleLoad);
+  }, [updateHeight, iframeSrc]);
+
+  const isResized = viewport !== 'desktop';
+  const containerWidth = containerRef.current?.clientWidth ?? 1280;
+  const targetWidth = viewportConfig[viewport].width;
+  // Scale down if the target viewport is wider than the container
+  const scale = isResized ? Math.min(1, (containerWidth - 32) / targetWidth) : 1;
 
   return (
     <Card className="overflow-hidden">
@@ -50,16 +99,66 @@ export function BlockPreview({ block, children }: BlockPreviewProps) {
               Dependencies
             </TabsTrigger>
           </TabsList>
-          <ThemeSelector
-            currentTheme={selectedTheme}
-            onThemeChange={setSelectedTheme}
-          />
+          <div className="flex items-center gap-1">
+            <div className="flex items-center border border-gray-200 dark:border-gray-700 rounded-md p-0.5">
+              <button
+                onClick={() => setViewport('desktop')}
+                className={`p-1.5 rounded-sm transition-colors ${viewport === 'desktop' ? 'bg-gray-100 dark:bg-gray-800 text-foreground' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}
+                title="Desktop"
+              >
+                <Monitor className="h-3.5 w-3.5" />
+              </button>
+              <button
+                onClick={() => setViewport('tablet')}
+                className={`p-1.5 rounded-sm transition-colors ${viewport === 'tablet' ? 'bg-gray-100 dark:bg-gray-800 text-foreground' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}
+                title="Tablet"
+              >
+                <Tablet className="h-3.5 w-3.5" />
+              </button>
+              <button
+                onClick={() => setViewport('mobile')}
+                className={`p-1.5 rounded-sm transition-colors ${viewport === 'mobile' ? 'bg-gray-100 dark:bg-gray-800 text-foreground' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'}`}
+                title="Mobile"
+              >
+                <Smartphone className="h-3.5 w-3.5" />
+              </button>
+            </div>
+            <ThemeSelector
+              currentTheme={selectedTheme}
+              onThemeChange={setSelectedTheme}
+            />
+          </div>
         </div>
 
         <TabsContent value="preview" className="p-0 m-0">
           <PremiumGate isPremium={block.isPremium} blockName={block.name}>
-            <div style={themeStyles} className={previewClasses}>
-              {children}
+            <div
+              ref={containerRef}
+              className={`w-full ${isResized ? 'flex justify-center bg-gray-100 dark:bg-gray-900 py-6' : ''}`}
+            >
+              <div
+                style={isResized ? {
+                  width: `${targetWidth}px`,
+                  height: `${iframeHeight * scale}px`,
+                } : undefined}
+                className={isResized ? 'relative overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm bg-white dark:bg-gray-950' : ''}
+              >
+                <iframe
+                  ref={iframeRef}
+                  src={iframeSrc}
+                  title={`Preview of ${block.name}`}
+                  className="border-0"
+                  style={isResized ? {
+                    width: `${targetWidth}px`,
+                    height: `${iframeHeight}px`,
+                    transform: `scale(${scale})`,
+                    transformOrigin: 'top left',
+                  } : {
+                    width: '100%',
+                    height: `${iframeHeight}px`,
+                  }}
+                />
+              </div>
             </div>
           </PremiumGate>
         </TabsContent>
