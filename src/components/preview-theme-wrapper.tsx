@@ -6,15 +6,20 @@ interface PreviewThemeWrapperProps {
 }
 
 export function PreviewThemeWrapper({ themeColors, children }: PreviewThemeWrapperProps) {
-  const hasOverrides = Object.keys(themeColors).length > 0;
+  const entries = Object.entries(themeColors);
 
-  if (!hasOverrides) {
+  if (entries.length === 0) {
     return <>{children}</>;
   }
 
+  // Inject theme overrides as a <style> on :root so portals (Sheet, Dialog, etc.) also get themed
+  const cssVars = entries.map(([key, value]) => `${key}: ${value};`).join('\n  ');
+  const styleContent = `:root {\n  ${cssVars}\n}`;
+
   return (
-    <div style={themeColors}>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: styleContent }} />
       {children}
-    </div>
+    </>
   );
 }
